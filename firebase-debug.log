@@ -1,0 +1,36 @@
+[debug] [2018-04-18T19:22:59.510Z] ----------------------------------------------------------------------
+[debug] [2018-04-18T19:22:59.512Z] Command:      /usr/local/bin/node /usr/local/bin/firebase serve
+[debug] [2018-04-18T19:22:59.512Z] CLI Version:  3.9.1
+[debug] [2018-04-18T19:22:59.512Z] Platform:     darwin
+[debug] [2018-04-18T19:22:59.512Z] Node Version: v9.8.0
+[debug] [2018-04-18T19:22:59.513Z] Time:         Wed Apr 18 2018 14:22:59 GMT-0500 (CDT)
+[debug] [2018-04-18T19:22:59.513Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-04-18T19:22:59.527Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-04-18T19:22:59.527Z] > authorizing via signed-in user
+[debug] [2018-04-18T19:22:59.528Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2018-04-18T19:22:59.529Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token { refresh_token: '1/zBnZPo3zVsHMOHNcW7V1w3Jk7-0hstCXPcbBNEXwV7Y',
+  client_id: '563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com',
+  client_secret: 'j9iVZfS8kkCEFUPaAeJV0sAi',
+  grant_type: 'refresh_token',
+  scope: 'email https://www.googleapis.com/auth/cloud-platform https://www.googleapis.com/auth/cloudplatformprojects.readonly https://www.googleapis.com/auth/firebase openid' } 
+ Wed Apr 18 2018 14:22:59 GMT-0500 (CDT)
+[debug] [2018-04-18T19:22:59.723Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-18T19:22:59.729Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/degtrivia-develop  
+ Wed Apr 18 2018 14:22:59 GMT-0500 (CDT)
+[debug] [2018-04-18T19:22:59.983Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-18T19:22:59.983Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/degtrivia-develop/tokens  
+ Wed Apr 18 2018 14:22:59 GMT-0500 (CDT)
+[debug] [2018-04-18T19:23:00.399Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from '/Users/aladage/Projects/_degsideprojects/degTrivia'...
+[info] 
+[debug] [2018-04-18T19:23:00.401Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/degtrivia-develop  
+ Wed Apr 18 2018 14:23:00 GMT-0500 (CDT)
+[debug] [2018-04-18T19:23:00.623Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-18T19:23:00.623Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/369298224791/clients/_:getWebAppConfig  
+ Wed Apr 18 2018 14:23:00 GMT-0500 (CDT)
+[debug] [2018-04-18T19:23:01.022Z] <<< HTTP RESPONSE 200
+[info] i  hosting: Serving hosting files from: public
+[info] ✔  hosting: Local server: http://localhost:5000
+
