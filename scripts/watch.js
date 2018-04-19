@@ -16,7 +16,7 @@ function isValidEventType(eventType) {
 }
 
 function onFileEvent(eventType, filepath, target) {
-	if(isValidEventType(eventType, target.events)) {
+	if(isValidEventType(eventType)) {
 		console.log(`File "${filepath}" was ${friendlyEventTypes[eventType]}.`);
 		taskRunner.runTask(target.taskName);
 	}
