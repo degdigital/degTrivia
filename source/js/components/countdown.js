@@ -1,9 +1,10 @@
 const countdown = (number, unit) => {
-    const d = document;
-    const daysElement = d.querySelector('.days');
-    const hoursElement = d.querySelector('.hours');
-    const minutesElement = d.querySelector('.minutes');
-    const secondsElement = d.querySelector('.seconds');
+    // const d = document;
+    // const daysElement = d.querySelector('.days');
+    // const hoursElement = d.querySelector('.hours');
+    // const minutesElement = d.querySelector('.minutes');
+	// const secondsElement = d.querySelector('.seconds');
+	const containerElement = document.querySelector('.countdown-container');
     let countdown;
     convertFormat(unit);
     
@@ -41,10 +42,20 @@ const countdown = (number, unit) => {
     }
   
     function displayTimeLeft(seconds) {
-		daysElement.textContent = Math.floor(seconds / 86400);
-		hoursElement.textContent = Math.floor((seconds % 86400) / 3600);
-		minutesElement.textContent = Math.floor((seconds % 86400) % 3600 / 60);
-		secondsElement.textContent = seconds % 60 < 10 ? `0${seconds % 60}` : seconds % 60;
+		containerElement.innerHTML = `
+			<span class="countdown__time">${Math.floor(seconds / 86400)}</span>
+			<span class="countdown__unit">days</span>
+			<span class="countdown__time">${Math.floor((seconds % 86400) / 3600)}</span>
+			<span class="countdown__unit">hours</span>
+			<span class="countdown__time">${Math.floor((seconds % 86400) % 3600 / 60)}</span>
+			<span class="countdown__unit">minutes</span>
+			<span class="countdown__time">${seconds % 60 < 10 ? `0${seconds % 60}` : seconds % 60}</span>
+			<span class="countdown__unit">seconds</span>
+		`;
+		// daysElement.textContent = Math.floor(seconds / 86400);
+		// hoursElement.textContent = Math.floor((seconds % 86400) / 3600);
+		// minutesElement.textContent = Math.floor((seconds % 86400) % 3600 / 60);
+		// secondsElement.textContent = seconds % 60 < 10 ? `0${seconds % 60}` : seconds % 60;
     }
 }
 

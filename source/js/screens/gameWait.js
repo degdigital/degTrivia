@@ -11,16 +11,7 @@ const gameWait = function(element) {
     
     function renderCountdownContainer(timeTilNextGame) {
         replaceContent(element, `
-            <div class="countdown-container">
-                <span class="days"></span>
-                <span class="days-label">days</span>
-                <span class="hours"></span>
-                <span class="hours-label">hours</span>
-                <span class="minutes"></span>
-                <span class="minutes-label">minutes</span>
-                <span class="seconds"></span>
-                <span class="seconds-label">seconds</span>
-            </div>
+            <div class="countdown-container"></div>
         `);
         countdown(timeTilNextGame, 'milliseconds');
     }
