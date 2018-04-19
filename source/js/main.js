@@ -1,6 +1,7 @@
 import appConfig from './config/appConfig.js';
-import router from "./utils/router.js";
-import gameLanding from "./screens/gameLanding.js";
+import router from './utils/router.js';
+import eventsService from './services/eventsService.js';
+import gameLanding from './screens/gameLanding.js';
 
 if (appConfig.element) {
 	const gameLandingInst = gameLanding(appConfig);
@@ -12,5 +13,5 @@ if (appConfig.element) {
 		routerLinkClass: appConfig.routerLinkClass,
 		routeAttr: appConfig.routeAttr
 	});
-	appConfig.auth.onAuthStateChanged(user => router.route('gameLanding', {user}));
+	eventsService.subscribe('onAuthStateChanged', user => router.route('gameLanding', {user}));
 }
