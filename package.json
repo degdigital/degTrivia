@@ -1,0 +1,51 @@
+{
+  "name": "degtrivia",
+  "version": "1.0.0",
+  "description": "A trivia web app",
+  "scripts": {
+    "test": "jest",
+    "build": "node scripts/build",
+    "watch": "node scripts/watch",
+    "serve": "firebase serve",
+    "start": "node scripts/start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/degdigital/degTrivia.git"
+  },
+  "keywords": [
+    "trivia"
+  ],
+  "contributors": [
+    {
+      "name": "Aaron Ladage",
+      "email": "aladage@gmail.com"
+    },
+    {
+      "name": "Anna Scheuler",
+      "email": "scheul93@gmail.com"
+    },
+    {
+      "name": "Ryan Heap",
+      "email": "heaper@gmail.com"
+    }
+  ],
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/degdigital/degTrivia/issues"
+  },
+  "homepage": "https://github.com/degdigital/degTrivia#readme",
+  "devDependencies": {
+    "autoprefixer": "^8.3.0",
+    "chokidar": "^2.0.3",
+    "cssnano": "^3.10.0",
+    "fs-extra": "^5.0.0",
+    "jest": "^22.4.3",
+    "postcss": "^6.0.21",
+    "postcss-color-function": "^4.0.1",
+    "postcss-easy-import": "^3.0.0"
+  },
+  "browserslist": [
+    "last 2 versions"
+  ]
+}
