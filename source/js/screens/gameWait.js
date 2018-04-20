@@ -1,11 +1,11 @@
 import {replaceContent} from '../utils/domUtils.js';
 import countdown from '../components/countdown.js';
+import dbService from '../services/dbService.js';
 
 const gameWait = function(element) {
-    const threshold = 7200000;
-    const nextGameTime = new Date('April 20, 2018 12:24:00');
     
-    function renderCountdownContainer(timeTilNextGame) {
+    function renderCountdownContainer(nextGameTime) {
+        const timeTilNextGame = nextGameTime.valueOf() - Date.now();
         replaceContent(element, `
             ${renderNextGameText(nextGameTime)}
             <div class="countdown-container"></div>
@@ -24,15 +24,19 @@ const gameWait = function(element) {
         `;
     }
 
-	function render() {
-        //get time of next game from service
-        const timeTilNextGame = nextGameTime.valueOf() - Date.now();
-        if (timeTilNextGame < threshold) {
-            renderCountdownContainer(timeTilNextGame)
+    function renderNoGameText() {
+        replaceContent(element, `
+            <div>There are no more games scheduled for your event.</div>
+        `)
+    }
+
+	async function render() {
+        const nextGameTime = await dbService.getNextGameTime();
+        if (nextGameTime) {
+            renderCountdownContainer(nextGameTime);
         } else {
-            replaceContent(element, renderNextGameText(nextGameTime));
-        }
-		
+            renderNoGameText();
+        }		
 	}
 
 	return {

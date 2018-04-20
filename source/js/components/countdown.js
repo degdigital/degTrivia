@@ -1,7 +1,7 @@
-const countdown = (number, unit) => {
+const countdown = (number, unit = 'milliseconds') => {
 	const containerElement = document.querySelector('.countdown-container');
 	let countdown;
-	if(containerElement) {
+	if(number && containerElement) {
 		convertFormat(unit);
 	}
     
@@ -25,14 +25,14 @@ const countdown = (number, unit) => {
 		const then = now + seconds * 1000;
 
 		countdown = setInterval(() => {
-		const secondsLeft = Math.round((then - Date.now()) / 1000);
+			const secondsLeft = Math.round((then - Date.now()) / 1000);
 
-		if(secondsLeft < 0) {
-			clearInterval(countdown);
-			return;
-		};
+			if(secondsLeft < 0) {
+				clearInterval(countdown);
+				return;
+			};
 
-		displayTimeLeft(secondsLeft);
+			displayTimeLeft(secondsLeft);
 
 		},1000);
 	}
@@ -40,7 +40,7 @@ const countdown = (number, unit) => {
 	function renderUnit(num, label) {
 		return `
 			<span class="countdown__time">${num}</span>
-			<span class="countdown__unit">${label}${num > 1 ? 's' : ''}</span>
+			<span class="countdown__unit">${label}${num === 1 ? '' : 's'}</span>
 		`;
 	}
 	 
