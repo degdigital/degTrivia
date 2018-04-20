@@ -4,10 +4,6 @@ import countdown from '../components/countdown.js';
 const gameWait = function(element) {
     const threshold = 7200000;
     const nextGameTime = new Date('April 20, 2018 12:24:00');
-
-	function init() {
-
-    }
     
     function renderCountdownContainer(timeTilNextGame) {
         replaceContent(element, `
@@ -38,8 +34,6 @@ const gameWait = function(element) {
         }
 		
 	}
-
-	init();
 
 	return {
 		render
