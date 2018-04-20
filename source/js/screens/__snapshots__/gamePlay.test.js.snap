@@ -1,0 +1,60 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`calling render() renders out a question and choices 1`] = `
+<div>
+  
+		
+  <div>
+    
+			
+    <h1>
+      Question #1
+    </h1>
+    
+			
+    <div>
+      0:00
+    </div>
+    
+			
+    <p>
+      Who is the most dashing Kansas City Royal of all time?
+    </p>
+    
+			
+    <div
+      class="choices"
+    >
+      
+				
+      <button
+        class="choice-button"
+        data-id="100"
+      >
+        Bob Hamelin
+      </button>
+      
+
+      <button
+        class="choice-button"
+        data-id="101"
+      >
+        Danny Tartabul
+      </button>
+      
+
+      <button
+        class="choice-button"
+        data-id="102"
+      >
+        Steve Balboni
+      </button>
+      
+
+			
+    </div>
+    
+		
+  </div>
+</div>
+`;

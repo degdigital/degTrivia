@@ -29,6 +29,10 @@ const dbService = function() {
 		});
 	}
 
+	function submitAnswer(gameId, questionId, choiceId) {
+		return Promise.resolve(true);
+	}
+
 	return {
 		db,
 		getEvent,
