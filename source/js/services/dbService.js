@@ -29,10 +29,17 @@ const dbService = function() {
 		});
 	}
 
+	function getNextGameTime() {
+		// TODO: return the start time of next game for the event in UTC
+		// new Date() will convert it to local time
+		return Promise.resolve(new Date('May 5, 2018 12:00:00'));
+	}
+
 	return {
 		db,
 		getEvent,
-		createPlayer
+		createPlayer,
+		getNextGameTime
 	};
 
 };
