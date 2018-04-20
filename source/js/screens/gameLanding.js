@@ -1,10 +1,11 @@
 import {replaceContent} from '../utils/domUtils.js';
 import formMapper from '../utils/formMapper.js';
 import dbService from '../services/dbService.js';
+import authService from '../services/authService.js';
 
 const gameLanding = function({element, eventAlias}) {
 
-	const formClass = 'js-welcome-form';
+	const formClass = 'capture-form';
 
 	function bindEvents() {
 		element.addEventListener('submit', onFormSubmit);
@@ -31,18 +32,18 @@ const gameLanding = function({element, eventAlias}) {
 		`);
 	}
 
-	function renderLoggedOutUser() {
+	function renderCaptureForm() {
 		replaceContent(element, `
 			<h1>Welcome to DEG Trivia!</h1>
 			<form class="${formClass}">
 				<label for="firstName">First name</label><br>
-				<input type="text" id="firstName" name="firstName" autofocus required value="Bob"><br><br>
+				<input type="text" id="firstName" name="firstName" autofocus required value="Aaron"><br><br>
 
 				<label for="lastName">Last name</label><br>
-				<input type="text" id="lastName" name="lastName" required value="Jones"><br><br>
+				<input type="text" id="lastName" name="lastName" required value="Ladage"><br><br>
 
 				<label for="email">Email address</label><br>
-				<input type="email" id="email" name="email" required value="bobjones@gmail.com"><br><br>
+				<input type="email" id="email" name="email" required value="aladage@degdigital.com"><br><br>
 
 				<button type="submit">Submit</button>
 			</form>
@@ -57,15 +58,16 @@ const gameLanding = function({element, eventAlias}) {
 				...{eventAlias},
 				...formMapper.getValues(el)
 			};
-			dbService.createPlayer(formVals)
-				.then(() => console.log('player created'));
+			authService.registerPlayer(formVals.email, eventAlias)
+				.then(message => console.log(message))
+				.catch(error => console.log(error));
 		}
 	}
 
 	bindEvents();
 
 	return {
-		render
+		renderCaptureForm
 	};
 
 };
