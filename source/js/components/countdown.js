@@ -36,17 +36,20 @@ const countdown = (number, unit) => {
 
 		},1000);
 	}
+
+	function renderUnit(num, label) {
+		return `
+			<span class="countdown__time">${num}</span>
+			<span class="countdown__unit">${label}${num > 1 ? 's' : ''}</span>
+		`;
+	}
 	 
     function displayTimeLeft(seconds) {
 		containerElement.innerHTML = `
-			<span class="countdown__time">${Math.floor(seconds / 86400)}</span>
-			<span class="countdown__unit">days</span>
-			<span class="countdown__time">${Math.floor((seconds % 86400) / 3600)}</span>
-			<span class="countdown__unit">hours</span>
-			<span class="countdown__time">${Math.floor((seconds % 86400) % 3600 / 60)}</span>
-			<span class="countdown__unit">minutes</span>
-			<span class="countdown__time">${seconds % 60 < 10 ? `0${seconds % 60}` : seconds % 60}</span>
-			<span class="countdown__unit">seconds</span>
+			${renderUnit(Math.floor(seconds / 86400), 'day')}
+			${renderUnit(Math.floor((seconds % 86400) / 3600), 'hour')}
+			${renderUnit(Math.floor((seconds % 86400) % 3600 / 60), 'minute')}
+			${renderUnit(seconds % 60 < 10 ? `0${seconds % 60}` : seconds % 60, 'second')}
 		`;
     }
 }

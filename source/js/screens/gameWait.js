@@ -3,7 +3,7 @@ import countdown from '../components/countdown.js';
 
 const gameWait = function(element) {
     const threshold = 7200000;
-    const nextGameTime = new Date('April 19, 2018 17:24:00');
+    const nextGameTime = new Date('April 20, 2018 12:24:00');
 
 	function init() {
 
@@ -11,17 +11,21 @@ const gameWait = function(element) {
     
     function renderCountdownContainer(timeTilNextGame) {
         replaceContent(element, `
+            ${renderNextGameText(nextGameTime)}
             <div class="countdown-container"></div>
         `);
         countdown(timeTilNextGame, 'milliseconds');
     }
 
     function renderNextGameText(nextGameTime) {
-        replaceContent(element, `
+        return `
             <div>
-                Next game is <time datetime="${nextGameTime.toISOString()}">${nextGameTime.toString()}</time>
+                Next game is 
+                <time datetime="${nextGameTime.toISOString()}">
+                    ${nextGameTime.toLocaleDateString()} ${nextGameTime.toLocaleTimeString()}
+                </time>
             </div>
-        `);
+        `;
     }
 
 	function render() {
@@ -30,7 +34,7 @@ const gameWait = function(element) {
         if (timeTilNextGame < threshold) {
             renderCountdownContainer(timeTilNextGame)
         } else {
-            renderNextGameText(nextGameTime);
+            replaceContent(element, renderNextGameText(nextGameTime));
         }
 		
 	}
