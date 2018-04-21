@@ -3,20 +3,25 @@ import router from './utils/router.js';
 import eventsService from './services/eventsService.js';
 import authService from './services/authService.js';
 import registration from './screens/registration.js';
+import gameLanding from './screens/gameLanding.js';
 
 if (appConfig.element) {
 	const registrationInst = registration(appConfig);
+	const gameLandingInst = gameLanding(appConfig);
 	const routes = {
-		register: registrationInst.register,
-		enterPassword: registrationInst.enterPassword
+		registration: registrationInst.renderRegistrationForm,
+		password: registrationInst.renderPasswordForm,
+		gameLanding: gameLandingInst.render
 	};
-	router.init(routes, {
-		routerLinkClass: appConfig.routerLinkClass,
-		routeAttr: appConfig.routeAttr
-	});
+	router.init(routes, appConfig);
 
-	authService.authorizePlayer(appConfig.eventAlias)
-		.then(() => console.log('authorized'))
-		.catch(() => router.route('captureForm'));
-	// eventsService.subscribe('onAuthStateChanged', user => router.route('gameLanding', {user}));
+	authService.authorizePlayer()
+		.then(() => router.route('gameLanding'))
+		.catch(errors => {
+			if (errors.badEmailLink === true) {
+				router.route('password');
+			} else {
+				router.route('registration');
+			}
+		});
 }

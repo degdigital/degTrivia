@@ -1,61 +1,58 @@
-const auth = firebase.auth();
-const currentUrl = window.location.href;
-const localStorageKey = 'degTrivia';
+import dbService from './dbService.js';
 
 const authService = function() {
 
-	function registerPlayer(email = null, eventAlias) {
+	const auth = firebase.auth();
+	const currentUrl = window.location.href;
+	const localStorageKey = 'degTriviaEmail';
+
+	async function registerPlayer(playerVals = {}) {
 		return new Promise((resolve, reject) => {
-			if (!email || email.length === 0) {
+			if (!playerVals.email || playerVals.email.length === 0) {
 				reject('You must provide an email address');
 			}
-			auth.sendSignInLinkToEmail(email, {
-				url: `${currentUrl}?finishSignup=1`,
-				handleCodeInApp: true
-			})
+			dbService.createInactivePlayer(playerVals)
 				.then(() => {
-					setEventEmailToLS(eventAlias, email);
-					resolve('success! check your email');
-				})
-				.catch(error => {
-					console.log(error);
-					reject('something went wrong');
+					auth.sendSignInLinkToEmail(playerVals.email, {
+						url: `${currentUrl}?finishSignup=1`,
+						handleCodeInApp: true
+					})
+						.then(() => {
+							window.localStorage.setItem(localStorageKey, playerVals.email);
+							resolve('Email sent!');
+						})
+						.catch(() => reject('Something went wrong'));
 				});
 		});
 	}
 
 	function authorizePlayer(eventAlias) {
 		return new Promise((resolve, reject) => {
-			if (auth.currentUser) {
-				resolve();
-			} else if (auth.isSignInWithEmailLink(currentUrl)) {
-				let email = getEventEmailFromLS(eventAlias);
-				if (!email) {
-					email = window.prompt('Please provide your email for confirmation');
-				}
-				firebase.auth().signInWithEmailLink(email, currentUrl)
-					.then(result => resolve())
-					.catch(error => {
-						console.log(error);
-						reject();
+			auth.onAuthStateChanged(user => {
+				if (user) {
+					resolve();
+				} else if (auth.isSignInWithEmailLink(currentUrl)) {
+					const email = window.localStorage.getItem(localStorageKey);
+					if (email) {
+						auth.signInWithEmailLink(email, currentUrl)
+					    	.then(result => {
+					    		window.localStorage.removeItem(localStorageKey);
+					    		history.replaceState(null, null, '/');
+					    		resolve();
+					    	})
+					    	.catch(error => reject(error));
+					} else {	
+						reject({
+							badEmailLink: true
+						});
+					}
+				} else {
+					reject({
+						badEmailLink: false
 					});
-			} else {
-				reject();
-			}
+				}
+			});
 		});
-	}
-
-	function setEventEmailToLS(eventAlias, email) {
-		const lsVals = {};
-		lsVals[eventAlias] = {
-			email: email
-		}
-		localStorage.setItem(localStorageKey, JSON.stringify(lsVals));
-	}
-
-	function getEventEmailFromLS(eventAlias) {
-		const lsObj = window.localStorage.getItem(localStorageKey) || {};
-		return JSON.parse(lsObj[eventAlias]) ? JSON.parse(lsObj[eventAlias]).email : null;
 	}
 	
 	return {
