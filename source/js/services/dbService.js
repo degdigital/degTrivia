@@ -18,15 +18,23 @@ const dbService = function() {
 		return eventsRef.orderByChild('alias').equalTo(eventAlias).once('value').then(snapshot => snapshot.val());
 	}
 
-	function createPlayer(playerData = null) {
-		return new Promise((resolve, reject) => {
-			const playersRef = getRef('players');
-			playersRef.orderByChild('email').equalTo(playerData.email).once('value').then(snapshot => {
-				const player = snapshot.val();
-				
-				resolve();
-			});
-		});
+	async function createInactivePlayer(playerVals) {
+		const event = await getEvent(playerVals.eventAlias);
+		const playersRef = getRef('players');
+		const newUserKey = playersRef.push().key;
+		const formattedPlayerVals = {
+			firstName: playerVals.firstName,
+			lastName: playerVals.lastName,
+			email: playerVals.email,
+			events: {
+				[Object.keys(event)[0]]: true
+			},
+			active: false
+		};
+		const updates = {};
+		updates[`/players/${newUserKey}`] = formattedPlayerVals;
+
+		return db.ref().update(updates);
 	}
 
 	function getNextGameTime() {
@@ -38,7 +46,7 @@ const dbService = function() {
 	return {
 		db,
 		getEvent,
-		createPlayer,
+		createInactivePlayer,
 		getNextGameTime
 	};
 
