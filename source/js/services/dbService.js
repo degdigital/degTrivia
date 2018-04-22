@@ -27,7 +27,7 @@ const dbService = function() {
 			lastName: playerVals.lastName,
 			email: playerVals.email,
 			events: {
-				[Object.keys(event)]: true
+				[Object.keys(event)[0]]: true
 			},
 			active: false
 		};
