@@ -43,6 +43,10 @@ const dbService = function() {
 		return Promise.resolve(new Date('May 5, 2018 12:00:00'));
 	}
 
+	function submitAnswer(gameId, questionId, choiceId) {
+		return Promise.resolve(true);
+	}
+
 	return {
 		db,
 		getEvent,
