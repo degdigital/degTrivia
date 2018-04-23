@@ -48,7 +48,7 @@ function updateChoices(element, choices, selectedChoiceId) {
 	replaceContent(choicesEl, renderChoices(choices, selectedChoiceId));
 }
 
-async function renderScreen(element, data) {
+function renderScreen(element, data) {
 	const {gameId, questionData} = data;
 
 	const html = `
@@ -72,7 +72,7 @@ export default function(element) {
 
 	let onClickBound;
 
-	async function render(data) {
+	function render(data) {
 		onClickBound = bindEventListeners(element, data);
 		renderScreen(element, data);
 	}
