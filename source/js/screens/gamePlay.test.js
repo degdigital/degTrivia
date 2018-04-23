@@ -42,7 +42,7 @@ describe('selecting a choice', () => {
 
 		const expectedChoiceId = Object.keys(data.questionData.choices)[0];
 
-		expect(submitAnswerSpy.mock.calls.length).toEqual(1);
+		expect(submitAnswerSpy).toHaveBeenCalledTimes(1);
 		expect(submitAnswerSpy.mock.calls[0]).toEqual([data.gameId, data.questionData.id, expectedChoiceId]);
 	});
 
