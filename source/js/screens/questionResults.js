@@ -19,7 +19,7 @@ function renderChoiceResults(results) {
 	}, '');
 }
 
-async function renderScreen(element, data) {
+function renderScreen(element, data) {
 	const {questionData} = data;
 
 	const html = `
