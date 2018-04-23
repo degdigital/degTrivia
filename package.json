@@ -48,5 +48,11 @@
   },
   "browserslist": [
     "last 2 versions"
-  ]
+  ],
+  "jest": {
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/public/"
+    ]
+  }
 }
