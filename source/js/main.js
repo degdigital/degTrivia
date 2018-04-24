@@ -17,7 +17,7 @@ if (appConfig.element) {
 	    messagingSenderId: "369298224791"
 	});
 	dbService.init();
-	authService.init();
+	playerService.init();
 	eventsService.init();
 
 

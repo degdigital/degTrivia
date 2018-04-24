@@ -1,11 +1,11 @@
-import authService from './authService.js';
+import playerService from './playerService.js';
 
 const eventsService = function() {
 
 	const callbacks = [];
 
 	function bindEvents() {
-		authService.getAuth().onAuthStateChanged(user => runSubscribedCallbacks('onAuthStateChanged', user));
+		playerService.getAuth().onAuthStateChanged(user => runSubscribedCallbacks('onAuthStateChanged', user));
 	}
 
 	function subscribe(name = null, callback = null) {

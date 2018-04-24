@@ -1,12 +1,22 @@
+import firebase from '@firebase/app';
+import '@firebase/auth';
 import dbService from './dbService.js';
 import {getUrlParameter} from '../utils/urlUtils.js';
 
 const playerService = function() {
 
-	const auth = firebase.auth();
+	let auth = null;
 	const currentUrl = window.location.href;
 	const pendingKeyUrlParam = 'k';
 	let cachedPlayerInfo = null;
+
+	function init() {
+		auth = firebase.auth(); 
+	}
+
+	function getAuth() {
+		return auth;
+	}
 
 	function register(playerVals = {}) {
 		return new Promise(async(resolve, reject) => {
@@ -80,7 +90,8 @@ const playerService = function() {
 	}
 	
 	return {
-		auth,
+		init,
+		getAuth,
 		register,
 		authorize,
 		getCurrentPlayerInfo
