@@ -1,8 +1,18 @@
 {
-	"ignore": [
-	    "node_modules/**"
-	  ],
-	  "presets": [
-	    "es2015"
-	  ]
+	"presets": [
+		["env", {
+			"modules": false,
+      		"targets": {
+        		"browsers": ["last 2 versions", "ie >= 11"]
+     	 	}
+    	}]
+    ],
+  	"env": {
+	    "test": {
+	    	"ignore": [
+				"node_modules/**"
+			],
+	      	"presets": [["env"]]
+	    }
+	  }
 }

@@ -1,10 +1,17 @@
+import firebase from '@firebase/app';
+import '@firebase/database';
+
 const dbService = function() {
 
-	const db = firebase.database();
+	let db = null;
 	const refs = {
 		events: null,
 		players: null
 	};
+
+	function init() {
+		db = firebase.database();
+	}
 
 	function getRef(refName) {
 		if (refs[refName]) {
@@ -48,6 +55,7 @@ const dbService = function() {
 	}
 
 	return {
+		init,
 		db,
 		getEvent,
 		createInactivePlayer,

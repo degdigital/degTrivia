@@ -5,7 +5,7 @@ const eventsService = function() {
 	const callbacks = [];
 
 	function bindEvents() {
-		authService.auth.onAuthStateChanged(user => runSubscribedCallbacks('onAuthStateChanged', user));
+		authService.getAuth().onAuthStateChanged(user => runSubscribedCallbacks('onAuthStateChanged', user));
 	}
 
 	function subscribe(name = null, callback = null) {
@@ -22,9 +22,12 @@ const eventsService = function() {
 		subscribedCallBacks.forEach(callback => callback.fn(response));
 	}
 
-	bindEvents();
-	
+	function init() {
+		bindEvents();
+	}
+
 	return {
+		init,
 		subscribe
 	};
 

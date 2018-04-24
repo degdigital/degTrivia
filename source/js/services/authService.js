@@ -1,10 +1,20 @@
 import dbService from './dbService.js';
+import firebase from '@firebase/app';
+import '@firebase/auth';
 
 const authService = function() {
 
-	const auth = firebase.auth();
+	let auth = null;
 	const currentUrl = window.location.href;
 	const localStorageKey = 'degTriviaEmail';
+
+	function init() {
+		auth = firebase.auth();
+	}
+
+	function getAuth() {
+		return auth;
+	}
 
 	async function registerPlayer(playerVals = {}) {
 		return new Promise((resolve, reject) => {
@@ -13,7 +23,7 @@ const authService = function() {
 			}
 			dbService.createInactivePlayer(playerVals)
 				.then(() => {
-					auth.sendSignInLinkToEmail(playerVals.email, {
+					getAuth().sendSignInLinkToEmail(playerVals.email, {
 						url: `${currentUrl}?finishSignup=1`,
 						handleCodeInApp: true
 					})
@@ -56,7 +66,8 @@ const authService = function() {
 	}
 	
 	return {
-		auth,
+		init,
+		getAuth,
 		registerPlayer,
 		authorizePlayer
 	};
