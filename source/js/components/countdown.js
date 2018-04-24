@@ -1,38 +1,37 @@
-let containerElement;
-let countdown;
-
-function convertFormat(number, format = 'milliseconds') {
+function convertFormat(containerElement, number, format = 'milliseconds') {
 	if (number && containerElement) {
 		switch(format) {
 			case 'milliseconds':
-				return timer(number / 1000);
+				return timer(number / 1000, containerElement);
 			case 'seconds':
-				return timer(number);
+				return timer(number, containerElement);
 			case 'minutes':
-				return timer(number * 60);
+				return timer(number * 60, containerElement);
 				case 'hours':
-				return timer(number * 60 * 60);
+				return timer(number * 60 * 60, containerElement);
 			case 'days':
-				return timer(number * 60 * 60 * 24);             
+				return timer(number * 60 * 60 * 24, containerElement);             
 		}
 	}
 }
 
-function timer(seconds) {
+function timer(seconds, containerElement) {
 	const now = Date.now();
 	const then = now + seconds * 1000;
 
-	countdown = setInterval(() => {
+	const countdown = setInterval(() => {
 		const secondsLeft = Math.round((then - Date.now()) / 1000);
 
 		if(secondsLeft < 0) {
-			stopTimer();
+			stopTimer(countdown);
 			return;
 		};
 
-		displayTimeLeft(secondsLeft);
+		displayTimeLeft(secondsLeft, containerElement);
 
 	},1000);
+
+	return countdown;
 }
 
 function renderUnit(num, label) {
@@ -42,7 +41,7 @@ function renderUnit(num, label) {
 	`;
 }
 	
-function displayTimeLeft(seconds) {
+function displayTimeLeft(seconds, containerElement) {
 	containerElement.innerHTML = `
 		${renderUnit(Math.floor(seconds / 86400), 'day')}
 		${renderUnit(Math.floor((seconds % 86400) / 3600), 'hour')}
@@ -51,15 +50,20 @@ function displayTimeLeft(seconds) {
 	`;
 }
 
-function stopTimer() {
+function stopTimer(countdown) {
 	clearInterval(countdown);
 }
 
 export default function() {
-	containerElement = document.querySelector('.countdown-container');
+	const containerElement = document.querySelector('.countdown-container');
+	let countdown;
+	
+	function start(num, format) {
+		countdown = convertFormat(containerElement, num, format)
+	}
 
 	return {
-		start: convertFormat,
-		stop: stopTimer
+		start,
+		stop: () => stopTimer(countdown)
 	}
 };
