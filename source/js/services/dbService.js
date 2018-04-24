@@ -19,6 +19,10 @@ const dbService = function() {
 		db = firebase.database();
 	}
 
+	function getDb() {
+		return db;
+	}
+
 	function getRef(refName) {
 		return refs[refName] ? refs[refName] : db.ref(refName);
 	}
@@ -80,7 +84,7 @@ const dbService = function() {
 
 	return {
 		init,
-		db,
+		getDb,
 		getCurrentEventId,
 		getEvent,
 		createPendingPlayer,
