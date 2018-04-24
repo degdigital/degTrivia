@@ -1,6 +1,9 @@
+import firebase from '@firebase/app';
+import '@firebase/database';
+
 const dbService = function() {
 
-	const db = firebase.database();
+	let db = null;
 	const nodeNames = {
 		pendingPlayers: 'pendingPlayers',
 		activePlayers: 'activePlayers'
@@ -11,6 +14,10 @@ const dbService = function() {
 		pendingPlayers: null
 	};
 	let cachedCurrentEventId = null;
+
+	function init() {
+		db = firebase.database();
+	}
 
 	function getRef(refName) {
 		return refs[refName] ? refs[refName] : db.ref(refName);
@@ -72,6 +79,7 @@ const dbService = function() {
 	}
 
 	return {
+		init,
 		db,
 		getCurrentEventId,
 		getEvent,

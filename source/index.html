@@ -4,14 +4,19 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Welcome to DEG Trivia!</title>
-        <script defer src="/__/firebase/4.12.1/firebase-app.js"></script>
+        <!--<script defer src="/__/firebase/4.12.1/firebase-app.js"></script>
         <script defer src="/__/firebase/4.12.1/firebase-auth.js"></script>
         <script defer src="/__/firebase/4.12.1/firebase-database.js"></script>
-        <script defer src="/__/firebase/init.js"></script>
+        <script defer src="/__/firebase/init.js"></script>-->
         <link rel="stylesheet" type="text/css" href="css/main.css">
     </head>
     <body>
         <div id="app"></div>
-        <script type="module" src="js/main.js"></script>
+
+        <!-- for modern browsers -->
+        <script type="module" src="js/main-bundle.js"></script>
+
+        <!-- for older browsers -->
+        <script nomodule src='js/main-bundle-nomodules.js'></script>        
     </body>
 </html>

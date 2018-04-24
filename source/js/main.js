@@ -1,11 +1,26 @@
 import appConfig from './config/appConfig.js';
 import router from './utils/router.js';
+import dbService from './services/dbService.js';
 import eventsService from './services/eventsService.js';
 import playerService from './services/playerService.js';
 import registration from './screens/registration.js';
 import gameLanding from './screens/gameLanding.js';
+import firebase from '@firebase/app';
 
 if (appConfig.element) {
+	firebase.initializeApp({
+		apiKey: "AIzaSyAZ5Ad3YFPCz2QKnMPtAl89tjplLQX6Lpw",
+	    authDomain: "degtrivia-develop.firebaseapp.com",
+	    databaseURL: "https://degtrivia-develop.firebaseio.com",
+	    projectId: "degtrivia-develop",
+	    storageBucket: "degtrivia-develop.appspot.com",
+	    messagingSenderId: "369298224791"
+	});
+	dbService.init();
+	playerService.init();
+	eventsService.init();
+
+
 	const registrationInst = registration(appConfig);
 	const gameLandingInst = gameLanding(appConfig);
 	const routes = {
