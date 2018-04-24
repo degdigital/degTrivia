@@ -47,11 +47,39 @@ const dbService = function() {
 		return Promise.resolve(true);
 	}
 
+	function getLeaderboards() {
+		// TODO: get top 20 players for most recent game, current day, event as a whole
+		return Promise.resolve({
+			game: {
+				leaders: [
+					{name: 'Anna', score: '1500000'},
+					{name: 'Aaron', score: '140'},
+					{name: 'Ryan', score: '42'}
+				]
+			},
+			day: {
+				leaders: [
+					{name: 'Anna', score: '1500000'},
+					{name: 'Aaron', score: '140'},
+					{name: 'Ryan', score: '42'}
+				]
+			},
+			event: {
+				leaders: [
+					{name: 'Aaron', score: '1500001'},
+					{name: 'Aaron', score: '200'},
+					{name: 'Ryan', score: '43'}
+				]
+			}
+		})
+	}
+
 	return {
 		db,
 		getEvent,
 		createInactivePlayer,
-		getNextGameTime
+		getNextGameTime,
+		getLeaderboards
 	};
 
 };
