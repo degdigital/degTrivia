@@ -1,16 +1,31 @@
 const dbService = function() {
 
 	const db = firebase.database();
+	const nodeNames = {
+		pendingPlayers: 'pendingPlayers',
+		activePlayers: 'activePlayers'
+	};
 	const refs = {
 		events: null,
-		players: null
+		activePlayers: null,
+		pendingPlayers: null
 	};
+	let cachedCurrentEventId = null;
 
 	function getRef(refName) {
-		if (refs[refName]) {
-			return refs[refName];
+		return refs[refName] ? refs[refName] : db.ref(refName);
+	}
+
+	function getCurrentEventId() {
+		if (cachedCurrentEventId) {
+			return Promise.resolve(cachedCurrentEventId);
+		} else {
+			return db.ref('currentEvent').once('value').then(snapshot => {
+				cachedCurrentEventId = snapshot.val();
+				return cachedCurrentEventId;
+			});
 		}
-		return db.ref(refName);
+		
 	}
 
 	function getEvent(eventAlias) {
@@ -18,23 +33,32 @@ const dbService = function() {
 		return eventsRef.orderByChild('alias').equalTo(eventAlias).once('value').then(snapshot => snapshot.val());
 	}
 
-	async function createInactivePlayer(playerVals) {
-		const event = await getEvent(playerVals.eventAlias);
-		const playersRef = getRef('players');
-		const newUserKey = playersRef.push().key;
+	function createPendingPlayer(playerVals, eventKey) {
+		const pendingPlayersRef = getRef(nodeNames.pendingPlayers);
+		const pendingPlayerKey = pendingPlayersRef.push().key;
 		const formattedPlayerVals = {
 			firstName: playerVals.firstName,
 			lastName: playerVals.lastName,
 			email: playerVals.email,
 			events: {
-				[Object.keys(event)[0]]: true
-			},
-			active: false
+				[eventKey]: true
+			}
 		};
-		const updates = {};
-		updates[`/players/${newUserKey}`] = formattedPlayerVals;
+		return db.ref(`/${nodeNames.pendingPlayers}/${pendingPlayerKey}`).update(formattedPlayerVals)
+			.then(() => pendingPlayerKey);
+	}
 
+	async function createActivePlayer(user, pendingKey) {
+		const pendingPlayerVals = await getPendingPlayer(pendingKey);
+		const updates = {};
+		updates[`/${nodeNames.pendingPlayers}/${pendingKey}`] = null;
+		updates[`/${nodeNames.activePlayers}/${user.uid}`] = pendingPlayerVals;
 		return db.ref().update(updates);
+	}
+
+	function getPendingPlayer(pendingKey, value = '') {
+		const pendingPlayersRef = getRef(nodeNames.pendingPlayers);
+		return pendingPlayersRef.child(`${pendingKey}/${value}`).once('value').then(snapshot => snapshot.val());
 	}
 
 	function getNextGameTime() {
@@ -49,8 +73,11 @@ const dbService = function() {
 
 	return {
 		db,
+		getCurrentEventId,
 		getEvent,
-		createInactivePlayer,
+		createPendingPlayer,
+		createActivePlayer,
+		getPendingPlayer,
 		getNextGameTime
 	};
 

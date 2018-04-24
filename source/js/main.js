@@ -1,7 +1,7 @@
 import appConfig from './config/appConfig.js';
 import router from './utils/router.js';
 import eventsService from './services/eventsService.js';
-import authService from './services/authService.js';
+import playerService from './services/playerService.js';
 import registration from './screens/registration.js';
 import gameLanding from './screens/gameLanding.js';
 
@@ -15,10 +15,10 @@ if (appConfig.element) {
 	};
 	router.init(routes, appConfig);
 
-	authService.authorizePlayer()
+	playerService.authorize()
 		.then(() => router.route('gameLanding'))
 		.catch(errors => {
-			if (errors.badEmailLink === true) {
+			if (errors.mustReauthenticate === true) {
 				router.route('password');
 			} else {
 				router.route('registration');
