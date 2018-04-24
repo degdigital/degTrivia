@@ -5,6 +5,7 @@ import eventsService from './services/eventsService.js';
 import playerService from './services/playerService.js';
 import registration from './screens/registration.js';
 import gameLanding from './screens/gameLanding.js';
+import gameWait from './screens/gameWait.js';
 import firebase from '@firebase/app';
 
 if (appConfig.element) {
@@ -23,15 +24,17 @@ if (appConfig.element) {
 
 	const registrationInst = registration(appConfig);
 	const gameLandingInst = gameLanding(appConfig);
+	const gameWaitInst = gameWait(appConfig);
 	const routes = {
 		registration: registrationInst.renderRegistrationForm,
 		password: registrationInst.renderPasswordForm,
-		gameLanding: gameLandingInst.render
+		gameLanding: gameLandingInst.render,
+		gameWait: gameWaitInst.render
 	};
 	router.init(routes, appConfig);
 
 	playerService.authorize()
-		.then(() => router.route('gameLanding'))
+		.then(() => router.route('gameWait'))
 		.catch(errors => {
 			if (errors.mustReauthenticate === true) {
 				router.route('password');
