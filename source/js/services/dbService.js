@@ -5,13 +5,10 @@ const dbService = function() {
 
 	let db = null;
 	const nodeNames = {
+		events: 'events',
+		games: 'games',
 		pendingPlayers: 'pendingPlayers',
 		activePlayers: 'activePlayers'
-	};
-	const refs = {
-		events: null,
-		activePlayers: null,
-		pendingPlayers: null
 	};
 	let cachedCurrentEventId = null;
 
@@ -21,10 +18,6 @@ const dbService = function() {
 
 	function getDb() {
 		return db;
-	}
-
-	function getRef(refName) {
-		return refs[refName] ? refs[refName] : db.ref(refName);
 	}
 
 	function getCurrentEventId() {
@@ -40,13 +33,11 @@ const dbService = function() {
 	}
 
 	function getEvent(eventAlias) {
-		const eventsRef = getRef('events');
-		return eventsRef.orderByChild('alias').equalTo(eventAlias).once('value').then(snapshot => snapshot.val());
+		return db.ref('events').orderByChild('alias').equalTo(eventAlias).once('value').then(snapshot => snapshot.val());
 	}
 
 	function createPendingPlayer(playerVals, eventKey) {
-		const pendingPlayersRef = getRef(nodeNames.pendingPlayers);
-		const pendingPlayerKey = pendingPlayersRef.push().key;
+		const pendingPlayerKey = db.ref(nodeNames.pendingPlayers).push().key;
 		const formattedPlayerVals = {
 			firstName: playerVals.firstName,
 			lastName: playerVals.lastName,
@@ -68,14 +59,17 @@ const dbService = function() {
 	}
 
 	function getPendingPlayer(pendingKey, value = '') {
-		const pendingPlayersRef = getRef(nodeNames.pendingPlayers);
-		return pendingPlayersRef.child(`${pendingKey}/${value}`).once('value').then(snapshot => snapshot.val());
+		return db.ref(nodeNames.pendingPlayers).child(`${pendingKey}/${value}`).once('value').then(snapshot => snapshot.val());
 	}
 
-	function getNextGameTime() {
-		// TODO: return the start time of next game for the event in UTC
-		// new Date() will convert it to local time
-		return Promise.resolve(new Date('May 5, 2018 12:00:00'));
+	async function getNextGameTime() {
+		const currentEventId = await getCurrentEventId();
+		const games = await db.ref('games').orderByChild('event').equalTo(currentEventId).once('value').then(snapshot => snapshot.val());
+		if (!games) {
+			return Promise.resolve(null);
+		}
+		const nextGameTime = new Date(Object.keys(games).map(gameId => games[gameId].startTime).sort()[0]);
+		return Promise.resolve(nextGameTime);
 	}
 
 	function submitAnswer(gameId, questionId, choiceId) {
