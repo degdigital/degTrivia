@@ -3,6 +3,7 @@ import router from './utils/router.js';
 import dbService from './services/dbService.js';
 import eventsService from './services/eventsService.js';
 import playerService from './services/playerService.js';
+import error from './screens/error.js';
 import registration from './screens/registration.js';
 import gameLanding from './screens/gameLanding.js';
 import firebase from '@firebase/app';
@@ -21,9 +22,11 @@ if (appConfig.element) {
 	eventsService.init();
 
 
+	const errorInst = error(appConfig);
 	const registrationInst = registration(appConfig);
 	const gameLandingInst = gameLanding(appConfig);
 	const routes = {
+		error: errorInst.render,
 		registration: registrationInst.renderRegistrationForm,
 		password: registrationInst.renderPasswordForm,
 		gameLanding: gameLandingInst.render

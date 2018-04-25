@@ -1,10 +1,14 @@
 import playerService from './playerService.js';
+import dbService from './dbService.js';
 
 const eventsService = function() {
 
 	const callbacks = [];
 
 	function bindEvents() {
+		dbService.init();
+		const connectedRef = dbService.getDb().ref('.info/connected');
+		connectedRef.on('value', snapshot => runSubscribedCallbacks('onConnectionStateChanged', snapshot.val() === true));
 		playerService.getAuth().onAuthStateChanged(user => runSubscribedCallbacks('onAuthStateChanged', user));
 	}
 
