@@ -7,8 +7,8 @@ const eventsService = function() {
 
 	function bindEvents() {
 		dbService.init();
-		const connectedRef = dbService.getDb().ref('.info/connected');
-		connectedRef.on('value', snapshot => runSubscribedCallbacks('onConnectionStateChanged', snapshot.val() === true));
+		dbService.getDb().ref('.info/connected')
+		dbService.getDb().ref('disableAll').on('value', snapshot => runSubscribedCallbacks('onErrorStateChanged', snapshot.val() === true));
 		playerService.getAuth().onAuthStateChanged(user => runSubscribedCallbacks('onAuthStateChanged', user));
 	}
 

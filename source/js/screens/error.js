@@ -5,11 +5,11 @@ import eventsService from '../services/eventsService.js';
 const error = function({element}) {
 
 	function bindEvents() {
-		eventsService.subscribe('onConnectionStateChanged', render);
+		eventsService.subscribe('onErrorStateChanged', render);
 	}
 
-	function render(isConnected = true) {
-		if (!isConnected) {
+	function render(isError = false) {
+		if (isError) {
 			replaceContent(element, `
 				Error
 			`);
