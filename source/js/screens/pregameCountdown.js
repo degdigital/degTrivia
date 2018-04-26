@@ -2,7 +2,7 @@ import {replaceContent} from '../utils/domUtils.js';
 import countdown from '../components/countdown.js';
 import dbService from '../services/dbService.js';
 
-const gameWait = function({element}) {
+const pregameCountdown = function({element}) {
     
     function renderCountdownContainer(nextGameTime) {
         const timeTilNextGame = nextGameTime.valueOf() - Date.now();
@@ -45,4 +45,4 @@ const gameWait = function({element}) {
 
 };
 
-export default gameWait;
+export default pregameCountdown;

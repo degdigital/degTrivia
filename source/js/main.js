@@ -1,12 +1,25 @@
+// Config
 import appConfig from './config/appConfig.js';
+
+// Utils
 import router from './utils/router.js';
+
+// Services
 import dbService from './services/dbService.js';
 import eventsService from './services/eventsService.js';
 import playerService from './services/playerService.js';
-import error from './screens/error.js';
+
+// Screens
 import registration from './screens/registration.js';
-import gameLanding from './screens/gameLanding.js';
-import gameWait from './screens/gameWait.js';
+import pregameCountdown from './screens/pregameCountdown.js';
+import gameWaitBeforeQuestions from './screens/gameWaitBeforeQuestions.js';
+import gameQuestion from './screens/gameQuestion.js';
+import gameQuestionResults from './screens/gameQuestionResults.js';
+import postgameResults from './screens/postgameResults.js';
+import leaderboard from './screens/leaderboard.js';
+import error from './screens/error.js';
+
+// Firebase
 import firebase from '@firebase/app';
 
 if (appConfig.element) {
@@ -22,27 +35,48 @@ if (appConfig.element) {
 	playerService.init();
 	eventsService.init();
 
-
-	const errorInst = error(appConfig);
 	const registrationInst = registration(appConfig);
-	const gameLandingInst = gameLanding(appConfig);
-	const gameWaitInst = gameWait(appConfig);
+	const pregameCountdownInst = pregameCountdown(appConfig);
+	const gameWaitBeforeQuestionsInst = gameWaitBeforeQuestions(appConfig);
+	const gameQuestionInst = gameQuestion(appConfig);
+	const gameQuestionResultsInst = gameQuestionResults(appConfig);
+	const postgameResultsInst = postgameResults(appConfig);
+	const leaderboardInst = leaderboard(appConfig);
+	const errorInst = leaderboard(appConfig);
+
 	const routes = {
-		error: errorInst.render,
 		registration: registrationInst.renderRegistrationForm,
 		password: registrationInst.renderPasswordForm,
-		gameLanding: gameLandingInst.render,
-		gameWait: gameWaitInst.render
+		pregameCountdown: pregameCountdownInst.render,
+		gameWaitBeforeQuestions: gameWaitBeforeQuestionsInst.render,
+		gameQuestion: gameQuestionInst.render,
+		gameQuestionResults: gameQuestionResultsInst.render,
+		postgameResults: postgameResults.render,
+		leaderboard: leaderboardInst.render,
+		error: errorInst.render
 	};
-	router.init(routes, appConfig);
 
-	playerService.authorize()
-		.then(() => router.route('gameWait'))
-		.catch(errors => {
-			if (errors.mustReauthenticate === true) {
-				router.route('password');
-			} else {
-				router.route('registration');
-			}
-		});
+	function init() {
+		router.init(routes, appConfig);
+		playerService.authorize()
+			.then(subscribeToEvents)
+			.catch(errors => {
+				if (errors.mustReauthenticate === true) {
+					router.route('password');
+				} else {
+					router.route('registration');
+				}
+			});
+	}
+
+	function subscribeToEvents() {
+		eventsService.subscribe('onGameStart', gameData => router.route('gameWaitBeforeQuestions', gameData));
+		eventsService.subscribe('onGameEnd', gameId => router.route('pregameCountdown'));
+		eventsService.subscribe('onErrorStateChanged', isError => isError === true ? 
+			router.route('error') : 
+			router.route('pregameCountdown')
+		);
+	}
+
+	init();
 }

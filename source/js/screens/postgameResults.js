@@ -1,12 +1,11 @@
 import {replaceContent} from '../utils/domUtils.js';
 
-const gameLanding = function({element}) {
+const postgameResults = function({element}) {
 
 	function render() {
 		replaceContent(element, `
-			gameLanding
+			Postgame results
 		`);
-		
 	}
 
 	return {
@@ -15,4 +14,4 @@ const gameLanding = function({element}) {
 
 };
 
-export default gameLanding;
+export default postgameResults;

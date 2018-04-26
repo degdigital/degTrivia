@@ -68,7 +68,7 @@ function teardown(element, onClickBound) {
 	unbindEventListeners(element, onClickBound);
 }
 
-export default function(element) {
+export default function({element}) {
 
 	let onClickBound;
 
