@@ -59,13 +59,13 @@ async function render(containerElement) {
                 <button class="button button--short tab-button" data-tab-index="1">Day</button>
                 <button class="button button--short tab-button" data-tab-index="2">Event</button>
             </div>
-            <div class="tab-section tab-section--game" data-section-name="game">
+            <div class="tab-section tab-section--game">
                 ${renderLeaderboard(leaderboardData.game)}
             </div>
-            <div class="tab-section tab-section--day is-hidden" data-section-name="day">
+            <div class="tab-section tab-section--day is-hidden">
                 ${renderLeaderboard(leaderboardData.day)}
             </div>
-            <div class="tab-section tab-section--event is-hidden" data-section-name="event">
+            <div class="tab-section tab-section--event is-hidden">
                 ${renderLeaderboard(leaderboardData.event)}
             </div>
         </div>

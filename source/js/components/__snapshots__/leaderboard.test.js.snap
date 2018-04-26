@@ -43,7 +43,6 @@ exports[`leaderboard should render 1`] = `
             
     <div
       class="tab-section tab-section--game"
-      data-section-name="game"
     >
       
                 
@@ -150,7 +149,6 @@ exports[`leaderboard should render 1`] = `
             
     <div
       class="tab-section tab-section--day is-hidden"
-      data-section-name="day"
     >
       
                 
@@ -164,7 +162,6 @@ exports[`leaderboard should render 1`] = `
             
     <div
       class="tab-section tab-section--event is-hidden"
-      data-section-name="event"
     >
       
                 
