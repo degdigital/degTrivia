@@ -3,7 +3,8 @@ import countdown from '../components/countdown.js';
 import dbService from '../services/dbService.js';
 
 const gameWait = function({element}) {
-    
+    let countdownInst;
+
     function renderCountdownContainer(nextGameTime) {
         const timeTilNextGame = nextGameTime.valueOf() - Date.now();
         replaceContent(element, `

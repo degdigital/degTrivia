@@ -20,7 +20,7 @@ describe('gameWait', () => {
     });
 
     it('renders', async () => {
-        await gameWait(element).render();
+        await gameWait({element}).render();
         expect(element).toBeTruthy();
 
         const countdownContainer = element.querySelector('.countdown-container');
@@ -31,7 +31,7 @@ describe('gameWait', () => {
     })
 
     it('renders message if no next game', async () => {
-        await gameWait(element).render();
+        await gameWait({element}).render();
         expect(document.body.innerHTML).toEqual(`<div><div>There are no more games scheduled for your event.</div></div>`
         );
     });

@@ -9,7 +9,7 @@ function loadLeaderboardData() {
     return Promise.all(promises).then(datasets => {
         const retVal = {};
         datasets.forEach(dataset => {
-            if (dataset.type) {
+            if (dataset && dataset.type) {
                 retVal[dataset.type] = dataset.leaders;
             }
         })
@@ -18,8 +18,9 @@ function loadLeaderboardData() {
 }
 
 function renderTableBody(leaderData) {
-    return leaderData.map(leader => (
+    return leaderData.map((leader, index) => (
         `<tr>
+            <td>${index + 1}.</td>
             <td>${leader.name}</td>
             <td>${leader.score}</td>
         </tr>`
@@ -27,18 +28,25 @@ function renderTableBody(leaderData) {
 }
 
 function renderLeaderboard(data) {
-    let returnMarkup = '<div>Top 20 Players</div>';
-    returnMarkup += `
-        <table>
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Score</th>
-                </tr>
-            </thead>
-            <tbody>${renderTableBody(data)}</tbody>
-        </table>
-    `;
+    let returnMarkup;
+    if (data) {
+        returnMarkup = '<div>Top 10 Players</div>';
+        returnMarkup += `
+            <table>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Name</th>
+                        <th>Score</th>
+                    </tr>
+                </thead>
+                <tbody>${renderTableBody(data)}</tbody>
+            </table>
+        `;
+    } else {
+        returnMarkup = '<div>No leaderboard data to display.</div>'
+    }
+   
     return returnMarkup;
 }
 

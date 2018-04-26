@@ -106,8 +106,8 @@ const dbService = function() {
 			type: 'event',
 			leaders: [
 				{name: 'Aaron', score: '1500001'},
-					{name: 'Aaron', score: '200'},
-					{name: 'Ryan', score: '43'}
+				{name: 'Aaron', score: '200'},
+				{name: 'Ryan', score: '43'}
 			]
 		})
 	}
