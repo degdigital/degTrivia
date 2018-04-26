@@ -3,7 +3,6 @@ let sectionEls;
 let navItemEls;
 
 function activateTab(newIndex) {
-    console.log(`activate tab ${newIndex}`);
     //TODO: polyfill classList toggle
     sectionEls.forEach((sectionEl, index) => {
         sectionEl.classList.toggle('is-hidden', index !== newIndex);
@@ -28,7 +27,9 @@ function onTabClick(event) {
 }
 
 function destroy(containerEl) {
-    containerEl.removeEventListener('click', onTabClick);
+    if (containerEl) {
+        containerEl.removeEventListener('click', onTabClick);
+    }
 }
 
 export default function(containerEl) {
