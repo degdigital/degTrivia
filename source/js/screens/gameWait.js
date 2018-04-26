@@ -2,8 +2,9 @@ import {replaceContent} from '../utils/domUtils.js';
 import countdown from '../components/countdown.js';
 import dbService from '../services/dbService.js';
 
+let countdownInst;
+
 const gameWait = function({element}) {
-    
     function renderCountdownContainer(nextGameTime) {
         const timeTilNextGame = nextGameTime.valueOf() - Date.now();
         replaceContent(element, `
