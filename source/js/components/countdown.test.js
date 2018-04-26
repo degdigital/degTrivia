@@ -44,22 +44,10 @@ describe('countdown', () => {
     });
 
     it('should initialize coundown', () => {
-        const initialOutput = `
-        <div class="countdown-container">
-            <span class="countdown__time">0</span>
-            <span class="countdown__unit">days</span>
-            <span class="countdown__time">0</span>
-            <span class="countdown__unit">hours</span>
-            <span class="countdown__time">0</span>
-            <span class="countdown__unit">minutes</span>
-            <span class="countdown__time">01</span>
-            <span class="countdown__unit">second</span>
-        </div>`;
-
         countdownInst.start(1, 'seconds');
         expect(setInterval).toHaveBeenCalledTimes(1);
         jest.advanceTimersByTime(1000);
-        expect(document.body.innerHTML).toBeEquivalent(initialOutput);
+        expect(document.body.innerHTML).toMatchSnapshot();
     });
 
     it('should stop interval if called', () => {
