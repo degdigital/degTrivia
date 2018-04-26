@@ -2,20 +2,22 @@ import {replaceContent} from '../utils/domUtils.js';
 import countdown from '../components/countdown.js';
 import dbService from '../services/dbService.js';
 
-const pregameCountdown = function({element}) {
-    
+let countdownInst;
+
+const gameWait = function({element}) {
     function renderCountdownContainer(nextGameTime) {
         const timeTilNextGame = nextGameTime.valueOf() - Date.now();
         replaceContent(element, `
             ${renderNextGameText(nextGameTime)}
             <div class="countdown-container"></div>
         `);
-        countdown(timeTilNextGame, 'milliseconds');
+        countdownInst = countdown();
+        countdownInst.start(timeTilNextGame, 'milliseconds');
     }
 
     function renderNextGameText(nextGameTime) {
         return `
-            <div>
+            <div class="next-game-time">
                 Next game is 
                 <time datetime="${nextGameTime.toISOString()}">
                     ${nextGameTime.toLocaleDateString()} ${nextGameTime.toLocaleTimeString()}
@@ -25,9 +27,7 @@ const pregameCountdown = function({element}) {
     }
 
     function renderNoGameText() {
-        replaceContent(element, `
-            <div>There are no more games scheduled for your event.</div>
-        `)
+        replaceContent(element, `<div>There are no more games scheduled for your event.</div>`)
     }
 
 	async function render() {
@@ -40,9 +40,10 @@ const pregameCountdown = function({element}) {
 	}
 
 	return {
-		render
+        render,
+        teardown: () => countdownInst.stop
 	};
 
 };
 
-export default pregameCountdown;
+export default gameWait;
