@@ -1,11 +1,15 @@
-import authService from './authService.js';
+import playerService from './playerService.js';
+import dbService from './dbService.js';
 
 const eventsService = function() {
 
 	const callbacks = [];
 
 	function bindEvents() {
-		authService.auth.onAuthStateChanged(user => runSubscribedCallbacks('onAuthStateChanged', user));
+		dbService.init();
+		dbService.getDb().ref('.info/connected')
+		dbService.getDb().ref('disableAll').on('value', snapshot => runSubscribedCallbacks('onErrorStateChanged', snapshot.val() === true));
+		playerService.getAuth().onAuthStateChanged(user => runSubscribedCallbacks('onAuthStateChanged', user));
 	}
 
 	function subscribe(name = null, callback = null) {
@@ -22,9 +26,12 @@ const eventsService = function() {
 		subscribedCallBacks.forEach(callback => callback.fn(response));
 	}
 
-	bindEvents();
-	
+	function init() {
+		bindEvents();
+	}
+
 	return {
+		init,
 		subscribe
 	};
 
