@@ -37,7 +37,9 @@
   "homepage": "https://github.com/degdigital/degTrivia#readme",
   "devDependencies": {
     "autoprefixer": "^8.3.0",
-    "babel-preset-es2015": "^6.24.1",
+    "babel": "^6.23.0",
+    "babel-plugin-external-helpers": "^6.22.0",
+    "babel-preset-env": "^1.6.1",
     "chokidar": "^2.0.3",
     "cssnano": "^3.10.0",
     "fs-extra": "^5.0.0",
@@ -45,7 +47,10 @@
     "postcss": "^6.0.21",
     "postcss-color-function": "^4.0.1",
     "postcss-easy-import": "^3.0.0",
-    "babel-preset-es2015": "^6.24.1"
+    "rollup": "^0.58.2",
+    "rollup-plugin-babel": "^3.0.4",
+    "rollup-plugin-commonjs": "^9.1.0",
+    "rollup-plugin-node-resolve": "^3.3.0"
   },
   "browserslist": [
     "last 2 versions"
@@ -55,5 +60,9 @@
       "/node_modules/",
       "/public/"
     ]
+  },
+  "dependencies": {
+    "firebase": "^4.13.1",
+    "babel-polyfill": "^6.26.0"
   }
 }

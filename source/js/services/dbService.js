@@ -1,46 +1,75 @@
+import firebase from '@firebase/app';
+import '@firebase/database';
+
 const dbService = function() {
 
-	const db = firebase.database();
-	const refs = {
-		events: null,
-		players: null
+	let db = null;
+	const nodeNames = {
+		events: 'events',
+		games: 'games',
+		pendingPlayers: 'pendingPlayers',
+		activePlayers: 'activePlayers'
 	};
+	let cachedCurrentEventId = null;
 
-	function getRef(refName) {
-		if (refs[refName]) {
-			return refs[refName];
+	function init() {
+		db = firebase.database();
+	}
+
+	function getDb() {
+		return db;
+	}
+
+	function getCurrentEventId() {
+		if (cachedCurrentEventId) {
+			return Promise.resolve(cachedCurrentEventId);
+		} else {
+			return db.ref('currentEvent').once('value').then(snapshot => {
+				cachedCurrentEventId = snapshot.val();
+				return cachedCurrentEventId;
+			});
 		}
-		return db.ref(refName);
+		
 	}
 
 	function getEvent(eventAlias) {
-		const eventsRef = getRef('events');
-		return eventsRef.orderByChild('alias').equalTo(eventAlias).once('value').then(snapshot => snapshot.val());
+		return db.ref('events').orderByChild('alias').equalTo(eventAlias).once('value').then(snapshot => snapshot.val());
 	}
 
-	async function createInactivePlayer(playerVals) {
-		const event = await getEvent(playerVals.eventAlias);
-		const playersRef = getRef('players');
-		const newUserKey = playersRef.push().key;
+	function createPendingPlayer(playerVals, eventKey) {
+		const pendingPlayerKey = db.ref(nodeNames.pendingPlayers).push().key;
 		const formattedPlayerVals = {
 			firstName: playerVals.firstName,
 			lastName: playerVals.lastName,
 			email: playerVals.email,
 			events: {
-				[Object.keys(event)[0]]: true
-			},
-			active: false
+				[eventKey]: true
+			}
 		};
-		const updates = {};
-		updates[`/players/${newUserKey}`] = formattedPlayerVals;
+		return db.ref(`/${nodeNames.pendingPlayers}/${pendingPlayerKey}`).update(formattedPlayerVals)
+			.then(() => pendingPlayerKey);
+	}
 
+	async function createActivePlayer(user, pendingKey) {
+		const pendingPlayerVals = await getPendingPlayer(pendingKey);
+		const updates = {};
+		updates[`/${nodeNames.pendingPlayers}/${pendingKey}`] = null;
+		updates[`/${nodeNames.activePlayers}/${user.uid}`] = pendingPlayerVals;
 		return db.ref().update(updates);
 	}
 
-	function getNextGameTime() {
-		// TODO: return the start time of next game for the event in UTC
-		// new Date() will convert it to local time
-		return Promise.resolve(new Date('May 5, 2018 12:00:00'));
+	function getPendingPlayer(pendingKey, value = '') {
+		return db.ref(nodeNames.pendingPlayers).child(`${pendingKey}/${value}`).once('value').then(snapshot => snapshot.val());
+	}
+
+	async function getNextGameTime() {
+		const currentEventId = await getCurrentEventId();
+		const games = await db.ref('games').orderByChild('event').equalTo(currentEventId).once('value').then(snapshot => snapshot.val());
+		if (!games) {
+			return Promise.resolve(null);
+		}
+		const nextGameTime = new Date(Object.keys(games).map(gameId => games[gameId].startTime).sort()[0]);
+		return Promise.resolve(nextGameTime);
 	}
 
 	function submitAnswer(gameId, questionId, choiceId) {
@@ -48,9 +77,13 @@ const dbService = function() {
 	}
 
 	return {
-		db,
+		init,
+		getDb,
+		getCurrentEventId,
 		getEvent,
-		createInactivePlayer,
+		createPendingPlayer,
+		createActivePlayer,
+		getPendingPlayer,
 		getNextGameTime
 	};
 

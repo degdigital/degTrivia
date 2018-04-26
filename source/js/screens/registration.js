@@ -1,6 +1,6 @@
 import {replaceContent} from '../utils/domUtils.js';
 import formMapper from '../utils/formMapper.js';
-import authService from '../services/authService.js';
+import playerService from '../services/playerService.js';
 
 const registration = function({element}) {
 
@@ -33,7 +33,7 @@ const registration = function({element}) {
 
 	function renderPasswordForm() {
 		replaceContent(element, `
-			renderPasswordForm
+			Re-enter password
 		`);
 	}
 
@@ -42,7 +42,7 @@ const registration = function({element}) {
 		if (el.classList.contains(registrationFormClass)) {
 			e.preventDefault();
 			const formVals = formMapper.getValues(el);
-			authService.registerPlayer(formVals)
+			playerService.register(formVals)
 				.then(successMsg => renderPostRegisterMessage(successMsg))
 				.catch(errorMsg => renderPostRegisterMessage(errorMsg));
 		}

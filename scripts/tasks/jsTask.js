@@ -1,36 +1,51 @@
-const path = require('path');
-const fse = require('fs-extra');
+const rollup = require('rollup');
+const nodeResolve =  require('rollup-plugin-node-resolve');
+const commonjs = require('rollup-plugin-commonjs');
+//const babel = require('rollup-plugin-babel');
 
-const filesToProcess = ['js'];
+const entryFilepath = 'source/js/main.js';
+const bundleFilepaths = {
+	modules: 'public/js/main-bundle.js',
+	noModules: 'public/js/main-bundle-nomodules.js'
+};
 
-function copyFile(srcFilepath, destFilepath) {
-	return fse.copy(srcFilepath, destFilepath)
-		.then(() => true)
-		.catch(e => {
-			console.error(`Error copying file "${srcFilepath}":`, e);
-			return false;
-		});
-} 
-
-function run() {
+async function run() {
 	console.log('JS task started.');
 
-	const promises = filesToProcess.map(file => {
-		const srcFilepath = path.resolve('source', file);
-		const destFilepath = path.resolve('public', file);
-		return copyFile(srcFilepath, destFilepath);
-	});
+	const inputOptions = {
+		input: entryFilepath,
+		plugins: [
+			/*babel({
+				exclude: 'node_modules/**'
+			}),*/
+			nodeResolve(), 
+			commonjs()
+		]
+	};
 
-	return Promise.all(promises)
-		.then(results => {
-			const success = results.every(result => result);
-			if(success) {
-				console.log('JS task complete.');
-			} else {
-				console.error('JS task failed.');
-			}
-			return success;
-		});
+	try {
+		const bundle = await rollup.rollup(inputOptions);
+
+		const modulesPromise = bundle.write({
+	    	file: bundleFilepaths.modules,
+	    	format: 'es'
+	    });
+
+	    const noModulesPromise = bundle.write({
+	    	file: bundleFilepaths.noModules,
+	    	format: 'iife'
+	    });
+
+	    await modulesPromise;
+	    await noModulesPromise;
+
+		console.log('JS task complete.');
+		return true;
+	} catch(e) {
+		console.error('Error building bundle file', e);
+		console.error('JS task failed.');
+		return false;
+	}
 }
 
 module.exports = {
