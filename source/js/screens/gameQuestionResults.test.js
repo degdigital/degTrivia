@@ -1,4 +1,4 @@
-import questionResults from './questionResults';
+import gameQuestionResults from './gameQuestionResults';
 
 let element;
 
@@ -34,7 +34,7 @@ beforeEach(() => {
 
 describe('calling render()', () => {
 	test('renders out a question and choice results', async () => {
-		await questionResults(element).render(data);
+		await gameQuestionResults(element).render(data);
 		expect(element).toMatchSnapshot();
 	});
 });
