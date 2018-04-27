@@ -26,7 +26,7 @@ beforeEach(() => {
 
 describe('calling render()', () => {
 	test('renders out a question and choices', async () => {
-		await gameQuestion(element).render(data);
+		await gameQuestion({element}).render(data);
 		expect(element).toMatchSnapshot();
 	});
 });
@@ -35,7 +35,7 @@ describe('selecting a choice', () => {
 	test('calls the dbService submitAnswer() method', async () => {
 		const submitAnswerSpy = jest.spyOn(dbService, 'submitAnswer');
 
-		await gameQuestion(element).render(data);
+		await gameQuestion({element}).render(data);
 
 		const firstChoiceButtonEl = element.querySelector('.choice-button');
 		firstChoiceButtonEl.click();
@@ -47,7 +47,7 @@ describe('selecting a choice', () => {
 	});
 
 	test('disables the choice buttons', async () => {
-		await gameQuestion(element).render(data);
+		await gameQuestion({element}).render(data);
 
 		const firstChoiceButtonEl = element.querySelector('.choice-button');
 		firstChoiceButtonEl.click();

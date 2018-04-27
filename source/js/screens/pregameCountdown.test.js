@@ -1,4 +1,4 @@
-import gameWait from './gameWait';
+import pregameCountdown from './pregameCountdown';
 import dbService from '../services/dbService';
 
 jest.mock('../services/dbService', () => {
@@ -10,7 +10,7 @@ jest.mock('../services/dbService', () => {
     }
 });
 
-describe('gameWait', () => {
+describe('pregameCountdown', () => {
     let element;
 
     beforeEach(() => {
@@ -20,7 +20,7 @@ describe('gameWait', () => {
     });
 
     it('renders', async () => {
-        await gameWait(element).render();
+        await pregameCountdown({element}).render();
         expect(element).toBeTruthy();
 
         const countdownContainer = element.querySelector('.countdown-container');
@@ -31,7 +31,7 @@ describe('gameWait', () => {
     })
 
     it('renders message if no next game', async () => {
-        await gameWait(element).render();
+        await pregameCountdown({element}).render();
         expect(document.body.innerHTML).toEqual(`<div><div>There are no more games scheduled for your event.</div></div>`
         );
     });
