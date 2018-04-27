@@ -17,22 +17,27 @@ const eventsService = function() {
 			dbService.getDb().ref(`events/${currentEventId}/activeGameId`).on('value', snapshot => {
 				const gameId = snapshot.val();
 				if (gameId) {
-					runSubscribedCallbacks('onGameStart', {
-						gameId: gameId,
-						questionData: {
-							id: 10,
-							order: 0,
-							question: 'Who is the most dashing Kansas City Royal of all time?',
-							choices: {
-								100: 'Bob Hamelin',
-								101: 'Danny Tartabul',
-								102: 'Steve Balboni' 
-							}
+					dbService.getDb().ref(`games/${gameId}`).once('value', snapshot => {
+						if (snapshot.exists()) {
+							const gameVals = snapshot.val();
+							runSubscribedCallbacks('onGameStart', gameVals);
+							dbService.getDb().ref(`games/${gameId}/activeQuestionId`).on('value', snapshot => {
+								const activeQuestionId = snapshot.val();
+								if (activeQuestionId) {
+									let activeQuestion = gameVals.questions[activeQuestionId];
+									activeQuestion.id = Object.keys(gameVals.questions[activeQuestionId])[0];
+									console.log(activeQuestion);
+									runSubscribedCallbacks('onQuestionAsked', {
+										gameId: gameId,
+										questionData: activeQuestion
+									});
+								} else {
+									runSubscribedCallbacks('onBetweenQuestions');
+								}
+							});
 						}
 					});
-
 				} else {
-
 					runSubscribedCallbacks('onGameEnd', gameId);
 				}
 			});
