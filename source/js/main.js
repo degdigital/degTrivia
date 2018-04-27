@@ -16,7 +16,7 @@ import gameWaitBeforeQuestions from './screens/gameWaitBeforeQuestions.js';
 import gameQuestion from './screens/gameQuestion.js';
 import gameQuestionResults from './screens/gameQuestionResults.js';
 import postgameResults from './screens/postgameResults.js';
-import leaderboard from './screens/leaderboard.js';
+import leaderboard from './screens/leaderboardScreen.js';
 import error from './screens/error.js';
 
 // Firebase

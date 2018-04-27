@@ -76,6 +76,42 @@ const dbService = function() {
 		return Promise.resolve(true);
 	}
 
+	function getGameLeaderboard() {
+		// TODO: get top 10 players for most recent game
+		return Promise.resolve({
+			type: 'game',
+			leaders: [
+				{name: 'Anna', score: '1500000'},
+				{name: 'Aaron', score: '140'},
+				{name: 'Ryan', score: '42'}
+			]
+		})
+	}
+
+	function getDayLeaderboard() {
+		// get top 10 people and scores for current day
+		return Promise.resolve({
+			type: 'day',
+			leaders: [
+				{name: 'Anna', score: '1500060'},
+				{name: 'Aaron', score: '146'},
+				{name: 'Ryan', score: '42'}
+			]
+		})
+	}
+
+	function getEventLeaderboard() {
+		// get top 10 people and scores for current event
+		return Promise.resolve({
+			type: 'event',
+			leaders: [
+				{name: 'Aaron', score: '1500001'},
+				{name: 'Aaron', score: '200'},
+				{name: 'Ryan', score: '43'}
+			]
+		})
+	}
+
 	return {
 		init,
 		getDb,
@@ -84,7 +120,10 @@ const dbService = function() {
 		createPendingPlayer,
 		createActivePlayer,
 		getPendingPlayer,
-		getNextGameTime
+		getNextGameTime,
+		getGameLeaderboard,
+		getDayLeaderboard,
+		getEventLeaderboard
 	};
 
 };
