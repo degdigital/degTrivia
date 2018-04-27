@@ -1,17 +1,11 @@
 import {replaceContent} from '../utils/domUtils.js';
 import leaderboard from '../components/leaderboard.js';
 
-const leaderboardScreen = function(config) {
-
-	const leaderboardInst = leaderboard();
-
-	function init() {}
+const leaderboardScreen = function({element}) {
 
 	function render() {
-		leaderboardInst.renderToElement(config.element);
+		leaderboard().renderToElement(element);
 	}
-
-	init();
 
 	return {
 		render
