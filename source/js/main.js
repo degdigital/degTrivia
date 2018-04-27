@@ -33,7 +33,6 @@ if (appConfig.element) {
 	});
 	dbService.init();
 	playerService.init();
-	eventsService.init();
 
 	const registrationInst = registration(appConfig);
 	const pregameCountdownInst = pregameCountdown(appConfig);
@@ -72,10 +71,13 @@ if (appConfig.element) {
 	function subscribeToEvents() {
 		eventsService.subscribe('onGameStart', gameData => router.route('gameWaitBeforeQuestions', gameData));
 		eventsService.subscribe('onGameEnd', gameId => router.route('pregameCountdown'));
+		eventsService.subscribe('onQuestionAsked', questionData => router.route('gameQuestion', questionData));
+		// eventsService.subscribe('onBetweenQuestions', questionData => router.route('gameQuestionResults'));
 		eventsService.subscribe('onErrorStateChanged', isError => isError === true ? 
 			router.route('error') : 
 			router.route('pregameCountdown')
 		);
+		eventsService.init(); // Must be run after all eventsService.subscribe() calls
 	}
 
 	init();

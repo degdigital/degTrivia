@@ -1,0 +1,28 @@
+[debug] [2018-04-26T20:28:14.955Z] ----------------------------------------------------------------------
+[debug] [2018-04-26T20:28:14.957Z] Command:      /usr/local/bin/node /usr/local/bin/firebase serve
+[debug] [2018-04-26T20:28:14.957Z] CLI Version:  3.9.1
+[debug] [2018-04-26T20:28:14.957Z] Platform:     darwin
+[debug] [2018-04-26T20:28:14.957Z] Node Version: v9.8.0
+[debug] [2018-04-26T20:28:14.958Z] Time:         Thu Apr 26 2018 15:28:14 GMT-0500 (CDT)
+[debug] [2018-04-26T20:28:14.958Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-04-26T20:28:14.970Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-04-26T20:28:14.970Z] > authorizing via signed-in user
+[debug] [2018-04-26T20:28:14.971Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/degtrivia-develop  
+ Thu Apr 26 2018 15:28:14 GMT-0500 (CDT)
+[debug] [2018-04-26T20:28:15.290Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-26T20:28:15.290Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/degtrivia-develop/tokens  
+ Thu Apr 26 2018 15:28:15 GMT-0500 (CDT)
+[debug] [2018-04-26T20:28:15.587Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from '/Users/aladage/Projects/_degsideprojects/degTrivia'...
+[info] 
+[debug] [2018-04-26T20:28:15.589Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/degtrivia-develop  
+ Thu Apr 26 2018 15:28:15 GMT-0500 (CDT)
+[debug] [2018-04-26T20:28:15.778Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-26T20:28:15.778Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/369298224791/clients/_:getWebAppConfig  
+ Thu Apr 26 2018 15:28:15 GMT-0500 (CDT)
+[debug] [2018-04-26T20:28:16.013Z] <<< HTTP RESPONSE 200
+[info] i  hosting: Serving hosting files from: public
+[info] ✔  hosting: Local server: http://localhost:5000
+
