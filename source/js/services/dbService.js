@@ -36,30 +36,11 @@ const dbService = function() {
 		return db.ref('events').orderByChild('alias').equalTo(eventAlias).once('value').then(snapshot => snapshot.val());
 	}
 
-	function createPendingPlayer(playerVals, eventKey) {
+	function createPendingPlayer(playerVals, eventKey, userId) {
 		const pendingPlayerKey = db.ref(nodeNames.pendingPlayers).push().key;
-		const formattedPlayerVals = {
-			firstName: playerVals.firstName,
-			lastName: playerVals.lastName,
-			email: playerVals.email,
-			events: {
-				[eventKey]: true
-			}
-		};
+		
 		return db.ref(`/${nodeNames.pendingPlayers}/${pendingPlayerKey}`).update(formattedPlayerVals)
 			.then(() => pendingPlayerKey);
-	}
-
-	async function createActivePlayer(user, pendingKey) {
-		const pendingPlayerVals = await getPendingPlayer(pendingKey);
-		const updates = {};
-		updates[`/${nodeNames.pendingPlayers}/${pendingKey}`] = null;
-		updates[`/${nodeNames.activePlayers}/${user.uid}`] = pendingPlayerVals;
-		return db.ref().update(updates);
-	}
-
-	function getPendingPlayer(pendingKey, value = '') {
-		return db.ref(nodeNames.pendingPlayers).child(`${pendingKey}/${value}`).once('value').then(snapshot => snapshot.val());
 	}
 
 	async function getNextGameTime() {
@@ -74,6 +55,18 @@ const dbService = function() {
 
 	function submitAnswer(gameId, questionId, choiceId) {
 		return Promise.resolve(true);
+	}
+
+	function getActiveGameData(gameId) {
+		return new Promise((resolve, reject) => {
+			db.ref(`games/${gameId}`).once('value', snapshot => {
+				if (snapshot.exists()) {
+					resolve(snapshot.val());	
+				} else {
+					reject();
+				}
+			});
+		});
 	}
 
 	function getGameLeaderboard() {
@@ -117,13 +110,11 @@ const dbService = function() {
 		getDb,
 		getCurrentEventId,
 		getEvent,
-		createPendingPlayer,
-		createActivePlayer,
-		getPendingPlayer,
 		getNextGameTime,
 		getGameLeaderboard,
 		getDayLeaderboard,
-		getEventLeaderboard
+		getEventLeaderboard,
+		getActiveGameData
 	};
 
 };

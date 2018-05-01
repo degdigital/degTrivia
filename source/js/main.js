@@ -23,16 +23,6 @@ import error from './screens/error.js';
 import firebase from '@firebase/app';
 
 if (appConfig.element) {
-	firebase.initializeApp({
-		apiKey: "AIzaSyAZ5Ad3YFPCz2QKnMPtAl89tjplLQX6Lpw",
-	    authDomain: "degtrivia-develop.firebaseapp.com",
-	    databaseURL: "https://degtrivia-develop.firebaseio.com",
-	    projectId: "degtrivia-develop",
-	    storageBucket: "degtrivia-develop.appspot.com",
-	    messagingSenderId: "369298224791"
-	});
-	dbService.init();
-	playerService.init();
 
 	const registrationInst = registration(appConfig);
 	const pregameCountdownInst = pregameCountdown(appConfig);
@@ -41,7 +31,7 @@ if (appConfig.element) {
 	const gameQuestionResultsInst = gameQuestionResults(appConfig);
 	const postgameResultsInst = postgameResults(appConfig);
 	const leaderboardInst = leaderboard(appConfig);
-	const errorInst = leaderboard(appConfig);
+	const errorInst = error(appConfig);
 
 	const routes = {
 		registration: registrationInst.renderRegistrationForm,
@@ -56,27 +46,29 @@ if (appConfig.element) {
 	};
 
 	function init() {
+		firebase.initializeApp({
+			apiKey: "AIzaSyAZ5Ad3YFPCz2QKnMPtAl89tjplLQX6Lpw",
+		    authDomain: "degtrivia-develop.firebaseapp.com",
+		    databaseURL: "https://degtrivia-develop.firebaseio.com",
+		    projectId: "degtrivia-develop",
+		    storageBucket: "degtrivia-develop.appspot.com",
+		    messagingSenderId: "369298224791"
+		});
+		dbService.init();
+		playerService.init();
 		router.init(routes, appConfig);
-		playerService.authorize()
-			.then(subscribeToEvents)
-			.catch(errors => {
-				if (errors.mustReauthenticate === true) {
-					router.route('password');
-				} else {
-					router.route('registration');
-				}
-			});
-	}
-
-	function subscribeToEvents() {
-		eventsService.subscribe('onGameStart', gameData => router.route('gameWaitBeforeQuestions', gameData));
-		eventsService.subscribe('onGameEnd', gameId => router.route('pregameCountdown'));
-		eventsService.subscribe('onQuestionAsked', questionData => router.route('gameQuestion', questionData));
+		
+		eventsService.subscribe('onPlayerUnauthenticated', () => router.route('registration'));
+		// eventsService.subscribe('onPlayerUnregisteredForEvent', () => router.route('password'));
+		// eventsService.subscribe('onGameStart', gameData => router.route('gameWaitBeforeQuestions', gameData));
+		// eventsService.subscribe('onGameEnd', () => router.route('pregameCountdown'));
+		// eventsService.subscribe('onQuestionAsked', questionData => router.route('gameQuestion', questionData));
 		// eventsService.subscribe('onBetweenQuestions', questionData => router.route('gameQuestionResults'));
-		eventsService.subscribe('onErrorStateChanged', isError => isError === true ? 
-			router.route('error') : 
-			router.route('pregameCountdown')
-		);
+		eventsService.subscribe('onErrorStateChanged', isError => {
+			if (isError === true) {
+				router.route('error');
+			}
+		});
 		eventsService.init(); // Must be run after all eventsService.subscribe() calls
 	}
 
