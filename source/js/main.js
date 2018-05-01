@@ -10,6 +10,7 @@ import eventsService from './services/eventsService.js';
 import playerService from './services/playerService.js';
 
 // Screens
+import info from './screens/info.js'
 import registration from './screens/registration.js';
 import pregameCountdown from './screens/pregameCountdown.js';
 import gameWaitBeforeQuestions from './screens/gameWaitBeforeQuestions.js';
@@ -24,6 +25,7 @@ import firebase from '@firebase/app';
 
 if (appConfig.element) {
 
+	const infoInst = info(appConfig);
 	const registrationInst = registration(appConfig);
 	const pregameCountdownInst = pregameCountdown(appConfig);
 	const gameWaitBeforeQuestionsInst = gameWaitBeforeQuestions(appConfig);
@@ -34,6 +36,7 @@ if (appConfig.element) {
 	const errorInst = error(appConfig);
 
 	const routes = {
+		info: infoInst.render,
 		registration: registrationInst.renderRegistrationForm,
 		password: registrationInst.renderPasswordForm,
 		pregameCountdown: pregameCountdownInst.render,
@@ -59,15 +62,16 @@ if (appConfig.element) {
 		router.init(routes, appConfig);
 		
 		eventsService.subscribe('onPlayerUnauthenticated', () => router.route('registration'));
-		// eventsService.subscribe('onGameStart', gameData => router.route('gameWaitBeforeQuestions', gameData));
-		// eventsService.subscribe('onGameEnd', () => router.route('pregameCountdown'));
-		// eventsService.subscribe('onQuestionAsked', questionData => router.route('gameQuestion', questionData));
-		// eventsService.subscribe('onBetweenQuestions', questionData => router.route('gameQuestionResults'));
-		eventsService.subscribe('onErrorStateChanged', isError => {
-			if (isError === true) {
-				router.route('error');
-			}
-		});
+		eventsService.subscribe('onNoActiveEvent', (infoObj) => router.route('info', infoObj));
+		eventsService.subscribe('onGameCountdown', () => router.route('pregameCountdown'));
+		eventsService.subscribe('onGameStart', gameData => router.route('gameWaitBeforeQuestions', gameData));
+		eventsService.subscribe('onPostgameResults', () => router.route('postgameResults'));
+		eventsService.subscribe('onGameEnd', () => router.route('pregameCountdown'));
+		eventsService.subscribe('onQuestionAsked', questionData => router.route('gameQuestion', questionData));
+		eventsService.subscribe('onBetweenQuestions', questionData => router.route('gameQuestionResults', questionData));
+		eventsService.subscribe('onError', () => router.route('error'));
+		eventsService.subscribe('onResetApp', () => location.reload());
+
 		eventsService.init(); // Must be run after all eventsService.subscribe() calls
 	}
 
