@@ -3,8 +3,8 @@ import playerService from '../services/playerService.js';
 import dbService from '../services/dbService.js';
 
 // Screens
-import login from './login.js';
-import manager from './manager.js';
+import login from './screens/login.js';
+import manager from './screens/manager.js';
 
 const admin = function(el) {
 

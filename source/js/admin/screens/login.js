@@ -1,8 +1,8 @@
 // Utils
-import {replaceContent} from '../utils/domUtils';
+import {replaceContent} from '../../utils/domUtils';
 
 // Services
-import playerService from '../services/playerService.js';
+import playerService from '../../services/playerService.js';
 
 const login = function(element, options = {}) {
 
