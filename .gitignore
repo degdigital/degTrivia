@@ -17,6 +17,7 @@ Thumbs.db
 
 /public
 .firebaserc
+firebase-debug.log
 
 *.sublime-project
 *.sublime-workspace
