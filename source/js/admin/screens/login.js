@@ -48,8 +48,8 @@ const login = function(element, options = {}) {
 	function renderForm() {
 		replaceContent(element, `
 			<form class="${settings.formClass}">
-				<legend>Login</legend>
 				<fieldset>
+					<legend>Login</legend>
 					<div class="field">
 						<label for="email">Email address</label><br>
 						<input class="${settings.emailInputClass}" name="email" id="email" type="email" required>
