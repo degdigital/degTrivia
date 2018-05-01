@@ -34,7 +34,7 @@ beforeEach(() => {
 
 describe('calling render()', () => {
 	test('renders out a question and choice results', async () => {
-		await gameQuestionResults(element).render(data);
+		await gameQuestionResults({element}).render(data);
 		expect(element).toMatchSnapshot();
 	});
 });
