@@ -137,7 +137,7 @@ const eventsService = function() {
 	function runSubscribedCallbacks(name, response) {
 		const subscribedCallBacks = callbacks.filter(callback => callback.name === name);
 		subscribedCallBacks.forEach(callback => {
-			if (appHasError === false || (appHasError === true && callback.name === 'onError')) {
+			if (appHasError === false || callback.name === 'onError') {
 				callback.fn(response);
 			}
 		});
