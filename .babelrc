@@ -1,18 +1,36 @@
 {
-	"presets": [
-		["env", {
-			"modules": false,
-      		"targets": {
-        		"browsers": ["last 2 versions", "ie >= 11"]
-     	 	}
-    	}]
-    ],
+	"ignore": [
+		"node_modules/**"
+	],
+	"plugins": [
+		"transform-runtime",
+		"external-helpers",
+	 	"syntax-async-functions",
+	    ["transform-regenerator", {
+	    	"asyncGenerators": false,
+	    	"generators": false,
+	    	"async": true
+		}]
+	],
   	"env": {
-	    "test": {
-	    	"ignore": [
-				"node_modules/**"
-			],
-	      	"presets": [["env"]]
+  		"development": {
+  			"presets": [
+				["env", {
+					"modules": false,
+		      		"targets": {
+		        		"browsers": [">1%", "ie 11", "not op_mini all"]
+		     	 	}
+		    	}]
+		    ]
+  		},
+		"test": {
+	      	"presets": [
+	      		["env", {
+	      			"targets": {
+	      				"node": "current"
+	      			}
+	      		}]
+	      	]
 	    }
-	  }
+	}
 }
