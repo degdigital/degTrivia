@@ -1,0 +1,273 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`leaderboard should render 1`] = `
+<div>
+  
+        
+  <div
+    class="tabs-container"
+  >
+    
+            
+    <div
+      class="tab-group"
+    >
+      
+                
+      <button
+        class="button button--short tab-button tab-button--active"
+        data-tab-index="0"
+      >
+        Game
+      </button>
+      
+                
+      <button
+        class="button button--short tab-button"
+        data-tab-index="1"
+      >
+        Day
+      </button>
+      
+                
+      <button
+        class="button button--short tab-button"
+        data-tab-index="2"
+      >
+        Event
+      </button>
+      
+            
+    </div>
+    
+            
+    <div
+      class="tab-section tab-section--game"
+    >
+      
+                
+      <div>
+        Top 10 Players
+      </div>
+      
+            
+      <table>
+        
+                
+        <thead>
+          
+                    
+          <tr>
+            
+                        
+            <th />
+            
+                        
+            <th>
+              Name
+            </th>
+            
+                        
+            <th>
+              Score
+            </th>
+            
+                    
+          </tr>
+          
+                
+        </thead>
+        
+                
+        <tbody>
+          <tr>
+            
+            
+            <td>
+              1.
+            </td>
+            
+            
+            <td>
+              Anna
+            </td>
+            
+            
+            <td>
+              1500000
+            </td>
+            
+        
+          </tr>
+          <tr>
+            
+            
+            <td>
+              2.
+            </td>
+            
+            
+            <td>
+              Aaron
+            </td>
+            
+            
+            <td>
+              140
+            </td>
+            
+        
+          </tr>
+          <tr>
+            
+            
+            <td>
+              3.
+            </td>
+            
+            
+            <td>
+              Ryan
+            </td>
+            
+            
+            <td>
+              42
+            </td>
+            
+        
+          </tr>
+        </tbody>
+        
+            
+      </table>
+      
+        
+            
+    </div>
+    
+            
+    <div
+      class="tab-section tab-section--day is-hidden"
+    >
+      
+                
+      <div>
+        No leaderboard data to display.
+      </div>
+      
+            
+    </div>
+    
+            
+    <div
+      class="tab-section tab-section--event is-hidden"
+    >
+      
+                
+      <div>
+        Top 10 Players
+      </div>
+      
+            
+      <table>
+        
+                
+        <thead>
+          
+                    
+          <tr>
+            
+                        
+            <th />
+            
+                        
+            <th>
+              Name
+            </th>
+            
+                        
+            <th>
+              Score
+            </th>
+            
+                    
+          </tr>
+          
+                
+        </thead>
+        
+                
+        <tbody>
+          <tr>
+            
+            
+            <td>
+              1.
+            </td>
+            
+            
+            <td>
+              Aaron
+            </td>
+            
+            
+            <td>
+              1500001
+            </td>
+            
+        
+          </tr>
+          <tr>
+            
+            
+            <td>
+              2.
+            </td>
+            
+            
+            <td>
+              Aaron
+            </td>
+            
+            
+            <td>
+              200
+            </td>
+            
+        
+          </tr>
+          <tr>
+            
+            
+            <td>
+              3.
+            </td>
+            
+            
+            <td>
+              Ryan
+            </td>
+            
+            
+            <td>
+              43
+            </td>
+            
+        
+          </tr>
+        </tbody>
+        
+            
+      </table>
+      
+        
+            
+    </div>
+    
+        
+  </div>
+  
+    
+</div>
+`;

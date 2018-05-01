@@ -10,31 +10,22 @@ import eventsService from './services/eventsService.js';
 import playerService from './services/playerService.js';
 
 // Screens
+import info from './screens/info.js'
 import registration from './screens/registration.js';
 import pregameCountdown from './screens/pregameCountdown.js';
 import gameWaitBeforeQuestions from './screens/gameWaitBeforeQuestions.js';
 import gameQuestion from './screens/gameQuestion.js';
 import gameQuestionResults from './screens/gameQuestionResults.js';
 import postgameResults from './screens/postgameResults.js';
-import leaderboard from './screens/leaderboard.js';
+import leaderboard from './screens/leaderboardScreen.js';
 import error from './screens/error.js';
 
 // Firebase
 import firebase from '@firebase/app';
 
 if (appConfig.element) {
-	firebase.initializeApp({
-		apiKey: "AIzaSyAZ5Ad3YFPCz2QKnMPtAl89tjplLQX6Lpw",
-	    authDomain: "degtrivia-develop.firebaseapp.com",
-	    databaseURL: "https://degtrivia-develop.firebaseio.com",
-	    projectId: "degtrivia-develop",
-	    storageBucket: "degtrivia-develop.appspot.com",
-	    messagingSenderId: "369298224791"
-	});
-	dbService.init();
-	playerService.init();
-	eventsService.init();
 
+	const infoInst = info(appConfig);
 	const registrationInst = registration(appConfig);
 	const pregameCountdownInst = pregameCountdown(appConfig);
 	const gameWaitBeforeQuestionsInst = gameWaitBeforeQuestions(appConfig);
@@ -42,9 +33,10 @@ if (appConfig.element) {
 	const gameQuestionResultsInst = gameQuestionResults(appConfig);
 	const postgameResultsInst = postgameResults(appConfig);
 	const leaderboardInst = leaderboard(appConfig);
-	const errorInst = leaderboard(appConfig);
+	const errorInst = error(appConfig);
 
 	const routes = {
+		info: infoInst.render,
 		registration: registrationInst.renderRegistrationForm,
 		password: registrationInst.renderPasswordForm,
 		pregameCountdown: pregameCountdownInst.render,
@@ -57,25 +49,30 @@ if (appConfig.element) {
 	};
 
 	function init() {
+		firebase.initializeApp({
+			apiKey: "AIzaSyAZ5Ad3YFPCz2QKnMPtAl89tjplLQX6Lpw",
+		    authDomain: "degtrivia-develop.firebaseapp.com",
+		    databaseURL: "https://degtrivia-develop.firebaseio.com",
+		    projectId: "degtrivia-develop",
+		    storageBucket: "degtrivia-develop.appspot.com",
+		    messagingSenderId: "369298224791"
+		});
+		dbService.init();
+		playerService.init();
 		router.init(routes, appConfig);
-		playerService.authorize()
-			.then(subscribeToEvents)
-			.catch(errors => {
-				if (errors.mustReauthenticate === true) {
-					router.route('password');
-				} else {
-					router.route('registration');
-				}
-			});
-	}
-
-	function subscribeToEvents() {
+		
+		eventsService.subscribe('onPlayerUnauthenticated', () => router.route('registration'));
+		eventsService.subscribe('onNoActiveEvent', (infoObj) => router.route('info', infoObj));
+		eventsService.subscribe('onGameCountdown', () => router.route('pregameCountdown'));
 		eventsService.subscribe('onGameStart', gameData => router.route('gameWaitBeforeQuestions', gameData));
-		eventsService.subscribe('onGameEnd', gameId => router.route('pregameCountdown'));
-		eventsService.subscribe('onErrorStateChanged', isError => isError === true ? 
-			router.route('error') : 
-			router.route('pregameCountdown')
-		);
+		eventsService.subscribe('onPostgameResults', () => router.route('postgameResults'));
+		eventsService.subscribe('onGameEnd', () => router.route('pregameCountdown'));
+		eventsService.subscribe('onQuestionAsked', questionData => router.route('gameQuestion', questionData));
+		eventsService.subscribe('onBetweenQuestions', questionData => router.route('gameQuestionResults', questionData));
+		eventsService.subscribe('onError', () => router.route('error'));
+		eventsService.subscribe('onResetApp', () => location.reload());
+
+		eventsService.init(); // Must be run after all eventsService.subscribe() calls
 	}
 
 	init();

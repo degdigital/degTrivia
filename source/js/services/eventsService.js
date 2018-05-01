@@ -1,39 +1,127 @@
+import {getFromLocalStorage, saveToLocalStorage, removeFromLocalStorage} from '../utils/localstorageUtils.js';
 import playerService from './playerService.js';
 import dbService from './dbService.js';
 
 const eventsService = function() {
-
+	
 	const callbacks = [];
+	let currentEventId;
+	let appHasError = false;
 
-	async function bindEvents() {
-		dbService.init();
-		
-		dbService.getDb().ref('.info/connected').on('value', snapshot => runSubscribedCallbacks('onErrorStateChanged', snapshot.val() === true));
-		dbService.getDb().ref('disableAll').on('value', snapshot => runSubscribedCallbacks('onErrorStateChanged', snapshot.val() === true));
-		playerService.getAuth().onAuthStateChanged(user => runSubscribedCallbacks('onAuthStateChanged', user));
-		
-		const currentEventId = await dbService.getCurrentEventId();
+	async function init() {
+		currentEventId = await dbService.getCurrentEventId();
+		bindBustedAppEvents();
 		if (currentEventId) {
-			dbService.getDb().ref(`events/${currentEventId}/activeGameId`).on('value', snapshot => {
-				const gameId = snapshot.val();
-				if (gameId) {
-					runSubscribedCallbacks('onGameStart', {
-						gameId: gameId,
-						questionData: {
-							id: 10,
-							order: 0,
-							question: 'Who is the most dashing Kansas City Royal of all time?',
-							choices: {
-								100: 'Bob Hamelin',
-								101: 'Danny Tartabul',
-								102: 'Steve Balboni' 
-							}
+			playerService.getAuth().onAuthStateChanged(user => onAuthStateChanged(user, currentEventId));
+		} else {
+			runSubscribedCallbacks('onNoActiveEvent', {
+				message: 'There are no active events at this time.'
+			});
+		}
+	}
+
+	function bindBustedAppEvents() {
+		dbService.getDb().ref('.info/connected').on('value', snapshot => onErrorStateChanged(snapshot.val() === false));
+		dbService.getDb().ref('disableAll').on('value', snapshot => onErrorStateChanged(snapshot.val() === true));
+		dbService.getDb().ref('resetApp').on('value', snapshot => onResetAppChanged(snapshot.val() === true));
+
+	}
+
+	function onErrorStateChanged(isError) {
+		appHasError = isError;
+		if (appHasError === true) {
+			runSubscribedCallbacks('onError');
+		}
+	}
+
+	function onResetAppChanged(isReset) {
+		if (isReset && window.localStorage) {
+			const lsKey = 'appHasBeenReset';
+			const lsVal = getFromLocalStorage(lsKey);
+			if (lsVal) {
+				removeFromLocalStorage(lsKey);
+			} else if (lsVal === null) {
+				if (saveToLocalStorage(lsKey, true)) {
+					location.reload();
+				}
+			}
+		}
+	}
+
+	async function onAuthStateChanged(user, currentEventId) {
+		if (user) {
+			dbService.getDb().ref(`events/${currentEventId}/gameIsInProgress`).on('value', snapshot => onGameInProgressChange(snapshot.val()));
+		} else {
+			dbService.getDb().ref(`events/${currentEventId}/activeGameId`).off();
+			runSubscribedCallbacks('onPlayerUnauthenticated', user);
+		}
+	}
+
+	async function onGameInProgressChange(gameIsInProgress) {
+		if (gameIsInProgress) {
+			runSubscribedCallbacks('onGameCountdown');
+		} else {
+			dbService.getDb().ref(`events/${currentEventId}/gameIsInProgress`).off();
+			dbService.getDb().ref(`events/${currentEventId}/activeGameId`).on('value', snapshot => onGameActivationChange(snapshot.val()));
+		}
+	}
+
+	async function onGameActivationChange(gameId) {
+		if (gameId) {
+			const gameVals = await dbService.getActiveGameData(gameId);
+			runSubscribedCallbacks('onGameStart', gameVals);
+			activeQuestionPath = `games/${gameId}/activeQuestionId`;
+			activeResultsPath = `games/${gameId}/activeResultsId`;
+			dbService.getDb().ref(`${activeQuestionPath}`).on('value', snapshot => onQuestionActivationChange(snapshot.val(), gameVals, gameId));
+			dbService.getDb().ref(`${activeResultsPath}`).on('value', snapshot => onResultsActivationChange(snapshot.val(), gameVals, gameId));
+
+		} else {
+			dbService.getDb().ref(`games/${gameId}/activeQuestionId`).off();
+			dbService.getDb().ref(`games/${gameId}/activeResultsId`).off();
+			const gameIsInProgress = await dbService.getDb().ref(`events/${currentEventId}/gameIsInProgress`).once('value').then(snapshot => onGameInProgressChange(snapshot.val()));
+			if (gameIsInProgress) {
+				runSubscribedCallbacks('onPostgameResults');
+			} else {
+				runSubscribedCallbacks('onGameEnd');
+			}
+		}
+	}
+
+	function onQuestionActivationChange(activeQuestionId, gameVals, gameId) {
+		if (activeQuestionId) {
+			let activeQuestion = gameVals.questions[activeQuestionId];
+			activeQuestion.id = Object.keys(gameVals.questions[activeQuestionId])[0];
+			runSubscribedCallbacks('onQuestionAsked', {
+				gameId: gameId,
+				questionData: activeQuestion
+			});
+		}
+	}
+
+	function onResultsActivationChange(activeResultsId, gameVals, gameId) {
+		if (activeResultsId) {
+			runSubscribedCallbacks('onBetweenQuestions', {
+				questionData: {
+					id: 10,
+					order: 0,
+					question: 'Who is the most dashing Kansas City Royal of all time?',
+					choiceResults: [
+						{
+							choiceText: 'Bob Hamelin',
+							isCorrectChoice: false,
+							chosenCount: 28
+						},
+						{
+							choiceText: 'Danny Tartabul',
+							isCorrectChoice: false,
+							chosenCount: 39
+						},
+						{
+							choiceText: 'Steve Balboni',
+							isCorrectChoice: true,
+							chosenCount: 142
 						}
-					});
-
-				} else {
-
-					runSubscribedCallbacks('onGameEnd', gameId);
+					]
 				}
 			});
 		}
@@ -50,11 +138,11 @@ const eventsService = function() {
 
 	function runSubscribedCallbacks(name, response) {
 		const subscribedCallBacks = callbacks.filter(callback => callback.name === name);
-		subscribedCallBacks.forEach(callback => callback.fn(response));
-	}
-
-	function init() {
-		bindEvents();
+		subscribedCallBacks.forEach(callback => {
+			if (appHasError === false || callback.name === 'onError') {
+				callback.fn(response);
+			}
+		});
 	}
 
 	return {
