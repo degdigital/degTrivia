@@ -3,17 +3,24 @@ const nodeResolve =  require('rollup-plugin-node-resolve');
 const commonjs = require('rollup-plugin-commonjs');
 const babel = require('rollup-plugin-babel');
 
-const entryFilepath = 'source/js/main.js';
-const bundleFilepaths = {
-	modules: 'public/js/main-bundle.js',
-	noModules: 'public/js/main-bundle-nomodules.js'
-};
+const bundles = [
+	{
+		name: 'main',
+		entryFilepath: 'source/js/main.js',
+		bundleFilepath: 'public/js/main-bundle.js',
+		noModulesBundleFilepath: 'public/js/main-bundle-nomodules.js'
+	},
+	{
+		name: 'admin',
+		entryFilepath: 'source/js/admin/index.js',
+		bundleFilepath: 'public/js/admin-bundle.js',
+		noModulesBundleFilepath: 'public/js/admin-bundle-nomodules.js'
+	}
+];
 
-async function run() {
-	console.log('JS task started.');
-
+async function buildBundle(bundleInfo) {
 	const inputOptions = {
-		input: entryFilepath,
+		input: bundleInfo.entryFilepath,
 		plugins: [
 			babel({
 				exclude: 'node_modules/**',
@@ -28,25 +35,42 @@ async function run() {
 		const bundle = await rollup.rollup(inputOptions);
 
 		const modulesPromise = bundle.write({
-	    	file: bundleFilepaths.modules,
+	    	file: bundleInfo.bundleFilepath,
 	    	format: 'es'
 	    });
 
 	    const noModulesPromise = bundle.write({
-	    	file: bundleFilepaths.noModules,
+	    	file: bundleInfo.noModulesBundleFilepath,
+	    	name: bundleInfo.name,
 	    	format: 'iife'
 	    });
 
 	    await modulesPromise;
 	    await noModulesPromise;
 
-		console.log('JS task complete.');
 		return true;
 	} catch(e) {
-		console.error('Error building bundle file', e);
-		console.error('JS task failed.');
+		console.error(`Error building bundle file for "${bundleInfo.entryFilepath}"`, e);
+		
 		return false;
 	}
+}
+
+async function run() {
+	console.log('JS task started.');
+
+	const promises = bundles.map(buildBundle);
+
+	return Promise.all(promises)
+		.then(success => {
+			if(success) {
+				console.log('JS task complete.');
+			} else {
+				console.error('JS task failed.');
+			}
+			return success;
+		});
+	
 }
 
 module.exports = {
