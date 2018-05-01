@@ -1,13 +1,7 @@
 {
-	"presets": [
-		["env", {
-			"debug": true,
-			"modules": false,
-      		"targets": {
-        		"browsers": [">1%", "ie 11", "not op_mini all"]
-     	 	}
-    	}]
-    ],
+	"ignore": [
+		"node_modules/**"
+	],
 	"plugins": [
 		"transform-runtime",
 		"external-helpers",
@@ -19,10 +13,17 @@
 		}]
 	],
   	"env": {
+  		"development": {
+  			"presets": [
+				["env", {
+					"modules": false,
+		      		"targets": {
+		        		"browsers": [">1%", "ie 11", "not op_mini all"]
+		     	 	}
+		    	}]
+		    ]
+  		},
 		"test": {
-	    	"ignore": [
-				"node_modules/**"
-			],
 	      	"presets": [
 	      		["env", {
 	      			"targets": {
