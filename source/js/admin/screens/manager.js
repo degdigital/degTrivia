@@ -1,33 +1,23 @@
 // Utils
 import {replaceContent} from '../../utils/domUtils';
 
-// Services
-import playerService from '../../services/playerService.js';
-import dbService from '../../services/dbService.js';
-
-// Screens
+// Components
 import killSwitch from '../components/killSwitch.js';
+import resetApp from '../components/resetApp.js';
 
 const manager = function(el) {
 
-	const auth = playerService.getAuth();
-	const db = dbService.getDb();
-	const killSwitchInst = killSwitch();
-	
-	function bindEvents() {
-		db.ref().on('value', snapshot => onValChange(snapshot));
-	}
+	const killSwitchWrapperClass = 'killswitch-wrapper';
+	const resetAppWrapperClass = 'resetapp-wrapper';
 
 	function render() {
 		replaceContent(el, `
 			<h1>Welcome, admin!</h1>
-			${killSwitchInst.render()}
+			<div class="${killSwitchWrapperClass}"></div><br>
+			<div class="${resetAppWrapperClass}"></div>
 		`);
-		bindEvents();
-	}
-
-	function onValChange(val) {
-		console.log(val);
+		killSwitch(el.querySelector(`.${killSwitchWrapperClass}`));
+		resetApp(el.querySelector(`.${resetAppWrapperClass}`));
 	}
 
 	return {
