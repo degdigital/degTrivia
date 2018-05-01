@@ -1,18 +1,35 @@
 {
 	"presets": [
 		["env", {
+			"debug": true,
 			"modules": false,
       		"targets": {
-        		"browsers": ["last 2 versions", "ie >= 11"]
+        		"browsers": [">1%", "ie 11", "not op_mini all"]
      	 	}
     	}]
     ],
+	"plugins": [
+		"transform-runtime",
+		"external-helpers",
+	 	"syntax-async-functions",
+	    ["transform-regenerator", {
+	    	"asyncGenerators": false,
+	    	"generators": false,
+	    	"async": true
+		}]
+	],
   	"env": {
-	    "test": {
+		"test": {
 	    	"ignore": [
 				"node_modules/**"
 			],
-	      	"presets": [["env"]]
+	      	"presets": [
+	      		["env", {
+	      			"targets": {
+	      				"node": "current"
+	      			}
+	      		}]
+	      	]
 	    }
-	  }
+	}
 }

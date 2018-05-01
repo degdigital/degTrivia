@@ -1,0 +1,40 @@
+[debug] [2018-05-01T18:43:31.503Z] ----------------------------------------------------------------------
+[debug] [2018-05-01T18:43:31.506Z] Command:       /usr/local/Cellar/node/0.10.26/bin/node /Users/rheap/.node/bin/firebase serve
+[debug] [2018-05-01T18:43:31.506Z] CLI Version:   3.18.4
+[debug] [2018-05-01T18:43:31.506Z] Platform:      darwin
+[debug] [2018-05-01T18:43:31.506Z] Node Version:  v9.4.0
+[debug] [2018-05-01T18:43:31.506Z] Time:          Tue May 01 2018 13:43:31 GMT-0500 (CDT)
+[debug] [2018-05-01T18:43:31.506Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-05-01T18:43:31.516Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-05-01T18:43:31.517Z] > authorizing via signed-in user
+[debug] [2018-05-01T18:43:31.519Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/degtrivia-develop  
+  
+ Tue May 01 2018 13:43:31 GMT-0500 (CDT)
+[debug] [2018-05-01T18:43:31.824Z] <<< HTTP RESPONSE 200
+[debug] [2018-05-01T18:43:31.825Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/degtrivia-develop/tokens  
+  
+ Tue May 01 2018 13:43:31 GMT-0500 (CDT)
+[debug] [2018-05-01T18:43:32.096Z] <<< HTTP RESPONSE 200
+[debug] [2018-05-01T18:43:32.097Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/degtrivia-develop  
+  
+ Tue May 01 2018 13:43:32 GMT-0500 (CDT)
+[debug] [2018-05-01T18:43:32.294Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from '/Users/rheap/Projects/degTrivia'...
+[info] 
+[info] i  functions: Preparing to emulate functions.
+[debug] [2018-05-01T18:43:32.772Z] Fetching environment
+[debug] [2018-05-01T18:43:32.773Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/369298224791:getServerAppConfig  
+  
+ Tue May 01 2018 13:43:32 GMT-0500 (CDT)
+[debug] [2018-05-01T18:43:32.773Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/369298224791/clients/_:getWebAppConfig  
+  
+ Tue May 01 2018 13:43:32 GMT-0500 (CDT)
+[debug] [2018-05-01T18:43:33.107Z] <<< HTTP RESPONSE 200
+[debug] [2018-05-01T18:43:33.108Z] Starting @google-cloud/functions-emulator
+[debug] [2018-05-01T18:43:33.150Z] <<< HTTP RESPONSE 200
+[info] i  hosting: Serving hosting files from: public
+[info] ✔  hosting: Local server: http://localhost:5000
+
+[debug] [2018-05-01T18:43:34.693Z] Parsing function triggers

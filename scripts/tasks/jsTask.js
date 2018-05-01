@@ -1,7 +1,7 @@
 const rollup = require('rollup');
 const nodeResolve =  require('rollup-plugin-node-resolve');
 const commonjs = require('rollup-plugin-commonjs');
-//const babel = require('rollup-plugin-babel');
+const babel = require('rollup-plugin-babel');
 
 const entryFilepath = 'source/js/main.js';
 const bundleFilepaths = {
@@ -15,9 +15,10 @@ async function run() {
 	const inputOptions = {
 		input: entryFilepath,
 		plugins: [
-			/*babel({
-				exclude: 'node_modules/**'
-			}),*/
+			babel({
+				exclude: 'node_modules/**',
+				runtimeHelpers: true
+			}),
 			nodeResolve(), 
 			commonjs()
 		]
