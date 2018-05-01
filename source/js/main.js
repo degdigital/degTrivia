@@ -3,6 +3,7 @@ import appConfig from './config/appConfig.js';
 
 // Utils
 import router from './utils/router.js';
+import {getUrlSegment} from './utils/urlUtils';
 
 // Services
 import dbService from './services/dbService.js';
@@ -20,33 +21,15 @@ import postgameResults from './screens/postgameResults.js';
 import leaderboard from './screens/leaderboardScreen.js';
 import error from './screens/error.js';
 
+// Admin
+import admin from './admin/index.js'
+
 // Firebase
 import firebase from '@firebase/app';
 
 if (appConfig.element) {
 
-	const infoInst = info(appConfig);
-	const registrationInst = registration(appConfig);
-	const pregameCountdownInst = pregameCountdown(appConfig);
-	const gameWaitBeforeQuestionsInst = gameWaitBeforeQuestions(appConfig);
-	const gameQuestionInst = gameQuestion(appConfig);
-	const gameQuestionResultsInst = gameQuestionResults(appConfig);
-	const postgameResultsInst = postgameResults(appConfig);
-	const leaderboardInst = leaderboard(appConfig);
-	const errorInst = error(appConfig);
-
-	const routes = {
-		info: infoInst.render,
-		registration: registrationInst.renderRegistrationForm,
-		password: registrationInst.renderPasswordForm,
-		pregameCountdown: pregameCountdownInst.render,
-		gameWaitBeforeQuestions: gameWaitBeforeQuestionsInst.render,
-		gameQuestion: gameQuestionInst.render,
-		gameQuestionResults: gameQuestionResultsInst.render,
-		postgameResults: postgameResults.render,
-		leaderboard: leaderboardInst.render,
-		error: errorInst.render
-	};
+	const isAdmin = getUrlSegment() === 'admin';
 
 	function init() {
 		firebase.initializeApp({
@@ -59,8 +42,36 @@ if (appConfig.element) {
 		});
 		dbService.init();
 		playerService.init();
+		if (isAdmin === true) {
+			admin(appConfig.element);
+		} else {
+			initGame();
+		}
+	}
+
+	function initGame() {
+		const infoInst = info(appConfig);
+		const registrationInst = registration(appConfig);
+		const pregameCountdownInst = pregameCountdown(appConfig);
+		const gameWaitBeforeQuestionsInst = gameWaitBeforeQuestions(appConfig);
+		const gameQuestionInst = gameQuestion(appConfig);
+		const gameQuestionResultsInst = gameQuestionResults(appConfig);
+		const postgameResultsInst = postgameResults(appConfig);
+		const leaderboardInst = leaderboard(appConfig);
+		const errorInst = error(appConfig);
+		const routes = {
+			info: infoInst.render,
+			registration: registrationInst.renderRegistrationForm,
+			password: registrationInst.renderPasswordForm,
+			pregameCountdown: pregameCountdownInst.render,
+			gameWaitBeforeQuestions: gameWaitBeforeQuestionsInst.render,
+			gameQuestion: gameQuestionInst.render,
+			gameQuestionResults: gameQuestionResultsInst.render,
+			postgameResults: postgameResults.render,
+			leaderboard: leaderboardInst.render,
+			error: errorInst.render
+		};
 		router.init(routes, appConfig);
-		
 		eventsService.subscribe('onPlayerUnauthenticated', () => router.route('registration'));
 		eventsService.subscribe('onNoActiveEvent', (infoObj) => router.route('info', infoObj));
 		eventsService.subscribe('onGameCountdown', () => router.route('pregameCountdown'));
@@ -71,7 +82,6 @@ if (appConfig.element) {
 		eventsService.subscribe('onBetweenQuestions', questionData => router.route('gameQuestionResults', questionData));
 		eventsService.subscribe('onError', () => router.route('error'));
 		eventsService.subscribe('onResetApp', () => location.reload());
-
 		eventsService.init(); // Must be run after all eventsService.subscribe() calls
 	}
 
