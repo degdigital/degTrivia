@@ -59,7 +59,6 @@ if (appConfig.element) {
 		router.init(routes, appConfig);
 		
 		eventsService.subscribe('onPlayerUnauthenticated', () => router.route('registration'));
-		// eventsService.subscribe('onPlayerUnregisteredForEvent', () => router.route('password'));
 		// eventsService.subscribe('onGameStart', gameData => router.route('gameWaitBeforeQuestions', gameData));
 		// eventsService.subscribe('onGameEnd', () => router.route('pregameCountdown'));
 		// eventsService.subscribe('onQuestionAsked', questionData => router.route('gameQuestion', questionData));

@@ -7,8 +7,7 @@ const dbService = function() {
 	const nodeNames = {
 		events: 'events',
 		games: 'games',
-		pendingPlayers: 'pendingPlayers',
-		activePlayers: 'activePlayers'
+		pendingPlayers: 'pendingPlayers'
 	};
 	let cachedCurrentEventId = null;
 
