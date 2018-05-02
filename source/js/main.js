@@ -21,15 +21,10 @@ import postgameResults from './screens/postgameResults.js';
 import leaderboard from './screens/leaderboardScreen.js';
 import error from './screens/error.js';
 
-// Admin
-import admin from './admin/index.js'
-
 // Firebase
 import firebase from '@firebase/app';
 
 if (appConfig.element) {
-
-	const isAdmin = getUrlSegment() === 'admin';
 
 	function init() {
 		firebase.initializeApp({
@@ -42,11 +37,8 @@ if (appConfig.element) {
 		});
 		dbService.init();
 		playerService.init();
-		if (isAdmin === true) {
-			admin(appConfig.element);
-		} else {
-			initGame();
-		}
+		
+		initGame();
 	}
 
 	function initGame() {
