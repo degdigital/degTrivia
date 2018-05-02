@@ -12,10 +12,15 @@ const screenTemplate = function({element}) {
 		`);
 	}
 
+	function teardown() {
+		//cleanup, i.e. unsubscribing event listeners 
+	}
+
 	init();
 
 	return {
-		render
+		render,
+		teardown
 	};
 
 };

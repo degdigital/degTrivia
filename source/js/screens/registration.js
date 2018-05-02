@@ -10,7 +10,7 @@ const registration = function({element}) {
 		element.addEventListener('submit', onFormSubmit);
 	}
 
-	function renderRegistrationForm() {
+	function render() {
 		replaceContent(element, `
 			<h1>Welcome to DEG Trivia!</h1>
 			<form class="${registrationFormClass}">
@@ -28,12 +28,6 @@ const registration = function({element}) {
 
 				<button type="submit">Submit</button>
 			</form>
-		`);
-	}
-
-	function renderPasswordForm() {
-		replaceContent(element, `
-			Re-enter password
 		`);
 	}
 
@@ -57,8 +51,7 @@ const registration = function({element}) {
 	bindEvents();
 
 	return {
-		renderRegistrationForm,
-		renderPasswordForm
+		render
 	};
 
 };
