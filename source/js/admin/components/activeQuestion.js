@@ -39,8 +39,12 @@ const activeQuestion = function(wrapperEl, options ={}) {
 			});
 		}
 		activeGameId = gameId;
-		const activeQuestionId = await db.ref(`games/${activeGameId}/activeQuestionId`).once('value').then(snapshot => snapshot.val());
-		const questions = await db.ref(`games/${activeGameId}/questions`).once('value').then(snapshot => snapshot.val());
+		const responses = await Promise.all([
+			db.ref(`games/${activeGameId}/activeQuestionId`).once('value').then(snapshot => snapshot.val()),
+			db.ref(`games/${activeGameId}/questions`).once('value').then(snapshot => snapshot.val())
+		]);
+		const activeQuestionId = responses[0];
+		const questions = responses[1];
 		let content = '';
 		if (questions) {
 			content = `

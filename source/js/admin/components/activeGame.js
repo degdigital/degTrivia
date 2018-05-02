@@ -40,8 +40,12 @@ const activeGame = function(wrapperEl, options ={}) {
 			});
 		}
 		activeEventId = eventId;
-		const activeGameId = await db.ref(`events/${activeEventId}/activeGameId`).once('value').then(snapshot => snapshot.val());
-		const games = await db.ref('games').orderByChild('event').equalTo(activeEventId).once('value').then(snapshot => snapshot.val());
+		const responses = await Promise.all([
+			db.ref(`events/${activeEventId}/activeGameId`).once('value').then(snapshot => snapshot.val()),
+			db.ref('games').orderByChild('event').equalTo(activeEventId).once('value').then(snapshot => snapshot.val())
+		]);
+		const activeGameId = responses[0];
+		const games = responses[1];
 		let content = '';
 		if (games) {
 			content = `
