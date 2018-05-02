@@ -1,3 +1,6 @@
+import appConfig from '../config/appConfig.js';
+import firebase from '@firebase/app';
+
 // Services
 import playerService from '../services/playerService.js';
 import dbService from '../services/dbService.js';
@@ -8,13 +11,12 @@ import manager from './screens/manager.js';
 
 const admin = function(el) {
 
-	const auth = playerService.getAuth();
-	const db = dbService.getDb();
-	const loginInst = login(el);
-	const managerInst = manager(el);
+	let db;
+	let loginInst;
+	let managerInst;
 
 	function bindEvents() {
-		auth.onAuthStateChanged(onAuthStateChange);
+		playerService.getAuth().onAuthStateChanged(onAuthStateChange);
 	}
 
 	async function onAuthStateChange(user) {
@@ -31,11 +33,27 @@ const admin = function(el) {
 	}
 
 	function init() {
+		firebase.initializeApp({
+			apiKey: "AIzaSyAZ5Ad3YFPCz2QKnMPtAl89tjplLQX6Lpw",
+		    authDomain: "degtrivia-develop.firebaseapp.com",
+		    databaseURL: "https://degtrivia-develop.firebaseio.com",
+		    projectId: "degtrivia-develop",
+		    storageBucket: "degtrivia-develop.appspot.com",
+		    messagingSenderId: "369298224791"
+		});
+		dbService.init();
+		playerService.init();
+
+		db = dbService.getDb();
+		loginInst = login(el);
+		managerInst = manager(el);
+
 		bindEvents();
 	}
 
 	init();
-
 };
 
-export default admin;
+if(appConfig.element) {
+	admin(appConfig.element);
+}
