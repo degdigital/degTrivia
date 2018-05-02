@@ -12,6 +12,7 @@ const router = function() {
 	const stateObj = {};
 	let routes;
 	let settings;
+	let currentRoute = null;
 
 	function init(routesObj = null, options = {}) {
 		if (routesObj === null) {
@@ -47,7 +48,13 @@ const router = function() {
 		if (!routes[path]) {
 			console.log(errors.routeNotFound);
 		} else {
-			routes[path](params);
+			if(currentRoute !== null && "teardown" in currentRoute) {
+				currentRoute.teardown();
+			}
+
+			currentRoute = routes[path];
+
+			currentRoute.render(params);
 			stateObj.path = path; 
 			if (silent === false) {
 				history.pushState(stateObj, '', hyphenize(path));
