@@ -6,6 +6,10 @@
     "public": "public",
     "rewrites": [
       {
+        "source": "/css/**",
+        "destination": "/css"
+      },
+      {
         "source": "**",
         "destination": "/index.html"
       }
