@@ -8,7 +8,10 @@ const plugins = [
 	require('cssnano'),
 	require('autoprefixer')
 ];
-const filesToProcess = ['main.css'];
+const filesToProcess = [
+	'main.css',
+	'admin.css'
+];
 
 function processFile(srcFilepath, destFilepath, plugins) {
 	return fse.readFile(srcFilepath)
