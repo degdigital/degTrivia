@@ -9,8 +9,17 @@ const eventsService = function() {
 	let appHasError = false;
 
 	async function init() {
-		currentEventId = await dbService.getCurrentEventId();
 		bindBustedAppEvents();
+		dbService.getDb().ref('currentEvent').on('value', snapshot => onCurrentEventStateChanged(snapshot.val()));
+	}
+
+	function bindBustedAppEvents() {
+		dbService.getDb().ref('.info/connected').on('value', snapshot => onErrorStateChanged(snapshot.val() === false));
+		dbService.getDb().ref('disableAll').on('value', snapshot => onErrorStateChanged(snapshot.val() === true));
+		// dbService.getDb().ref('resetApp').on('value', snapshot => onResetAppChanged(snapshot.val() === true));
+	}
+
+	function onCurrentEventStateChanged(currentEventId) {
 		if (currentEventId) {
 			playerService.getAuth().onAuthStateChanged(user => onAuthStateChanged(user, currentEventId));
 		} else {
@@ -20,13 +29,6 @@ const eventsService = function() {
 		}
 	}
 
-	function bindBustedAppEvents() {
-		dbService.getDb().ref('.info/connected').on('value', snapshot => onErrorStateChanged(snapshot.val() === false));
-		dbService.getDb().ref('disableAll').on('value', snapshot => onErrorStateChanged(snapshot.val() === true));
-		dbService.getDb().ref('resetApp').on('value', snapshot => onResetAppChanged(snapshot.val() === true));
-
-	}
-
 	function onErrorStateChanged(isError) {
 		appHasError = isError;
 		if (appHasError === true) {
@@ -34,19 +36,19 @@ const eventsService = function() {
 		}
 	}
 
-	function onResetAppChanged(isReset) {
-		if (isReset && window.localStorage) {
-			const lsKey = 'appHasBeenReset';
-			const lsVal = getFromLocalStorage(lsKey);
-			if (lsVal) {
-				removeFromLocalStorage(lsKey);
-			} else if (lsVal === null) {
-				if (saveToLocalStorage(lsKey, true)) {
-					location.reload();
-				}
-			}
-		}
-	}
+	// function onResetAppChanged(isReset) {
+	// 	if (isReset && window.localStorage) {
+	// 		const lsKey = 'appHasBeenReset';
+	// 		const lsVal = getFromLocalStorage(lsKey);
+	// 		if (lsVal) {
+	// 			removeFromLocalStorage(lsKey);
+	// 		} else if (lsVal === null) {
+	// 			if (saveToLocalStorage(lsKey, true)) {
+	// 				location.reload();
+	// 			}
+	// 		}
+	// 	}
+	// }
 
 	async function onAuthStateChanged(user, currentEventId) {
 		if (user) {

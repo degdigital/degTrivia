@@ -9,7 +9,6 @@ const dbService = function() {
 		games: 'games',
 		pendingPlayers: 'pendingPlayers'
 	};
-	let cachedCurrentEventId = null;
 
 	function init() {
 		db = firebase.database();
@@ -20,15 +19,7 @@ const dbService = function() {
 	}
 
 	function getCurrentEventId() {
-		if (cachedCurrentEventId) {
-			return Promise.resolve(cachedCurrentEventId);
-		} else {
-			return db.ref('currentEvent').once('value').then(snapshot => {
-				cachedCurrentEventId = snapshot.val();
-				return cachedCurrentEventId;
-			});
-		}
-		
+		return db.ref('currentEvent').once('value').then(snapshot => snapshot.val());
 	}
 
 	function getEvent(eventAlias) {
