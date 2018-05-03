@@ -19,10 +19,10 @@ function unbindEventListeners(element, onClickBound) {
 	}
 }
 
-function onClick(e, element, {gameId, questionData}) {
+function onClick(e, element, {gameId, eventId, seriesId, questionData}) {
 	if(e.target.matches(`.${cssClasses.choiceButton}`)) {
 		const selectedChoiceId = e.target.dataset.id;
-		dbService.submitAnswer(gameId, questionData.id, selectedChoiceId);
+		dbService.submitAnswer(gameId, eventId, seriesId, questionData.id, questionData.correctChoice, selectedChoiceId);
 		updateChoices(element, questionData.choices, selectedChoiceId);
 	}
 }

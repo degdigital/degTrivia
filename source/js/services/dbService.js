@@ -1,5 +1,6 @@
 import firebase from '@firebase/app';
 import '@firebase/database';
+import playerService from './playerService.js';
 
 const dbService = function() {
 
@@ -35,12 +36,12 @@ const dbService = function() {
 		return db.ref('events').orderByChild('alias').equalTo(eventAlias).once('value').then(snapshot => snapshot.val());
 	}
 
-	function createPendingPlayer(playerVals, eventKey, userId) {
-		const pendingPlayerKey = db.ref(nodeNames.pendingPlayers).push().key;
+	// function createPendingPlayer(playerVals, eventKey, userId) {
+	// 	const pendingPlayerKey = db.ref(nodeNames.pendingPlayers).push().key;
 		
-		return db.ref(`/${nodeNames.pendingPlayers}/${pendingPlayerKey}`).update(formattedPlayerVals)
-			.then(() => pendingPlayerKey);
-	}
+	// 	return db.ref(`/${nodeNames.pendingPlayers}/${pendingPlayerKey}`).update(formattedPlayerVals)
+	// 		.then(() => pendingPlayerKey);
+	// }
 
 	async function getNextGameTime() {
 		const currentEventId = await getCurrentEventId();
@@ -52,8 +53,21 @@ const dbService = function() {
 		return Promise.resolve(nextGameTime);
 	}
 
-	function submitAnswer(gameId, questionId, choiceId) {
-		return Promise.resolve(true);
+	function submitAnswer(gameId, eventId, seriesId, questionId, correctChoiceId, choiceId) {
+		const playerId = playerService.getAuth().uid;
+		return db.ref(`answers`).update({
+			[questionId]: {
+				eventId,
+				seriesId,
+				gameId,
+				correctChoiceId,
+				responses: {
+					[choiceId]: {
+						[textKey]: true
+					}
+				}
+			}
+		});
 	}
 
 	function getActiveGameData(gameId) {
@@ -110,6 +124,7 @@ const dbService = function() {
 		getCurrentEventId,
 		getEvent,
 		getNextGameTime,
+		submitAnswer,
 		getGameLeaderboard,
 		getDayLeaderboard,
 		getEventLeaderboard,
