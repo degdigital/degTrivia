@@ -1,5 +1,6 @@
 import {replaceContent} from '../utils/domUtils.js';
 import dbService from '../services/dbService.js';
+import countdown from '../components/countdown.js';
 
 const cssClasses = {
 	choices: 'choices',
@@ -54,7 +55,7 @@ function renderScreen(element, data) {
 	const html = `
 		<div>
 			<h1>Question #${questionData.order + 1}</h1>
-			<div>0:00</div>
+			<div class="countdown-container">0:00</div>
 			<p>${questionData.question}</p>
 			<div class="${cssClasses.choices}">
 				${renderChoices(questionData.choices)}
@@ -62,6 +63,12 @@ function renderScreen(element, data) {
 		</div>`;
 
 	replaceContent(element, html);
+	const containerElement = document.querySelector('.countdown-container');
+	countdown({
+		containerElement,
+		includeLabels: false,
+		precision: 'second'
+	}).start(30, 'seconds');
 }
 
 function teardown(element, onClickBound) {
@@ -69,9 +76,7 @@ function teardown(element, onClickBound) {
 }
 
 export default function({element}) {
-
 	let onClickBound;
-
 	function render(data) {
 		onClickBound = bindEventListeners(element, data);
 		renderScreen(element, data);
