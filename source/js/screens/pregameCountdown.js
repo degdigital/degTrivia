@@ -12,7 +12,7 @@ const gameWait = function({element}) {
             <div class="countdown-container"></div>
         `);
         const containerElement = document.querySelector('.countdown-container');
-        countdownInst = countdown({containerElement});
+        countdownInst = countdown({containerElement, includeLabels: false, precision: 'second'});
         countdownInst.start(timeTilNextGame, 'milliseconds');
     }
 
