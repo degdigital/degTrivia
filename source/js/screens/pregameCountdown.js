@@ -26,22 +26,20 @@ const gameWait = function({element}) {
         `;
     }
 
-    function renderNoGameText() {
-        replaceContent(element, `<div>There are no more games scheduled for your event.</div>`)
-    }
-
 	async function render() {
         const nextGameTime = await dbService.getNextGameTime();
         if (nextGameTime) {
             renderCountdownContainer(nextGameTime);
-        } else {
-            renderNoGameText();
-        }		
+        }	
 	}
 
 	return {
         render,
-        teardown: () => countdownInst.stop
+        teardown: () => {
+            if (countdownInst) {
+                countdownInst.stop();
+            }
+        }
 	};
 
 };

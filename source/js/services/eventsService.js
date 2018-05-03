@@ -5,8 +5,8 @@ import dbService from './dbService.js';
 const eventsService = function() {
 	
 	const callbacks = [];
-	let currentEventId;
 	let appHasError = false;
+	let initialAppConnect = true;
 
 	async function init() {
 		bindBustedAppEvents();
@@ -16,7 +16,7 @@ const eventsService = function() {
 	function bindBustedAppEvents() {
 		dbService.getDb().ref('.info/connected').on('value', snapshot => onErrorStateChanged(snapshot.val() === false));
 		dbService.getDb().ref('disableAll').on('value', snapshot => onErrorStateChanged(snapshot.val() === true));
-		// dbService.getDb().ref('resetApp').on('value', snapshot => onResetAppChanged(snapshot.val() === true));
+		dbService.getDb().ref('resetApp').on('value', snapshot => onResetAppChanged(snapshot.val() === true));
 	}
 
 	function onCurrentEventStateChanged(currentEventId) {
@@ -29,77 +29,52 @@ const eventsService = function() {
 		}
 	}
 
-	function onErrorStateChanged(isError) {
-		appHasError = isError;
-		if (appHasError === true) {
-			runSubscribedCallbacks('onError');
-		}
-	}
-
-	// function onResetAppChanged(isReset) {
-	// 	if (isReset && window.localStorage) {
-	// 		const lsKey = 'appHasBeenReset';
-	// 		const lsVal = getFromLocalStorage(lsKey);
-	// 		if (lsVal) {
-	// 			removeFromLocalStorage(lsKey);
-	// 		} else if (lsVal === null) {
-	// 			if (saveToLocalStorage(lsKey, true)) {
-	// 				location.reload();
-	// 			}
-	// 		}
-	// 	}
-	// }
-
 	async function onAuthStateChanged(user, currentEventId) {
 		if (user) {
 			dbService.getDb().ref(`events/${currentEventId}/gameIsInProgress`).on('value', snapshot => onGameInProgressChange(snapshot.val()));
+			dbService.getDb().ref(`events/${currentEventId}/activeGameId`).on('value', snapshot => onGameActivationChange(snapshot.val(), currentEventId));
 		} else {
-			dbService.getDb().ref(`events/${currentEventId}/activeGameId`).off();
-			runSubscribedCallbacks('onPlayerUnauthenticated', user);
+			runSubscribedCallbacks('onPlayerUnauthenticated');
 		}
 	}
 
-	async function onGameInProgressChange(gameIsInProgress) {
-		if (gameIsInProgress) {
+	function onGameInProgressChange(gameIsInProgress) {
+		if (gameIsInProgress === false) {
 			runSubscribedCallbacks('onGameCountdown');
-		} else {
-			dbService.getDb().ref(`events/${currentEventId}/gameIsInProgress`).off();
-			dbService.getDb().ref(`events/${currentEventId}/activeGameId`).on('value', snapshot => onGameActivationChange(snapshot.val()));
 		}
 	}
 
-	async function onGameActivationChange(gameId) {
+	async function onGameActivationChange(gameId, currentEventId) {
 		if (gameId) {
-			const gameVals = await dbService.getActiveGameData(gameId);
-			runSubscribedCallbacks('onGameStart', gameVals);
-			dbService.getDb().ref(`games/${gameId}/activeQuestionId`).on('value', snapshot => onQuestionActivationChange(snapshot.val(), gameVals, gameId));
-			dbService.getDb().ref(`games/${gameId}/activeResultsId`).on('value', snapshot => onResultsActivationChange(snapshot.val(), gameVals, gameId));
-
-		} else {
-			dbService.getDb().ref(`games/${gameId}/activeQuestionId`).off();
-			dbService.getDb().ref(`games/${gameId}/activeResultsId`).off();
-			const gameIsInProgress = await dbService.getDb().ref(`events/${currentEventId}/gameIsInProgress`).once('value').then(snapshot => onGameInProgressChange(snapshot.val()));
+			const gameIsInProgress = await checkIfGameIsInProgress(currentEventId);
 			if (gameIsInProgress) {
-				runSubscribedCallbacks('onPostgameResults');
+				runSubscribedCallbacks('onGameCountdown');
 			} else {
-				runSubscribedCallbacks('onGameEnd');
+				const gameVals = await dbService.getActiveGameData(gameId);
+				runSubscribedCallbacks('onGameStart', gameVals);
+				dbService.getDb().ref(`games/${gameId}/activeQuestionId`).on('value', snapshot => onQuestionActivationChange(snapshot.val(), gameVals, gameId, currentEventId));
+				dbService.getDb().ref(`games/${gameId}/showQuestionResults`).on('value', snapshot => onShowQuestionResultsChange(snapshot.val()));
+				dbService.getDb().ref(`games/${gameId}/showGameResults`).on('value', snapshot => onShowGameResultsChange(snapshot.val()));
+				dbService.getDb().ref(`games/${gameId}/showGameOver`).on('value', snapshot => onShowGameOverChange(snapshot.val()));
 			}
 		}
 	}
 
-	function onQuestionActivationChange(activeQuestionId, gameVals, gameId) {
+	function onQuestionActivationChange(activeQuestionId, gameVals, gameId, currentEventId) {
 		if (activeQuestionId) {
 			let activeQuestion = gameVals.questions[activeQuestionId];
 			activeQuestion.id = Object.keys(gameVals.questions[activeQuestionId])[0];
 			runSubscribedCallbacks('onQuestionAsked', {
 				gameId: gameId,
+				seriesId: gameVals.series,
+				eventId: currentEventId,
 				questionData: activeQuestion
 			});
 		}
 	}
 
-	function onResultsActivationChange(activeResultsId, gameVals, gameId) {
-		if (activeResultsId) {
+	function onShowQuestionResultsChange(shouldShowQuestionResults) {
+		if (shouldShowQuestionResults) {
 			runSubscribedCallbacks('onBetweenQuestions', {
 				questionData: {
 					id: 10,
@@ -125,6 +100,53 @@ const eventsService = function() {
 				}
 			});
 		}
+	}
+
+	function onShowGameResultsChange(shouldShowGameResults) {
+		if (shouldShowGameResults) {
+			runSubscribedCallbacks('onPostgameResults');
+		}
+	}
+
+	function onShowGameOverChange(shouldShowGameResults) {
+		if (shouldShowGameResults) {
+			runSubscribedCallbacks('onGameEnd');
+		}
+	}
+
+	function onErrorStateChanged(isError = false) {
+		if (initialAppConnect === true) {
+			initialAppConnect = false;
+		} else {
+			appHasError = isError;
+			if (appHasError === true) {
+				runSubscribedCallbacks('onError');
+			}
+			// else {
+			// 	runSubscribedCallbacks('onErrorResolved', {
+			// 		message: 'Error resolved, back to normal shortly...'
+			// 	});
+			// }
+		}
+		
+	}
+
+	function onResetAppChanged(isReset) {
+		if (isReset && window.localStorage) {
+			const lsKey = 'appHasBeenReset';
+			const lsVal = getFromLocalStorage(lsKey);
+			if (lsVal) {
+				removeFromLocalStorage(lsKey);
+			} else if (lsVal === null) {
+				if (saveToLocalStorage(lsKey, true)) {
+					location.reload();
+				}
+			}
+		}
+	}
+
+	function checkIfGameIsInProgress(currentEventId) {
+		return dbService.getDb().ref(`events/${currentEventId}/gameIsInProgress`).once('value').then(snapshot => snapshot.val());
 	}
 
 	function subscribe(name = null, callback = null) {
