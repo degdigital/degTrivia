@@ -1,23 +1,23 @@
-function convertFormat(containerElement, number, format = 'milliseconds') {
-	if (number && containerElement) {
+function convertFormat(settings, number, format = 'milliseconds') {
+	if (number && settings.containerElement) {
 		switch(format) {
 			case 'milliseconds':
-				return timer(number / 1000, containerElement);
+				return timer(number, settings.containerElement, settings.includeLabels);
 			case 'seconds':
-				return timer(number, containerElement);
+				return timer(number * 1000, settings.containerElement, settings.includeLabels);
 			case 'minutes':
-				return timer(number * 60, containerElement);
+				return timer(number * 60 * 1000, settings.containerElement, settings.includeLabels);
 				case 'hours':
-				return timer(number * 60 * 60, containerElement);
+				return timer(number * 60 * 60 * 1000, settings.containerElement, settings.includeLabels);
 			case 'days':
-				return timer(number * 60 * 60 * 24, containerElement);             
+				return timer(number * 60 * 60 * 24 * 1000, settings.containerElement, settings.includeLabels);             
 		}
 	}
 }
 
-function timer(seconds, containerElement) {
+function timer(milliseconds, containerElement, includeLabels) {
 	const now = Date.now();
-	const then = now + seconds * 1000;
+	const then = now + milliseconds;
 
 	const countdown = setInterval(() => {
 		const secondsLeft = Math.round((then - Date.now()) / 1000);
@@ -27,26 +27,30 @@ function timer(seconds, containerElement) {
 			return;
 		};
 
-		displayTimeLeft(secondsLeft, containerElement);
+		displayTimeLeft(secondsLeft, containerElement, includeLabels);
 
 	},1000);
 
 	return countdown;
 }
 
-function renderUnit(num, label) {
-	return `
-		<span class="countdown__time">${num}</span>
-		<span class="countdown__unit">${label}${num === 1 || num === '01' ? '' : 's'}</span>
-	`;
+function renderUnit(num, label, includeLabels) {
+	if (includeLabels) {
+		return `
+			<span class="countdown__time">${num}</span>
+			<span class="countdown__unit">${label}${num === 1 || num === '01' ? '' : 's'}</span>
+		`;
+	}
+	return num > 0 ? `<span class="countdown__time">${num}:</span>` : '';
+	
 }
 	
-function displayTimeLeft(seconds, containerElement) {
+function displayTimeLeft(seconds, containerElement, includeLabels) {
 	containerElement.innerHTML = `
-		${renderUnit(Math.floor(seconds / 86400), 'day')}
-		${renderUnit(Math.floor((seconds % 86400) / 3600), 'hour')}
-		${renderUnit(Math.floor((seconds % 86400) % 3600 / 60), 'minute')}
-		${renderUnit(seconds % 60 < 10 ? `0${seconds % 60}` : seconds % 60, 'second')}
+		${renderUnit(Math.floor(seconds / 86400), 'day', includeLabels)}
+		${renderUnit(Math.floor((seconds % 86400) / 3600), 'hour', includeLabels)}
+		${renderUnit(Math.floor((seconds % 86400) % 3600 / 60), 'minute', includeLabels)}
+		${renderUnit(seconds % 60 < 10 ? `0${seconds % 60}` : seconds % 60, 'second', includeLabels)}
 	`;
 }
 
@@ -54,12 +58,16 @@ function stopTimer(countdown) {
 	clearInterval(countdown);
 }
 
-export default function() {
-	const containerElement = document.querySelector('.countdown-container');
+export default function(opts) {
+	const defaults = {
+		containerElement: null,
+		includeLabels: true
+	}
+	const settings = Object.assign({}, defaults, opts);
 	let countdown;
 	
 	function start(num, format) {
-		countdown = convertFormat(containerElement, num, format)
+		countdown = convertFormat(settings, num, format)
 	}
 
 	return {
