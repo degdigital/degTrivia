@@ -11,7 +11,8 @@ const gameWait = function({element}) {
             ${renderNextGameText(nextGameTime)}
             <div class="countdown-container"></div>
         `);
-        countdownInst = countdown();
+        const containerElement = document.querySelector('.countdown-container');
+        countdownInst = countdown({containerElement, includeLabels: false, precision: 'second'});
         countdownInst.start(timeTilNextGame, 'milliseconds');
     }
 
