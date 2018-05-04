@@ -1,0 +1,225 @@
+{
+  "admins" : {
+    "0s3r7yEj7gRzNoFaW2wGfzwWyub2" : true,
+    "5biIuUJKBDV6dOVvRzSoXpDyEaN2" : true,
+    "5j6igMzdffTqGY3BuunaKPWVVQN2" : true,
+    "HrnFh8lr76UEBtR2d32cBXBqFx33" : true,
+    "aK6xWtxovRTz0gaAjIlFgn6dhgo1" : true,
+    "cjDL28OF3AN4qnyq6p4yZt2HOpB3" : true,
+    "h1eWfB0CfTTcr7XKnqyav8ceHgq2" : true,
+    "lNcu9GkIvuZmoo31l9gdoFjvRAj2" : true,
+    "sAysvz3egIMLFpQAQlulRsP1eW72" : true
+  },
+  "answers" : {
+    "question1" : {
+      "responses" : {
+        "67890" : {
+          "player12345" : true
+        },
+        "78901" : {
+          "player12345" : true
+        },
+        "89012" : {
+          "player1" : true
+        }
+      }
+    }
+  },
+  "currentEvent" : false,
+  "disableAll" : false,
+  "events" : {
+    "12345" : {
+      "activeGameId" : false,
+      "alias" : "connections2018",
+      "gameIsInProgress" : false,
+      "games" : {
+        "34567" : true
+      },
+      "name" : "Connections 2018",
+      "players" : {
+        "45678" : true
+      },
+      "series" : {
+        "23456" : true
+      }
+    }
+  },
+  "games" : {
+    "34567" : {
+      "activeQuestionId" : false,
+      "event" : 12345,
+      "name" : "10 a.m. game",
+      "players" : {
+        "45678" : true
+      },
+      "questions" : {
+        "56789" : {
+          "choices" : {
+            "67890" : "Choice A",
+            "78901" : "Choice B",
+            "89012" : "Choice C",
+            "90123" : "Choice D"
+          },
+          "correctChoice" : 67890,
+          "order" : 0,
+          "question" : "Question 1 text?"
+        },
+        "999999" : {
+          "choices" : {
+            "55551" : "Sure why not",
+            "55552" : "Yes, but do you like to party?",
+            "55553" : "Not my cup of tea",
+            "55554" : "Duh."
+          },
+          "correctChoice" : 55554,
+          "order" : 1,
+          "question" : "Do you like to party?"
+        }
+      },
+      "series" : 23456,
+      "showGameOver" : false,
+      "showGameResults" : false,
+      "showQuestionResults" : false,
+      "startTime" : 1528900200000
+    },
+    "999999" : {
+      "activeQuestionId" : false,
+      "event" : 12345,
+      "name" : "12 p.m. game",
+      "players" : {
+        "45678" : true
+      },
+      "questions" : {
+        "56789" : {
+          "choices" : {
+            "67890" : "Choice A",
+            "78901" : "Choice B",
+            "89012" : "Choice C",
+            "90123" : "Choice D"
+          },
+          "correctChoice" : 67890,
+          "order" : 0,
+          "question" : "Question 1 text?"
+        },
+        "999999" : {
+          "choices" : {
+            "55551" : "Sure why not",
+            "55552" : "Yes, but do you like to party?",
+            "55553" : "Not my cup of tea",
+            "55554" : "Duh."
+          },
+          "correctChoice" : 55554,
+          "order" : 1,
+          "question" : "Do you like to party?"
+        }
+      },
+      "series" : 23456,
+      "showGameOver" : false,
+      "showGameResults" : false,
+      "showQuestionResults" : false,
+      "startTime" : 1528900200000
+    }
+  },
+  "leaderboardEvent" : {
+    "eventId" : {
+      "userId" : 0
+    }
+  },
+  "leaderboardGame" : {
+    "gameId" : {
+      "userId" : 0
+    }
+  },
+  "leaderboardSeries" : {
+    "seriesId" : {
+      "userId" : 0,
+      "userId2" : 7
+    }
+  },
+  "players" : {
+    "Enm1NEzXbaP4e7ZRBPMlTunBTle2" : {
+      "active" : true,
+      "email" : "aladage@degdigital.com",
+      "event" : 12345,
+      "firstName" : "Aaron",
+      "lastName" : "Ladage"
+    },
+    "KQcFGhN7ViQl2uGUQDzFLalwBBA3" : {
+      "active" : true,
+      "email" : "aladage@degdigital.com",
+      "event" : 12345,
+      "firstName" : "Ryan",
+      "lastName" : "Ladage"
+    },
+    "LKmy2anBIDgkag8j2aoPVkV128q1" : {
+      "active" : true,
+      "email" : "aladage@degdigital.com",
+      "event" : 12345,
+      "firstName" : "Aaron",
+      "lastName" : "Ladage"
+    },
+    "PBywcqY7Zqg6zHwunK1vdCRKnTz1" : {
+      "active" : true,
+      "email" : "aladage@degdigital.com",
+      "event" : 12345,
+      "firstName" : "Aaron",
+      "lastName" : "Ladage"
+    },
+    "SQ0okBrPQGZ5xvBa6xWmSBTvdrc2" : {
+      "active" : true,
+      "email" : "bgraves@degdigital.com",
+      "event" : 12345,
+      "firstName" : "Brian",
+      "lastName" : "Graves"
+    },
+    "TseVKLkzpcPGJfX1xWdYVjS4U0T2" : {
+      "active" : true,
+      "email" : "aladage@degdigital.com",
+      "event" : 12345,
+      "firstName" : "Aaron",
+      "lastName" : "Ladage"
+    },
+    "nRZ8XF1ibzaUSE6b5PylbCKZSfK2" : {
+      "active" : true,
+      "email" : "aladage@degdigital.com",
+      "event" : 12345,
+      "firstName" : "Aaron",
+      "lastName" : "Ladage"
+    },
+    "s2kyjeU1eRgEJitxCPEHacP1ySr1" : {
+      "active" : true,
+      "email" : "dflowerday@degdigital.com",
+      "event" : 12345,
+      "firstName" : "Drew",
+      "lastName" : "Flowerday"
+    },
+    "svei5gb0JjUCwmojGyNKiFus8ZZ2" : {
+      "active" : true,
+      "email" : "aladage@degdigital.com",
+      "event" : 12345,
+      "firstName" : "Aaron",
+      "lastName" : "Ladage"
+    },
+    "ub0X2Xpm4GgPJM3sDgHwauzPqkA2" : {
+      "active" : true,
+      "email" : "aladage@degdigital.com",
+      "event" : 12345,
+      "firstName" : "Aaron",
+      "lastName" : "Ladage"
+    }
+  },
+  "questionDuration" : 10000,
+  "resetApp" : false,
+  "series" : {
+    "23456" : {
+      "event" : 12345,
+      "games" : {
+        "34567" : true
+      },
+      "name" : "Day 1",
+      "players" : {
+        "45678" : true
+      }
+    }
+  }
+}
