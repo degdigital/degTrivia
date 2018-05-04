@@ -3,6 +3,7 @@ import dbService from '../services/dbService.js';
 import countdown from '../components/countdown.js';
 
 const cssClasses = {
+	countdownContainer: 'countdown-container',
 	choices: 'choices',
 	choiceButton: 'choice-button',
 	choiceButtonSelected: 'choice-button--selected'
@@ -55,7 +56,7 @@ function renderScreen(element, data) {
 	const html = `
 		<div>
 			<h1>Question #${questionData.order + 1}</h1>
-			<div class="countdown-container">0:00</div>
+			<div class="countdown-container"></div>
 			<p>${questionData.question}</p>
 			<div class="${cssClasses.choices}">
 				${renderChoices(questionData.choices)}
@@ -71,19 +72,30 @@ function renderScreen(element, data) {
 	}).start(30, 'seconds');
 }
 
-function teardown(element, onClickBound) {
+function teardown(element, onClickBound, countdownInst) {
 	unbindEventListeners(element, onClickBound);
+	countdownInst.stop();
 }
 
 export default function({element}) {
 	let onClickBound;
+	let countdownInst;
+
 	function render(data) {
 		onClickBound = bindEventListeners(element, data);
+
 		renderScreen(element, data);
+
+		countdownInst = countdown({
+			containerElement: element.querySelector(`.${cssClasses.countdownContainer}`),
+			includeLabels: false,
+			precision: 'second'
+		});
+		countdownInst.start(data.questionData.duration, 'milliseconds');
 	}
 
 	return {
 		render,
-		teardown: () => teardown(element, onClickBound)
+		teardown: () => teardown(element, onClickBound, countdownInst)
 	};
 }
