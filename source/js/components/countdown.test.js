@@ -5,8 +5,14 @@ describe('countdown', () => {
 
     beforeEach(() => {
         jest.useFakeTimers();
+
         document.body.innerHTML = '<div class="countdown-container"></div>';
-        countdownInst = countdown();
+        
+        countdownInst = countdown({
+            containerElement: document.querySelector('.countdown-container'),
+            includeLabels: true,
+            precision: 'day'
+        });
     })
 
     afterEach(() => {
