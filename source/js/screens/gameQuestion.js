@@ -1,5 +1,6 @@
 import {replaceContent} from '../utils/domUtils.js';
 import dbService from '../services/dbService.js';
+import playerService from '../services/playerService.js';
 import countdown from '../components/countdown.js';
 
 const cssClasses = {
@@ -24,7 +25,8 @@ function unbindEventListeners(element, onClickBound) {
 function onClick(e, element, {questionData}) {
 	if(e.target.matches(`.${cssClasses.choiceButton}`)) {
 		const selectedChoiceId = e.target.dataset.id;
-		dbService.submitAnswer(questionData.id, selectedChoiceId);
+		const playerId = playerService.getAuth().uid;
+		dbService.submitAnswer(questionData.id, selectedChoiceId, playerId);
 		updateChoices(element, questionData.choices, selectedChoiceId);
 	}
 }
