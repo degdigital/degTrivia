@@ -19,9 +19,8 @@ exports.initQuestionResponses =  functions.database.ref('events/{eventId}/active
                 const data = gameSnap.val();
                 if (data) {
                     const questions = data.questions;
-                    const promises = [];
-                    Object.keys(questions).forEach(qId => {
-                        promises.push(initQuestionResponsesNode(context.params.eventId, data.series, gameId, qId, questions[qId].correctChoice));
+                    const promises = Object.keys(questions).map(qId => {
+                        return initQuestionResponsesNode(context.params.eventId, data.series, gameId, qId, questions[qId].correctChoice);
                     })
                     return Promise.all(promises);
                 }
