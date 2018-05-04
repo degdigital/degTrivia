@@ -27,12 +27,12 @@ const dbService = function() {
 		return db.ref('events').orderByChild('alias').equalTo(eventAlias).once('value').then(snapshot => snapshot.val());
 	}
 
-	// function createPendingPlayer(playerVals, eventKey, userId) {
-	// 	const pendingPlayerKey = db.ref(nodeNames.pendingPlayers).push().key;
+	function createPendingPlayer(playerVals, eventKey, userId) {
+		const pendingPlayerKey = db.ref(nodeNames.pendingPlayers).push().key;
 		
-	// 	return db.ref(`/${nodeNames.pendingPlayers}/${pendingPlayerKey}`).update(formattedPlayerVals)
-	// 		.then(() => pendingPlayerKey);
-	// }
+		return db.ref(`/${nodeNames.pendingPlayers}/${pendingPlayerKey}`).update(formattedPlayerVals)
+			.then(() => pendingPlayerKey);
+	}
 
 	async function getNextGameTime() {
 		const currentEventId = await getCurrentEventId();
@@ -55,7 +55,7 @@ const dbService = function() {
 					correctChoiceId,
 					responses: {
 						[choiceId]: {
-							[textKey]: true
+							[playerId]: true
 						}
 					}
 				}
