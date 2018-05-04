@@ -1,8 +1,8 @@
 const functions = require('firebase-functions');
+const admin = require('firebase-admin');
+admin.initializeApp();
 
-// // Create and Deploy Your First Cloud Functions
-// // https://firebase.google.com/docs/functions/write-firebase-functions
-//
-// exports.helloWorld = functions.https.onRequest((request, response) => {
-//  response.send("Hello from Firebase!");
-// });
+exports.onQuestionActivation = functions.database.ref(`/games/{gameId}/activeQuestionId`).onUpdate(snapshot => {
+	const activeQuestionId = snapshot.val();
+	return snapshot.ref.parent.child('showQuestionResults').set(true);
+});
