@@ -21,24 +21,26 @@ const activeGame = function(wrapperEl, options ={}) {
 	function onWrapperChange(e) {
 		const el = e.target;
 		if (el.classList.contains(triggerClass)) {
-			const eventId = el.value === 'no-value' ? false : parseInt(el.value);
-			updateDb(eventId)
-				.then(() => settings.onActiveGameChangeCallback(eventId));
+			const val = el.value === 'no-value' ? false : parseInt(el.value);
+			updateDb(val);
 		}
 	}
 
-	function updateDb(eventId) {
-		if (!activeEventId) {
-			return Promise.resolve();
-		}
-		return db.ref(`events/${activeEventId}`).update({
-			activeGameId: eventId === false ? false : eventId,
-			gameIsInProgress: eventId !== false
-		});
+	function updateDb(val) {
+		db.ref(`events/${activeEventId}`).update({
+			activeGameId: val,
+			gameIsInProgress: val !== false
+		})
+			.then(() => settings.onActiveGameChangeCallback(val));
 	}
 
 	async function render(eventId) {
-		const dbUpdate = await updateDb(eventId);
+		if (activeEventId) {
+			db.ref(`events/${activeEventId}`).update({
+				activeGameId: eventId === false ? false : eventId,
+				gameIsInProgress: eventId !== false
+			});
+		}
 		activeEventId = eventId;
 		const responses = await Promise.all([
 			db.ref(`events/${activeEventId}/activeGameId`).once('value').then(snapshot => snapshot.val()),
