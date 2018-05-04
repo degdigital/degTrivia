@@ -29,7 +29,7 @@ const activeQuestion = function(wrapperEl, options ={}) {
 	function updateDb(gameId) {
 		if (activeGameId) {
 			db.ref(`games/${activeGameId}`).update({
-				activeQuestionId: gameId !== false;
+				activeQuestionId: gameId !== false
 			});
 		}
 	}
