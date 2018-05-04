@@ -44,21 +44,11 @@ const dbService = function() {
 		return Promise.resolve(nextGameTime);
 	}
 
-	function submitAnswer(gameId, eventId, seriesId, questionId, correctChoiceId, choiceId) {
+	function submitAnswer(questionId, choiceId) {
 		const playerId = playerService.getAuth().uid;
 		if (questionId && choiceId && playerId){
-			return db.ref(`answers`).update({
-				[questionId]: {
-					eventId,
-					seriesId,
-					gameId,
-					correctChoiceId,
-					responses: {
-						[choiceId]: {
-							[playerId]: true
-						}
-					}
-				}
+			return db.ref(`answers/${questionId}/responses/${choiceId}`).update({
+				[playerId]: true
 			});
 		}
 	}
