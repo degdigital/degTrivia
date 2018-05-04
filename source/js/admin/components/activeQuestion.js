@@ -21,21 +21,25 @@ const activeQuestion = function(wrapperEl, options ={}) {
 	function onWrapperChange(e) {
 		const el = e.target;
 		if (el.classList.contains(triggerClass)) {
-			const gameId = el.value === 'no-value' ? false : parseInt(el.value);
-			updateDb(gameId);
+			const val = el.value === 'no-value' ? false : parseInt(el.value);
+			updateDb(val);
 		}
 	}
 
-	function updateDb(gameId) {
-		if (activeGameId) {
-			db.ref(`games/${activeGameId}`).update({
-				activeQuestionId: gameId !== false
-			});
-		}
+	function updateDb(val) {
+		db.ref(`games/${activeGameId}`).update({
+			activeQuestionId: val,
+			showQuestionResults: false
+		});
 	}
 
 	async function render(gameId) {
-		const dbUpdate = await updateDb(gameId);
+		if (activeGameId && !gameId) {
+			db.ref(`games/${activeGameId}`).update({
+				activeQuestionId: false,
+				showQuestionResults: false
+			});
+		}
 		activeGameId = gameId;
 		const responses = await Promise.all([
 			db.ref(`games/${activeGameId}/activeQuestionId`).once('value').then(snapshot => snapshot.val()),
