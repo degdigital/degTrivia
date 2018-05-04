@@ -8,7 +8,6 @@ const router = function() {
 		routerLinkClass: 'js-router-link',
 		routeAttr: 'data-route'
 	};
-	// const urlPaths = getURLPaths();
 	const stateObj = {};
 	let routes;
 	let settings;
@@ -61,14 +60,6 @@ const router = function() {
 			}
 		}
 	}
-
-	// function getURLPaths() {
-	// 	return location.pathname.split('/');
-	// }
-
-	// function camelize(str = '') {
-	// 	return str.replace(/-([a-z])/g, g => g[1].toUpperCase());
-	// }
 
 	function hyphenize(str = '') {
 		return str.replace(/([a-z][A-Z])/g, g => `${g[0]}-${g[1].toLowerCase()}`);
