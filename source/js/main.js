@@ -35,14 +35,15 @@ if (appConfig.element) {
 		routes.init(appConfig);
 
 		eventsService.subscribe('onPlayerUnauthenticated', () => router.route('registration'));
-		eventsService.subscribe('onNoActiveEvent', (infoObj) => router.route('info', infoObj));
+		eventsService.subscribe('onNoActiveEvent', infoObj => router.route('info', infoObj));
 		eventsService.subscribe('onGameCountdown', () => router.route('pregameCountdown'));
 		eventsService.subscribe('onGameStart', gameData => router.route('gameWaitBeforeQuestions', gameData));
-		eventsService.subscribe('onPostgameResults', () => router.route('postgameResults'));
-		eventsService.subscribe('onGameEnd', () => router.route('pregameCountdown'));
 		eventsService.subscribe('onQuestionAsked', questionData => router.route('gameQuestion', questionData));
 		eventsService.subscribe('onBetweenQuestions', questionData => router.route('gameQuestionResults', questionData));
+		eventsService.subscribe('onPostgameResults', () => router.route('postgameResults'));
+		eventsService.subscribe('onGameEnd', () => router.route('pregameCountdown'));
 		eventsService.subscribe('onError', () => router.route('error'));
+		// eventsService.subscribe('onErrorResolved', infoObj => router.route('info', infoObj));
 		eventsService.subscribe('onResetApp', () => location.reload());
 		eventsService.init(); // Must be run after all eventsService.subscribe() calls
 	}
