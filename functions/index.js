@@ -1,4 +1,6 @@
 const functions = require('firebase-functions');
+const admin = require('firebase-admin');
+admin.initializeApp(functions.config().firebase);
 
 exports.initActiveQuestionCountdown = functions.database.ref(`/games/{gameId}/activeQuestionId`).onUpdate(event => {
     return admin.database().ref('questionDuration').once('value')

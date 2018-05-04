@@ -30,8 +30,7 @@ function render(wrapperEl) {
 
 function teardown() {
 	wrapperEl.removeEventListener('click', e => boundClickHandler);
-
-	wrapperEl.replaceContent(wrapperEl, '');
+	replaceContent(wrapperEl, '');
 }
 
 function endGameInterface(wrapperEl, gameId) {
