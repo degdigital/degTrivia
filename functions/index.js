@@ -30,7 +30,7 @@ exports.initQuestionResponses =  functions.database.ref('events/{eventId}/active
         return Promise.resolve();
     })
 
-function updateLeaderboardScore(ref) {
+function updateScore(ref) {
     return admin.database().ref(ref).transaction(currentVal => (currentVal || 0) + 1);
 }
 
@@ -40,15 +40,15 @@ function updatePlayerScore(playerId, eventId, seriesId, gameId) {
         const seriesBoardRef = admin.database().ref(`leaderboardSeries/${seriesId}/${playerId}`);
         const eventBoardRef = admin.database().ref(`leaderboardEvent/${eventId}/${playerId}`);
         const promises = [
-            updateLeaderboardScore(gameBoardRef),
-            updateLeaderboardScore(seriesBoardRef),
-            updateLeaderboardScore(eventBoardRef)
+            updateScore(gameBoardRef),
+            updateScore(seriesBoardRef),
+            updateScore(eventBoardRef)
         ];
         return Promise.all(promises);
     }
 }
 
-exports.updateLeaderboard = functions.database.ref('games/{gameId}/activeQuestionId')
+exports.updateLeaderboards = functions.database.ref('games/{gameId}/activeQuestionId')
     .onUpdate((event, context) => {
         const questionId = event.before.val();
         if (questionId){
