@@ -1,5 +1,36 @@
 const functions = require('firebase-functions');
 
+function initQuestionResponsesNode(eventId, seriesId, gameId, questionId, correctChoiceId) {
+    return admin.database().ref('answers').update({
+        [questionId]: {
+            eventId,
+            seriesId,
+            gameId,
+            correctChoiceId
+        }
+    })
+}
+
+exports.initQuestionResponses =  functions.database.ref('events/{eventId}/activeGameId')
+    .onUpdate((event, context) => {
+        const gameId = event.after.val();
+        if (gameId) {
+            return admin.database().ref(`games/${gameId}`).once('value').then(gameSnap => {
+                const data = gameSnap.val();
+                if (data) {
+                    const seriesId = data.series;
+                    const questions = data.questions;
+                    const promises = [];
+                    Object.keys(questions).forEach(qId => {
+                        promises.push(initQuestionResponsesNode(context.params.eventId, seriesId, gameId, qId, questions[qId].correctChoice));
+                    })
+                    return Promise.all(promises);
+                }
+            })
+        }
+        return Promise.resolve();
+    })
+
 function updateLeaderboardScore(ref) {
     return admin.database().ref(ref).transaction(currentVal => (currentVal || 0) + 1);
 }
@@ -19,8 +50,8 @@ function updatePlayerScore(playerId, eventId, seriesId, gameId) {
 }
 
 exports.updateLeaderboard = functions.database.ref('games/{gameId}/activeQuestionId')
-    .onWrite((change, context) => {
-        const questionId = change.before.val();
+    .onUpdate((event, context) => {
+        const questionId = event.before.val();
         if (questionId){
            return admin.database().ref(`answers/${questionId}`).once('value').then(snapshot => {
                const questionRespData = snapshot.val();
