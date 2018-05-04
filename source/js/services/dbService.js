@@ -46,19 +46,21 @@ const dbService = function() {
 
 	function submitAnswer(gameId, eventId, seriesId, questionId, correctChoiceId, choiceId) {
 		const playerId = playerService.getAuth().uid;
-		return db.ref(`answers`).update({
-			[questionId]: {
-				eventId,
-				seriesId,
-				gameId,
-				correctChoiceId,
-				responses: {
-					[choiceId]: {
-						[textKey]: true
+		if (questionId && choiceId && playerId){
+			return db.ref(`answers`).update({
+				[questionId]: {
+					eventId,
+					seriesId,
+					gameId,
+					correctChoiceId,
+					responses: {
+						[choiceId]: {
+							[textKey]: true
+						}
 					}
 				}
-			}
-		});
+			});
+		}
 	}
 
 	function getActiveGameData(gameId) {
