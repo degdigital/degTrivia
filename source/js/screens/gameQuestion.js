@@ -64,12 +64,6 @@ function renderScreen(element, data) {
 		</div>`;
 
 	replaceContent(element, html);
-	const containerElement = document.querySelector('.countdown-container');
-	countdown({
-		containerElement,
-		includeLabels: false,
-		precision: 'second'
-	}).start(30, 'seconds');
 }
 
 function teardown(element, onClickBound, countdownInst) {
