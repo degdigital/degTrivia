@@ -12,9 +12,9 @@ exports[`calling render() renders out a question and choices 1`] = `
     </h1>
     
 			
-    <div>
-      0:00
-    </div>
+    <div
+      class="countdown-container"
+    />
     
 			
     <p>
