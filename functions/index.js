@@ -3,7 +3,7 @@ const admin = require('firebase-admin');
 admin.initializeApp(functions.config().firebase);
 
 exports.onQuestionActivation = functions.database.ref(`/games/{gameId}/activeQuestionId`).onUpdate(event => {
-	return functions.database.ref('questionDuration').once('value')
+	return admin.database().ref('questionDuration').once('value')
 		.then(snapshot => {
 			const questionDuration = snapshot.val();
 			const activeQuestionId = event.data.val();
