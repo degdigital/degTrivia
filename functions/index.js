@@ -18,7 +18,6 @@ exports.initQuestionResponses =  functions.database.ref('events/{eventId}/active
             return admin.database().ref(`games/${gameId}`).once('value').then(gameSnap => {
                 const data = gameSnap.val();
                 if (data) {
-                    const seriesId = data.series;
                     const questions = data.questions;
                     const promises = Object.keys(questions).map(qId => {
                         return initQuestionResponsesNode(context.params.eventId, data.series, gameId, qId, questions[qId].correctChoice);
