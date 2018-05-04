@@ -68,7 +68,6 @@ function displayTimeLeft(timeLeft, containerElement, includeLabels, precision) {
 		timeUnits.push(renderUnit(timeLeft[unit], unit, includeLabels));
 	}
 	const markup = timeUnits.reverse();
-	console.log(timeLeft);
 	containerElement.innerHTML = markup.join(separator);
 }
 
