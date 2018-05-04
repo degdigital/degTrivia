@@ -1,5 +1,6 @@
 import firebase from '@firebase/app';
 import '@firebase/database';
+import playerService from './playerService.js';
 
 const dbService = function() {
 
@@ -43,8 +44,13 @@ const dbService = function() {
 		return Promise.resolve(nextGameTime);
 	}
 
-	function submitAnswer(gameId, questionId, choiceId) {
-		return Promise.resolve(true);
+	function submitAnswer(questionId, choiceId) {
+		const playerId = playerService.getAuth().uid;
+		if (questionId && choiceId && playerId){
+			return db.ref(`answers/${questionId}/responses/${choiceId}`).update({
+				[playerId]: true
+			});
+		}
 	}
 
 	function getActiveGameData(gameId) {
@@ -101,6 +107,7 @@ const dbService = function() {
 		getCurrentEventId,
 		getEvent,
 		getNextGameTime,
+		submitAnswer,
 		getGameLeaderboard,
 		getDayLeaderboard,
 		getEventLeaderboard,
