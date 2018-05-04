@@ -20,9 +20,8 @@ exports.initQuestionResponses =  functions.database.ref('events/{eventId}/active
                 if (data) {
                     const seriesId = data.series;
                     const questions = data.questions;
-                    const promises = [];
-                    Object.keys(questions).forEach(qId => {
-                        promises.push(initQuestionResponsesNode(context.params.eventId, seriesId, gameId, qId, questions[qId].correctChoice));
+                    const promises = Object.keys(questions).map(qId => {
+                        return initQuestionResponsesNode(context.params.eventId, data.series, gameId, qId, questions[qId].correctChoice);
                     })
                     return Promise.all(promises);
                 }
@@ -56,9 +55,8 @@ exports.updateLeaderboard = functions.database.ref('games/{gameId}/activeQuestio
            return admin.database().ref(`answers/${questionId}`).once('value').then(snapshot => {
                const questionRespData = snapshot.val();
                const playersList = questionRespData.responses[questionRespData.correctChoice];
-               const promises = [];
-               Object.keys(playersList).forEach(playerId => {
-                   promises.push(updatePlayerScore(playerId, questionRespData.eventId, questionRespData.seriesId, questionRespData.gameId));
+               const promises = Object.keys(playersList).map(playerId => {
+                   updatePlayerScore(playerId, questionRespData.eventId, questionRespData.seriesId, questionRespData.gameId);
                });
                return Promise.all(promises);
            })
