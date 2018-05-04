@@ -21,10 +21,10 @@ function unbindEventListeners(element, onClickBound) {
 	}
 }
 
-function onClick(e, element, {gameId, questionData}) {
+function onClick(e, element, {questionData}) {
 	if(e.target.matches(`.${cssClasses.choiceButton}`)) {
 		const selectedChoiceId = e.target.dataset.id;
-		dbService.submitAnswer(gameId, questionData.id, selectedChoiceId);
+		dbService.submitAnswer(questionData.id, selectedChoiceId);
 		updateChoices(element, questionData.choices, selectedChoiceId);
 	}
 }
@@ -72,7 +72,6 @@ function teardown(element, onClickBound, countdownInst) {
 }
 
 export default function({element}) {
-
 	let onClickBound;
 	let countdownInst;
 

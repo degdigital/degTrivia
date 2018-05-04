@@ -30,9 +30,9 @@ describe('pregameCountdown', () => {
         expect(nextTimeEl).toBeTruthy();
     })
 
-    it('renders message if no next game', async () => {
+    it('renders nothing if no next game', async () => {
         await pregameCountdown({element}).render();
-        expect(document.body.innerHTML).toEqual(`<div><div>There are no more games scheduled for your event.</div></div>`
+        expect(document.body.innerHTML).toEqual(`<div></div>`
         );
     });
 

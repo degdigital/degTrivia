@@ -52,7 +52,7 @@ const eventsService = function() {
 			} else {
 				const gameVals = await dbService.getActiveGameData(gameId);
 				runSubscribedCallbacks('onGameStart', gameVals);
-				dbService.getDb().ref(`games/${gameId}/activeQuestionId`).on('value', snapshot => onQuestionActivationChange(snapshot.val(), gameVals, gameId, currentEventId));
+				dbService.getDb().ref(`games/${gameId}/activeQuestionId`).on('value', snapshot => onQuestionActivationChange(snapshot.val(), gameVals, gameId));
 				dbService.getDb().ref(`games/${gameId}/showQuestionResults`).on('value', snapshot => onShowQuestionResultsChange(snapshot.val()));
 				dbService.getDb().ref(`games/${gameId}/showGameResults`).on('value', snapshot => onShowGameResultsChange(snapshot.val()));
 				dbService.getDb().ref(`games/${gameId}/showGameOver`).on('value', snapshot => onShowGameOverChange(snapshot.val()));
@@ -60,14 +60,12 @@ const eventsService = function() {
 		}
 	}
 
-	function onQuestionActivationChange(activeQuestionId, gameVals, gameId, currentEventId) {
+	function onQuestionActivationChange(activeQuestionId, gameVals, gameId) {
 		if (activeQuestionId) {
 			let activeQuestion = gameVals.questions[activeQuestionId];
 			activeQuestion.id = Object.keys(gameVals.questions[activeQuestionId])[0];
 			runSubscribedCallbacks('onQuestionAsked', {
 				gameId: gameId,
-				seriesId: gameVals.series,
-				eventId: currentEventId,
 				questionData: activeQuestion
 			});
 		}
