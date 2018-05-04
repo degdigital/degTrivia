@@ -1,5 +1,23 @@
 const functions = require('firebase-functions');
 
+exports.initActiveQuestionCountdown = functions.database.ref(`/games/{gameId}/activeQuestionId`).onUpdate(event => {
+    return admin.database().ref('questionDuration').once('value')
+        .then(snapshot => {
+            const questionDuration = snapshot.val();
+            const activeQuestionId = event.data.val();
+            if (activeQuestionId === false) {
+                return Promise.resolve();
+            }
+            return new Promise((resolve, reject) => {
+                setTimeout(() => event.data.adminRef.parent.update({
+                    activeQuestionId: false,
+                    showQuestionResults: true
+                }), questionDuration);
+            });
+        })
+        .catch(error => console.log(error));
+});
+
 function initQuestionResponsesNode(eventId, seriesId, gameId, questionId, correctChoiceId) {
     return admin.database().ref('answers').update({
         [questionId]: {
