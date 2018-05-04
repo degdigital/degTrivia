@@ -7,6 +7,7 @@ import resetApp from '../components/resetApp.js';
 import activeEvent from '../components/activeEvent.js';
 import activeGame from '../components/activeGame.js';
 import activeQuestion from '../components/activeQuestion.js';
+import endGameInterface from '../components/endGameInterface.js';
 
 const manager = function(el) {
 
@@ -15,8 +16,10 @@ const manager = function(el) {
 	const activeEventWrapperClass = 'activeevent-wrapper';
 	const activeGameWrapperClass = 'activegame-wrapper';
 	const activeQuestionWrapperClass = 'activequestion-wrapper';
+	const endGameWrapperClass = 'endgame-wrapper';
 	let activeGameInst;
 	let activeQuestionInst;
+	let endGameInterfaceInst;
 
 	function render() {
 		replaceContent(el, `
@@ -24,6 +27,7 @@ const manager = function(el) {
 			<div class="${activeEventWrapperClass}"></div>
 			<div class="${activeGameWrapperClass}"></div>
 			<div class="${activeQuestionWrapperClass}"></div>
+			<div class="${endGameWrapperClass}"></div>
 			<hr>
 			<div class="${killSwitchWrapperClass}"></div>
 			<hr>
@@ -46,6 +50,18 @@ const manager = function(el) {
 
 	function onActiveGameChange(activeGameId) {
 		activeQuestionInst.render(activeGameId);
+
+		renderEndGameInterface(activeGameId);	
+	}
+
+	function renderEndGameInterface(activeGameId) {
+		if(activeGameId !== false) {
+			const endGameWrapperEl = el.querySelector(`.${endGameWrapperClass}`);
+			endGameInterfaceInst = endGameInterface(endGameWrapperEl, activeGameId);
+			endGameInterfaceInst.render();
+		} else if(endGameInterfaceInst) {
+			endGameInterfaceInst.teardown();
+		}
 	}
 
 	return {
