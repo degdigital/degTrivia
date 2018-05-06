@@ -1,6 +1,10 @@
 // Utils
 import {replaceContent} from '../../utils/domUtils';
 
+
+// Plugins
+import tabs from '../plugins/tabs.js';
+
 // Components
 import killSwitch from '../components/killSwitch.js';
 import resetApp from '../components/resetApp.js';
@@ -24,15 +28,27 @@ const manager = function(el) {
 	function render() {
 		replaceContent(el, `
 			<h1>Welcome, admin!</h1>
-			<div class="${activeEventWrapperClass}"></div>
-			<div class="${activeGameWrapperClass}"></div>
-			<div class="${activeQuestionWrapperClass}"></div>
-			<div class="${endGameWrapperClass}"></div>
-			<hr>
-			<div class="${killSwitchWrapperClass}"></div>
-			<hr>
-			<div class="${resetAppWrapperClass}"></div>
+			<ul class="tab-triggers">
+				<li><button class="tab-trigger" data-target="gameplay">Manage Gameplay</button></li>
+				<li><button class="tab-trigger" data-target="setup">Setup</button></li>
+				<li><button class="tab-trigger" data-target="yikes">Yikes</button></li>
+			</ul>
+			<div class="tab-section" data-section="gameplay">
+				<div class="${activeEventWrapperClass}"></div>
+				<div class="${activeGameWrapperClass}"></div>
+				<div class="${activeQuestionWrapperClass}"></div>
+				<div class="${endGameWrapperClass}"></div>
+			</div>
+			<div class="tab-section" data-section="setup">
+				Setup
+			</div>
+			<div class="tab-section" data-section="yikes">
+				<div class="${killSwitchWrapperClass}"></div>
+				<hr>
+				<div class="${resetAppWrapperClass}"></div>
+			</div>
 		`);
+		tabs();
 		killSwitch(el.querySelector(`.${killSwitchWrapperClass}`));
 		resetApp(el.querySelector(`.${resetAppWrapperClass}`));
 		activeEvent(el.querySelector(`.${activeEventWrapperClass}`), {
