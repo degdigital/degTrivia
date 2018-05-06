@@ -32,7 +32,7 @@ function initQuestionResponsesNode(eventId, seriesId, gameId, questionId, correc
 }
 
 exports.initQuestionResponses =  functions.database.ref('events/{eventId}/activeGameId')
-    .onUpdate((event, context) => {
+    .onWrite((event, context) => {
         const gameId = event.after.val();
         if (gameId) {
             return admin.database().ref(`games/${gameId}`).once('value').then(gameSnap => {
@@ -68,7 +68,7 @@ function updatePlayerScore(playerId, eventId, seriesId, gameId) {
 }
 
 exports.updateLeaderboards = functions.database.ref('games/{gameId}/activeQuestionId')
-    .onUpdate((event, context) => {
+    .onWrite((event, context) => {
         const questionId = event.before.val();
         if (questionId){
            return admin.database().ref(`answers/${questionId}`).once('value').then(snapshot => {

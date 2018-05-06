@@ -28,9 +28,11 @@ function render(wrapperEl) {
 	`);
 }
 
-function teardown() {
-	wrapperEl.removeEventListener('click', e => boundClickHandler);
-	replaceContent(wrapperEl, '');
+function teardown(boundClickHandler, wrapperEl) {
+	if (wrapperEl) {
+		wrapperEl.removeEventListener('click', e => boundClickHandler);
+		replaceContent(wrapperEl, '');	
+	}
 }
 
 function endGameInterface(wrapperEl, gameId) {
@@ -39,7 +41,7 @@ function endGameInterface(wrapperEl, gameId) {
 
 	return {
 		render: gameId => render(wrapperEl),
-		teardown: () => teardown(boundClickHandler)
+		teardown: () => teardown(boundClickHandler, wrapperEl)
 	};
 }
 
