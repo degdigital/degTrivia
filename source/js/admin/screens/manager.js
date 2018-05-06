@@ -50,12 +50,11 @@ const manager = function(el) {
 
 	function onActiveGameChange(activeGameId) {
 		activeQuestionInst.render(activeGameId);
-
 		renderEndGameInterface(activeGameId);	
 	}
 
 	function renderEndGameInterface(activeGameId) {
-		if(activeGameId !== false) {
+		if(activeGameId && activeGameId !== false) {
 			const endGameWrapperEl = el.querySelector(`.${endGameWrapperClass}`);
 			endGameInterfaceInst = endGameInterface(endGameWrapperEl, activeGameId);
 			endGameInterfaceInst.render();

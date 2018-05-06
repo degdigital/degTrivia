@@ -137,6 +137,13 @@
     }
   },
   "players" : {
+    "6WJI9uKv9sfjhgEG94VH1Tub7DC3" : {
+      "active" : true,
+      "email" : "aladage@degdigital.com",
+      "event" : 12345,
+      "firstName" : "Aaron",
+      "lastName" : "Ladage"
+    },
     "Enm1NEzXbaP4e7ZRBPMlTunBTle2" : {
       "active" : true,
       "email" : "aladage@degdigital.com",
@@ -179,6 +186,20 @@
       "firstName" : "Aaron",
       "lastName" : "Ladage"
     },
+    "bmDoovzMpacsibKIjyU21oBhGP62" : {
+      "active" : true,
+      "email" : "aladage@degdigital.com",
+      "event" : 12345,
+      "firstName" : "Aaron",
+      "lastName" : "Ladage"
+    },
+    "ekC8ohVcgIR9hBtAlXnfQKlhEEm1" : {
+      "active" : true,
+      "email" : "aladage@degdigital.com",
+      "event" : 12345,
+      "firstName" : "Aaron",
+      "lastName" : "Ladage"
+    },
     "nRZ8XF1ibzaUSE6b5PylbCKZSfK2" : {
       "active" : true,
       "email" : "aladage@degdigital.com",
@@ -192,6 +213,13 @@
       "event" : 12345,
       "firstName" : "Drew",
       "lastName" : "Flowerday"
+    },
+    "shDGukMYByabaEKWOCv0QQd3c5y1" : {
+      "active" : true,
+      "email" : "aladage@degdigital.com",
+      "event" : 12345,
+      "firstName" : "Aaron",
+      "lastName" : "Ladage"
     },
     "svei5gb0JjUCwmojGyNKiFus8ZZ2" : {
       "active" : true,
