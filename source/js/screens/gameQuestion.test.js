@@ -1,8 +1,10 @@
 import gameQuestion from './gameQuestion.js';
 import dbService from '../services/dbService.js';
+import playerService from '../services/playerService.js';
 import countdown from '../components/countdown.js';
 
 jest.mock('../services/dbService');
+jest.mock('../services/playerService');
 jest.mock('../components/countdown');
 
 let element;
@@ -68,7 +70,7 @@ describe('selecting a choice', () => {
 		const expectedChoiceId = Object.keys(data.questionData.choices)[0];
 
 		expect(submitAnswerSpy).toHaveBeenCalledTimes(1);
-		expect(submitAnswerSpy.mock.calls[0]).toEqual([data.gameId, data.questionData.id, expectedChoiceId]);
+		expect(submitAnswerSpy).toHaveBeenCalledWith(data.questionData.id, expectedChoiceId, playerService.__authData.uid);
 	});
 
 	test('disables the choice buttons', async () => {
