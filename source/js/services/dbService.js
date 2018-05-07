@@ -6,9 +6,15 @@ const dbService = function() {
 	let db = null;
 	const nodeNames = {
 		events: 'events',
+		series: 'series',
 		games: 'games',
 		pendingPlayers: 'pendingPlayers'
 	};
+	const defaultNodesToGet = [
+		'events',
+		'series',
+		'games'
+	];
 
 	function init() {
 		db = firebase.database();
@@ -16,6 +22,16 @@ const dbService = function() {
 
 	function getDb() {
 		return db;
+	}
+
+	function getInitialData(nodes = defaultNodesToGet) {
+		return new Promise(async(resolve, reject) => {
+			// const nodes = nodesToGet | defaultNodesToGet;
+			let output = {};
+			const data = await Promise.all(nodes.map(node => db.ref(node).once('value').then(snapshot => snapshot.val())));
+			nodes.map((node, index) => output[node] = data[index]);
+			resolve(output);
+		});
 	}
 
 	function getCurrentEventId() {
@@ -102,6 +118,7 @@ const dbService = function() {
 	return {
 		init,
 		getDb,
+		getInitialData,
 		getCurrentEventId,
 		getEvent,
 		getNextGameTime,

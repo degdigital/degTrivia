@@ -6,6 +6,7 @@ const plugins = [
 	require('postcss-easy-import'),  
 	require('postcss-color-function'),
 	require('cssnano'),
+	require('postcss-nested'),
 	require('autoprefixer')
 ];
 const filesToProcess = [

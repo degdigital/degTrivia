@@ -50,6 +50,7 @@
     "postcss": "^6.0.21",
     "postcss-color-function": "^4.0.1",
     "postcss-easy-import": "^3.0.0",
+    "postcss-nested": "^1.0.1",
     "rollup": "^0.58.2",
     "rollup-plugin-babel": "^3.0.4",
     "rollup-plugin-commonjs": "^9.1.0",

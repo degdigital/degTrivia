@@ -1,4 +1,7 @@
+// Config
 import appConfig from '../config/appConfig.js';
+
+// Firebase
 import firebase from '@firebase/app';
 
 // Services
