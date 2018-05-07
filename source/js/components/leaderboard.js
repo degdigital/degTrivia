@@ -5,16 +5,7 @@ import tabs from './tabs.js';
 const leaderboardSections = ['game', 'day', 'event'];
 
 function loadLeaderboardData() {
-    const promises = [dbService.getGameLeaderboard(), dbService.getDayLeaderboard(), dbService.getEventLeaderboard()];
-    return Promise.all(promises).then(datasets => {
-        const retVal = {};
-        datasets.forEach(dataset => {
-            if (dataset && dataset.type) {
-                retVal[dataset.type] = dataset.leaders;
-            }
-        })
-        return retVal;
-    });
+    return dbService.getLeaderboardData();
 }
 
 function renderTableBody(leaderData) {
@@ -63,7 +54,7 @@ async function render(containerElement) {
                 ${renderLeaderboard(leaderboardData.game)}
             </div>
             <div class="tab-section tab-section--day is-hidden">
-                ${renderLeaderboard(leaderboardData.day)}
+                ${renderLeaderboard(leaderboardData.series)}
             </div>
             <div class="tab-section tab-section--event is-hidden">
                 ${renderLeaderboard(leaderboardData.event)}

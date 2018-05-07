@@ -4,7 +4,7 @@ const admin = require('firebase-admin');
 const initActiveQuestionCountdown = require('./components/initActiveQuestionCountdown');
 const initQuestionReponses = require('./components/initQuestionResponses');
 const updateLeaderboards = require('./components/updateLeaderboards');
-const cacheLeaderboardData = require('.components/cacheLeaderboardData');
+const cacheLeaderboardData = require('./components/cacheLeaderboardData');
 const updateMostRecentEventId = require('./components/updateMostRecentEventId');
 const updateMostRecentGameSeriesId = require('./components/updateMostRecentGameSeriesId');
 

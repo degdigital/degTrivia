@@ -153,9 +153,44 @@ exports[`leaderboard should render 1`] = `
       
                 
       <div>
-        No leaderboard data to display.
+        Top 10 Players
       </div>
       
+            
+      <table>
+        
+                
+        <thead>
+          
+                    
+          <tr>
+            
+                        
+            <th />
+            
+                        
+            <th>
+              Name
+            </th>
+            
+                        
+            <th>
+              Score
+            </th>
+            
+                    
+          </tr>
+          
+                
+        </thead>
+        
+                
+        <tbody />
+        
+            
+      </table>
+      
+        
             
     </div>
     

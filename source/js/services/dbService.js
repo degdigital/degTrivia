@@ -79,39 +79,13 @@ const dbService = function() {
 		});
 	}
 
-	function getGameLeaderboard() {
-		// TODO: get top 10 players for most recent game
-		return Promise.resolve({
-			type: 'game',
-			leaders: [
-				{name: 'Anna', score: '1500000'},
-				{name: 'Aaron', score: '140'},
-				{name: 'Ryan', score: '42'}
-			]
-		})
-	}
-
-	function getDayLeaderboard() {
-		// get top 10 people and scores for current day
-		return Promise.resolve({
-			type: 'day',
-			leaders: [
-				{name: 'Anna', score: '1500060'},
-				{name: 'Aaron', score: '146'},
-				{name: 'Ryan', score: '42'}
-			]
-		})
-	}
-
-	function getEventLeaderboard() {
-		// get top 10 people and scores for current event
-		return Promise.resolve({
-			type: 'event',
-			leaders: [
-				{name: 'Aaron', score: '1500001'},
-				{name: 'Aaron', score: '200'},
-				{name: 'Ryan', score: '43'}
-			]
+	function getLeaderboardData() {
+		return db.ref('leaderboardCurrent').once('value').then(snapshot => {
+			if (snapshot.val()) {
+				return snapshot.val();
+			} else {
+				return {};
+			}
 		})
 	}
 
@@ -123,9 +97,7 @@ const dbService = function() {
 		getEvent,
 		getNextGameTime,
 		submitAnswer,
-		getGameLeaderboard,
-		getDayLeaderboard,
-		getEventLeaderboard,
+		getLeaderboardData,
 		getActiveGameData
 	};
 
