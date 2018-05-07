@@ -9,6 +9,8 @@ import activeGame from '../components/activeGame.js';
 import activeQuestion from '../components/activeQuestion.js';
 import endGameInterface from '../components/endGameInterface.js';
 
+import store, { activeEventChanged, activeGameChanged } from '../store.js';
+
 const manager = function(el) {
 
 	const killSwitchWrapperClass = 'killswitch-wrapper';
@@ -20,6 +22,8 @@ const manager = function(el) {
 	let activeGameInst;
 	let activeQuestionInst;
 	let endGameInterfaceInst;
+
+	store.init();
 
 	function render() {
 		replaceContent(el, `
@@ -36,12 +40,14 @@ const manager = function(el) {
 		killSwitch(el.querySelector(`.${killSwitchWrapperClass}`));
 		resetApp(el.querySelector(`.${resetAppWrapperClass}`));
 		activeEvent(el.querySelector(`.${activeEventWrapperClass}`), {
-			onActiveEventChangeCallback: onActiveEventChange
+			//onActiveEventChangeCallback: onActiveEventChange
 		});
 		activeGameInst = activeGame(el.querySelector(`.${activeGameWrapperClass}`), {
-			onActiveGameChangeCallback: onActiveGameChange
+			//onActiveGameChangeCallback: onActiveGameChange
 		});
 		activeQuestionInst = activeQuestion(el.querySelector(`.${activeQuestionWrapperClass}`));
+	
+		
 	}
 
 	function onActiveEventChange(activeEventId) {
@@ -54,13 +60,25 @@ const manager = function(el) {
 		renderEndGameInterface(activeGameId);	
 	}
 
+	function onActiveEventChanged(state) {
+		console.log('here');
+		activeGameInst.render(state.activeEventId);
+	}
+
+	function onActiveGameChanged(state) {
+		activeQuestionInst.render(state.activeGameId);
+
+		renderEndGameInterface(state.activeGameId);
+	}
+
 	function renderEndGameInterface(activeGameId) {
+		if(endGameInterfaceInst) {
+			endGameInterfaceInst.teardown();
+		}
 		if(activeGameId !== false) {
 			const endGameWrapperEl = el.querySelector(`.${endGameWrapperClass}`);
 			endGameInterfaceInst = endGameInterface(endGameWrapperEl, activeGameId);
 			endGameInterfaceInst.render();
-		} else if(endGameInterfaceInst) {
-			endGameInterfaceInst.teardown();
 		}
 	}
 

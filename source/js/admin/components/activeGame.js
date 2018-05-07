@@ -22,8 +22,8 @@ const activeGame = function(wrapperEl, options ={}) {
 		const el = e.target;
 		if (el.classList.contains(triggerClass)) {
 			const eventId = el.value === 'no-value' ? false : parseInt(el.value);
-			updateDb(eventId)
-				.then(() => settings.onActiveGameChangeCallback(eventId));
+			updateDb(eventId);
+				//.then(() => settings.onActiveGameChangeCallback(eventId));
 		}
 	}
 
