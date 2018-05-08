@@ -130,3 +130,7 @@ legend {
 	}
 
 }
+
+.is-hidden {
+	display: none;
+}

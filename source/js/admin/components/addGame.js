@@ -5,16 +5,22 @@ import formMapper from '../../utils/formMapper';
 // Services
 import dbService from '../../services/dbService.js';
 
+// Plugins
+import questionManager from '../plugins/questionManager.js'
+
 const addGame = function(wrapperEl, initialData) {
 
+	let questionManagerInst;
 	const gamesRef = dbService.getDb().ref('games');
 
 	const formClass = 'addgame-form';
+	const questionsWrapperClass = 'questions-wrapper';
 	let formEl;
 
 	function init() {
 		bindEvents();
 		render(initialData);
+		questionManagerInst = questionManager(wrapperEl);
 	}
 
 	function bindEvents() {
@@ -60,8 +66,12 @@ const addGame = function(wrapperEl, initialData) {
 						<label for="name">Name</label><br>
 						<input id="name" name="name" type="text" required>
 					</div>
-					${renderDropdownSection('Events', data.events)}
+					${renderDropdownSection('Event', data.events)}
 					${renderDropdownSection('Series', data.series)}
+					<div class="field">
+						Questions
+						<div class="${questionsWrapperClass}"></div>
+					</div>
 					<div class="field">
 						<label for="startTime">Start Time</label><br>
 						<input id="startTime" name="startTime" type="datetime-local" required>
