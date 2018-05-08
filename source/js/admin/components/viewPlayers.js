@@ -1,5 +1,6 @@
 // Utils
 import {replaceContent} from '../../utils/domUtils';
+import {renderObjKeysToList} from '../../utils/objectUtils';
 
 // Services
 import dbService from '../../services/dbService.js';
@@ -80,21 +81,6 @@ const viewPlayers = function(wrapperEl) {
 			}
 		}, '');
 		replaceContent(tableBodyEl, rows);
-	}
-
-	function renderObjKeysToList(obj) {
-		if (!obj) {
-			return '';
-		}
-		const listItems = Object.keys(obj).reduce((output, key) => `
-			${output}
-			<li>${key}</li>
-		`, '');
-		return `
-			<ul>
-				${listItems}
-			</ul>
-		`;
 	}
 
 	init();

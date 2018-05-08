@@ -36,15 +36,6 @@ const addSeries = function(wrapperEl, initialData) {
 		});
 	}
 
-	function formatArrayToObject(arr = null) {
-		if (!arr) {
-			return null;
-		}
-		let output = {};
-		arr.map(item => output[item] = true);
-		return output;
-	}
-
 	function render(data) {
 		replaceContent(wrapperEl, `
 			<form class="${formClass}">
