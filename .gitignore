@@ -1,5 +1,6 @@
 tmp/
 node_modules
+functions/node_modules
 
 *.suo
 *.user
