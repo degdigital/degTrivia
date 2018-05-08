@@ -1,9 +1,9 @@
-import {getUrlSegment} from '../utils/urlUtils.js';
+function getAppConfig() {
+	return {
+		element: document.getElementById('app'),
+		routerLinkClass: 'js-router-link',
+		routeAttr: 'data-route'
+	};
+}
 
-const appConfig = {
-	element: document.getElementById('app'),
-	routerLinkClass: 'js-router-link',
-	routeAttr: 'data-route'
-};
-
-export default appConfig;
+export { getAppConfig };
