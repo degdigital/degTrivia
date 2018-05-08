@@ -19,7 +19,7 @@ function generateCounts(db, change, questionId ) {
             return Promise.all(promises)
                 .then(() => updateFlag(change, {showQuestionResults: true}));
         }
-        return Promise.resolve();
+        return updateFlag(change, {showQuestionResults: true});
     })
 }
 
