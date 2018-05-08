@@ -19,6 +19,9 @@ import addEvent from '../components/addEvent.js';
 import viewEvents from '../components/viewEvents.js';
 import addSeries from '../components/addSeries.js';
 import viewSeries from '../components/viewSeries.js';
+import addGame from '../components/addGame.js';
+import viewGames from '../components/viewGames.js';
+import viewPlayers from '../components/viewPlayers.js';
 
 const manager = function(el) {
 
@@ -35,8 +38,7 @@ const manager = function(el) {
 	const viewSeriesWrapperClass = 'viewseries-wrapper';
 	const addGameWrapperClass = 'addgame-wrapper';
 	const viewGamesWrapperClass = 'viewgames-wrapper';
-	const addQuestionWrapperClass = 'addquestion-wrapper';
-	const viewQuestionsWrapperClass = 'viewquestions-wrapper';
+	const viewPlayersWrapperClass = 'viewplayers-wrapper';
 	let activeGameInst;
 	let activeQuestionInst;
 	let endGameInterfaceInst;
@@ -49,7 +51,7 @@ const manager = function(el) {
 				<li><button class="tab-trigger" data-target="events">Events</button></li>
 				<li><button class="tab-trigger" data-target="series">Series</button></li>
 				<li><button class="tab-trigger" data-target="games">Games</button></li>
-				<li><button class="tab-trigger" data-target="questions">Questions</button></li>
+				<li><button class="tab-trigger" data-target="players">Players</button></li>
 				<li><button class="tab-trigger" data-target="system">System</button></li>
 			</ul>
 			<div class="tab-section" data-section="gameplay">
@@ -67,14 +69,11 @@ const manager = function(el) {
 				<div class="${viewSeriesWrapperClass}"></div>
 			</div>
 			<div class="tab-section" data-section="games">
-				Games
 				<div class="${addGameWrapperClass}"></div> 
 				<div class="${viewGamesWrapperClass}"></div> 
 			</div>
-			<div class="tab-section" data-section="questions">
-				Questions
-				<div class="${addQuestionWrapperClass}"></div> 
-				<div class="${viewQuestionsWrapperClass}"></div> 
+			<div class="tab-section" data-section="players">
+				<div class="${viewPlayersWrapperClass}"></div> 
 			</div>
 			<div class="tab-section" data-section="system">
 				<div class="${questionDurationWrapperClass}"></div>
@@ -103,7 +102,10 @@ const manager = function(el) {
 		addEvent(el.querySelector(`.${addEventWrapperClass}`), initialData);
 		viewEvents(el.querySelector(`.${viewEventsWrapperClass}`));
 		addSeries(el.querySelector(`.${addSeriesWrapperClass}`), initialData);
-		viewSeries(el.querySelector(`.${viewSeriesWrapperClass}`))
+		viewSeries(el.querySelector(`.${viewSeriesWrapperClass}`));
+		addGame(el.querySelector(`.${addGameWrapperClass}`), initialData);
+		viewGames(el.querySelector(`.${viewGamesWrapperClass}`));
+		viewPlayers(el.querySelector(`.${viewPlayersWrapperClass}`));
 	}
 
 	function onActiveEventChange(activeEventId) {

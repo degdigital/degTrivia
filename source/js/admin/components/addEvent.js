@@ -1,5 +1,6 @@
 // Utils
 import {replaceContent} from '../../utils/domUtils';
+import {formatArrayToObject} from '../../utils/objectUtils';
 import formMapper from '../../utils/formMapper';
 
 // Services
@@ -42,15 +43,6 @@ const addEvent = function(wrapperEl, initialData) {
 				series: formatArrayToObject(data.series)
 			});
 		}
-	}
-
-	function formatArrayToObject(arr = null) {
-		if (!arr) {
-			return null;
-		}
-		let output = {};
-		arr.map(item => output[item] = true);
-		return output;
 	}
 
 	function render(data) {
