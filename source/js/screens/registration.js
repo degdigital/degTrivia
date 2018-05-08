@@ -15,13 +15,13 @@ const registration = function({element}) {
 			<h1>Welcome to DEG Trivia!</h1>
 			<form class="${registrationFormClass}">
 				<label for="firstName">First name</label><br>
-				<input type="text" id="firstName" name="firstName" autofocus required value="Aaron"><br><br>
+				<input type="text" id="firstName" name="firstName" autofocus required><br><br>
 
 				<label for="lastName">Last name</label><br>
-				<input type="text" id="lastName" name="lastName" required value="Ladage"><br><br>
+				<input type="text" id="lastName" name="lastName" required><br><br>
 
 				<label for="email">Email address</label><br>
-				<input type="email" id="email" name="email" required value="aladage@degdigital.com"><br><br>
+				<input type="email" id="email" name="email" required><br><br>
 
 				<label for="eventAlias">Event Code</label><br>
 				<input type="text" id="eventAlias" name="eventAlias" required value="connections2018"><br><br>

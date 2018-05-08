@@ -5,11 +5,11 @@ import formMapper from '../../utils/formMapper';
 // Services
 import dbService from '../../services/dbService.js';
 
-const addSeries = function(wrapperEl, initialData) {
+const addGame = function(wrapperEl, initialData) {
 
-	const seriesRef = dbService.getDb().ref('series');
+	const gamesRef = dbService.getDb().ref('games');
 
-	const formClass = 'addseries-form';
+	const formClass = 'addgame-form';
 	let formEl;
 
 	function init() {
@@ -28,47 +28,49 @@ const addSeries = function(wrapperEl, initialData) {
 	}
 
 	async function saveFormData(data) {
-		const newKey = seriesRef.push().key;
-		seriesRef.child(newKey).update({
-			event: data.event,
-			games: formatArrayToObject(data.games),
-			name: data.name
+		const newKey = gamesRef.push().key;
+		gamesRef.child(newKey).update({
+			activeQuestionId: false,
+			event: data.events,
+			name: data.name,
+			questions: false,
+			series: data.series,
+			showGameOver: false,
+			showGameResults: false,
+			showQuestionResults: false,
+			startTime: new Date(data.startTime).getTime()
 		});
+	}
+
+	function formatArrayToObject(arr = null) {
+		if (!arr) {
+			return null;
+		}
+		let output = {};
+		arr.map(item => output[item] = true);
+		return output;
 	}
 
 	function render(data) {
 		replaceContent(wrapperEl, `
 			<form class="${formClass}">
 				<fieldset>
-					<legend>Add a Series</legend>
+					<legend>Add a Game</legend>
 					<div class="field">
 						<label for="name">Name</label><br>
 						<input id="name" name="name" type="text" required>
 					</div>
-					${renderDropdownSection('Event', data.events)}
-					${renderCheckboxSection('Games', data.games)}
+					${renderDropdownSection('Events', data.events)}
+					${renderDropdownSection('Series', data.series)}
+					<div class="field">
+						<label for="startTime">Start Time</label><br>
+						<input id="startTime" name="startTime" type="datetime-local" required>
+					</div>
 					<button type="submit">Submit</button>
 				</fieldset>
 			</form>
 		`);
 		formEl = wrapperEl.querySelector(`.${formClass}`);
-	}
-
-	function renderCheckboxSection(sectionName, sectionData) {
-		if (!sectionData) {
-			return '';
-		}
-		const lcName = sectionName.toLowerCase();
-		const fields = Object.keys(sectionData).reduce((output, id, index) => `
-			${output}
-			<input id="addseries-${lcName}--${index}" name="${lcName}" type="checkbox" value="${id}">
-			<label for="addseries-${lcName}--${index}">${sectionData[id].name}</label><br>
-		`, `${sectionName}<br>`);
-		return `
-			<div class="field">
-				${fields}
-			</div>
-		`;
 	}
 
 	function renderDropdownSection(sectionName, sectionData) {
@@ -94,4 +96,4 @@ const addSeries = function(wrapperEl, initialData) {
 
 };
 
-export default addSeries;
+export default addGame;
