@@ -60,21 +60,24 @@ function sortLeaderboard(currentLeaderboardData) {
 
 // writes leaderboard data to current leaderboard node
 function writeCurrentLeaderboard(leaderboardData, idToNameMap) {
-    const currentLeaderboardData = Object.keys(leaderboardData.leaders).map(id => {
-        return {
-            name: idToNameMap[id],
-            score: leaderboardData.leaders[id]
-        }
-    })
-    const test = sortLeaderboard(currentLeaderboardData);
-
-    return database.ref(`leaderboardCurrent/${leaderboardData.type}`).set(test);
+    if (leaderboardData.leaders) {
+        const currentLeaderboardData = Object.keys(leaderboardData.leaders).map(id => {
+            return {
+                name: idToNameMap[id],
+                score: leaderboardData.leaders[id]
+            }
+        })
+    
+        return database.ref(`leaderboardCurrent/${leaderboardData.type}`).set(sortLeaderboard(currentLeaderboardData));
+    }
+    return Promise.resolve();
 }
-
-
+    
 module.exports = function(event, context, db) {
     if (event.after.val()){
-        database = db;
+        if (!database) {
+            database = db;
+        }
         const promises = [
             formatBoard('mostRecentGame', 'leaderboardGame', 'game'),
             formatBoard('mostRecentSeries', 'leaderboardSeries', 'series'),
@@ -87,7 +90,7 @@ module.exports = function(event, context, db) {
                     playerIds = [...playerIds, ...Object.keys(currentVal.leaders)];
                 }
             });
-            const uniquePlayerIds = playerIds.filter(id => playerIds.indexOf(id) >= 0);
+            const uniquePlayerIds = [...new Set(playerIds)];
             return getPlayerNameIdMap(uniquePlayerIds).then(idToNameMap => {
                 const writePromises = results.map(leaderboardData => writeCurrentLeaderboard(leaderboardData, idToNameMap));
                 return Promise.all(writePromises);

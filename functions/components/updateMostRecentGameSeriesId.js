@@ -12,6 +12,7 @@ function updateMostRecentSeriesId(db, gameId) {
                 mostRecentSeries: seriesId
             });
         }
+        return Promise.resolve();
     })
 }
 
