@@ -5,10 +5,10 @@ const babel = require('rollup-plugin-babel');
 
 const bundles = [
 	{
-		name: 'main',
-		entryFilepath: 'source/js/main.js',
-		bundleFilepath: 'public/js/main-bundle.js',
-		noModulesBundleFilepath: 'public/js/main-bundle-nomodules.js'
+		name: 'app',
+		entryFilepath: 'source/js/index.js',
+		bundleFilepath: 'public/js/app-bundle.js',
+		noModulesBundleFilepath: 'public/js/app-bundle-nomodules.js'
 	},
 	{
 		name: 'admin',
