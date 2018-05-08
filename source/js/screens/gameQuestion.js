@@ -41,7 +41,7 @@ function renderChoices(choices, selectedChoiceId) {
 			buttonClasses.push(cssClasses.choiceButtonSelected);
 		} 
 
-		const buttonHtml = `<button class="${buttonClasses.join(' ')}" data-id="${key}" ${disabledAttr}>${choices[key]}</button>\n`;
+		const buttonHtml = `<button class="${buttonClasses.join(' ')}" data-id="${key}" ${disabledAttr}>${choices[key].text}</button>\n`;
 
 		return html + buttonHtml;
 	}, '');
