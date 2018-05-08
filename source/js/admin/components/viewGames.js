@@ -5,10 +5,10 @@ import {renderObjKeysToList} from '../../utils/objectUtils';
 // Services
 import dbService from '../../services/dbService.js';
 
-const viewEvents = function(wrapperEl) {
+const viewGames = function(wrapperEl) {
 
 	const db = dbService.getDb();
-	const tableBodyClass = 'viewevents-table-body';
+	const tableBodyClass = 'viewseries-table-body';
 	let tableBodyEl = null;
 
 	function init() {
@@ -18,22 +18,24 @@ const viewEvents = function(wrapperEl) {
 	}
 
 	function bindEvents() {
-		db.ref('events').on('value', snapshot => renderTableRows(snapshot.val()));
+		db.ref('games').on('value', snapshot => renderTableRows(snapshot.val()));
 	}
 
 	function renderTable() {
 		replaceContent(wrapperEl, `
 			<table>
-				<caption>All Events</caption>
+				<caption>All Games</caption>
 				<thead>
 					<tr>
 						<th>Name</th>
-						<th>Alias</th>
 						<th>ID</th>
+						<th>Event</th>
 						<th>Series</th>
-						<th>Games</th>
-						<th>Active Game</th>
-						<th>In Progress</th>
+						<th>Active Question ID</th>
+						<th>Questions</th>
+						<th>Start Time</th>
+						<th>Game Results Showing</th>
+						<th>Question Results Showing</th>
 					</tr>
 				</thead>
 				<tbody class="${tableBodyClass}"></tbody>
@@ -46,12 +48,14 @@ const viewEvents = function(wrapperEl) {
 			${output}
 			<tr>
 				<td>${data[key].name}</td>
-				<td>${data[key].alias}</td>
 				<td>${key}</td>
-				<td>${renderObjKeysToList(data[key].series)}</td>
-				<td>${renderObjKeysToList(data[key].games)}</td>
-				<td>${data[key].activeGameId ? data[key].activeGameId : 'None'}</td>
-				<td>${data[key].gameIsInProgress ? 'Yes' : 'No'}</td>
+				<td>${data[key].event}</td>
+				<td>${data[key].series}</td>
+				<td>${data[key].activeQuestionId ? data[key].activeQuestionId : 'None'}</td>
+				<td>${renderObjKeysToList(data[key].questions)}</td>
+				<td>${data[key].startTime}</td>
+				<td>${data[key].showGameResults ? 'Yes' : 'No'}</td>
+				<td>${data[key].showQuestionResults ? 'Yes' : 'No'}</td>
 			</tr>
 		`, '');
 		replaceContent(tableBodyEl, rows);
@@ -61,4 +65,4 @@ const viewEvents = function(wrapperEl) {
 
 };
 
-export default viewEvents;
+export default viewGames;
