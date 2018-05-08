@@ -78,23 +78,21 @@ const eventsService = function() {
 					id: 10,
 					order: 0,
 					question: 'Who is the most dashing Kansas City Royal of all time?',
-					choiceResults: [
-						{
-							choiceText: 'Bob Hamelin',
-							isCorrectChoice: false,
+					correctChoice: 102,
+					choices: {
+						100: {
+							text: 'Bob Hamelin',
 							chosenCount: 28
 						},
-						{
-							choiceText: 'Danny Tartabul',
-							isCorrectChoice: false,
+						101: {
+							text: 'Danny Tartabul',
 							chosenCount: 39
 						},
-						{
-							choiceText: 'Steve Balboni',
-							isCorrectChoice: true,
+						102: {
+							text: 'Steve Balboni',
 							chosenCount: 142
 						}
-					]
+					}
 				}
 			});
 		}

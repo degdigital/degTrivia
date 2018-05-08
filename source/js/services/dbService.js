@@ -26,7 +26,6 @@ const dbService = function() {
 
 	function getInitialData(nodes = defaultNodesToGet) {
 		return new Promise(async(resolve, reject) => {
-			// const nodes = nodesToGet | defaultNodesToGet;
 			let output = {};
 			const data = await Promise.all(nodes.map(node => db.ref(node).once('value').then(snapshot => snapshot.val())));
 			nodes.map((node, index) => output[node] = data[index]);
