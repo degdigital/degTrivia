@@ -17,9 +17,18 @@ const data = {
 		question: 'Who is the most dashing Kansas City Royal of all time?',
 		duration: 30000,
 		choices: {
-			100: 'Bob Hamelin',
-			101: 'Danny Tartabul',
-			102: 'Steve Balboni' 
+			100: {
+				text: 'Bob Hamelin',
+				chosenCount: 0
+			},
+			101: {
+				text: 'Danny Tartabul',
+				chosenCount: 0
+			},
+			102: {
+				text: 'Steve Balboni',
+				chosenCount: 0
+			}
 		}
 	}
 };
