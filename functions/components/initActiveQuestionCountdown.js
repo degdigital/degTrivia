@@ -11,7 +11,7 @@ function updateFlag(change, newVal) {
 function generateCounts(db, change, questionId ) {
     return db.ref(`answers/${questionId}`).once('value').then(snapshot => {
         const questionAnswerData = snapshot.val();
-        if (questionAnswerData) {
+        if (questionAnswerData && questionAnswerData.responses) {
             const promises = Object.keys(questionAnswerData.responses).map(optId => {
                 // TODO: potentially re-work to make a percentage
                 writeCounts(change, questionId, optId, Object.keys(questionAnswerData.responses[optId]).length);

@@ -63,7 +63,7 @@ const eventsService = function() {
 	function onQuestionActivationChange(activeQuestionId, gameVals, gameId) {
 		if (activeQuestionId) {
 			let activeQuestion = gameVals.questions[activeQuestionId];
-			activeQuestion.id = Object.keys(gameVals.questions[activeQuestionId])[0];
+			activeQuestion.id = activeQuestionId;
 			runSubscribedCallbacks('onQuestionAsked', {
 				gameId: gameId,
 				questionData: activeQuestion
