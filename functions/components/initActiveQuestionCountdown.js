@@ -4,11 +4,8 @@ function writeCounts(change, questionId, optId, count) {
     });
 }
 
-function updateFlags(change) {
-    return change.after.ref.parent.update({
-        activeQuestionId: false,
-        showQuestionResults: true
-    })
+function updateFlag(change, newVal) {
+    return change.after.ref.parent.update(newVal);
 }
 
 function generateCounts(db, change, questionId ) {
@@ -19,7 +16,8 @@ function generateCounts(db, change, questionId ) {
                 // TODO: potentially re-work to make a percentage
                 writeCounts(change, questionId, optId, Object.keys(questionAnswerData.responses[optId]).length);
             });
-            return Promise.all(promises);
+            return Promise.all(promises)
+                .then(() => updateFlag(change, {showQuestionResults: true}));
         }
         return Promise.resolve();
     })
@@ -35,8 +33,10 @@ module.exports = function(db, change, context) {
             }
             return new Promise((resolve, reject) => {
                 setTimeout(() => {
-                    resolve(generateCounts(db, change, activeQuestionId)
-                        .then(() => updateFlags(change)))
+                    return Promise.all([
+                        updateFlag(change, {activeQuestionId: false}),
+                        generateCounts(db, change, activeQuestionId)
+                    ]);
                 }, questionDuration);
             });
         })
