@@ -25,7 +25,7 @@ function unbindEventListeners(element, onClickBound) {
 function onClick(e, element, {questionData}) {
 	if(e.target.matches(`.${cssClasses.choiceButton}`)) {
 		const selectedChoiceId = e.target.dataset.id;
-		const playerId = playerService.getAuth().uid;
+		const playerId = playerService.getAuth().currentUser.uid;
 		dbService.submitAnswer(questionData.id, selectedChoiceId, playerId);
 		updateChoices(element, questionData.choices, selectedChoiceId);
 	}
