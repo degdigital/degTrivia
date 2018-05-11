@@ -1,0 +1,68 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`pregameCountdown renders countdown if next game starts exactly 15 minutes from now: countdown 1`] = `
+<div>
+  
+            
+  <div
+    class="countdown-container"
+  />
+  
+        
+</div>
+`;
+
+exports[`pregameCountdown renders countdown if next game starts less than 15 minutes from now: countdown 1`] = `
+<div>
+  
+            
+  <div
+    class="countdown-container"
+  />
+  
+        
+</div>
+`;
+
+exports[`pregameCountdown renders game ready message after countdown completes: game ready message 1`] = `
+<div>
+  <p>
+    The next game will be starting momentarily.
+  </p>
+</div>
+`;
+
+exports[`pregameCountdown renders game ready message if next game start time has passed: game ready message 1`] = `
+<div>
+  <p>
+    The next game will be starting momentarily.
+  </p>
+</div>
+`;
+
+exports[`pregameCountdown renders game time message if next game starts more than 15 minutes from now: game time message 1`] = `
+<div>
+  <div>
+    
+                Next game starts at 
+                
+    <time
+      datetime="1980-09-22T05:20:00.000Z"
+    >
+      
+                    12:20am 
+                
+    </time>
+    
+            
+  </div>
+</div>
+`;
+
+exports[`pregameCountdown renders no next game message if there is not a next game: no next game message 1`] = `
+<div>
+  <p>
+    No other games are currently scheduled.
+  </p>
+</div>
+`;
