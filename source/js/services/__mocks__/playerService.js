@@ -1,7 +1,9 @@
 const playerService = jest.genMockFromModule('./playerService');
 
 const authData = {
-	uid: '123'
+	currentUser: {
+		uid: '123'
+	}
 };
 
 function getAuth() {
