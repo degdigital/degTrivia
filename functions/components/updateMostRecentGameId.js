@@ -3,7 +3,7 @@ module.exports = function(db, change, context) {
 
     if (gameId) {
         return db.ref().update({
-            mostRecentGame: newVal
+            mostRecentGame: gameId
         });;
     }
     return Promise.resolve();
