@@ -31,32 +31,20 @@ const eventsService = function() {
 
 	async function onAuthStateChanged(user, activeEventId) {
 		if (user) {
-			dbService.getDb().ref(`events/${activeEventId}/gameIsInProgress`).on('value', snapshot => onGameInProgressChange(snapshot.val()));
 			dbService.getDb().ref(`events/${activeEventId}/activeGameId`).on('value', snapshot => onGameActivationChange(snapshot.val(), activeEventId));
 		} else {
 			runSubscribedCallbacks('onPlayerUnauthenticated');
 		}
 	}
 
-	function onGameInProgressChange(gameIsInProgress) {
-		if (gameIsInProgress === false) {
-			runSubscribedCallbacks('onGameCountdown');
-		}
-	}
-
 	async function onGameActivationChange(gameId, activeEventId) {
 		if (gameId) {
-			const gameIsInProgress = await checkIfGameIsInProgress(activeEventId);
-			if (gameIsInProgress) {
-				runSubscribedCallbacks('onGameCountdown');
-			} else {
-				const gameVals = await dbService.getActiveGameData(gameId);
-				runSubscribedCallbacks('onGameStart', gameVals);
-				dbService.getDb().ref(`games/${gameId}/activeQuestionId`).on('value', snapshot => onQuestionActivationChange(snapshot.val(), gameVals, gameId));
-				dbService.getDb().ref(`games/${gameId}/showQuestionResults`).on('value', snapshot => onShowQuestionResultsChange(snapshot.val()));
-				dbService.getDb().ref(`games/${gameId}/showGameResults`).on('value', snapshot => onShowGameResultsChange(snapshot.val()));
-				dbService.getDb().ref(`games/${gameId}/showGameOver`).on('value', snapshot => onShowGameOverChange(snapshot.val()));
-			}
+			const gameVals = await dbService.getActiveGameData(gameId);
+			runSubscribedCallbacks('onGameStart', gameVals);
+			dbService.getDb().ref(`games/${gameId}/activeQuestionId`).on('value', snapshot => onQuestionActivationChange(snapshot.val(), gameVals, gameId));
+			dbService.getDb().ref(`games/${gameId}/showQuestionResults`).on('value', snapshot => onShowQuestionResultsChange(snapshot.val()));
+			dbService.getDb().ref(`games/${gameId}/showGameResults`).on('value', snapshot => onShowGameResultsChange(snapshot.val()));
+			dbService.getDb().ref(`games/${gameId}/showGameOver`).on('value', snapshot => onShowGameOverChange(snapshot.val()));
 		}
 	}
 
@@ -139,10 +127,6 @@ const eventsService = function() {
 				}
 			}
 		}
-	}
-
-	function checkIfGameIsInProgress(activeEventId) {
-		return dbService.getDb().ref(`events/${activeEventId}/gameIsInProgress`).once('value').then(snapshot => snapshot.val());
 	}
 
 	function subscribe(name = null, callback = null) {

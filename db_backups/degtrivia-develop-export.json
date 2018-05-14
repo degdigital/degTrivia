@@ -1,5 +1,5 @@
 {
-  "activeEventId" : "-LCUWuNIqOKlRmpPvZTE",
+  "activeEventId" : false,
   "admins" : {
     "0s3r7yEj7gRzNoFaW2wGfzwWyub2" : true,
     "5biIuUJKBDV6dOVvRzSoXpDyEaN2" : true,
@@ -12,18 +12,30 @@
     "sAysvz3egIMLFpQAQlulRsP1eW72" : true
   },
   "answers" : {
-    "question1" : {
-      "responses" : {
-        "67890" : {
-          "player12345" : true
-        },
-        "78901" : {
-          "player12345" : true
-        },
-        "89012" : {
-          "player1" : true
-        }
-      }
+    "-LCU_qvWZf7LxjPDwnWa" : {
+      "correctChoiceId" : "-LCU_qvWZf7LxjPDwnWd",
+      "eventId" : "-LCUWuNIqOKlRmpPvZTE",
+      "gameId" : "-LCU_qvXC1rWVovF0Cva"
+    },
+    "-LCU_qvWZf7LxjPDwnWf" : {
+      "correctChoiceId" : "-LCU_qvWZf7LxjPDwnWi",
+      "eventId" : "-LCUWuNIqOKlRmpPvZTE",
+      "gameId" : "-LCU_qvXC1rWVovF0Cva"
+    },
+    "-LCU_qvWZf7LxjPDwnWk" : {
+      "correctChoiceId" : "-LCU_qvWZf7LxjPDwnWl",
+      "eventId" : "-LCUWuNIqOKlRmpPvZTE",
+      "gameId" : "-LCU_qvXC1rWVovF0Cva"
+    },
+    "-LCU_qvWZf7LxjPDwnWp" : {
+      "correctChoiceId" : "-LCU_qvWZf7LxjPDwnWs",
+      "eventId" : "-LCUWuNIqOKlRmpPvZTE",
+      "gameId" : "-LCU_qvXC1rWVovF0Cva"
+    },
+    "-LCU_qvWZf7LxjPDwnWu" : {
+      "correctChoiceId" : "-LCU_qvXC1rWVovF0CvY",
+      "eventId" : "-LCUWuNIqOKlRmpPvZTE",
+      "gameId" : "-LCU_qvXC1rWVovF0Cva"
     }
   },
   "currentEvent" : false,
@@ -32,7 +44,6 @@
     "-LCUWuNIqOKlRmpPvZTE" : {
       "activeGameId" : false,
       "alias" : "connections2018",
-      "gameIsInProgress" : false,
       "games" : {
         "-LCU_qvXC1rWVovF0Cva" : true,
         "-LCUjYNIiCbBWln2OOuA" : true
@@ -42,7 +53,6 @@
     "-LCUbqaXAuNRGFOJBXEL" : {
       "activeGameId" : false,
       "alias" : "beer30",
-      "gameIsInProgress" : false,
       "games" : false,
       "name" : "Beer:30"
     }
@@ -60,11 +70,11 @@
               "text" : "William and Elizabeth"
             },
             "-LCU_qvWZf7LxjPDwnWc" : {
-              "chosenCount" : 0,
+              "chosenCount" : 1,
               "text" : "Joseph and Catherine"
             },
             "-LCU_qvWZf7LxjPDwnWd" : {
-              "chosenCount" : 0,
+              "chosenCount" : 1,
               "text" : "John and Mary"
             },
             "-LCU_qvWZf7LxjPDwnWe" : {
@@ -83,7 +93,7 @@
               "text" : "When it was made, in 1701"
             },
             "-LCU_qvWZf7LxjPDwnWh" : {
-              "chosenCount" : 0,
+              "chosenCount" : 1,
               "text" : "When it rang on July 4, 1776"
             },
             "-LCU_qvWZf7LxjPDwnWi" : {
@@ -169,8 +179,8 @@
           "question" : "Which of the following items was owned by the fewest U.S. homes in 1990?"
         }
       },
-      "showGameOver" : false,
-      "showGameResults" : false,
+      "showGameOver" : true,
+      "showGameResults" : true,
       "showQuestionResults" : false,
       "startTime" : 1526233800000
     },
@@ -323,8 +333,18 @@
       "score" : 1
     } ]
   },
-  "mostRecentEvent" : 12345,
-  "mostRecentGame" : 34567,
+  "mostRecentEvent" : "-LCUWuNIqOKlRmpPvZTE",
+  "mostRecentGame" : "-LCU_qvXC1rWVovF0Cva",
+  "playerResultsEvent" : {
+    "-LCUWuNIqOKlRmpPvZTE" : {
+      "5biIuUJKBDV6dOVvRzSoXpDyEaN2" : 1
+    }
+  },
+  "playerResultsGame" : {
+    "-LCU_qvXC1rWVovF0Cva" : {
+      "5biIuUJKBDV6dOVvRzSoXpDyEaN2" : 1
+    }
+  },
   "players" : {
     "4e38F7Zk6lcScxpcajk2Z5hnUkA2" : {
       "active" : true,
