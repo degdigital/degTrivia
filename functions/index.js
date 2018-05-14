@@ -6,7 +6,7 @@ const initQuestionReponses = require('./components/initQuestionResponses');
 const updateLeaderboards = require('./components/updateLeaderboards');
 const cacheLeaderboardData = require('./components/cacheLeaderboardData');
 const updateMostRecentEventId = require('./components/updateMostRecentEventId');
-const updateMostRecentGameSeriesId = require('./components/updateMostRecentGameSeriesId');
+const updateMostRecentGameId = require('./components/updateMostRecentGameId');
 
 admin.initializeApp(functions.config().firebase);
 const db = admin.database();
@@ -26,5 +26,5 @@ exports.cacheLeaderboardData = functions.database.ref('games/{gameId}/showGameOv
 exports.updateMostRecentEventId = functions.database.ref('currentEvent')
     .onUpdate((change, context) => updateMostRecentEventId(db, change, context));
 
-exports.updateMostRecentGameSeriesId = functions.database.ref('events/{eventId}/activeGameId')
-    .onUpdate((change, context) => updateMostRecentGameSeriesId(db, change, context));
+exports.updateMostRecentGameId = functions.database.ref('events/{eventId}/activeGameId')
+    .onUpdate((change, context) => updateMostRecentGameId(db, change, context));

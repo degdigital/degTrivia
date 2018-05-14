@@ -80,7 +80,6 @@ module.exports = function(event, context, db) {
         }
         const promises = [
             formatBoard('mostRecentGame', 'leaderboardGame', 'game'),
-            formatBoard('mostRecentSeries', 'leaderboardSeries', 'series'),
             formatBoard('mostRecentEvent', 'leaderboardEvent', 'event')
         ];
         return Promise.all(promises).then(results => {
