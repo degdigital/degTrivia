@@ -25,7 +25,7 @@ function unbindEventListeners(element, onClickBound) {
 function onClick(e, element, {questionData}) {
 	if(e.target.matches(`.${cssClasses.choiceButton}`)) {
 		const selectedChoiceId = e.target.dataset.id;
-		const playerId = playerService.getAuth().uid;
+		const playerId = playerService.getAuth().currentUser.uid;
 		dbService.submitAnswer(questionData.id, selectedChoiceId, playerId);
 		updateChoices(element, questionData.choices, selectedChoiceId);
 	}
@@ -41,7 +41,7 @@ function renderChoices(choices, selectedChoiceId) {
 			buttonClasses.push(cssClasses.choiceButtonSelected);
 		} 
 
-		const buttonHtml = `<button class="${buttonClasses.join(' ')}" data-id="${key}" ${disabledAttr}>${choices[key]}</button>\n`;
+		const buttonHtml = `<button class="${buttonClasses.join(' ')}" data-id="${key}" ${disabledAttr}>${choices[key].text}</button>\n`;
 
 		return html + buttonHtml;
 	}, '');
@@ -84,8 +84,7 @@ export default function({element}) {
 
 		countdownInst = countdown({
 			containerElement: element.querySelector(`.${cssClasses.countdownContainer}`),
-			includeLabels: false,
-			precision: 'second'
+			format: 'mm:ss'
 		});
 		countdownInst.start(data.questionData.duration, 'milliseconds');
 	}

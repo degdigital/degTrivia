@@ -17,9 +17,18 @@ const data = {
 		question: 'Who is the most dashing Kansas City Royal of all time?',
 		duration: 30000,
 		choices: {
-			100: 'Bob Hamelin',
-			101: 'Danny Tartabul',
-			102: 'Steve Balboni' 
+			100: {
+				text: 'Bob Hamelin',
+				chosenCount: 0
+			},
+			101: {
+				text: 'Danny Tartabul',
+				chosenCount: 0
+			},
+			102: {
+				text: 'Steve Balboni',
+				chosenCount: 0
+			}
 		}
 	}
 };
@@ -32,7 +41,7 @@ beforeEach(() => {
 
 describe('calling render()', () => {
 	test('renders out a question and choices', async () => {
-		await gameQuestion({element}).render(data);
+		gameQuestion({element}).render(data);
 		expect(element).toMatchSnapshot();
 	});
 
@@ -41,15 +50,14 @@ describe('calling render()', () => {
 
 		const expectedOptions = {
 			containerElement: expect.any(Object),
-			includeLabels: false,
-			precision: 'second'
+			format: 'mm:ss'
 		};	
 
 		const startSpy = jest.spyOn(countdownInst, 'start');
 
 		const gameQuestionInst = gameQuestion({element});
-		await gameQuestionInst.render(data);
-		await gameQuestionInst.teardown(); 
+	 	gameQuestionInst.render(data);
+		gameQuestionInst.teardown(); 
 
 		expect(countdown).toHaveBeenCalledTimes(1);
 		expect(countdown).toHaveBeenCalledWith(expectedOptions);
@@ -59,10 +67,10 @@ describe('calling render()', () => {
 });
 
 describe('selecting a choice', () => {
-	test('calls the dbService submitAnswer() method', async () => {
+	test('calls the dbService submitAnswer() method', () => {
 		const submitAnswerSpy = jest.spyOn(dbService, 'submitAnswer');
 
-		await gameQuestion({element}).render(data);
+		gameQuestion({element}).render(data);
 
 		const firstChoiceButtonEl = element.querySelector('.choice-button');
 		firstChoiceButtonEl.click();
@@ -70,11 +78,11 @@ describe('selecting a choice', () => {
 		const expectedChoiceId = Object.keys(data.questionData.choices)[0];
 
 		expect(submitAnswerSpy).toHaveBeenCalledTimes(1);
-		expect(submitAnswerSpy).toHaveBeenCalledWith(data.questionData.id, expectedChoiceId, playerService.__authData.uid);
+		expect(submitAnswerSpy).toHaveBeenCalledWith(data.questionData.id, expectedChoiceId, playerService.__authData.currentUser.uid);
 	});
 
-	test('disables the choice buttons', async () => {
-		await gameQuestion({element}).render(data);
+	test('disables the choice buttons', () => {
+		gameQuestion({element}).render(data);
 
 		const firstChoiceButtonEl = element.querySelector('.choice-button');
 		firstChoiceButtonEl.click();
@@ -87,14 +95,14 @@ describe('selecting a choice', () => {
 });
 
 describe('calling teardown()', () => {
-	test('stops the countdown', async () => {
-		const countdownInst = countdown();
+	test('stops the countdown', () => {
+		const countdownInst = countdown.__getInstance();
 
 		const stopSpy = jest.spyOn(countdownInst, 'stop');
 
 		const gameQuestionInst = gameQuestion({element});
-		await gameQuestionInst.render(data);
-		await gameQuestionInst.teardown(); 
+		gameQuestionInst.render(data);
+		gameQuestionInst.teardown(); 
 
 		expect(stopSpy).toHaveBeenCalledTimes(1);
 	});

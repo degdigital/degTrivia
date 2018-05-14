@@ -1,17 +1,17 @@
 import {replaceContent} from '../utils/domUtils.js';
 
-function renderChoiceResults(results) {
-	return results.reduce((html, result) => {
+function renderChoiceResults(results, correctChoice) {
+	return Object.keys(results).reduce((html, optId) => {
 		const resultCssClasses = ['choice-result'];
-
-		if(result.isCorrectChoice) {
+		
+		if(optId.toString() === correctChoice.toString()) {
 			resultCssClasses.push('choice-result--is-correct');
 		}
 
 		const resultHtml = `
 			<div class="${resultCssClasses.join(' ')}">
-				<span>${result.choiceText}</span>
-				<span>${result.chosenCount}</span>
+				<span>${results[optId].text}</span>
+				<span>${results[optId].chosenCount}</span>
 			</div>
 		`;
 	
@@ -27,7 +27,7 @@ function renderScreen(element, data) {
 			<h1>Question #${questionData.order + 1}</h1>			
 			<p>${questionData.question}</p>
 			<div class="choice-results">
-				${renderChoiceResults(questionData.choiceResults)}
+				${renderChoiceResults(questionData.choices, questionData.correctChoice)}
 			</div>
 		</div>`;
 
