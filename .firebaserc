@@ -1,0 +1,8 @@
+{
+  "projects": {
+    "default": "degtrivia-develop",
+    "develop": "degtrivia-develop",
+    "staging": "degtrivia-staging",
+    "production": "degtrivia-production"
+  }
+}
