@@ -6,13 +6,11 @@ const dbService = function() {
 	let db = null;
 	const nodeNames = {
 		events: 'events',
-		series: 'series',
 		games: 'games',
 		pendingPlayers: 'pendingPlayers'
 	};
 	const defaultNodesToGet = [
 		'events',
-		'series',
 		'games'
 	];
 

@@ -26,14 +26,6 @@ exports[`leaderboard should render 1`] = `
         class="button button--short tab-button"
         data-tab-index="1"
       >
-        Day
-      </button>
-      
-                
-      <button
-        class="button button--short tab-button"
-        data-tab-index="2"
-      >
         Event
       </button>
       
@@ -138,54 +130,6 @@ exports[`leaderboard should render 1`] = `
         
           </tr>
         </tbody>
-        
-            
-      </table>
-      
-        
-            
-    </div>
-    
-            
-    <div
-      class="tab-section tab-section--day is-hidden"
-    >
-      
-                
-      <div>
-        Top 10 Players
-      </div>
-      
-            
-      <table>
-        
-                
-        <thead>
-          
-                    
-          <tr>
-            
-                        
-            <th />
-            
-                        
-            <th>
-              Name
-            </th>
-            
-                        
-            <th>
-              Score
-            </th>
-            
-                    
-          </tr>
-          
-                
-        </thead>
-        
-                
-        <tbody />
         
             
       </table>

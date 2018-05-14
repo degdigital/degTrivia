@@ -11,7 +11,6 @@ function getLeaderboardData() {
 			{name: 'Aaron', score: '140'},
 			{name: 'Ryan', score: '42'}
 		],
-		series: [],
 		event: [
 			{name: 'Aaron', score: '1500001'},
 			{name: 'Aaron', score: '200'},

@@ -2,7 +2,7 @@ import {replaceContent} from '../utils/domUtils.js';
 import dbService from '../services/dbService.js';
 import tabs from './tabs.js';
 
-const leaderboardSections = ['game', 'day', 'event'];
+const leaderboardSections = ['game', 'event'];
 
 function loadLeaderboardData() {
     return dbService.getLeaderboardData();
@@ -47,14 +47,10 @@ async function render(containerElement) {
         <div class="tabs-container">
             <div class="tab-group">
                 <button class="button button--short tab-button tab-button--active" data-tab-index="0">Game</button>
-                <button class="button button--short tab-button" data-tab-index="1">Day</button>
-                <button class="button button--short tab-button" data-tab-index="2">Event</button>
+                <button class="button button--short tab-button" data-tab-index="1">Event</button>
             </div>
             <div class="tab-section tab-section--game">
                 ${renderLeaderboard(leaderboardData.game)}
-            </div>
-            <div class="tab-section tab-section--day is-hidden">
-                ${renderLeaderboard(leaderboardData.series)}
             </div>
             <div class="tab-section tab-section--event is-hidden">
                 ${renderLeaderboard(leaderboardData.event)}
