@@ -2,9 +2,10 @@ import {replaceContent} from '../utils/domUtils.js';
 
 const postgameResults = function({element}) {
 
-	function render() {
+	function render(gameScore) {
 		replaceContent(element, `
-			Postgame results
+			Your game score was ${gameScore}
+			${leaderboard().renderToElement(element)};
 		`);
 	}
 

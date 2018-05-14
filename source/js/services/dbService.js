@@ -93,6 +93,15 @@ const dbService = function() {
 		})
 	}
 
+	function getMostRecentGameId() {
+		return db.ref('mostRecentGame').once('value').then(snapshot => snapshot.val());
+	}
+
+	async function getPlayerScore(playerId) {
+		const recentGameId = await getMostRecentGameId();
+		return db.ref(`playerResultsGame/${recentGameId}/${playerId}`).once('value').then(snapshot => snapshot.val());
+	}
+
 	return {
 		init,
 		getDb,
@@ -102,7 +111,8 @@ const dbService = function() {
 		getNextGameTime,
 		submitAnswer,
 		getLeaderboardData,
-		getActiveGameData
+		getActiveGameData,
+		getPlayerScore
 	};
 
 };

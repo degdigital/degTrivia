@@ -100,7 +100,8 @@ const eventsService = function() {
 
 	function onShowGameResultsChange(shouldShowGameResults) {
 		if (shouldShowGameResults) {
-			runSubscribedCallbacks('onPostgameResults');
+			const gameScore = await dbService.getPlayerScore(playerService.getAuth().currentUser.uid);
+			runSubscribedCallbacks('onPostgameResults', gameScore);
 		}
 	}
 
