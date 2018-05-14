@@ -1,5 +1,7 @@
 const dbService = jest.genMockFromModule('./dbService');
 
+let nextGameTime = null;
+
 function submitAnswer() {
 	return Promise.resolve(true);
 }
@@ -19,7 +21,17 @@ function getLeaderboardData() {
 	})
 }
 
+function getNextGameTime() {
+	return nextGameTime;
+}
+
+function __setNextGameTime(newNextGameTime) {
+	nextGameTime = newNextGameTime;
+}
+
 dbService.submitAnswer = submitAnswer;
 dbService.getLeaderboardData = getLeaderboardData;
+dbService.getNextGameTime = getNextGameTime;
+dbService.__setNextGameTime = __setNextGameTime;
 
 export default dbService;
