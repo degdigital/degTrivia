@@ -84,8 +84,7 @@ export default function({element}) {
 
 		countdownInst = countdown({
 			containerElement: element.querySelector(`.${cssClasses.countdownContainer}`),
-			includeLabels: false,
-			precision: 'second'
+			format: 'mm:ss'
 		});
 		countdownInst.start(data.questionData.duration, 'milliseconds');
 	}

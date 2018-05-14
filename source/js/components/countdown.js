@@ -1,4 +1,9 @@
-const units = ['second', 'minute', 'hour', 'day'];
+const unitSeparator = ':';
+const millisecondsInDay = 86400000;
+const millisecondsInHour = 3600000;
+const millisecondsInMinute = 60000;
+const millisecondsInSecond = 1000
+const defaultInterval = 1000;
 
 function convertFormat(settings, number, format = 'milliseconds') {
 	if (number && settings.containerElement) {
@@ -6,90 +11,117 @@ function convertFormat(settings, number, format = 'milliseconds') {
 			case 'milliseconds':
 				return timer(number, settings);
 			case 'seconds':
-				return timer(number * 1000, settings);
+				return timer(number * millisecondsInSecond, settings);
 			case 'minutes':
-				return timer(number * 60 * 1000, settings);
-				case 'hours':
-				return timer(number * 60 * 60 * 1000, settings);
+				return timer(number * millisecondsInMinute, settings);
+			case 'hours':
+				return timer(number * millisecondsInHour, settings);
 			case 'days':
-				return timer(number * 60 * 60 * 24 * 1000, settings);             
+				return timer(number * millisecondsInDay, settings);             
 		}
 	}
 }
 
-function getTimeLeft(secondsLeft) {
-	return {
-		day: Math.floor(secondsLeft / 86400),
-		hour: Math.floor((secondsLeft % 86400) / 3600),
-		minute: Math.floor((secondsLeft % 86400) % 3600 / 60),
-		second: secondsLeft % 60 < 10 ? `0${secondsLeft % 60}` : secondsLeft % 60
-	};
-}
+function timer(milliseconds, {containerElement, format, onComplete}) {
+	const endDate = Date.now() + milliseconds;
 
-function timer(milliseconds, {containerElement, includeLabels, precision}) {
-	const now = Date.now();
-	const then = now + milliseconds;
-	
-	const currentTime = Math.round((then - Date.now()) / 1000);
-	displayTimeLeft(getTimeLeft(currentTime), containerElement, includeLabels, precision);
+	const duration = calculateDuration(endDate);
+	displayDuration(duration, format, containerElement);
 
-	const countdown = setInterval(() => {
-		const secondsLeft = Math.round((then - Date.now()) / 1000);
+	if(duration <= 0) {
+		callOnComplete(onComplete);
+		return null;
+	}
 
-		if(secondsLeft < 0) {
-			stopTimer(countdown);
-			return;
+	const interval = Math.min(defaultInterval, duration);
+
+	const intervalId = setInterval(() => {
+		const duration = calculateDuration(endDate);
+		displayDuration(duration, format, containerElement);
+		if(duration <= 0) {
+			stopTimer(intervalId);
+			callOnComplete(onComplete);
 		};
+	}, interval);
 
-		displayTimeLeft(getTimeLeft(secondsLeft), containerElement, includeLabels, precision);
-
-	},1000);
-
-	return countdown;
+	return intervalId;
 }
 
-function renderUnit(num, label, includeLabels) {
-	if (includeLabels) {
-		return `
-			<span class="countdown__time">${num}</span>
-			<span class="countdown__unit">${label}${num === 1 || num === '01' ? '' : 's'}</span>
-		`;
+function calculateDuration(endDate) {
+	return Math.max(endDate - Date.now(), 0);
+}
+
+function callOnComplete(onComplete) {
+	if(onComplete) {
+		onComplete();
 	}
-	return `<span class="countdown__time">${num}</span>`;
-	
 }
-	
-function displayTimeLeft(timeLeft, containerElement, includeLabels, precision) {
-	const timeUnits = [];
-	const separator = includeLabels ? '' : ':';
 
-	for (let i = 0; i <= units.indexOf(precision); i++) {
-		const unit = units[i];
-		timeUnits.push(renderUnit(timeLeft[unit], unit, includeLabels));
+function getDays(duration) {
+	return Math.floor(duration / millisecondsInDay);
+}
+
+function getHours(duration) {
+	return Math.floor(duration % millisecondsInDay / millisecondsInHour);
+}
+
+function getMinutes(duration) {
+	return Math.floor(duration % millisecondsInDay % millisecondsInHour / millisecondsInMinute);
+}
+
+function getSeconds(duration) {
+	return Math.floor(duration % millisecondsInDay % millisecondsInHour % millisecondsInMinute / millisecondsInSecond);
+}
+
+function getDurationPart(duration, unit) {
+	switch(unit) {
+		case 'dd':
+			return getDays(duration);
+		case 'hh':
+			return getHours(duration);
+		case 'mm':
+			return getMinutes(duration);
+		case 'ss':
+		default:
+			return getSeconds(duration);
 	}
-	const markup = timeUnits.reverse();
-	containerElement.innerHTML = markup.join(separator);
 }
 
-function stopTimer(countdown) {
-	clearInterval(countdown);
+function getDurationParts(duration, format) {
+	const formatParts = format.split(':');
+	return formatParts.map(formatPart => padNumber(getDurationPart(duration, formatPart)));	
+}
+	
+function displayDuration(duration, format, containerElement) {
+	const durationParts = getDurationParts(duration, format);
+
+	const durationMarkup = durationParts.join(unitSeparator);
+	containerElement.innerHTML = `<span class="countdown__time">${durationMarkup}</span>`;
+}
+
+function padNumber(num) {
+	return num < 10 ? `0${num.toString()}` : num.toString();
+}
+
+function stopTimer(intervalId) {
+	clearInterval(intervalId);
 }
 
 export default function(opts) {
 	const defaults = {
 		containerElement: null,
-		includeLabels: true,
-		precision: 'day'
+		format: 'dd:hh:mm:ss',
+		onComplete: null
 	}
 	const settings = Object.assign({}, defaults, opts);
-	let countdown;
+	let intervalId;
 	
 	function start(num, format) {
-		countdown = convertFormat(settings, num, format)
+		intervalId = convertFormat(settings, num, format)
 	}
 
 	return {
 		start,
-		stop: () => stopTimer(countdown)
+		stop: () => stopTimer(intervalId)
 	}
 };
