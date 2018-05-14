@@ -11,6 +11,7 @@ import questionManager from '../plugins/questionManager.js'
 const addGame = function(wrapperEl, initialData) {
 
 	const gamesRef = dbService.getDb().ref('games');
+	const eventsRef = dbService.getDb().ref('events');
 	const formClass = 'addgame-form';
 	const questionsWrapperClass = 'questions-wrapper';
 	let questionManagerInst;
@@ -41,15 +42,19 @@ const addGame = function(wrapperEl, initialData) {
 
 	async function saveFormData(gameVals, questionsVals) {
 		const newKey = gamesRef.push().key;
+		const eventId = parseInt(gameVals.event);
 		gamesRef.child(newKey).update({
 			activeQuestionId: false,
-			event: parseInt(gameVals.event),
+			event: eventId,
 			name: gameVals.name,
 			questions: questionsVals,
 			showGameOver: false,
 			showGameResults: false,
 			showQuestionResults: false,
 			startTime: new Date(gameVals.startTime).getTime()
+		});
+		eventsRef.child(`${eventId}/games`).update({
+			[newKey]: true
 		});
 	}
 
