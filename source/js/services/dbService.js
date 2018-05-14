@@ -52,6 +52,7 @@ const dbService = function() {
 		if (!games) {
 			return Promise.resolve(null);
 		}
+		// only include dates that are after the current date
 		const nextGameTime = new Date(Object.keys(games).map(gameId => games[gameId].startTime).sort()[0]);
 		return Promise.resolve(nextGameTime);
 	}
