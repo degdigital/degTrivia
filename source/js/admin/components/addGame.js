@@ -42,7 +42,7 @@ const addGame = function(wrapperEl, initialData) {
 
 	async function saveFormData(gameVals, questionsVals) {
 		const newKey = gamesRef.push().key;
-		const eventId = parseInt(gameVals.event);
+		const eventId = gameVals.event;
 		gamesRef.child(newKey).update({
 			activeQuestionId: false,
 			event: eventId,
