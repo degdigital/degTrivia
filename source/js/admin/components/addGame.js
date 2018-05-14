@@ -10,41 +10,46 @@ import questionManager from '../plugins/questionManager.js'
 
 const addGame = function(wrapperEl, initialData) {
 
-	let questionManagerInst;
 	const gamesRef = dbService.getDb().ref('games');
-
 	const formClass = 'addgame-form';
 	const questionsWrapperClass = 'questions-wrapper';
+	let questionManagerInst;
 	let formEl;
 
 	function init() {
 		bindEvents();
 		render(initialData);
-		questionManagerInst = questionManager(wrapperEl);
+		questionManagerInst = questionManager(wrapperEl, {
+			onSaveCallback: onQuestionSave
+		});
 	}
 
 	function bindEvents() {
 		wrapperEl.addEventListener('submit', onSubmit);
 	}
 
-	function onSubmit(e) {
-		e.preventDefault();
-		const formVals = formMapper.getValues(formEl);
-		saveFormData(formVals);
+	function onQuestionSave(questionsData) {
+		// console.log(questionsData);
 	}
 
-	async function saveFormData(data) {
+	async function onSubmit(e) {
+		e.preventDefault();
+		const gameVals = formMapper.getValues(formEl);
+		const questionsVals = getQuestionsVals();
+		saveFormData(gameVals, questionsVals);
+	}
+
+	async function saveFormData(gameVals, questionsVals) {
 		const newKey = gamesRef.push().key;
 		gamesRef.child(newKey).update({
 			activeQuestionId: false,
-			event: data.events,
-			name: data.name,
-			questions: false,
-			series: data.series,
+			event: parseInt(gameVals.event),
+			name: gameVals.name,
+			questions: questionsVals,
 			showGameOver: false,
 			showGameResults: false,
 			showQuestionResults: false,
-			startTime: new Date(data.startTime).getTime()
+			startTime: new Date(gameVals.startTime).getTime()
 		});
 	}
 
@@ -67,7 +72,6 @@ const addGame = function(wrapperEl, initialData) {
 						<input id="name" name="name" type="text" required>
 					</div>
 					${renderDropdownSection('Event', data.events)}
-					${renderDropdownSection('Series', data.series)}
 					<div class="field">
 						Questions
 						<div class="${questionsWrapperClass}"></div>
@@ -76,7 +80,7 @@ const addGame = function(wrapperEl, initialData) {
 						<label for="startTime">Start Time</label><br>
 						<input id="startTime" name="startTime" type="datetime-local" required>
 					</div>
-					<button type="submit">Submit</button>
+					<button type="submit">Add Game</button>
 				</fieldset>
 			</form>
 		`);
@@ -100,6 +104,44 @@ const addGame = function(wrapperEl, initialData) {
 				</select>
 			</div>
 		`;
+	}
+
+	function getQuestionsVals() {
+		const rawQuestionsArr = questionManagerInst.getQuestionVals();
+		if (rawQuestionsArr.length === 0) {
+			return false;
+		}
+		let formattedQuestionsObj = {};
+		rawQuestionsArr.forEach((item, index) => {
+			const key = getKey();
+			const choicesVals = getChoicesVals(item.choices);
+			const correctChoice = Object.keys(choicesVals)[parseInt(item.correctChoice)];
+			formattedQuestionsObj[key] = {
+				question: item.question,
+				choices: choicesVals,
+				order: index,
+				correctChoice: correctChoice
+			};
+		});
+		return formattedQuestionsObj;
+
+	}
+
+	function getChoicesVals(choicesArr) {
+		let formattedChoicesObj = {};
+		choicesArr.forEach(choice => {
+			const key = getKey();
+			formattedChoicesObj[key] = {
+				chosenCount: 0,
+				text: choice
+			};
+		});
+		return formattedChoicesObj;
+	}
+
+
+	function getKey() {
+		return gamesRef.push().key;
 	}
 
 	init();

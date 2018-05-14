@@ -28,13 +28,13 @@ const activeEvent = function(wrapperEl, options ={}) {
 
 	function updateDb(val) {
 		db.ref().update({
-			currentEvent: val
+			activeEventId: val
 		})
 			.then(() => settings.onActiveEventChangeCallback(val));
 	}
 
 	async function render(events) {
-		const activeEventId = await db.ref('currentEvent').once('value').then(snapshot => snapshot.val());
+		const activeEventId = await db.ref('activeEventId').once('value').then(snapshot => snapshot.val());
 		settings.onActiveEventChangeCallback(activeEventId);
 		replaceContent(wrapperEl, `
 			<label for="activeEvent">Active Event:</label>

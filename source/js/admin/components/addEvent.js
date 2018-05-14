@@ -39,8 +39,7 @@ const addEvent = function(wrapperEl, initialData) {
 				alias: data.alias,
 				gameIsInProgress: false,
 				games: formatArrayToObject(data.games),
-				name: data.name,
-				series: formatArrayToObject(data.series)
+				name: data.name
 			});
 		}
 	}
@@ -55,10 +54,9 @@ const addEvent = function(wrapperEl, initialData) {
 						<input id="name" name="name" type="text" required>
 					</div>
 					<div class="field">
-						<label for="alias">Alias</label><br>
+						<label for="alias">Alias (this will be the password players enter during signup)</label><br>
 						<input id="alias" name="alias" type="text" required>
 					</div>
-					${renderCheckboxSection('Series', data.series)}
 					${renderCheckboxSection('Games', data.games)}
 					<button type="submit">Submit</button>
 				</fieldset>

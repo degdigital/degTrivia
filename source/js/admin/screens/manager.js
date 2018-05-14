@@ -17,8 +17,6 @@ import activeQuestion from '../components/activeQuestion.js';
 import endGameInterface from '../components/endGameInterface.js';
 import addEvent from '../components/addEvent.js';
 import viewEvents from '../components/viewEvents.js';
-import addSeries from '../components/addSeries.js';
-import viewSeries from '../components/viewSeries.js';
 import addGame from '../components/addGame.js';
 import viewGames from '../components/viewGames.js';
 import viewPlayers from '../components/viewPlayers.js';
@@ -34,8 +32,6 @@ const manager = function(el) {
 	const endGameWrapperClass = 'endgame-wrapper';
 	const addEventWrapperClass = 'addevent-wrapper';
 	const viewEventsWrapperClass = 'viewevents-wrapper';
-	const addSeriesWrapperClass = 'addseries-wrapper';
-	const viewSeriesWrapperClass = 'viewseries-wrapper';
 	const addGameWrapperClass = 'addgame-wrapper';
 	const viewGamesWrapperClass = 'viewgames-wrapper';
 	const viewPlayersWrapperClass = 'viewplayers-wrapper';
@@ -49,7 +45,6 @@ const manager = function(el) {
 			<ul class="tab-triggers">
 				<li><button class="tab-trigger" data-target="gameplay">Manage Gameplay</button></li>
 				<li><button class="tab-trigger" data-target="events">Events</button></li>
-				<li><button class="tab-trigger" data-target="series">Series</button></li>
 				<li><button class="tab-trigger" data-target="games">Games</button></li>
 				<li><button class="tab-trigger" data-target="players">Players</button></li>
 				<li><button class="tab-trigger" data-target="system">System</button></li>
@@ -63,10 +58,6 @@ const manager = function(el) {
 			<div class="tab-section" data-section="events">
 				<div class="${addEventWrapperClass}"></div> 
 				<div class="${viewEventsWrapperClass}"></div>
-			</div>
-			<div class="tab-section" data-section="series">
-				<div class="${addSeriesWrapperClass}"></div>
-				<div class="${viewSeriesWrapperClass}"></div>
 			</div>
 			<div class="tab-section" data-section="games">
 				<div class="${addGameWrapperClass}"></div> 
@@ -101,8 +92,6 @@ const manager = function(el) {
 		activeQuestionInst = activeQuestion(el.querySelector(`.${activeQuestionWrapperClass}`));
 		addEvent(el.querySelector(`.${addEventWrapperClass}`), initialData);
 		viewEvents(el.querySelector(`.${viewEventsWrapperClass}`));
-		addSeries(el.querySelector(`.${addSeriesWrapperClass}`), initialData);
-		viewSeries(el.querySelector(`.${viewSeriesWrapperClass}`));
 		addGame(el.querySelector(`.${addGameWrapperClass}`), initialData);
 		viewGames(el.querySelector(`.${viewGamesWrapperClass}`));
 		viewPlayers(el.querySelector(`.${viewPlayersWrapperClass}`));

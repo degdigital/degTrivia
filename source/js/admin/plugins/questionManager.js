@@ -1,7 +1,8 @@
 // Utils
-import {replaceContent} from '../../utils/domUtils';
+import {emptyElements, replaceContent, removeElements} from '../../utils/domUtils';
+import formMapper from '../../utils/formMapper';
 
-const questionManager = function(wrapperEl) {
+const questionManager = function(wrapperEl, options = {}) {
 
 	const formWrapperClass = 'form-wrapper';
 	const formClass = 'question-form';
@@ -10,12 +11,24 @@ const questionManager = function(wrapperEl) {
 	const formcancelTriggerClass = 'form-cancel-trigger';
 	const hiddenClass = 'is-hidden';
 	const addQuestionTriggerClass = 'add-question-trigger';
+	const choicesClass = 'choices';
+	const choiceClass = 'choice';
+	const addChoiceClass = 'add-choice';
+	const removeChoiceClass = 'remove-choice';
+	const correctChoiceInputClass = 'correct-choice-input';
 	const noQuestionsText = 'No questions found.';
-	const questions = [];
+	const questionsVals = [];
+	const defaults = {
+		onSaveCallback: null
+	};
+	let settings;
 	let questionsWrapperEl;
 	let formWrapperEl;
+	let choicesEl;
+	let choicesCount = 0;
 
 	function init() {
+		settings = Object.assign({}, defaults, options);
 		questionsWrapperEl = wrapperEl.querySelector(`.${questionsWrapperClass}`);
 		renderForm();
 		renderSummary();
@@ -30,8 +43,14 @@ const questionManager = function(wrapperEl) {
 
 	function onFormClick(e) {
 		const el = e.target;
-		if (el.matches(`.${formcancelTriggerClass}`)) {
+		if (el.matches(`.${formcancelTriggerClass}`) && confirm('Are you sure?')) {
 			hideAddQuestionForm();
+		}
+		if (el.matches(`.${addChoiceClass}`)) {
+			addChoice();
+		}
+		if (el.matches(`.${removeChoiceClass}`)) {
+			removeChoice();
 		}
 	}
 
@@ -39,12 +58,20 @@ const questionManager = function(wrapperEl) {
 		const el = e.target;
 		if (el.matches(`.${formClass}`)) {
 			e.preventDefault();
+			const questionVals = formatQuestionVals();
+			questionsVals.push(questionVals);
+			renderSummary(questionsVals);
+			hideAddQuestionForm();
+			if (settings.onSaveCallback !== null) {
+				settings.onSaveCallback(questionVals);
+			}
 		}
 	}
 
 	function onWrapperClick(e) {
 		const el = e.target;
 		if (el.matches(`.${addQuestionTriggerClass}`)) {
+			addChoice(true);
 			showAddQuestionForm();
 		}
 	}
@@ -53,8 +80,13 @@ const questionManager = function(wrapperEl) {
 		let summation;
 		if (!questions) {
 			summation = `<p>${noQuestionsText}</p>`
+		} else {
+			summation = questions.reduce((output, item) => `
+				${output}
+				${item.question}<br>
+			`, '');
 		}
-		replaceContent(wrapperEl, `
+		replaceContent(questionsWrapperEl, `
 			${summation}
 			<button class="${addQuestionTriggerClass}" type="button">Add a Question</button>
 		`)
@@ -66,28 +98,92 @@ const questionManager = function(wrapperEl) {
 				<form class="${formClass}">
 					<legend>Add a Question</legend>
 					<div class="field">
-						<label for="question">Question text</question>
-						<input id="question" name="question" type="text">
+						<label for="question">Question text</label><br>
+						<input id="question" name="question" type="text" required>
 					</div>
-					<button class="${formSubmitTriggerClass}" type="submit">Save</button>
-					<button class="${formcancelTriggerClass}" type="cancel">Cancel</button>
+					Choices / Correct Answer
+					<button class="${addChoiceClass}" type="button">Add</button>
+					<button class="${removeChoiceClass}" type="button">Remove</button><br>
+					<div class="${choicesClass}"></div>
+					<button class="${formSubmitTriggerClass}" type="submit">Add Question</button>
+					<button class="${formcancelTriggerClass}" type="button">Cancel</button>
 				</form>
 			</div>
 		`);
 		formWrapperEl = document.querySelector(`.${formWrapperClass}`);
+		choicesEl = formWrapperEl.querySelector(`.${choicesClass}`);
+	}
+
+	function addChoice(clearChoices = false) {
+		if (clearChoices === true) {
+			choicesCount = 0;
+			emptyElements(choicesEl);
+		}
+		choicesEl.insertAdjacentHTML('beforeend', `
+			<div class="${choiceClass} choice-${choicesCount}">
+				<div class="field">
+					<label class="is-hidden" for="choice-${choicesCount}">Choice ${choicesCount}</label>
+					<input id="choice-input-${choicesCount}" name="choice-input-${choicesCount}" type="text" required>
+				</div>
+				<div class="field">
+					<label class="is-hidden" for="correct-input-${choicesCount}">Correct Choice 1</label>
+					<input class="${correctChoiceInputClass}" id="correct-input-${choicesCount}" name="correctChoice" type="radio" value="${choicesCount}"${clearChoices === true ? ' checked' : ''}>
+				</div>
+			</div>
+		`);
+		choicesCount++;
+	}
+
+	function removeChoice() {
+		if (choicesCount > 1) {
+			const lastIndex = choicesCount - 1;
+			const lastChoiceEl = choicesEl.querySelector(`.choice-${lastIndex}`);
+			if (lastChoiceEl.querySelector(`#correct-input-${lastIndex}`).checked === true) {
+				choicesEl.querySelector(`.${correctChoiceInputClass}`).checked = true;
+			}
+			removeElements(lastChoiceEl);
+			choicesCount--;
+		}
 	}
 
 	function showAddQuestionForm() {
 		wrapperEl.classList.add(hiddenClass);
+		Array.from(formWrapperEl.querySelectorAll('input')).forEach(el => el.removeAttribute('disabled'));
 		formWrapperEl.classList.remove(hiddenClass);
 	}
 
 	function hideAddQuestionForm() {
+		Array.from(formWrapperEl.querySelectorAll('input')).forEach(el => {
+			el.value = '';
+			el.setAttribute('disabled', true)
+		});
 		wrapperEl.classList.remove(hiddenClass);
 		formWrapperEl.classList.add(hiddenClass);
 	}
 
+	function formatQuestionVals() {
+		const formVals = formMapper.getValues(formWrapperEl);
+		const formattedVals = Object.keys(formVals).reduce((output, key) => {
+			if (key.includes('choice-input-')) {
+				output.choices = output.choices || [];
+				output.choices.push(formVals[key]);
+			} else {
+				output[key] = formVals[key];
+			}
+			return output;
+		}, {});
+		return formattedVals;
+	}
+
+	function getQuestionVals() {
+		return questionsVals;
+	}
+
 	init();
+
+	return {
+		getQuestionVals
+	};
 
 };
 

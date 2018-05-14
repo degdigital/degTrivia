@@ -20,12 +20,12 @@ const playerService = function() {
 			if (!playerVals.email || playerVals.email.length === 0) {
 				reject('You must provide an email address.');
 			}
-			const currentEventKey = await dbService.getCurrentEventId();
-			if (!currentEventKey) {
+			const activeEventId = await dbService.getActiveEventId();
+			if (!activeEventId) {
 				reject('The event code is invalid.')
 			}
 			auth.signInAnonymously()
-				.then(user => createPlayer(playerVals, currentEventKey, user.uid))
+				.then(user => createPlayer(playerVals, activeEventId, user.uid))
 				.then(user => resolve('User created!'))
 				.catch(error => {
 					console.log(error);
@@ -47,7 +47,6 @@ const playerService = function() {
 
 	function authorize(eventAlias) {
 		return new Promise(async(resolve, reject) => {
-			const currentEventId = await dbService.getCurrentEventId();
 			auth.onAuthStateChanged(async(user) => {
 				if (user) {
 					console.log(user);
