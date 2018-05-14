@@ -99,7 +99,7 @@ const questionManager = function(wrapperEl, options = {}) {
 					<legend>Add a Question</legend>
 					<div class="field">
 						<label for="question">Question text</label><br>
-						<input id="question" name="question" type="text" required>
+						<input class="input--wide" id="question" name="question" type="text" required>
 					</div>
 					Choices / Correct Answer
 					<button class="${addChoiceClass}" type="button">Add</button>
@@ -123,7 +123,7 @@ const questionManager = function(wrapperEl, options = {}) {
 			<div class="${choiceClass} choice-${choicesCount}">
 				<div class="field">
 					<label class="is-hidden" for="choice-${choicesCount}">Choice ${choicesCount}</label>
-					<input id="choice-input-${choicesCount}" name="choice-input-${choicesCount}" type="text" required>
+					<input class="input--medium" id="choice-input-${choicesCount}" name="choice-input-${choicesCount}" type="text" required>
 				</div>
 				<div class="field">
 					<label class="is-hidden" for="correct-input-${choicesCount}">Correct Choice 1</label>

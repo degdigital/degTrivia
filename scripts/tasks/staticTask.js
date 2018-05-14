@@ -3,8 +3,12 @@ const fse = require('fs-extra');
 
 const filesToProcess = ['images', 'fonts'];
 
-function copy(srcFilepath, destFilepath) {
-	return fse.copy(srcFilepath, destFilepath)
+function copy(srcFilepath, destFilepaths) {
+	const promises = destFilepaths.map(destFilepath => 
+		fse.copy(srcFilepath, destFilepath)
+	);
+
+	return Promise.all(promises)
 		.then(() => true)
 		.catch(e => {
 			console.error(`Error copying file or directory "${srcFilepath}":`, e);
@@ -17,8 +21,12 @@ function run() {
 
 	const promises = filesToProcess.map(file => {
 		const srcFilepath = path.resolve('source', file);
-		const destFilepath = path.resolve('public', file);
-		return copy(srcFilepath, destFilepath);
+		const destFilepaths = [
+			path.resolve('public', file),
+			path.resolve('patternlab', file)
+		];
+
+		return copy(srcFilepath, destFilepaths);
 	});
 
 	return Promise.all(promises)

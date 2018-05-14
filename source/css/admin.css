@@ -64,6 +64,14 @@ caption {
 	margin-bottom: 1rem;
 }
 
+.input--wide {
+	width: 18rem;
+}
+
+.input--medium {
+	width: 10rem;
+}
+
 table {
 	border-left: 0.0625rem solid #ccc;
 	border-top: 0.0625rem solid #ccc;

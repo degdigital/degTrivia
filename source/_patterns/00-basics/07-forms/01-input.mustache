@@ -1,0 +1,13 @@
+{{#input}}
+	<input 
+		class="input js-form-input {{#isInvalid}}input--invalid{{/isInvalid}} {{class}} {{styleModifier}}" 
+		id="{{# id }}{{ id }}{{/ id }}{{^ id }}{{ name }}{{/ id }}" 
+		name="{{# name }}{{name}}{{/ name }}{{^ name }}{{id}}{{/ name }}" 
+		type="{{type}}" 
+		value="{{value}}" 
+		placeholder="{{placeholder}}" 
+		{{#isRequired}}required{{/isRequired}} 
+		{{#isDisabled}}disabled{{/isDisabled}}
+		{{#attributes}}{{name}}="{{value}}"{{/attributes}} />
+{{/input}}
+

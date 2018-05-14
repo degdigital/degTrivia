@@ -42,7 +42,7 @@ const addGame = function(wrapperEl, initialData) {
 
 	async function saveFormData(gameVals, questionsVals) {
 		const newKey = gamesRef.push().key;
-		const eventId = parseInt(gameVals.event);
+		const eventId = gameVals.event;
 		gamesRef.child(newKey).update({
 			activeQuestionId: false,
 			event: eventId,
@@ -74,7 +74,7 @@ const addGame = function(wrapperEl, initialData) {
 					<legend>Add a Game</legend>
 					<div class="field">
 						<label for="name">Name</label><br>
-						<input id="name" name="name" type="text" required>
+						<input class="input--wide" id="name" name="name" type="text" required>
 					</div>
 					${renderDropdownSection('Event', data.events)}
 					<div class="field">

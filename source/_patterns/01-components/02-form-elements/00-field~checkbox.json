@@ -1,0 +1,10 @@
+{
+	"field": {
+		"isInputFirst": true,
+		"isInline": true,
+		"input": {
+			"type": "checkbox",
+			"class": "input--checkbox"
+		}
+	}
+}
