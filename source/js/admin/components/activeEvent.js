@@ -21,7 +21,7 @@ const activeEvent = function(wrapperEl, options ={}) {
 	function onWrapperChange(e) {
 		const el = e.target;
 		if (el.classList.contains(triggerClass)) {
-			const val = el.value === 'no-value' ? false : parseInt(el.value);
+			const val = el.value === 'no-value' ? false : el.value;
 			updateDb(val);
 		}
 	}
@@ -48,7 +48,7 @@ const activeEvent = function(wrapperEl, options ={}) {
 		return Object.keys(events).reduce((output, id) => {
 			return `
 				${output}
-				<option value="${id}" ${activeEventId === parseInt(id) ? 'selected' : ''}>${events[id].name}</option>
+				<option value="${id}" ${activeEventId === id ? 'selected' : ''}>${events[id].name}</option>
 			`;
 		}, '<option value="no-value">No active event</option>');
 	}
