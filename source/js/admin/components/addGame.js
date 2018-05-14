@@ -19,7 +19,6 @@ const addGame = function(wrapperEl, initialData) {
 
 	function init() {
 		bindEvents();
-		console.log(initialData);
 		render(initialData);
 		questionManagerInst = questionManager(wrapperEl, {
 			onSaveCallback: onQuestionSave
