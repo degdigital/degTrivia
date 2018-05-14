@@ -35,3 +35,9 @@ Use command `npm run serve` to run a local firebase server
 Use command `npm run serve-patternlab` to run a local Pattern Lab server
 
 User command `npm start` to run build tasks, fire up watcher and start the local firebase and Pattern Lab servers
+
+Use command `npm run deploy-develop` to deploy to the develop firebase environment
+
+Use command `npm run deploy-staging` to deploy to the staging firebase environment
+
+Use command `npm run deploy-production` to deploy to the production firebase environment
