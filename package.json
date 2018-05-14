@@ -50,6 +50,7 @@
     "cssnano": "^3.10.0",
     "fs-extra": "^5.0.0",
     "jest": "^22.4.3",
+    "mockdate": "^2.0.2",
     "postcss": "^6.0.21",
     "postcss-color-function": "^4.0.1",
     "postcss-easy-import": "^3.0.0",
@@ -70,6 +71,7 @@
   },
   "dependencies": {
     "babel-polyfill": "^6.26.0",
+    "date-fns": "^2.0.0-alpha.7",
     "firebase": "^4.13.1"
   }
 }

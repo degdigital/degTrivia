@@ -50,8 +50,7 @@ describe('calling render()', () => {
 
 		const expectedOptions = {
 			containerElement: expect.any(Object),
-			includeLabels: false,
-			precision: 'second'
+			format: 'mm:ss'
 		};	
 
 		const startSpy = jest.spyOn(countdownInst, 'start');
@@ -97,7 +96,7 @@ describe('selecting a choice', () => {
 
 describe('calling teardown()', () => {
 	test('stops the countdown', () => {
-		const countdownInst = countdown();
+		const countdownInst = countdown.__getInstance();
 
 		const stopSpy = jest.spyOn(countdownInst, 'stop');
 

@@ -1,34 +1,31 @@
 import countdown from './countdown.js';
+import MockDate from 'mockdate';
 
 describe('countdown', () => {
     let countdownInst;
+    let onComplete;
+    const now = 338446800000;
 
     beforeEach(() => {
         jest.useFakeTimers();
 
+        MockDate.set(now);
+
         document.body.innerHTML = '<div class="countdown-container"></div>';
         
+        onComplete = jest.fn();
+
         countdownInst = countdown({
             containerElement: document.querySelector('.countdown-container'),
-            includeLabels: true,
-            precision: 'day'
+            onComplete
         });
     })
 
     afterEach(() => {
+        jest.clearAllTimers();
         setInterval.mockReset();
+        clearInterval.mockReset();
     })
-
-    expect.extend({
-        toBeEquivalent(received, argument) {
-            const didPass = received.replace(/\s/g, '') === argument.replace(/\s/g, '');
-            return {
-                message: () => `expected ${received} to equal ${argument}`,
-                pass: didPass
-            }
-        }
-    })
-
 
     it('should not run if container el is not found', () => {
         document.body.innerHTML = '';
@@ -42,24 +39,36 @@ describe('countdown', () => {
         expect(setInterval).toHaveBeenCalledTimes(0);
     });
 
-    it('should countdown each second', () => {
+    it('should render countdown', () => {
         countdownInst.start(1, 'seconds');
-        expect(setInterval).toHaveBeenCalledTimes(1);
-        jest.runAllTimers();
-        expect(clearInterval).toHaveBeenCalledTimes(1);
-    });
-
-    it('should initialize coundown', () => {
-        countdownInst.start(1, 'seconds');
-        expect(setInterval).toHaveBeenCalledTimes(1);
+        
+        MockDate.set(now + 1000);
         jest.advanceTimersByTime(1000);
         expect(document.body.innerHTML).toMatchSnapshot();
     });
 
-    it('should stop interval if called', () => {
+    it('should start interval', () => {
         countdownInst.start(1, 'seconds');
         expect(setInterval).toHaveBeenCalledTimes(1);
+    });
+
+    it('should stop interval when completed', () => {
+        countdownInst.start(1, 'seconds');
+        MockDate.set(now + 1000);
+        jest.advanceTimersByTime(1000);
+        expect(clearInterval).toHaveBeenCalledTimes(1);
+    });
+
+    it('should call onComplete callback when completed', () => {
+        countdownInst.start(1, 'seconds');
+        MockDate.set(now + 1000);
+        jest.advanceTimersByTime(1000);
+        expect(onComplete).toHaveBeenCalledTimes(1);
+    });
+
+    it('should stop interval if called', () => {
+        countdownInst.start(1, 'seconds');
         countdownInst.stop();
         expect(clearInterval).toHaveBeenCalledTimes(1);
-    })
+    });
 })
