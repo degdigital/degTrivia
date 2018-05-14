@@ -1,0 +1,18 @@
+{{# field }}
+	<div class="field {{class}} {{styleModifier}}">
+		{{# isInputFirst }}
+			{{> basics-input }}
+			{{> basics-label }}			
+		{{/ isInputFirst }}
+		{{^ isInputFirst }}
+			{{> basics-label }}
+			{{> basics-input }}
+		{{/ isInputFirst }}
+		{{# inputDescription }}
+			<div class="field__description">{{inputDescription}}</div>
+		{{/ inputDescription }}	
+		{{# isInvalid }}
+			{{> components-field-error-messages}}
+		{{/ isInvalid }}
+	</div>
+{{/ field }}

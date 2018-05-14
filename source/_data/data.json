@@ -1,0 +1,81 @@
+{
+	"title" : "DEG Trivia",
+	"lang": "en-us",
+	"url": "#",
+	"button": {
+		"content": "Button"
+	},
+    "label": {
+        "content": "Label"
+    },
+    "input": {
+        "name": "input",
+        "type": "text",
+        "value": "",
+        "placeholder": "",
+        "options": [
+            {
+                "label": "Option 1",
+                "value": "1"
+            },
+            {
+                "label": "Option 2",
+                "value": "2"
+            },
+            {
+                "label": "Option 3",
+                "value": "3"
+            }
+        ]
+    },
+    "fieldErrorMessages": {
+        "items": [
+            {
+                "content": "This is a validation error message"
+            }
+        ]
+    },
+    "field": {
+        "id": "input"
+    },
+    "fieldGroup": {
+    },
+    "formErrorMessage": {
+        "text": "This is a form error message"
+    },
+    "table": {
+        "tableColumns": [
+            { "heading" : "Table Heading 1" },
+            { "heading" : "Table Heading 2" },
+            { "heading" : "Table Heading 3" },
+            { "heading" : "Table Heading 4" },
+            { "heading" : "Table Heading 5" }
+        ],
+        "tableData": [
+            { "row" : [
+                    { "heading": "Table Heading 1", "content": "Table Cell A1" },
+                    { "heading": "Table Heading 2", "content": "Table Cell A2" },
+                    { "heading": "Table Heading 3", "content": "Table Cell A3" },
+                    { "heading": "Table Heading 4", "content": "Table Cell A4" },
+                    { "heading": "Table Heading 5", "content": "Table Cell A5" }
+                ]
+            },
+            { "row" : [
+                    { "heading": "Table Heading 1", "content": "Table Cell B1" },
+                    { "heading": "Table Heading 2", "content": "Table Cell B2" },
+                    { "heading": "Table Heading 3", "content": "Table Cell B3" },
+                    { "heading": "Table Heading 4", "content": "Table Cell B4" },
+                    { "heading": "Table Heading 5", "content": "Table Cell B5" }
+                ]
+            },
+            { "row" : [
+                    { "heading": "Table Heading 1", "content": "Table Cell C1" },
+                    { "heading": "Table Heading 2", "content": "Table Cell C2" },
+                    { "heading": "Table Heading 3", "content": "Table Cell C3" },
+                    { "heading": "Table Heading 4", "content": "Table Cell C4" },
+                    { "heading": "Table Heading 5", "content": "Table Cell C5" }
+                ]
+            }
+        ]
+    }
+}

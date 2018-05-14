@@ -17,6 +17,7 @@ Thumbs.db
 ~$*
 
 /public
+/patternlab
 .firebaserc
 firebase-debug.log
 
