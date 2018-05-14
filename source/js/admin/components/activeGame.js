@@ -28,8 +28,7 @@ const activeGame = function(wrapperEl, options ={}) {
 
 	function updateDb(val) {
 		db.ref(`events/${activeEventId}`).update({
-			activeGameId: val,
-			gameIsInProgress: val !== false
+			activeGameId: val
 		})
 			.then(() => settings.onActiveGameChangeCallback(val));
 	}
@@ -37,8 +36,7 @@ const activeGame = function(wrapperEl, options ={}) {
 	async function render(eventId) {
 		if (activeEventId) {
 			db.ref(`events/${activeEventId}`).update({
-				activeGameId: eventId === false ? false : eventId,
-				gameIsInProgress: eventId !== false
+				activeGameId: eventId === false ? false : eventId
 			});
 		}
 		activeEventId = eventId;

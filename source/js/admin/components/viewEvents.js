@@ -32,7 +32,6 @@ const viewEvents = function(wrapperEl) {
 						<th>ID</th>
 						<th>Games</th>
 						<th>Active Game</th>
-						<th>In Progress</th>
 					</tr>
 				</thead>
 				<tbody class="${tableBodyClass}"></tbody>
@@ -49,7 +48,6 @@ const viewEvents = function(wrapperEl) {
 				<td>${key}</td>
 				<td>${renderObjKeysToList(data[key].games)}</td>
 				<td>${data[key].activeGameId ? data[key].activeGameId : 'None'}</td>
-				<td>${data[key].gameIsInProgress ? 'Yes' : 'No'}</td>
 			</tr>
 		`, '');
 		replaceContent(tableBodyEl, rows);
