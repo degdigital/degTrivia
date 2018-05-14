@@ -52,7 +52,14 @@ const dbService = function() {
 		if (!games) {
 			return Promise.resolve(null);
 		}
-		const nextGameTime = new Date(Object.keys(games).map(gameId => games[gameId].startTime).sort()[0]);
+		let nextGameTime;
+		const now = Date.now();
+		const gameTimes = Object.keys(games).map(gameId => games[gameId].startTime)
+			.filter(gameTime => gameTime >= now);
+
+		if (gameTimes) {
+			nextGameTime = new Date(gameTimes.sort()[0]);
+		}
 		return Promise.resolve(nextGameTime);
 	}
 
