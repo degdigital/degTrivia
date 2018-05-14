@@ -2,12 +2,14 @@ const staticTask = require('./tasks/staticTask');
 const htmlTask = require('./tasks/htmlTask');
 const cssTask = require('./tasks/cssTask');
 const jsTask = require('./tasks/jsTask');
+const patternlabTask = require('./tasks/patternlabTask');
 
 const tasks = {
 	'static': staticTask,
 	'html': htmlTask,
 	'css': cssTask,
-	'js': jsTask
+	'js': jsTask,
+	'patternlab': patternlabTask
 };
 
 function runTask(taskName) {

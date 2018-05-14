@@ -14,15 +14,19 @@ const filesToProcess = [
 	'admin.css'
 ];
 
-function processFile(srcFilepath, destFilepath, plugins) {
+function processFile(srcFilepath, destFilepaths, plugins) {
 	return fse.readFile(srcFilepath)
 		.then(contents =>
 			postcss(plugins).process(contents, {
-				from: srcFilepath,
-				to: destFilepath
+				from: srcFilepath
 			})
 		)
-		.then(result => fse.outputFile(destFilepath, result.css))
+		.then(result => {
+			const promises = destFilepaths.map(destFilepath => 
+				fse.outputFile(destFilepath, result.css));
+
+			return Promise.all(promises);
+		})
 		.then(() => true)
 		.catch(e => {
 			console.error(`Error processing CSS file "${srcFilepath}":`, e);
@@ -35,8 +39,11 @@ function run() {
 
 	const promises = filesToProcess.map(file => {
 		const srcFilepath = path.resolve('source/css', file);
-		const destFilepath = path.resolve('public/css', file);
-		return processFile(srcFilepath, destFilepath, plugins);
+		const destFilepaths = [
+			path.resolve('public/css', file),
+			path.resolve('patternlab/css', file)
+		];
+		return processFile(srcFilepath, destFilepaths, plugins);
 	});
 
 	return Promise.all(promises)
