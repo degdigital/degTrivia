@@ -1,8 +1,7 @@
-function initQuestionResponsesNode(db, eventId, seriesId, gameId, questionId, correctChoiceId) {
+function initQuestionResponsesNode(db, eventId, gameId, questionId, correctChoiceId) {
     return db.ref('answers').update({
         [questionId]: {
             eventId,
-            seriesId,
             gameId,
             correctChoiceId
         }
@@ -17,7 +16,7 @@ module.exports = function(db, change, context) {
             if (data) {
                 const questions = data.questions;
                 const promises = Object.keys(questions).map(qId => {
-                    return initQuestionResponsesNode(db, context.params.eventId, data.series, gameId, qId, questions[qId].correctChoice);
+                    return initQuestionResponsesNode(db, context.params.eventId, gameId, qId, questions[qId].correctChoice);
                 })
                 return Promise.all(promises);
             }

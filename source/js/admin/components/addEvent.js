@@ -1,6 +1,5 @@
 // Utils
 import {replaceContent} from '../../utils/domUtils';
-import {formatArrayToObject} from '../../utils/objectUtils';
 import formMapper from '../../utils/formMapper';
 
 // Services
@@ -38,9 +37,8 @@ const addEvent = function(wrapperEl, initialData) {
 				activeGameId: false,
 				alias: data.alias,
 				gameIsInProgress: false,
-				games: formatArrayToObject(data.games),
-				name: data.name,
-				series: formatArrayToObject(data.series)
+				games: false,
+				name: data.name
 			});
 		}
 	}
@@ -55,33 +53,14 @@ const addEvent = function(wrapperEl, initialData) {
 						<input id="name" name="name" type="text" required>
 					</div>
 					<div class="field">
-						<label for="alias">Alias</label><br>
+						<label for="alias">Alias (this will be the password players enter during signup)</label><br>
 						<input id="alias" name="alias" type="text" required>
 					</div>
-					${renderCheckboxSection('Series', data.series)}
-					${renderCheckboxSection('Games', data.games)}
 					<button type="submit">Submit</button>
 				</fieldset>
 			</form>
 		`);
 		formEl = wrapperEl.querySelector(`.${formClass}`);
-	}
-
-	function renderCheckboxSection(sectionName, sectionData) {
-		if (!sectionData) {
-			return '';
-		}
-		const lcName = sectionName.toLowerCase();
-		const fields = Object.keys(sectionData).reduce((output, id, index) => `
-			${output}
-			<input id="${lcName}--${index}" name="${lcName}" type="checkbox" value="${id}">
-			<label for="${lcName}--${index}">${sectionData[id].name}</label><br>
-		`, `${sectionName}<br>`);
-		return `
-			<div class="field">
-				${fields}
-			</div>
-		`;
 	}
 
 	init();
