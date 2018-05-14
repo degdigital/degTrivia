@@ -1,4 +1,5 @@
 {
+  "activeEventId" : "-LCUWuNIqOKlRmpPvZTE",
   "admins" : {
     "0s3r7yEj7gRzNoFaW2wGfzwWyub2" : true,
     "5biIuUJKBDV6dOVvRzSoXpDyEaN2" : true,
@@ -11,6 +12,29 @@
     "sAysvz3egIMLFpQAQlulRsP1eW72" : true
   },
   "answers" : {
+    "11111" : {
+      "correctChoiceId" : 777,
+      "eventId" : "12345",
+      "gameId" : 34567,
+      "responses" : {
+        "777" : {
+          "PenNu9IWScYiaGy2FYOV6QNPIwv1" : true
+        }
+      },
+      "seriesId" : 23456
+    },
+    "56789" : {
+      "correctChoiceId" : 67890,
+      "eventId" : "12345",
+      "gameId" : 34567,
+      "seriesId" : 23456
+    },
+    "999999" : {
+      "correctChoiceId" : 55554,
+      "eventId" : "12345",
+      "gameId" : 34567,
+      "seriesId" : 23456
+    },
     "question1" : {
       "responses" : {
         "67890" : {
@@ -28,121 +52,339 @@
   "currentEvent" : false,
   "disableAll" : false,
   "events" : {
-    "12345" : {
+    "-LCUWuNIqOKlRmpPvZTE" : {
       "activeGameId" : false,
       "alias" : "connections2018",
       "gameIsInProgress" : false,
       "games" : {
-        "34567" : true
+        "-LCU_qvXC1rWVovF0Cva" : true,
+        "-LCUjYNIiCbBWln2OOuA" : true
       },
-      "name" : "Connections 2018",
-      "players" : {
-        "45678" : true
-      },
-      "series" : {
-        "23456" : true
-      }
+      "name" : "Connections 2018"
+    },
+    "-LCUbqaXAuNRGFOJBXEL" : {
+      "activeGameId" : false,
+      "alias" : "beer30",
+      "gameIsInProgress" : false,
+      "games" : false,
+      "name" : "Beer:30"
     }
   },
   "games" : {
-    "34567" : {
+    "-LCU_qvXC1rWVovF0Cva" : {
       "activeQuestionId" : false,
-      "event" : 12345,
-      "name" : "10 a.m. game",
-      "players" : {
-        "45678" : true
-      },
+      "event" : "-LCUWuNIqOKlRmpPvZTE",
+      "name" : "12 p.m. Game",
       "questions" : {
-        "56789" : {
+        "-LCU_qvWZf7LxjPDwnWa" : {
           "choices" : {
-            "67890" : "Choice A",
-            "78901" : "Choice B",
-            "89012" : "Choice C",
-            "90123" : "Choice D"
+            "-LCU_qvWZf7LxjPDwnWb" : {
+              "chosenCount" : 0,
+              "text" : "William and Elizabeth"
+            },
+            "-LCU_qvWZf7LxjPDwnWc" : {
+              "chosenCount" : 0,
+              "text" : "Joseph and Catherine"
+            },
+            "-LCU_qvWZf7LxjPDwnWd" : {
+              "chosenCount" : 0,
+              "text" : "John and Mary"
+            },
+            "-LCU_qvWZf7LxjPDwnWe" : {
+              "chosenCount" : 0,
+              "text" : "George and Anne"
+            }
           },
-          "correctChoice" : 67890,
+          "correctChoice" : "-LCU_qvWZf7LxjPDwnWd",
           "order" : 0,
-          "question" : "Question 1 text?"
+          "question" : "In the year 1900 in the U.S. what were the most popular first names given to boy and girl babies?"
         },
-        "999999" : {
+        "-LCU_qvWZf7LxjPDwnWf" : {
           "choices" : {
-            "55551" : "Sure why not",
-            "55552" : "Yes, but do you like to party?",
-            "55553" : "Not my cup of tea",
-            "55554" : "Duh."
+            "-LCU_qvWZf7LxjPDwnWg" : {
+              "chosenCount" : 0,
+              "text" : "When it was made, in 1701"
+            },
+            "-LCU_qvWZf7LxjPDwnWh" : {
+              "chosenCount" : 0,
+              "text" : "When it rang on July 4, 1776"
+            },
+            "-LCU_qvWZf7LxjPDwnWi" : {
+              "chosenCount" : 0,
+              "text" : "In the 19th century, when it became a symbol of the abolition of slavery"
+            },
+            "-LCU_qvWZf7LxjPDwnWj" : {
+              "chosenCount" : 0,
+              "text" : "None of the above"
+            }
           },
-          "correctChoice" : 55554,
+          "correctChoice" : "-LCU_qvWZf7LxjPDwnWi",
           "order" : 1,
-          "question" : "Do you like to party?"
+          "question" : "When did the Liberty Bell get its name?"
+        },
+        "-LCU_qvWZf7LxjPDwnWk" : {
+          "choices" : {
+            "-LCU_qvWZf7LxjPDwnWl" : {
+              "chosenCount" : 0,
+              "text" : "Buttermilk"
+            },
+            "-LCU_qvWZf7LxjPDwnWm" : {
+              "chosenCount" : 0,
+              "text" : "Daisy"
+            },
+            "-LCU_qvWZf7LxjPDwnWn" : {
+              "chosenCount" : 0,
+              "text" : "Scout"
+            },
+            "-LCU_qvWZf7LxjPDwnWo" : {
+              "chosenCount" : 0,
+              "text" : "Tulip"
+            }
+          },
+          "correctChoice" : "-LCU_qvWZf7LxjPDwnWl",
+          "order" : 2,
+          "question" : "In the Roy Rogers -Dale Evans Museum, you will find Roy and Dales stuffed horses. Roy's horse was named Trigger, which was Dales horse?"
+        },
+        "-LCU_qvWZf7LxjPDwnWp" : {
+          "choices" : {
+            "-LCU_qvWZf7LxjPDwnWq" : {
+              "chosenCount" : 0,
+              "text" : "A log cabin in Kentucky"
+            },
+            "-LCU_qvWZf7LxjPDwnWr" : {
+              "chosenCount" : 0,
+              "text" : "A two-story clapboard house in Tennessee"
+            },
+            "-LCU_qvWZf7LxjPDwnWs" : {
+              "chosenCount" : 0,
+              "text" : "A four-story Georgian-style home in Missouri"
+            },
+            "-LCU_qvWZf7LxjPDwnWt" : {
+              "chosenCount" : 0,
+              "text" : "A three story brick house in Arkansas"
+            }
+          },
+          "correctChoice" : "-LCU_qvWZf7LxjPDwnWs",
+          "order" : 3,
+          "question" : "The Daniel Boon museum at the home where he died can best be described how?"
+        },
+        "-LCU_qvWZf7LxjPDwnWu" : {
+          "choices" : {
+            "-LCU_qvWZf7LxjPDwnWv" : {
+              "chosenCount" : 0,
+              "text" : "Home computer"
+            },
+            "-LCU_qvXC1rWVovF0CvY" : {
+              "chosenCount" : 0,
+              "text" : "Compact disk player"
+            },
+            "-LCU_qvXC1rWVovF0CvZ" : {
+              "chosenCount" : 0,
+              "text" : "Cordless phone"
+            },
+            "-LCU_qvXC1rWVovF0Cv_" : {
+              "chosenCount" : 0,
+              "text" : "Dishwasher"
+            }
+          },
+          "correctChoice" : "-LCU_qvXC1rWVovF0CvY",
+          "order" : 4,
+          "question" : "Which of the following items was owned by the fewest U.S. homes in 1990?"
         }
       },
-      "series" : 23456,
       "showGameOver" : false,
       "showGameResults" : false,
       "showQuestionResults" : false,
-      "startTime" : 1528900200000
+      "startTime" : 1526233800000
     },
-    "999999" : {
+    "-LCUjYNIiCbBWln2OOuA" : {
       "activeQuestionId" : false,
-      "event" : 12345,
-      "name" : "12 p.m. game",
-      "players" : {
-        "45678" : true
-      },
+      "event" : "-LCUWuNIqOKlRmpPvZTE",
+      "name" : "2 p.m. Game",
       "questions" : {
-        "56789" : {
+        "-LCUjYNIiCbBWln2OOtm" : {
           "choices" : {
-            "67890" : "Choice A",
-            "78901" : "Choice B",
-            "89012" : "Choice C",
-            "90123" : "Choice D"
+            "-LCUjYNIiCbBWln2OOtn" : {
+              "chosenCount" : 0,
+              "text" : "Jack Nicklaus"
+            },
+            "-LCUjYNIiCbBWln2OOto" : {
+              "chosenCount" : 0,
+              "text" : "Arnold Palmer"
+            },
+            "-LCUjYNIiCbBWln2OOtp" : {
+              "chosenCount" : 0,
+              "text" : "Byron Nelson"
+            },
+            "-LCUjYNIiCbBWln2OOtq" : {
+              "chosenCount" : 0,
+              "text" : "Ben Hogan"
+            }
           },
-          "correctChoice" : 67890,
+          "correctChoice" : "-LCUjYNIiCbBWln2OOtp",
           "order" : 0,
-          "question" : "Question 1 text?"
+          "question" : "Who holds the record for the most victories in a row on the professional golf tour?"
         },
-        "999999" : {
+        "-LCUjYNIiCbBWln2OOtr" : {
           "choices" : {
-            "55551" : "Sure why not",
-            "55552" : "Yes, but do you like to party?",
-            "55553" : "Not my cup of tea",
-            "55554" : "Duh."
+            "-LCUjYNIiCbBWln2OOts" : {
+              "chosenCount" : 0,
+              "text" : "Reggie Jackson"
+            },
+            "-LCUjYNIiCbBWln2OOtt" : {
+              "chosenCount" : 0,
+              "text" : "Harmon Killebrew"
+            },
+            "-LCUjYNIiCbBWln2OOtu" : {
+              "chosenCount" : 0,
+              "text" : "Willie Mays"
+            },
+            "-LCUjYNIiCbBWln2OOtv" : {
+              "chosenCount" : 0,
+              "text" : "Frank Robinson"
+            }
           },
-          "correctChoice" : 55554,
+          "correctChoice" : "-LCUjYNIiCbBWln2OOtu",
           "order" : 1,
-          "question" : "Do you like to party?"
+          "question" : "Who is third behind Hank Aaron and Babe Ruth in major league career home runs?"
+        },
+        "-LCUjYNIiCbBWln2OOtw" : {
+          "choices" : {
+            "-LCUjYNIiCbBWln2OOtx" : {
+              "chosenCount" : 0,
+              "text" : "8"
+            },
+            "-LCUjYNIiCbBWln2OOty" : {
+              "chosenCount" : 0,
+              "text" : "18"
+            },
+            "-LCUjYNIiCbBWln2OOtz" : {
+              "chosenCount" : 0,
+              "text" : "38"
+            },
+            "-LCUjYNIiCbBWln2OOu-" : {
+              "chosenCount" : 0,
+              "text" : "58"
+            }
+          },
+          "correctChoice" : "-LCUjYNIiCbBWln2OOty",
+          "order" : 2,
+          "question" : "In 1990, in what percentage of U.S. married couples did the wife earn more money than the husband?"
+        },
+        "-LCUjYNIiCbBWln2OOu0" : {
+          "choices" : {
+            "-LCUjYNIiCbBWln2OOu1" : {
+              "chosenCount" : 0,
+              "text" : "Cocker spaniel"
+            },
+            "-LCUjYNIiCbBWln2OOu2" : {
+              "chosenCount" : 0,
+              "text" : "German shepherd"
+            },
+            "-LCUjYNIiCbBWln2OOu3" : {
+              "chosenCount" : 0,
+              "text" : "Labrador retriever"
+            },
+            "-LCUjYNIiCbBWln2OOu4" : {
+              "chosenCount" : 0,
+              "text" : "Poodle"
+            }
+          },
+          "correctChoice" : "-LCUjYNIiCbBWln2OOu1",
+          "order" : 3,
+          "question" : "During the 1980s for six consecutive years what breed of dog was the most popular in the U.S.?"
+        },
+        "-LCUjYNIiCbBWln2OOu5" : {
+          "choices" : {
+            "-LCUjYNIiCbBWln2OOu6" : {
+              "chosenCount" : 0,
+              "text" : "10 percent"
+            },
+            "-LCUjYNIiCbBWln2OOu7" : {
+              "chosenCount" : 0,
+              "text" : "15 percent"
+            },
+            "-LCUjYNIiCbBWln2OOu8" : {
+              "chosenCount" : 0,
+              "text" : "31 percent"
+            },
+            "-LCUjYNIiCbBWln2OOu9" : {
+              "chosenCount" : 0,
+              "text" : "51 percent"
+            }
+          },
+          "correctChoice" : "-LCUjYNIiCbBWln2OOu8",
+          "order" : 4,
+          "question" : "In 1985, five percent of U.S. households had telephone answering machines. By 1990 what percentage of homes had answering machines?"
         }
       },
-      "series" : 23456,
       "showGameOver" : false,
       "showGameResults" : false,
       "showQuestionResults" : false,
-      "startTime" : 1528900200000
+      "startTime" : 1528830000000
     }
   },
+  "leaderboardCurrent" : {
+    "event" : [ {
+      "name" : "Anna Scheuler",
+      "score" : 1500000
+    }, {
+      "name" : "Ryan Heap",
+      "score" : 38
+    }, {
+      "name" : "Aaron Ladage",
+      "score" : 37
+    } ],
+    "game" : [ {
+      "name" : "Anna Scheuler",
+      "score" : 42
+    }, {
+      "name" : "Aaron Ladage",
+      "score" : 7
+    }, {
+      "name" : "Ryan Heap",
+      "score" : 1
+    } ]
+  },
   "leaderboardEvent" : {
+    "12345" : {
+      "PenNu9IWScYiaGy2FYOV6QNPIwv1" : 1
+    },
     "eventId" : {
       "userId" : 0
     }
   },
   "leaderboardGame" : {
+    "34567" : {
+      "PenNu9IWScYiaGy2FYOV6QNPIwv1" : 1
+    },
     "gameId" : {
       "userId" : 0
     }
   },
-  "leaderboardSeries" : {
-    "seriesId" : {
-      "userId" : 0,
-      "userId2" : 7
-    }
-  },
+  "mostRecentEvent" : 12345,
+  "mostRecentGame" : 34567,
   "players" : {
+    "4e38F7Zk6lcScxpcajk2Z5hnUkA2" : {
+      "active" : true,
+      "email" : "aladage@degdigital.com",
+      "event" : 12345,
+      "firstName" : "Aaron",
+      "lastName" : "Ladage"
+    },
     "6WJI9uKv9sfjhgEG94VH1Tub7DC3" : {
       "active" : true,
       "email" : "aladage@degdigital.com",
       "event" : 12345,
       "firstName" : "Aaron",
       "lastName" : "Ladage"
+    },
+    "E1xVLfxsBXUIKTXPzteQ310FtbW2" : {
+      "active" : true,
+      "email" : "ascheuler@degdigital.com",
+      "event" : 12345,
+      "firstName" : "Anna",
+      "lastName" : "Scheuler"
     },
     "Enm1NEzXbaP4e7ZRBPMlTunBTle2" : {
       "active" : true,
@@ -158,6 +400,13 @@
       "firstName" : "Ryan",
       "lastName" : "Ladage"
     },
+    "L52nl4r7uvZ3haE3n3q7tDREqot2" : {
+      "active" : true,
+      "email" : "ascheuler@degdigital.com",
+      "event" : 12345,
+      "firstName" : "Anna",
+      "lastName" : "Scheuler"
+    },
     "LKmy2anBIDgkag8j2aoPVkV128q1" : {
       "active" : true,
       "email" : "aladage@degdigital.com",
@@ -172,6 +421,13 @@
       "firstName" : "Aaron",
       "lastName" : "Ladage"
     },
+    "PenNu9IWScYiaGy2FYOV6QNPIwv1" : {
+      "active" : true,
+      "email" : "test@test.com",
+      "event" : 12345,
+      "firstName" : "test",
+      "lastName" : "test"
+    },
     "SQ0okBrPQGZ5xvBa6xWmSBTvdrc2" : {
       "active" : true,
       "email" : "bgraves@degdigital.com",
@@ -179,12 +435,26 @@
       "firstName" : "Brian",
       "lastName" : "Graves"
     },
+    "ShoSStE1XsOKLZztXeP0EnaOoJp2" : {
+      "active" : true,
+      "email" : "aladage@gmail.com",
+      "event" : 12345,
+      "firstName" : "Aaron",
+      "lastName" : "Ladage"
+    },
     "TseVKLkzpcPGJfX1xWdYVjS4U0T2" : {
       "active" : true,
       "email" : "aladage@degdigital.com",
       "event" : 12345,
       "firstName" : "Aaron",
       "lastName" : "Ladage"
+    },
+    "aIb75HtqrlhzYo3C8hbXrwWxIwG3" : {
+      "active" : true,
+      "email" : "test@test.com",
+      "event" : 12345,
+      "firstName" : "Tarl",
+      "lastName" : "Fartnoise"
     },
     "bmDoovzMpacsibKIjyU21oBhGP62" : {
       "active" : true,
@@ -234,20 +504,15 @@
       "event" : 12345,
       "firstName" : "Aaron",
       "lastName" : "Ladage"
+    },
+    "unkkbmjhHSZAzoDqyD0k7nrLM373" : {
+      "active" : true,
+      "email" : "jon@snow.com",
+      "event" : 12345,
+      "firstName" : "Jon",
+      "lastName" : "Snow"
     }
   },
   "questionDuration" : 10000,
-  "resetApp" : false,
-  "series" : {
-    "23456" : {
-      "event" : 12345,
-      "games" : {
-        "34567" : true
-      },
-      "name" : "Day 1",
-      "players" : {
-        "45678" : true
-      }
-    }
-  }
+  "resetApp" : false
 }
