@@ -20,7 +20,7 @@ module.exports = function(db, event, context){
         return db.ref(`answers/${questionId}`).once('value').then(snapshot => {
             const questionRespData = snapshot.val();
             if (questionRespData) {
-                const playersList = questionRespData.responses[questionRespData.correctChoiceId];
+                const playersList = questionRespData.responses[questionRespData.correctChoiceId] || [];
                 const promises = Object.keys(playersList).map(playerId => {
                     updatePlayerScore(db, playerId, questionRespData.eventId, questionRespData.gameId);
                 });

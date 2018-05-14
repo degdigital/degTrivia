@@ -10,6 +10,12 @@
 		},
 		"players": {
 			".indexOn": "alias"
+		},
+		"playerResultsGame": {
+			".indexOn": ".value"
+		},
+		"playerResultsEvent": {
+			".indexOn": ".value"
 		}
 	}
 }
