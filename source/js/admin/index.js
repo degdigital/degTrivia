@@ -3,6 +3,7 @@ import {getAppConfig} from '../config/appConfig.js';
 
 // Firebase
 import firebase from '@firebase/app';
+import firebaseConfig from '../config/firebaseConfig.js';
 
 // Services
 import playerService from '../services/playerService.js';
@@ -36,14 +37,7 @@ const admin = function(el) {
 	}
 
 	function init() {
-		firebase.initializeApp({
-			apiKey: "AIzaSyAZ5Ad3YFPCz2QKnMPtAl89tjplLQX6Lpw",
-		    authDomain: "degtrivia-develop.firebaseapp.com",
-		    databaseURL: "https://degtrivia-develop.firebaseio.com",
-		    projectId: "degtrivia-develop",
-		    storageBucket: "degtrivia-develop.appspot.com",
-		    messagingSenderId: "369298224791"
-		});
+		firebase.initializeApp(firebaseConfig);
 		dbService.init();
 		playerService.init();
 

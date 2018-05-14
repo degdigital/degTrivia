@@ -10,16 +10,10 @@ import playerService from './services/playerService.js';
 
 // Firebase
 import firebase from '@firebase/app';
+import firebaseConfig from './config/firebaseConfig.js';
 
 function init(appConfig) {
-	firebase.initializeApp({
-		apiKey: "AIzaSyAZ5Ad3YFPCz2QKnMPtAl89tjplLQX6Lpw",
-	    authDomain: "degtrivia-develop.firebaseapp.com",
-	    databaseURL: "https://degtrivia-develop.firebaseio.com",
-	    projectId: "degtrivia-develop",
-	    storageBucket: "degtrivia-develop.appspot.com",
-	    messagingSenderId: "369298224791"
-	});
+	firebase.initializeApp(firebaseConfig);
 	dbService.init();
 	playerService.init();
 	
