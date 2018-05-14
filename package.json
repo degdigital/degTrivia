@@ -6,12 +6,12 @@
     "test": "jest",
     "build": "node scripts/build",
     "watch": "node scripts/watch",
-    "serve": "firebase serve",
+    "serve": "firebase use develop && firebase serve",
     "serve-patternlab": "node scripts/servePatternlab",
     "start": "node scripts/start",
-    "deploy-develop": "firebase use develop && firebase deploy",
-    "deploy-staging": "firebase use staging && firebase deploy",
-    "deploy-production": "firebase use production && firebase deploy"
+    "deploy-develop": "npm run build && firebase use develop && firebase deploy",
+    "deploy-staging": "NODE_ENV=staging npm run build && firebase use staging && firebase deploy",
+    "deploy-production": "NODE_ENV=production npm run build && firebase use production && firebase deploy"
   },
   "repository": {
     "type": "git",
@@ -63,7 +63,8 @@
     "rollup": "^0.58.2",
     "rollup-plugin-babel": "^3.0.4",
     "rollup-plugin-commonjs": "^9.1.0",
-    "rollup-plugin-node-resolve": "^3.3.0"
+    "rollup-plugin-node-resolve": "^3.3.0",
+    "rollup-plugin-replace": "^2.0.0"
   },
   "browserslist": [
     "last 2 versions"
