@@ -14,14 +14,6 @@ const watchTargets = [
 	{
 		paths: ['source/js/**/*.js'],
 		taskName: 'js'
-	},
-	{
-		paths: [
-			'source/_patterns/**/*.mustache',
-			'source/_data/*.json',
-			'source/_meta/*.mustache'
-		],
-		taskName: 'patternlab'
 	}
 ];
 

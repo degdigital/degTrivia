@@ -6,5 +6,6 @@ taskRunner.runAllTasks()
 		if(success) {
 			spawn('node', ['scripts/watch'], { stdio: 'inherit' });
 			spawn('firebase', ['serve'], { stdio: 'inherit' });
+			spawn('node', ['scripts/servePatternlab'], { stdio: 'inherit' });
 		}
 	});
