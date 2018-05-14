@@ -7,6 +7,7 @@
     "build": "node scripts/build",
     "watch": "node scripts/watch",
     "serve": "firebase serve",
+    "serve-patternlab": "node scripts/servePatternlab",
     "start": "node scripts/start"
   },
   "repository": {
@@ -36,6 +37,9 @@
   },
   "homepage": "https://github.com/degdigital/degTrivia#readme",
   "devDependencies": {
+    "@pattern-lab/patternlab-node": "^3.0.0-alpha.8",
+    "@pattern-lab/styleguidekit-assets-default": "^4.0.0-alpha.3",
+    "@pattern-lab/styleguidekit-mustache-default": "^4.0.0-alpha.1",
     "autoprefixer": "^8.3.0",
     "babel": "^6.23.0",
     "babel-plugin-external-helpers": "^6.22.0",
