@@ -21,7 +21,7 @@ const activeEvent = function(wrapperEl, options ={}) {
 	function onWrapperChange(e) {
 		const el = e.target;
 		if (el.classList.contains(triggerClass)) {
-			const val = el.value === 'no-value' ? false : parseInt(el.value);
+			const val = el.value === 'no-value' ? false : el.value;
 			updateDb(val);
 		}
 	}

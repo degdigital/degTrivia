@@ -21,7 +21,7 @@ const activeGame = function(wrapperEl, options ={}) {
 	function onWrapperChange(e) {
 		const el = e.target;
 		if (el.classList.contains(triggerClass)) {
-			const val = el.value === 'no-value' ? false : parseInt(el.value);
+			const val = el.value === 'no-value' ? false : el.value;
 			updateDb(val);
 		}
 	}
@@ -65,7 +65,7 @@ const activeGame = function(wrapperEl, options ={}) {
 		return Object.keys(games).reduce((output, id) => {
 			return `
 				${output}
-				<option value="${id}" ${activeGameId === parseInt(id) ? 'selected' : ''}>${games[id].name}</option>
+				<option value="${id}" ${activeGameId === id ? 'selected' : ''}>${games[id].name}</option>
 			`;
 		}, '<option value="no-value">No active game</option>');
 	}
