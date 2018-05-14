@@ -4,8 +4,8 @@ function updateScore(db, ref) {
 
 function updatePlayerScore(db, playerId, eventId, gameId) {
     if (playerId) {
-        const gameBoardRef = db.ref(`leaderboardGame/${gameId}/${playerId}`);
-        const eventBoardRef = db.ref(`leaderboardEvent/${eventId}/${playerId}`);
+        const gameBoardRef = db.ref(`playerResultsGame/${gameId}/${playerId}`);
+        const eventBoardRef = db.ref(`playerResultsEvent/${eventId}/${playerId}`);
         const promises = [
             updateScore(db, gameBoardRef),
             updateScore(db, eventBoardRef)

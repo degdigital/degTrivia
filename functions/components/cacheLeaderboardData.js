@@ -79,8 +79,8 @@ module.exports = function(event, context, db) {
             database = db;
         }
         const promises = [
-            formatBoard('mostRecentGame', 'leaderboardGame', 'game'),
-            formatBoard('mostRecentEvent', 'leaderboardEvent', 'event')
+            formatBoard('mostRecentGame', 'playerResultsGame', 'game'),
+            formatBoard('mostRecentEvent', 'playerResultsEvent', 'event')
         ];
         return Promise.all(promises).then(results => {
             let playerIds = [];
