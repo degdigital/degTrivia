@@ -12,29 +12,6 @@
     "sAysvz3egIMLFpQAQlulRsP1eW72" : true
   },
   "answers" : {
-    "11111" : {
-      "correctChoiceId" : 777,
-      "eventId" : "12345",
-      "gameId" : 34567,
-      "responses" : {
-        "777" : {
-          "PenNu9IWScYiaGy2FYOV6QNPIwv1" : true
-        }
-      },
-      "seriesId" : 23456
-    },
-    "56789" : {
-      "correctChoiceId" : 67890,
-      "eventId" : "12345",
-      "gameId" : 34567,
-      "seriesId" : 23456
-    },
-    "999999" : {
-      "correctChoiceId" : 55554,
-      "eventId" : "12345",
-      "gameId" : 34567,
-      "seriesId" : 23456
-    },
     "question1" : {
       "responses" : {
         "67890" : {
@@ -345,22 +322,6 @@
       "name" : "Ryan Heap",
       "score" : 1
     } ]
-  },
-  "leaderboardEvent" : {
-    "12345" : {
-      "PenNu9IWScYiaGy2FYOV6QNPIwv1" : 1
-    },
-    "eventId" : {
-      "userId" : 0
-    }
-  },
-  "leaderboardGame" : {
-    "34567" : {
-      "PenNu9IWScYiaGy2FYOV6QNPIwv1" : 1
-    },
-    "gameId" : {
-      "userId" : 0
-    }
   },
   "mostRecentEvent" : 12345,
   "mostRecentGame" : 34567,
