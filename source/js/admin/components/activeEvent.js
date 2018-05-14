@@ -48,7 +48,7 @@ const activeEvent = function(wrapperEl, options ={}) {
 		return Object.keys(events).reduce((output, id) => {
 			return `
 				${output}
-				<option value="${id}" ${activeEventId === parseInt(id) ? 'selected' : ''}>${events[id].name}</option>
+				<option value="${id}" ${activeEventId === id ? 'selected' : ''}>${events[id].name}</option>
 			`;
 		}, '<option value="no-value">No active event</option>');
 	}
