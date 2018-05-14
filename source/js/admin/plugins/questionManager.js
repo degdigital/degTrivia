@@ -81,10 +81,15 @@ const questionManager = function(wrapperEl, options = {}) {
 		if (!questions) {
 			summation = `<p>${noQuestionsText}</p>`
 		} else {
-			summation = questions.reduce((output, item) => `
+			const questionsSummary = questions.reduce((output, item) => `
 				${output}
 				${item.question}<br>
 			`, '');
+			summation = `
+				<ol>
+					${questionsSummary}
+				</ol>
+			`;
 		}
 		replaceContent(questionsWrapperEl, `
 			${summation}

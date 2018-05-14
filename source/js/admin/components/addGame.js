@@ -19,6 +19,7 @@ const addGame = function(wrapperEl, initialData) {
 
 	function init() {
 		bindEvents();
+		console.log(initialData);
 		render(initialData);
 		questionManagerInst = questionManager(wrapperEl, {
 			onSaveCallback: onQuestionSave
@@ -99,7 +100,7 @@ const addGame = function(wrapperEl, initialData) {
 		const lcName = sectionName.toLowerCase();
 		const options = Object.keys(sectionData).reduce((output, key) => `
 			${output}
-			<option value="${key}">${key}</option>
+			<option value="${key}">${initialData.events[key].name}</option>
 		`, '');
 		return `
 			<div class="field">
