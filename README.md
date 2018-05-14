@@ -26,10 +26,12 @@ If you do not have a public directory, copy the source directory and rename it *
 ## Commands
 Use command `npm test` to run jest tests
 
-Use command `npm build` to run build tasks
+Use command `npm run build` to run build tasks
 
-Use command `npm watch` to run watcher on files
+Use command `npm run watch` to run watcher on files
 
-Use command `npm serve` to run a local firebase server
+Use command `npm run serve` to run a local firebase server
 
-User command `npm start` to run build tasks, fire up watcher and start firebase server
+Use command `npm run serve-patternlab` to run a local Pattern Lab server
+
+User command `npm start` to run build tasks, fire up watcher and start the local firebase and Pattern Lab servers
