@@ -30,7 +30,6 @@ const viewEvents = function(wrapperEl) {
 						<th>Name</th>
 						<th>Alias</th>
 						<th>ID</th>
-						<th>Series</th>
 						<th>Games</th>
 						<th>Active Game</th>
 						<th>In Progress</th>
@@ -48,7 +47,6 @@ const viewEvents = function(wrapperEl) {
 				<td>${data[key].name}</td>
 				<td>${data[key].alias}</td>
 				<td>${key}</td>
-				<td>${renderObjKeysToList(data[key].series)}</td>
 				<td>${renderObjKeysToList(data[key].games)}</td>
 				<td>${data[key].activeGameId ? data[key].activeGameId : 'None'}</td>
 				<td>${data[key].gameIsInProgress ? 'Yes' : 'No'}</td>

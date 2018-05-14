@@ -8,7 +8,7 @@ import dbService from '../../services/dbService.js';
 const viewGames = function(wrapperEl) {
 
 	const db = dbService.getDb();
-	const tableBodyClass = 'viewseries-table-body';
+	const tableBodyClass = 'viewgames-table-body';
 	let tableBodyEl = null;
 
 	function init() {
@@ -30,7 +30,6 @@ const viewGames = function(wrapperEl) {
 						<th>Name</th>
 						<th>ID</th>
 						<th>Event</th>
-						<th>Series</th>
 						<th>Active Question ID</th>
 						<th>Questions</th>
 						<th>Start Time</th>
@@ -50,7 +49,6 @@ const viewGames = function(wrapperEl) {
 				<td>${data[key].name}</td>
 				<td>${key}</td>
 				<td>${data[key].event}</td>
-				<td>${data[key].series}</td>
 				<td>${data[key].activeQuestionId ? data[key].activeQuestionId : 'None'}</td>
 				<td>${renderObjKeysToList(data[key].questions)}</td>
 				<td>${data[key].startTime}</td>

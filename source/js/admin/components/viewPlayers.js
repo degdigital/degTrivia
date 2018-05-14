@@ -13,7 +13,7 @@ const viewPlayers = function(wrapperEl) {
 	let tableBodyEl = null;
 	let dropdownEl = null;
 	let cachedPlayerData = {};
-	let currentEventId = 'all-events';
+	let eventId = 'all-events';
 
 	function init() {
 		renderTable();
@@ -32,7 +32,7 @@ const viewPlayers = function(wrapperEl) {
 	}
 
 	function onDropdownChange(e) {
-		currentEventId = e.target.value;
+		eventId = e.target.value;
 		renderTableRows(cachedPlayerData);
 	}
 
@@ -65,7 +65,7 @@ const viewPlayers = function(wrapperEl) {
 
 	function renderTableRows(data) {
 		const rows = Object.keys(data).reduce((output, key) => {
-			if (currentEventId === 'all-events' || data[key].event.toString() === currentEventId.toString()) {
+			if (eventId === 'all-events' || data[key].event.toString() === eventId.toString()) {
 				return `
 					${output}
 					<tr>

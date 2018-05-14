@@ -130,3 +130,30 @@ legend {
 	}
 
 }
+
+.is-hidden {
+	display: none;
+}
+
+.addgame-wrapper {
+	margin-bottom: 1rem;
+}
+
+.choices {
+	margin-bottom: 1rem;
+}
+
+.choice {
+	align-items: top;
+	display: flex;
+	margin-bottom: 0.5rem;
+
+	.field {
+		margin-bottom: 0;
+
+		&:first-child {
+			margin-right: 0.5rem;
+		}
+
+	}
+}

@@ -31,8 +31,8 @@ const dbService = function() {
 		});
 	}
 
-	function getCurrentEventId() {
-		return db.ref('currentEvent').once('value').then(snapshot => snapshot.val());
+	function getActiveEventId() {
+		return db.ref('activeEventId').once('value').then(snapshot => snapshot.val());
 	}
 
 	function getEvent(eventAlias) {
@@ -47,8 +47,8 @@ const dbService = function() {
 	}
 
 	async function getNextGameTime() {
-		const currentEventId = await getCurrentEventId();
-		const games = await db.ref('games').orderByChild('event').equalTo(currentEventId).once('value').then(snapshot => snapshot.val());
+		const activeEventId = await getActiveEventId();
+		const games = await db.ref('games').orderByChild('event').equalTo(activeEventId).once('value').then(snapshot => snapshot.val());
 		if (!games) {
 			return Promise.resolve(null);
 		}
@@ -90,7 +90,7 @@ const dbService = function() {
 		init,
 		getDb,
 		getInitialData,
-		getCurrentEventId,
+		getActiveEventId,
 		getEvent,
 		getNextGameTime,
 		submitAnswer,
