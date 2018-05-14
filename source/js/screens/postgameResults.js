@@ -1,4 +1,5 @@
 import {replaceContent} from '../utils/domUtils.js';
+import leaderboard from '../components/leaderboard.js';
 
 const postgameResults = function({element}) {
 
