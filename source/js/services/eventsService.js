@@ -64,7 +64,7 @@ const eventsService = function() {
 	async function onQuestionResultsChange(questionId, gameId) {
 		if (questionId !== false) {
 			const questionResults = await dbService.getQuestionResults(gameId, questionId);
-			runSubscribedCallbacks('onBetweenQuestions', questionResults);
+			runSubscribedCallbacks('onQuestionResults', questionResults);
 		}
 	}
 
