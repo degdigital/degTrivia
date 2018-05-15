@@ -73,6 +73,13 @@ function writeCurrentLeaderboard(leaderboardData, idToNameMap) {
     return Promise.resolve();
 }
     
+function setShowResultsFlag(dbRef) {
+    return dbRef.ref.parent.update({
+        showGameOver: false,
+        showGameResults: true
+    })
+}
+
 module.exports = function(event, context, db) {
     if (event.after.val()){
         if (!database) {
@@ -92,9 +99,9 @@ module.exports = function(event, context, db) {
             const uniquePlayerIds = [...new Set(playerIds)];
             return getPlayerNameIdMap(uniquePlayerIds).then(idToNameMap => {
                 const writePromises = results.map(leaderboardData => writeCurrentLeaderboard(leaderboardData, idToNameMap));
-                return Promise.all(writePromises);
+                return Promise.all(writePromises).then(() => setShowResultsFlag(event.after));
             })
         })
     }
-    return Promise.resolve();
+    return Promise.resolve().then(() => setShowResultsFlag(event.after));
 }
