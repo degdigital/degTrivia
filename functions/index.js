@@ -23,7 +23,7 @@ exports.updateLeaderboards = functions.database.ref('games/{gameId}/activeQuesti
 exports.cacheLeaderboardData = functions.database.ref('games/{gameId}/showGameOver')
     .onUpdate((change, context) => cacheLeaderboardData(change, context, db));
 
-exports.updateMostRecentEventId = functions.database.ref('currentEvent')
+exports.updateMostRecentEventId = functions.database.ref('activeEventId')
     .onUpdate((change, context) => updateMostRecentEventId(db, change, context));
 
 exports.updateMostRecentGameId = functions.database.ref('events/{eventId}/activeGameId')

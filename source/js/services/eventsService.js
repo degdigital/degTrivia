@@ -8,7 +8,7 @@ const eventsService = function() {
 	let appHasError = false;
 	let initialAppConnect = true;
 
-	async function init() {
+	function init() {
 		bindBustedAppEvents();
 		dbService.getDb().ref('activeEventId').on('value', snapshot => onActiveEventStateChanged(snapshot.val()));
 	}
@@ -20,6 +20,7 @@ const eventsService = function() {
 	}
 
 	function onActiveEventStateChanged(activeEventId) {
+		debugger;
 		if (activeEventId) {
 			playerService.getAuth().onAuthStateChanged(user => onAuthStateChanged(user, activeEventId));
 		} else {
@@ -29,7 +30,7 @@ const eventsService = function() {
 		}
 	}
 
-	async function onAuthStateChanged(user, activeEventId) {
+	function onAuthStateChanged(user, activeEventId) {
 		if (user) {
 			dbService.getDb().ref(`events/${activeEventId}/activeGameId`).on('value', snapshot => onGameActivationChange(snapshot.val(), activeEventId));
 		} else {
