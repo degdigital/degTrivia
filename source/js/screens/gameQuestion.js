@@ -78,6 +78,7 @@ export default function({element}) {
 	let countdownInst;
 
 	function render(data) {
+		console.log(data.questionData);
 		onClickBound = bindEventListeners(element, data);
 
 		renderScreen(element, data);

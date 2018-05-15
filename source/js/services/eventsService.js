@@ -42,7 +42,7 @@ const eventsService = function() {
 			const gameVals = await dbService.getActiveGameData(gameId);
 			runSubscribedCallbacks('onGameStart', gameVals);
 			dbService.getDb().ref(`games/${gameId}/activeQuestionId`).on('value', snapshot => onQuestionActivationChange(snapshot.val(), gameVals, gameId));
-			dbService.getDb().ref(`games/${gameId}/showQuestionResults`).on('value', snapshot => onShowQuestionResultsChange(snapshot.val(), gameId));
+			dbService.getDb().ref(`games/${gameId}/showQuestionResults`).on('value', snapshot => onQuestionResultsChange(snapshot.val(), gameId));
 			dbService.getDb().ref(`games/${gameId}/showGameResults`).on('value', snapshot => onShowGameResultsChange(snapshot.val()));
 			dbService.getDb().ref(`games/${gameId}/showGameOver`).on('value', snapshot => onShowGameOverChange(snapshot.val()));
 		} else {
@@ -61,7 +61,7 @@ const eventsService = function() {
 		}
 	}
 
-	async function onShowQuestionResultsChange(questionId, gameId) {
+	async function onQuestionResultsChange(questionId, gameId) {
 		if (questionId !== false) {
 			const questionResults = await dbService.getQuestionResults(gameId, questionId);
 			runSubscribedCallbacks('onBetweenQuestions', questionResults);
