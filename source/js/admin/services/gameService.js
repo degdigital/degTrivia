@@ -13,7 +13,7 @@ async function endGame(gameId) {
 		});
 
 		const gamePromise = db.ref(`games/${gameId}`).update({
-			showGameResults: true,
+			showGameOver: true,
 			showQuestionResults: false
 		});
 
