@@ -63,6 +63,14 @@ const dbService = function() {
 		return Promise.resolve(nextGameTime);
 	}
 
+	async function getQuestionResults(gameId, questionId) {
+		const questionResults = await db.ref(`games/${gameId}/questions/${questionId}`).once('value').then(snapshot => snapshot.val());
+		questionResults.id = questionId;
+		return {
+			questionData: questionResults
+		};
+	}
+
 	function submitAnswer(questionId, choiceId, playerId) {
 		if (questionId && choiceId && playerId){
 			return db.ref(`answers/${questionId}/responses/${choiceId}`).update({
@@ -112,7 +120,8 @@ const dbService = function() {
 		submitAnswer,
 		getLeaderboardData,
 		getActiveGameData,
-		getPlayerScore
+		getPlayerScore,
+		getQuestionResults
 	};
 
 };

@@ -42,7 +42,7 @@ const eventsService = function() {
 			const gameVals = await dbService.getActiveGameData(gameId);
 			runSubscribedCallbacks('onGameStart', gameVals);
 			dbService.getDb().ref(`games/${gameId}/activeQuestionId`).on('value', snapshot => onQuestionActivationChange(snapshot.val(), gameVals, gameId));
-			dbService.getDb().ref(`games/${gameId}/showQuestionResults`).on('value', snapshot => onShowQuestionResultsChange(snapshot.val()));
+			dbService.getDb().ref(`games/${gameId}/showQuestionResults`).on('value', snapshot => onQuestionResultsChange(snapshot.val(), gameId));
 			dbService.getDb().ref(`games/${gameId}/showGameResults`).on('value', snapshot => onShowGameResultsChange(snapshot.val()));
 			dbService.getDb().ref(`games/${gameId}/showGameOver`).on('value', snapshot => onShowGameOverChange(snapshot.val()));
 		} else {
@@ -61,30 +61,10 @@ const eventsService = function() {
 		}
 	}
 
-	function onShowQuestionResultsChange(shouldShowQuestionResults) {
-		if (shouldShowQuestionResults) {
-			runSubscribedCallbacks('onBetweenQuestions', {
-				questionData: {
-					id: 10,
-					order: 0,
-					question: 'Who is the most dashing Kansas City Royal of all time?',
-					correctChoice: 102,
-					choices: {
-						100: {
-							text: 'Bob Hamelin',
-							chosenCount: 28
-						},
-						101: {
-							text: 'Danny Tartabul',
-							chosenCount: 39
-						},
-						102: {
-							text: 'Steve Balboni',
-							chosenCount: 142
-						}
-					}
-				}
-			});
+	async function onQuestionResultsChange(questionId, gameId) {
+		if (questionId !== false) {
+			const questionResults = await dbService.getQuestionResults(gameId, questionId);
+			runSubscribedCallbacks('onQuestionResults', questionResults);
 		}
 	}
 
