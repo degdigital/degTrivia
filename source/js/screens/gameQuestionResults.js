@@ -1,6 +1,7 @@
 import {replaceContent} from '../utils/domUtils.js';
 
 function renderChoiceResults(results, correctChoice) {
+	const chosenPercentages = calculateChosenPercentages(results);
 	return Object.keys(results).reduce((html, optId) => {
 		const resultCssClasses = ['choice-result'];
 		
@@ -11,12 +12,22 @@ function renderChoiceResults(results, correctChoice) {
 		const resultHtml = `
 			<div class="${resultCssClasses.join(' ')}">
 				<span>${results[optId].text}</span>
-				<span>${results[optId].chosenCount}</span>
+				<span>${chosenPercentages[optId]}</span>
 			</div>
 		`;
 	
 		return html + resultHtml;
 	}, '');
+}
+
+function calculateChosenPercentages(results) {
+	const resultsKeys = Object.keys(results);
+	const total = resultsKeys.reduce((output, key) => output + results[key].chosenCount, 0);
+	let output = {};
+	resultsKeys.forEach(key => {
+		output[key] = Math.floor((results[key].chosenCount / total) * 100) + '%';
+	});
+	return output;
 }
 
 function renderScreen(element, data) {
