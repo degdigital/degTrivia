@@ -20,7 +20,6 @@ const eventsService = function() {
 	}
 
 	function onActiveEventStateChanged(activeEventId) {
-		debugger;
 		if (activeEventId) {
 			playerService.getAuth().onAuthStateChanged(user => onAuthStateChanged(user, activeEventId));
 		} else {
@@ -46,6 +45,8 @@ const eventsService = function() {
 			dbService.getDb().ref(`games/${gameId}/showQuestionResults`).on('value', snapshot => onShowQuestionResultsChange(snapshot.val()));
 			dbService.getDb().ref(`games/${gameId}/showGameResults`).on('value', snapshot => onShowGameResultsChange(snapshot.val()));
 			dbService.getDb().ref(`games/${gameId}/showGameOver`).on('value', snapshot => onShowGameOverChange(snapshot.val()));
+		} else {
+			runSubscribedCallbacks('onGameCountdown');
 		}
 	}
 

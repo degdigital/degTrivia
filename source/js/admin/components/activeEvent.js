@@ -37,8 +37,8 @@ const activeEvent = function(wrapperEl, options ={}) {
 		const activeEventId = await db.ref('activeEventId').once('value').then(snapshot => snapshot.val());
 		settings.onActiveEventChangeCallback(activeEventId);
 		replaceContent(wrapperEl, `
-			<label for="activeEvent">Active Event:</label>
-			<select class="${triggerClass}" id="activeEvent" name="activeEvent">
+			<label for="activeEventId">Active Event:</label>
+			<select class="${triggerClass}" id="activeEventId" name="activeEventId">
 				${renderDropdownOptions(events, activeEventId)}
 			</select>
 		`);
