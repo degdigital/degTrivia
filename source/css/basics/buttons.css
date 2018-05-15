@@ -1,0 +1,29 @@
+.button {
+	background-color: var(--color-green);
+	color: var(--color-black);
+	border: 0;
+	border-radius: var(--border-radius);
+	text-transform: uppercase;
+	padding: .75em 1.5em;
+	font-size: 1em;
+	font-weight: bold;
+	cursor: pointer;
+
+	&:hover, &:focus {
+		background-color: var(--color-green-dark-10);
+	}
+
+	&:active {
+		background-color: var(--color-green-dark-20);
+	}
+
+	&:disabled {
+		background-color: var(--color-gray-light-40);
+		color: var(--color-gray);
+		cursor: default;
+
+		&:hover, &:focus, &:active {
+			background-color: var(--color-gray-light-40);
+		}
+	}
+}

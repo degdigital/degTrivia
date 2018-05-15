@@ -1,6 +1,6 @@
 {{#input}}
 	<select 
-		class="input input--select-menu js-form-input {{#isInvalid}}input--invalid{{/isInvalid}} {{class}} {{styleModifier}}" 
+		class="input input--select-menu {{#isInvalid}}input--invalid{{/isInvalid}} {{class}} {{styleModifier}}" 
 		id="{{# id }}{{ id }}{{/ id }}{{^ id }}{{ name }}{{/ id }}" 
 		name="{{# name }}{{name}}{{/ name }}{{^ name }}{{id}}{{/ name }}"
 		{{#isRequired}}required{{/isRequired}}

@@ -1,0 +1,8 @@
+.input {
+	font-size: 1em;
+	background-color: transparent;
+	border-width: 0 0 .25em 0;
+	border-style: solid;
+	border-color: var(--color-gray-light-40);
+	padding: .375em .125em;
+}

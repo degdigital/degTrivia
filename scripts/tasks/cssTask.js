@@ -4,10 +4,11 @@ const postcss = require('postcss');
 
 const plugins = [
 	require('postcss-easy-import'),  
+	require('postcss-custom-properties')({preserve: false}),
 	require('postcss-color-function'),
-	require('cssnano'),
 	require('postcss-nested'),
-	require('autoprefixer')
+	require('autoprefixer'),
+	require('cssnano')
 ];
 const filesToProcess = [
 	'main.css',
