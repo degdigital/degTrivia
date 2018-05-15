@@ -25,7 +25,11 @@ function calculateChosenPercentages(results) {
 	const total = resultsKeys.reduce((output, key) => output + results[key].chosenCount, 0);
 	let output = {};
 	resultsKeys.forEach(key => {
-		output[key] = Math.round((results[key].chosenCount / total) * 100) + '%';
+		if (results[key].chosenCount === 0) {
+			output[key] = '0%';
+		} else {
+			output[key] = Math.round((results[key].chosenCount / total) * 100) + '%';
+		}
 	});
 	return output;
 }
