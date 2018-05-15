@@ -15,7 +15,12 @@
     "-LCU_qvWZf7LxjPDwnWa" : {
       "correctChoiceId" : "-LCU_qvWZf7LxjPDwnWd",
       "eventId" : "-LCUWuNIqOKlRmpPvZTE",
-      "gameId" : "-LCU_qvXC1rWVovF0Cva"
+      "gameId" : "-LCU_qvXC1rWVovF0Cva",
+      "responses" : {
+        "-LCU_qvWZf7LxjPDwnWb" : {
+          "HrnFh8lr76UEBtR2d32cBXBqFx33" : true
+        }
+      }
     },
     "-LCU_qvWZf7LxjPDwnWf" : {
       "correctChoiceId" : "-LCU_qvWZf7LxjPDwnWi",
@@ -38,7 +43,6 @@
       "gameId" : "-LCU_qvXC1rWVovF0Cva"
     }
   },
-  "currentEvent" : false,
   "disableAll" : false,
   "events" : {
     "-LCUWuNIqOKlRmpPvZTE" : {
@@ -66,7 +70,7 @@
         "-LCU_qvWZf7LxjPDwnWa" : {
           "choices" : {
             "-LCU_qvWZf7LxjPDwnWb" : {
-              "chosenCount" : 0,
+              "chosenCount" : 1,
               "text" : "William and Elizabeth"
             },
             "-LCU_qvWZf7LxjPDwnWc" : {
@@ -179,8 +183,8 @@
           "question" : "Which of the following items was owned by the fewest U.S. homes in 1990?"
         }
       },
-      "showGameOver" : true,
-      "showGameResults" : true,
+      "showGameOver" : false,
+      "showGameResults" : false,
       "showQuestionResults" : false,
       "startTime" : 1526233800000
     },

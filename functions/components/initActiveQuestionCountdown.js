@@ -17,9 +17,9 @@ function generateCounts(db, change, questionId ) {
                 writeCounts(change, questionId, optId, Object.keys(questionAnswerData.responses[optId]).length);
             });
             return Promise.all(promises)
-                .then(() => updateFlag(change, {showQuestionResults: true}));
+                .then(() => updateFlag(change, {showQuestionResults: questionId}));
         }
-        return updateFlag(change, {showQuestionResults: true});
+        return updateFlag(change, {showQuestionResults: questionId});
     })
 }
 

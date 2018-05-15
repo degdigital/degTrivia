@@ -28,7 +28,7 @@ function initGame(appConfig) {
 	eventsService.subscribe('onGameCountdown', () => router.route('pregameCountdown'));
 	eventsService.subscribe('onGameStart', gameData => router.route('gameWaitBeforeQuestions', gameData));
 	eventsService.subscribe('onQuestionAsked', questionData => router.route('gameQuestion', questionData));
-	eventsService.subscribe('onBetweenQuestions', questionData => router.route('gameQuestionResults', questionData));
+	eventsService.subscribe('onQuestionResults', questionData => router.route('gameQuestionResults', questionData));
 	eventsService.subscribe('onPostgameResults', gameScore => router.route('postgameResults', gameScore));
 	eventsService.subscribe('onGameEnd', () => router.route('pregameCountdown'));
 	eventsService.subscribe('onError', () => router.route('error'));
