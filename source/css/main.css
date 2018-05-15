@@ -1,7 +1,4 @@
-.is-hidden {
-    display: none;
-}
-
-.tab-button--active {
-    background-color: purple;
-}
+@import "variables.css";
+@import "basics/**/*.css";
+@import "components/**/*.css";
+@import "templates/**/*.css";

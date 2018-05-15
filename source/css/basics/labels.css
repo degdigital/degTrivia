@@ -1,0 +1,11 @@
+.label {
+	text-transform: uppercase;
+	color: var(--color-dark-20);
+	font-weight: bold;
+	font-size: .875em;
+	display: block;
+}
+
+.label--inline {
+	display: inline-block;
+}

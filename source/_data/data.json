@@ -77,5 +77,58 @@
                 ]
             }
         ]
+    },
+    "registrationForm": {
+        "firstName": {
+            "field": {
+                "id": "firstName",
+                "label": {
+                    "content": "First Name"
+                },
+                "input": {
+                    "isRequired": true,
+                    "attributes": [
+                        {
+                            "name": "autofocus",
+                            "value": true
+                        }
+                    ]
+                }
+            }
+        },
+        "lastName": {
+            "field": {
+                "id": "lastName",
+                "label": {
+                    "content": "Last Name"
+                },
+                "input": {
+                    "isRequired": true
+                }
+            }
+        },
+        "emailAddress": {
+            "field": {
+                "id": "emailAddress",
+                "label": {
+                    "content": "Email Address"
+                },
+                "input": {
+                    "type": "email",
+                    "isRequired": true
+                }
+            }
+        },
+        "eventCode": {
+            "field": {
+                "id": "eventCode",
+                "label": {
+                    "content": "Event Code"
+                },
+                "input": {
+                    "isRequired": true
+                }
+            }
+        }
     }
 }

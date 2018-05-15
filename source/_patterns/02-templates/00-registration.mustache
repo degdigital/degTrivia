@@ -1,16 +1,4 @@
-<h1>Welcome to DEG Trivia!</h1>
-<form class="">
-	<label for="firstName">First name</label>
-	<input type="text" id="firstName" name="firstName" autofocus required>
-
-	<label for="lastName">Last name</label>
-	<input type="text" id="lastName" name="lastName" required>
-
-	<label for="email">Email address</label>
-	<input type="email" id="email" name="email" required>
-
-	<label for="eventAlias">Event Code</label>
-	<input type="text" id="eventAlias" name="eventAlias" required value="connections2018">
-
-	<button type="submit">Submit</button>
-</form>
+<main class="page-width">
+	<h1>Welcome to DEG Trivia!</h1>
+	{{> components-registration-form }}
+</main>
