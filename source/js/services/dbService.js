@@ -1,5 +1,6 @@
 import firebase from '@firebase/app';
 import '@firebase/database';
+import '@firebase/functions';
 
 const dbService = function() {
 
@@ -79,6 +80,15 @@ const dbService = function() {
 		}
 	}
 
+	function setActiveQuestion(gameId, questionId) {
+		const setActiveQ = firebase.functions().httpsCallable('setActiveQuestion');
+		setActiveQ({
+			gameId: gameId,
+			questionId: questionId
+		})
+			.then(result => console.log(result));
+	}
+
 	function getActiveGameData(gameId) {
 		return new Promise((resolve, reject) => {
 			db.ref(`games/${gameId}`).once('value', snapshot => {
@@ -105,12 +115,6 @@ const dbService = function() {
 		return db.ref('mostRecentGame').once('value').then(snapshot => snapshot.val());
 	}
 
-	async function getQuestionExpirationTime() {
-		const questionDuration = await db.ref('questionDuration').once('value').then(snapshot => snapshot.val());
-		const timestamp = Date.now();
-		return questionDuration + timestamp;
-	}
-
 	async function getPlayerScore(playerId) {
 		const recentGameId = await getMostRecentGameId();
 		return db.ref(`playerResultsGame/${recentGameId}/${playerId}`).once('value').then(snapshot => snapshot.val());
@@ -124,11 +128,11 @@ const dbService = function() {
 		getEvent,
 		getNextGameTime,
 		submitAnswer,
+		setActiveQuestion,
 		getLeaderboardData,
 		getActiveGameData,
 		getPlayerScore,
-		getQuestionResults,
-		getQuestionExpirationTime
+		getQuestionResults
 	};
 
 };

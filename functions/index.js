@@ -31,4 +31,4 @@ exports.updateMostRecentGameId = functions.database.ref('events/{eventId}/active
     .onUpdate((change, context) => updateMostRecentGameId(db, change, context));
 
 exports.setActiveQuestion = functions.https
-	.onCall((data, context) => setActiveQuestion(data, context));
+	.onCall((data, context) => setActiveQuestion(data, context, admin));
