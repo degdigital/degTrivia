@@ -55,7 +55,7 @@ const eventsService = function() {
 			const questionExpirationTime = await dbService.getQuestionExpirationTime();
 			let activeQuestion = gameVals.questions[activeQuestionId];
 			activeQuestion.id = activeQuestionId;
-			activeQuestion.duration = questionExpirationTime;
+			activeQuestion.expirationTime = questionExpirationTime;
 			runSubscribedCallbacks('onQuestionAsked', {
 				gameId: gameId,
 				questionData: activeQuestion

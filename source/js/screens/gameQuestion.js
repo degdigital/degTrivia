@@ -79,19 +79,16 @@ export default function({element}) {
 
 	function render(data) {
 		onClickBound = bindEventListeners(element, data);
-		const now = Date.now();
-		const expiration = data.questionData.duration - now;
-		console.log(`Now: ${now}`);
-		console.log(`data.questionData.duration: ${data.questionData.duration}`);
-		console.log(`Expiration: ${expiration}`);
+	
+		const duration = data.questionData.expirationTime - Date.now();
 
 		renderScreen(element, data);
-
+		
 		countdownInst = countdown({
 			containerElement: element.querySelector(`.${cssClasses.countdownContainer}`),
 			format: 'mm:ss'
 		});
-		countdownInst.start(expiration, 'milliseconds');
+		countdownInst.start(duration, 'milliseconds');
 	}
 
 	return {
