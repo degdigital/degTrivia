@@ -1,4 +1,5 @@
 import {replaceContent} from '../utils/domUtils.js';
+import router from '../utils/router.js';
 import dbService from '../services/dbService.js';
 import playerService from '../services/playerService.js';
 import countdown from '../components/countdown.js';
@@ -68,6 +69,11 @@ function renderScreen(element, data) {
 	replaceContent(element, html);
 }
 
+function onCountdownComplete(data) {
+	data.resultsPending = true;
+	router.route('gameQuestionResults', data);
+}
+
 function teardown(element, onClickBound, countdownInst) {
 	unbindEventListeners(element, onClickBound);
 	countdownInst.stop();
@@ -78,16 +84,18 @@ export default function({element}) {
 	let countdownInst;
 
 	function render(data) {
-		console.log(data.questionData);
 		onClickBound = bindEventListeners(element, data);
+	
+		const duration = data.questionData.expirationTime - Date.now();
 
 		renderScreen(element, data);
-
+		
 		countdownInst = countdown({
 			containerElement: element.querySelector(`.${cssClasses.countdownContainer}`),
-			format: 'mm:ss'
+			format: 'mm:ss',
+			onComplete: () => onCountdownComplete(data)
 		});
-		countdownInst.start(data.questionData.duration, 'milliseconds');
+		countdownInst.start(duration, 'milliseconds');
 	}
 
 	return {
