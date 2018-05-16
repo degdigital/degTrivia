@@ -70,12 +70,6 @@
   "browserslist": [
     "last 2 versions"
   ],
-  "jest": {
-    "testPathIgnorePatterns": [
-      "/node_modules/",
-      "/public/"
-    ]
-  },
   "dependencies": {
     "babel-polyfill": "^6.26.0",
     "firebase": "^4.13.1"
