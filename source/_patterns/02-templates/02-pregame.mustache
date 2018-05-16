@@ -1,0 +1,21 @@
+<main class="page-width">
+	{{# pregame }}
+		{{# showCountdown }}
+			<div class="countdown">15:00</div>
+		{{/ showCountdown }}
+		{{# showNextGameTime }}
+			<p>
+	            Next game starts at 
+	            <time datetime="2018-07-18T14:30:00.000">
+	           		2:30pm
+	            </time>
+	        </p>
+		{{/ showNextGameTime }}
+		{{# showNoNextGame }}
+			<p>No other games are currently scheduled.</p>
+		{{/ showNoNextGame}}
+		{{# showGameReady }}
+			<p>The next game will be starting momentarily.</p>
+		{{/ showGameReady }}
+	{{/ pregame }}
+</main>
