@@ -15,7 +15,7 @@ function renderChoiceResults(results, correctChoice, resultsPending) {
 		const resultHtml = `
 			<div class="${resultCssClasses.join(' ')}">
 				<span>${results[optId].text}</span>
-				${chosenPercentages ? `<span>${chosenPercentages[optId]}</span>` : ``}</span>
+				${chosenPercentages ? `<span>${chosenPercentages[optId]}</span>` : ``}
 			</div>
 		`;
 	
