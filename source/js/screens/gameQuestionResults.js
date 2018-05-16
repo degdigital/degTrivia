@@ -1,7 +1,10 @@
 import {replaceContent} from '../utils/domUtils.js';
 
-function renderChoiceResults(results, correctChoice) {
-	const chosenPercentages = calculateChosenPercentages(results);
+function renderChoiceResults(results, correctChoice, resultsPending) {
+	let chosenPercentages;
+	if (resultsPending !== true) {
+		chosenPercentages = calculateChosenPercentages(results);
+	}
 	return Object.keys(results).reduce((html, optId) => {
 		const resultCssClasses = ['choice-result'];
 		
@@ -12,7 +15,7 @@ function renderChoiceResults(results, correctChoice) {
 		const resultHtml = `
 			<div class="${resultCssClasses.join(' ')}">
 				<span>${results[optId].text}</span>
-				<span>${chosenPercentages[optId]}</span>
+				${chosenPercentages ? `<span>${chosenPercentages[optId]}</span>` : ``}</span>
 			</div>
 		`;
 	
@@ -36,13 +39,15 @@ function calculateChosenPercentages(results) {
 
 function renderScreen(element, data) {
 	const {questionData} = data;
+	const resultsPending = data.resultsPending && data.resultsPending === true;
 
 	const html = `
 		<div>
 			<h1>Question #${questionData.order + 1}</h1>			
 			<p>${questionData.question}</p>
+			${resultsPending === true ? '<p>Calculating results...</p>' : ''}
 			<div class="choice-results">
-				${renderChoiceResults(questionData.choices, questionData.correctChoice)}
+				${renderChoiceResults(questionData.choices, questionData.correctChoice, resultsPending)}
 			</div>
 		</div>`;
 
