@@ -60,6 +60,10 @@ caption {
 	text-align: left;
 }
 
+select {
+	max-width: 13.75rem;
+}
+
 .field {
 	margin-bottom: 1rem;
 }
