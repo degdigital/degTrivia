@@ -109,6 +109,9 @@ const manager = function(el) {
 	function renderEndGameInterface(activeGameId) {
 		if(activeGameId && activeGameId !== false) {
 			const endGameWrapperEl = el.querySelector(`.${endGameWrapperClass}`);
+			if (endGameInterfaceInst) {
+				endGameInterfaceInst.teardown();
+			}
 			endGameInterfaceInst = endGameInterface(endGameWrapperEl, activeGameId);
 			endGameInterfaceInst.render();
 		} else if(endGameInterfaceInst) {
