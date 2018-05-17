@@ -89,7 +89,7 @@ const dbService = function() {
 	}
 
 	function getQuestionExpirationTime(gameId) {
-		return db.ref(`games/${gameId}/expires`).once('value').then(snapshot => snapshot.val());
+		return db.ref(`games/${gameId}/questionExpirationTime`).once('value').then(snapshot => snapshot.val());
 	}
 
 	function getActiveGameData(gameId) {
