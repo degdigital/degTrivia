@@ -4,15 +4,11 @@ module.exports = function(data, context, admin, functions) {
 	const questionId = data.questionId;
 
 	if (isInvalidIdFormat(gameId) || isInvalidIdFormat(questionId)) {
-		throw new functions.https.HttpsError('invalid-argument', `
-			The function must be called with a valid gameId and questionId.
-		`);
+		throw new functions.https.HttpsError('invalid-argument', 'The function must be called with a valid gameId and questionId.');
 	}
 
 	if (isUnauthorizedUser()) {
-		throw new functions.https.HttpsError('failed-precondition', `
-			The function must be called while authenticated.
-		`);
+		throw new functions.https.HttpsError('failed-precondition', 'The function must be called while authenticated.');
 	}
 
 	function getQuestionExpiration() {
