@@ -3,7 +3,7 @@ module.exports = function(data, context, admin, functions) {
 	const gameId = data.gameId;
 	const questionId = data.questionId;
 
-	if (isInValidIdFormat(gameId) || isInValidIdFormat(questionId)) {
+	if (isInvalidIdFormat(gameId) || isInvalidIdFormat(questionId)) {
 		throw new functions.https.HttpsError('invalid-argument', `
 			The function must be called with a valid gameId and questionId.
 		`);
@@ -28,7 +28,7 @@ module.exports = function(data, context, admin, functions) {
 		});
 	}
 
-	function isInValidIdFormat(id = null) {
+	function isInvalidIdFormat(id = null) {
 		return !id || typeof id !== 'string' || id.toString().length === 0;
 	}
 
