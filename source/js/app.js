@@ -30,7 +30,9 @@ function initGame(appConfig) {
 	eventsService.subscribe('onQuestionAsked', questionData => router.route('gameQuestion', questionData));
 	eventsService.subscribe('onQuestionResults', questionData => router.route('gameQuestionResults', questionData));
 	eventsService.subscribe('onPostgameResults', gameScore => router.route('postgameResults', gameScore));
-	eventsService.subscribe('onGameEnd', () => router.route('pregameCountdown'));
+	// TODO: figure out logic for showing pregameCountdown after game.
+	// right now this was bypassing the postgameResults screen
+	// eventsService.subscribe('onGameEnd', () => router.route('pregameCountdown'));
 	eventsService.subscribe('onError', () => router.route('error'));
 	// eventsService.subscribe('onErrorResolved', infoObj => router.route('info', infoObj));
 	eventsService.subscribe('onResetApp', () => location.reload());

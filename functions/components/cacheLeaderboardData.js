@@ -33,7 +33,13 @@ function getPlayerNameIdMap(playerIds) {
         const players = snap.val();
         if (players) {
             const retVal = {};
-            playerIds.forEach(id => retVal[id] = `${players[id].firstName} ${players[id].lastName}`)
+            playerIds.forEach(id => {
+                if (players[id]) {
+                    retVal[id] = `${players[id].firstName} ${players[id].lastName}`;
+                } else {
+                    retVal[id] = 'Anonymous Player';
+                }
+            })
             return retVal;
         }
         return {};

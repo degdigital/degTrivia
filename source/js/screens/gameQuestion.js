@@ -11,10 +11,12 @@ const cssClasses = {
 	choiceButtonSelected: 'choice-button--selected'
 }
 
-function bindEventListeners(element, data, onClickBound) {
-	onClickBound = e => onClick(e, element, data);
+function bindEventListeners(element, data) {
+	const onClickBound = e => onClick(e, element, data);
 
 	element.addEventListener('click', onClickBound);
+
+	return onClickBound;
 }
 
 function unbindEventListeners(element, onClickBound) {
