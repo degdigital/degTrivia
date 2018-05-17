@@ -1,0 +1,21 @@
+.choice-button {
+	display: block;
+	max-width: 20em;
+}
+
+.choice-button--disabled {
+	cursor: default;
+	background-color: var(--color-gray-light-40);
+
+	&:hover, &:focus, &:active {
+		background-color: var(--color-gray-light-40);
+	}
+}
+
+.choice-button--selected {
+	background-color: var(--color-green);
+	
+	&:hover, &:focus, &:active {
+		background-color: var(--color-green);
+	}
+}
