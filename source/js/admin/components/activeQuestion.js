@@ -23,7 +23,6 @@ const activeQuestion = function(wrapperEl, options ={}) {
 		if (el.classList.contains(triggerClass)) {
 			const activeQuestionId = el.value === 'no-value' ? false : el.value;
 			dbService.setActiveQuestion(activeGameId, activeQuestionId);
-			// updateDb(val);
 		}
 	}
 

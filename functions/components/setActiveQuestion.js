@@ -1,9 +1,21 @@
-module.exports = function(data, context, admin) {
+module.exports = function(data, context, admin, functions) {
 
 	const gameId = data.gameId;
 	const questionId = data.questionId;
 
-	function getQuestionExpirationTime() {
+	if (isInValidIdFormat(gameId) || isInValidIdFormat(questionId)) {
+		throw new functions.https.HttpsError('invalid-argument', `
+			The function must be called with a valid gameId and questionId.
+		`);
+	}
+
+	if (isUnauthorizedUser()) {
+		throw new functions.https.HttpsError('failed-precondition', `
+			The function must be called while authenticated.
+		`);
+	}
+
+	function getQuestionDuration() {
 		return admin.database().ref('questionDuration').once('value').then(snapshot => {
 			return snapshot.val() + Date.now();
 		});
@@ -16,8 +28,16 @@ module.exports = function(data, context, admin) {
 		});
 	}
 
+	function isInValidIdFormat(id = null) {
+		return !id || typeof id !== 'string' || id.toString().length === 0;
+	}
+
+	function isUnauthorizedUser() {
+		return !context.auth;
+	}
+
 	return new Promise((resolve, reject) => {
-		getQuestionExpirationTime()
+		getQuestionDuration()
 			.then(questionExpirationTime => saveGameVals(questionExpirationTime))
 			.then(() => resolve({
 				success: true

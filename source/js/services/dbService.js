@@ -86,7 +86,13 @@ const dbService = function() {
 			gameId: gameId,
 			questionId: questionId
 		})
-			.then(result => console.log(result));
+			.then(result => {
+				// console.log(result);
+			});
+	}
+
+	function getQuestionExpirationTime(gameId) {
+		return db.ref(`games/${gameId}/expires`).once('value').then(snapshot => snapshot.val());
 	}
 
 	function getActiveGameData(gameId) {
@@ -132,7 +138,8 @@ const dbService = function() {
 		getLeaderboardData,
 		getActiveGameData,
 		getPlayerScore,
-		getQuestionResults
+		getQuestionResults,
+		getQuestionExpirationTime
 	};
 
 };
