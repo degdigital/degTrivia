@@ -15,7 +15,7 @@ module.exports = function(data, context, admin, functions) {
 		`);
 	}
 
-	function getQuestionDuration() {
+	function getQuestionExpiration() {
 		return admin.database().ref('questionDuration').once('value').then(snapshot => {
 			return snapshot.val() + Date.now();
 		});
@@ -37,7 +37,7 @@ module.exports = function(data, context, admin, functions) {
 	}
 
 	return new Promise((resolve, reject) => {
-		getQuestionDuration()
+		getQuestionExpiration()
 			.then(questionExpirationTime => saveGameVals(questionExpirationTime))
 			.then(() => resolve({
 				success: true
