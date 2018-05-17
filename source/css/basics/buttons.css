@@ -1,4 +1,5 @@
 .button {
+	display: inline-block;
 	background-color: var(--color-green);
 	color: var(--color-black);
 	border: 0;
@@ -8,6 +9,7 @@
 	font-size: 1em;
 	font-weight: bold;
 	cursor: pointer;
+	text-align: center;
 
 	&:hover, &:focus {
 		background-color: var(--color-green-dark-10);

@@ -2,6 +2,7 @@ import gameQuestion from './gameQuestion.js';
 import dbService from '../services/dbService.js';
 import playerService from '../services/playerService.js';
 import countdown from '../components/countdown.js';
+import MockDate from 'mockdate';
 
 jest.mock('../services/dbService');
 jest.mock('../services/playerService');
@@ -9,13 +10,15 @@ jest.mock('../components/countdown');
 
 let element;
 
+const now = 338446800000;
+
 const data = {
 	gameId: 1,
 	questionData: {
 		id: 10,
 		order: 0,
 		question: 'Who is the most dashing Kansas City Royal of all time?',
-		duration: 30000,
+		expirationTime: 338446815000,
 		choices: {
 			100: {
 				text: 'Bob Hamelin',
@@ -35,6 +38,9 @@ const data = {
 
 beforeEach(() => {
 	jest.clearAllMocks();
+
+	MockDate.set(now);
+
 	element = document.createElement('div');
 	document.body.appendChild(element);
 });
@@ -50,7 +56,8 @@ describe('calling render()', () => {
 
 		const expectedOptions = {
 			containerElement: expect.any(Object),
-			format: 'mm:ss'
+			format: 'mm:ss',
+			onComplete: expect.any(Function)
 		};	
 
 		const startSpy = jest.spyOn(countdownInst, 'start');
@@ -59,10 +66,12 @@ describe('calling render()', () => {
 	 	gameQuestionInst.render(data);
 		gameQuestionInst.teardown(); 
 
+		const expectedDuration = data.questionData.expirationTime - now;
+
 		expect(countdown).toHaveBeenCalledTimes(1);
 		expect(countdown).toHaveBeenCalledWith(expectedOptions);
 		expect(startSpy).toHaveBeenCalledTimes(1);
-		expect(startSpy).toHaveBeenCalledWith(data.questionData.duration, 'milliseconds');
+		expect(startSpy).toHaveBeenCalledWith(expectedDuration, 'milliseconds');
 	});
 });
 

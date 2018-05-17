@@ -1,5 +1,6 @@
 import firebase from '@firebase/app';
 import '@firebase/database';
+import '@firebase/functions';
 
 const dbService = function() {
 
@@ -79,6 +80,18 @@ const dbService = function() {
 		}
 	}
 
+	function setActiveQuestion(gameId, questionId) {
+		const setActiveQ = firebase.functions().httpsCallable('setActiveQuestion');
+		setActiveQ({
+			gameId: gameId,
+			questionId: questionId
+		});
+	}
+
+	function getQuestionExpirationTime(gameId) {
+		return db.ref(`games/${gameId}/expires`).once('value').then(snapshot => snapshot.val());
+	}
+
 	function getActiveGameData(gameId) {
 		return new Promise((resolve, reject) => {
 			db.ref(`games/${gameId}`).once('value', snapshot => {
@@ -118,10 +131,12 @@ const dbService = function() {
 		getEvent,
 		getNextGameTime,
 		submitAnswer,
+		setActiveQuestion,
 		getLeaderboardData,
 		getActiveGameData,
 		getPlayerScore,
-		getQuestionResults
+		getQuestionResults,
+		getQuestionExpirationTime
 	};
 
 };

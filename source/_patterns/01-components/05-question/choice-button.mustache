@@ -1,0 +1,6 @@
+{{# choice }}
+	<div class="choice-field">
+		<input type="radio" id="{{id}}" name="choice" class="is-vishidden" {{#isSelected}}checked{{/isSelected}} {{#isDisabled}}disabled{{/isDisabled}} />
+		<label for="{{id}}" class="button choice-button{{#isSelected}} choice-button--selected{{/isSelected}}{{#isDisabled}} choice-button--disabled{{/isDisabled}}" {{^isDisabled}}tabindex="0"{{/isDisabled}} >{{text}}</label>
+	</div>
+{{/ choice }}

@@ -70,7 +70,7 @@ function getMinutes(duration) {
 }
 
 function getSeconds(duration) {
-	return Math.floor(duration % millisecondsInDay % millisecondsInHour % millisecondsInMinute / millisecondsInSecond);
+	return Math.round(duration % millisecondsInDay % millisecondsInHour % millisecondsInMinute / millisecondsInSecond);
 }
 
 function getDurationPart(duration, unit) {

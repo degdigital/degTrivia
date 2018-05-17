@@ -50,10 +50,12 @@ const eventsService = function() {
 		}
 	}
 
-	function onQuestionActivationChange(activeQuestionId, gameVals, gameId) {
+	async function onQuestionActivationChange(activeQuestionId, gameVals, gameId) {
 		if (activeQuestionId) {
+			const questionExpirationTime = await dbService.getQuestionExpirationTime(gameId);
 			let activeQuestion = gameVals.questions[activeQuestionId];
 			activeQuestion.id = activeQuestionId;
+			activeQuestion.expirationTime = questionExpirationTime;
 			runSubscribedCallbacks('onQuestionAsked', {
 				gameId: gameId,
 				questionData: activeQuestion

@@ -1,0 +1,30 @@
+{
+	"isDisabled": true,
+	"choices": [
+        {
+            "choice": {
+                "id": "choice-1",
+                "text": "Choice 1"
+            }
+        },
+        {
+            "choice": {
+                "id": "choice-2",
+                "text": "Choice 2",
+                "isSelected": true
+            }
+        },
+        {
+            "choice": {
+                "id": "choice-3",
+                "text": "Choice 3"
+            }
+        },
+        {
+            "choice": {
+                "id": "choice-4",
+                "text": "Choice 4"
+            }
+        }
+    ]
+}
