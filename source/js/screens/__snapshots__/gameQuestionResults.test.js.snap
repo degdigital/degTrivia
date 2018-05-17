@@ -17,6 +17,7 @@ exports[`calling render() renders out a question and choice results 1`] = `
     </p>
     
 			
+			
     <div
       class="choice-results"
     >
@@ -34,7 +35,7 @@ exports[`calling render() renders out a question and choice results 1`] = `
         
 				
         <span>
-          28
+          13%
         </span>
         
 			
@@ -53,7 +54,7 @@ exports[`calling render() renders out a question and choice results 1`] = `
         
 				
         <span>
-          39
+          19%
         </span>
         
 			
@@ -72,7 +73,7 @@ exports[`calling render() renders out a question and choice results 1`] = `
         
 				
         <span>
-          142
+          68%
         </span>
         
 			

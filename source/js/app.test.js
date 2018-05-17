@@ -70,17 +70,18 @@ describe('app should route to', () => {
 
     test('question results page when a question ends', () => {
     	const dataObj = {}; 
-		eventsService.__fireEvent('onBetweenQuestions', dataObj);
+		eventsService.__fireEvent('onQuestionResults', dataObj);
 
         expect(routeSpy).toHaveBeenCalledTimes(1);
         expect(routeSpy).toHaveBeenCalledWith('gameQuestionResults', dataObj);
     });
 
     test('game results page when game results are ready', () => {
-		eventsService.__fireEvent('onPostgameResults');
+        const dataObj = {}; 
+        eventsService.__fireEvent('onPostgameResults', dataObj);
 
         expect(routeSpy).toHaveBeenCalledTimes(1);
-        expect(routeSpy).toHaveBeenCalledWith('postgameResults');
+        expect(routeSpy).toHaveBeenCalledWith('postgameResults', dataObj);
     });
 
     test('pregame countdown page when a game ends', () => {
