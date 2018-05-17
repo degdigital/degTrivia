@@ -30,7 +30,7 @@ function render(wrapperEl) {
 
 function teardown(boundClickHandler, wrapperEl) {
 	if (wrapperEl) {
-		wrapperEl.removeEventListener('click', e => boundClickHandler);
+		wrapperEl.removeEventListener('click', boundClickHandler);
 		replaceContent(wrapperEl, '');	
 	}
 }
