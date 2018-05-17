@@ -26,13 +26,6 @@ const activeQuestion = function(wrapperEl, options ={}) {
 		}
 	}
 
-	function updateDb(val) {
-		db.ref(`games/${activeGameId}`).update({
-			activeQuestionId: val,
-			showQuestionResults: false
-		});
-	}
-
 	async function render(gameId) {
 		if (activeGameId && !gameId) {
 			db.ref(`games/${activeGameId}`).update({
