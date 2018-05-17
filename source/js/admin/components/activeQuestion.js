@@ -21,16 +21,9 @@ const activeQuestion = function(wrapperEl, options ={}) {
 	function onWrapperChange(e) {
 		const el = e.target;
 		if (el.classList.contains(triggerClass)) {
-			const val = el.value === 'no-value' ? false : el.value;
-			updateDb(val);
+			const activeQuestionId = el.value === 'no-value' ? false : el.value;
+			dbService.setActiveQuestion(activeGameId, activeQuestionId);
 		}
-	}
-
-	function updateDb(val) {
-		db.ref(`games/${activeGameId}`).update({
-			activeQuestionId: val,
-			showQuestionResults: false
-		});
 	}
 
 	async function render(gameId) {

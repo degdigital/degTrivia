@@ -72,6 +72,7 @@
   ],
   "dependencies": {
     "babel-polyfill": "^6.26.0",
-    "firebase": "^4.13.1"
+    "firebase": "^4.13.1",
+    "@firebase/functions": "^0.2.2"
   }
 }

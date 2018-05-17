@@ -52,7 +52,7 @@ const eventsService = function() {
 
 	async function onQuestionActivationChange(activeQuestionId, gameVals, gameId) {
 		if (activeQuestionId) {
-			const questionExpirationTime = await dbService.getQuestionExpirationTime();
+			const questionExpirationTime = await dbService.getQuestionExpirationTime(gameId);
 			let activeQuestion = gameVals.questions[activeQuestionId];
 			activeQuestion.id = activeQuestionId;
 			activeQuestion.expirationTime = questionExpirationTime;
