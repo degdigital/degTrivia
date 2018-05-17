@@ -1,9 +1,9 @@
-module.exports = function(data, context, admin, functions) {
+module.exports = function(data, context, db, functions) {
 
 	const gameId = data.gameId;
 	const questionId = data.questionId;
 
-	if (isInvalidIdFormat(gameId) || isInvalidIdFormat(questionId)) {
+	if (!isValidIdFormat(gameId) || !isValidIdFormat(questionId)) {
 		throw new functions.https.HttpsError('invalid-argument', 'The function must be called with a valid gameId and questionId.');
 	}
 
@@ -12,20 +12,20 @@ module.exports = function(data, context, admin, functions) {
 	}
 
 	function getQuestionExpiration() {
-		return admin.database().ref('questionDuration').once('value').then(snapshot => {
+		return db.ref('questionDuration').once('value').then(snapshot => {
 			return snapshot.val() + Date.now();
 		});
 	}
 
 	function saveGameVals(questionExpirationTime) {
-		return admin.database().ref(`/games/${gameId}`).update({
+		return db.ref(`/games/${gameId}`).update({
 			activeQuestionId: questionId,
 			expires: questionExpirationTime
 		});
 	}
 
-	function isInvalidIdFormat(id = null) {
-		return !id || typeof id !== 'string' || id.toString().length === 0;
+	function isValidIdFormat(id = null) {
+		return id && typeof id === 'string' && id.toString().length > 0;
 	}
 
 	function isUnauthorizedUser() {

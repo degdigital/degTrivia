@@ -85,10 +85,7 @@ const dbService = function() {
 		setActiveQ({
 			gameId: gameId,
 			questionId: questionId
-		})
-			.then(result => {
-				// console.log(result);
-			});
+		});
 	}
 
 	function getQuestionExpirationTime(gameId) {
