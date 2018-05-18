@@ -1,0 +1,13 @@
+.question {
+	text-align: center;
+}
+
+.question__text {
+	font-size: 1.25em;
+	margin-bottom: 1.25em;
+	text-align: left;
+}
+
+.question__countdown {
+	margin-bottom: .375em;
+}

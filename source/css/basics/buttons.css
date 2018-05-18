@@ -5,7 +5,7 @@
 	border: 0;
 	border-radius: var(--border-radius);
 	text-transform: uppercase;
-	padding: .75em 1.5em;
+	padding: .75em 1.25em;
 	font-size: 1em;
 	font-weight: bold;
 	cursor: pointer;
