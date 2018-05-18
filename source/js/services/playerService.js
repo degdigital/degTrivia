@@ -20,17 +20,24 @@ const playerService = function() {
 			if (!playerVals.email || playerVals.email.length === 0) {
 				reject('You must provide an email address.');
 			}
-			const activeEventId = await dbService.getActiveEventId();
-			if (!activeEventId) {
-				reject('The event code is invalid.')
+			const promises = await Promise.all([
+				dbService.getActiveEventId(),
+				dbService.getEvent(playerVals.eventAlias)
+			]);
+			const activeEventId = promises[0];
+			const requestedRegistrationEvent = promises[1];
+			if (!activeEventId || !requestedRegistrationEvent || activeEventId !== Object.keys(requestedRegistrationEvent)[0]) {
+				reject('The event code is invalid.');
+			} else {
+				auth.signInAnonymously()
+					.then(user => createPlayer(playerVals, activeEventId, user.uid))
+					.then(user => resolve('User created!'))
+					.catch(error => {
+						console.log(error);
+						reject('Something went wrong');
+					});
 			}
-			auth.signInAnonymously()
-				.then(user => createPlayer(playerVals, activeEventId, user.uid))
-				.then(user => resolve('User created!'))
-				.catch(error => {
-					console.log(error);
-					reject('Something went wrong');
-				});
+			
 		});
 	}
 
