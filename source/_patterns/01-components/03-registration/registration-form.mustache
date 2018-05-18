@@ -1,5 +1,8 @@
 {{# registrationForm }}
 <form class="">
+	{{# isFormInvalid }}
+		{{> components-form-error-message }}
+	{{/ isFormInvalid }}
 	{{# firstName }}
 		{{> components-field }}
 	{{/ firstName }}

@@ -31,7 +31,7 @@
     "fieldErrorMessages": {
         "items": [
             {
-                "content": "This is a validation error message"
+                "text": "This is a validation error message"
             }
         ]
     },
