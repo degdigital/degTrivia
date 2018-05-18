@@ -13,6 +13,10 @@ body {
 	margin: 0 auto;
 }
 
+.page-width--wide {
+	max-width: 80em;
+}
+
 .main {
 	padding: 0 1.5em 1em 1.5em;
 	flex-grow: 1;
