@@ -42,8 +42,11 @@ const manager = function(el) {
     }
 
 
-	async function render() {
-        const leaderboardData = await dbService.getLeaderboardData();
+	async function render(dbData) {
+        let leaderboardData = dbData;
+        if (!dbData) {
+            leaderboardData = await dbService.getLeaderboardData();
+        }
         replaceContent(el, `
         <div class="page-width page-width--wide">
 			<h1 class="text--centered">DEG Trivia Leaderboard</h1>

@@ -15,15 +15,20 @@ const leaderboardTV = function(el) {
 
 	let db;
 	let loginInst;
-	// let managerInst;
+
+	function setUpListeners(managerInst) {
+		dbService.getDb().ref(`leaderboardCurrent`).on('value', snapshot => managerInst.render(snapshot.val()));
+	}
 
 	function init() {
 		firebase.initializeApp(firebaseConfig);
 		dbService.init();
 
 		db = dbService.getDb();
-        // managerInst = manager(el);
-        manager(el).render();
+		const managerInst = manager(el);
+		managerInst.render();
+		
+		setUpListeners(managerInst);
 	}
 
 	init();
