@@ -14,6 +14,8 @@
 	
 	--color-teal: #85dadf;
 
+	--color-orange: #f98e2b;
+
 	--color-green: #c3d600;
 	--color-green-dark-10: color(var(--color-green) shade(10%));
 	--color-green-dark-20: color(var(--color-green) shade(20%));
@@ -21,7 +23,7 @@
 	--color-red: #c00;
 	  
 	--color-text: var(--color-white);
-	--color-error: var(--color-red);
+	--color-error: var(--color-orange);
 
 	--font-family-primary: 'Open Sans', sans-serif;
 	--base-font-size: 1em;
