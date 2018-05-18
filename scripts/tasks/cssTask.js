@@ -12,7 +12,8 @@ const plugins = [
 ];
 const filesToProcess = [
 	'main.css',
-	'admin.css'
+	'admin.css',
+	'leaderboard.css'
 ];
 
 function processFile(srcFilepath, destFilepaths, plugins) {
