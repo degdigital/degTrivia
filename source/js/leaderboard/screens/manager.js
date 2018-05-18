@@ -10,19 +10,19 @@ const manager = function(el) {
         let returnMarkup = '';
         if (data) {
             returnMarkup += data.map((leader, index) => (
-                `<tr>
-                     <td>${index + 1}</td>
-                     <td>${leader.name}</td>
-                     <td>${leader.score}</td>
+                `<tr class="table__row table__data-row">
+                     <td class="table__data-cell">${index + 1}</td>
+                     <td class="table__data-cell">${leader.name}</td>
+                     <td class="table__data-cell">${leader.score}</td>
                 </tr>`
             )).join('');
         } else {
-            for (let i = 0; i < 10; i++) {
+            for (let index = 0; index < 10; index++) {
                 returnMarkup += `
-                <tr>
-                     <td>${index + 1}</td>
-                     <td></td>
-                     <td></td>
+                <tr class="table__row table__data-row">
+                     <td class="table__data-cell">${index + 1}</td>
+                     <td class="table__data-cell"></td>
+                     <td class="table__data-cell"></td>
                  </tr>
                 `
             }
@@ -32,9 +32,9 @@ const manager = function(el) {
 
     function renderLeaderboard(data, title) {
        return `
-       <table>
+       <table class="table">
             <caption class="table__caption">${title}</caption>
-            <tbody>
+            <tbody class="table__table-body">
                 ${renderTableBody(data)}
             </tbody>
         </table>
@@ -49,7 +49,7 @@ const manager = function(el) {
         }
         replaceContent(el, `
         <div class="page-width page-width--wide">
-			<h1 class="text--centered">DEG Trivia Leaderboard</h1>
+			<h1 class="page-title page-title--centered">DEG Trivia Leaderboard</h1>
             <div class="columns columns--two">
                 <div class="column">
                     ${renderLeaderboard(leaderboardData.game, 'Last Game')}

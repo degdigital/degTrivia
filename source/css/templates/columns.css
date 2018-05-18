@@ -1,0 +1,39 @@
+.columns {
+    clear: both;
+    display: flex;
+    flex-direction: column;
+}
+
+.column {
+    margin-bottom: 1.5em;
+}
+
+@media screen and (min-width: 48em) {
+    .columns {
+        flex-direction: row;
+    }
+
+    .columns--two {
+        .column {
+            margin-right: 1em;
+            width: calc(50% - .5em);
+
+            &:last-child {
+                margin-iright: 0;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 64em) {
+    .columns--two {
+        .column {
+            margin-right: 2em;
+            width: calc(50% - 1em);
+
+            &:last-child {
+                margin-iright: 0;
+            }
+        }
+    }
+}
