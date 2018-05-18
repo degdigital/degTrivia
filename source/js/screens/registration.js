@@ -5,6 +5,8 @@ import playerService from '../services/playerService.js';
 const registration = function({element}) {
 
 	const registrationFormClass = 'registrationForm';
+	const errorPlaceholderClass = 'error-placeholder';
+	let errorPlaceholderEl;
 
 	function bindEvents() {
 		element.addEventListener('submit', onFormSubmit);
@@ -13,6 +15,7 @@ const registration = function({element}) {
 	function render() {
 		replaceContent(element, `
 			<h1>Welcome to DEG Trivia!</h1>
+			<span class="${errorPlaceholderClass}"></span>
 			<form class="${registrationFormClass}">
 				<label for="firstName">First name</label><br>
 				<input type="text" id="firstName" name="firstName" autofocus required><br><br>
@@ -24,11 +27,12 @@ const registration = function({element}) {
 				<input type="email" id="email" name="email" required><br><br>
 
 				<label for="eventAlias">Event Code</label><br>
-				<input type="text" id="eventAlias" name="eventAlias" required value="connections2018"><br><br>
+				<input type="text" id="eventAlias" name="eventAlias" required"><br><br>
 
 				<button type="submit">Submit</button>
 			</form>
 		`);
+		errorPlaceholderEl = element.querySelector(`.${errorPlaceholderClass}`);
 	}
 
 	function onFormSubmit(e) {
@@ -37,13 +41,13 @@ const registration = function({element}) {
 			e.preventDefault();
 			const formVals = formMapper.getValues(el);
 			playerService.register(formVals)
-				.then(successMsg => renderPostRegisterMessage(successMsg))
-				.catch(errorMsg => renderPostRegisterMessage(errorMsg));
+				.then(successMsg => renderPostRegisterMessage(element, successMsg))
+				.catch(errorMsg => renderPostRegisterMessage(errorPlaceholderEl, errorMsg));
 		}
 	}
 
-	function renderPostRegisterMessage(message) {
-		replaceContent(element, `
+	function renderPostRegisterMessage(el, message) {
+		replaceContent(el, `
 			<p>${message}</p>
 		`);
 	}
