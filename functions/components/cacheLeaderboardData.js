@@ -35,7 +35,7 @@ function getPlayerNameIdMap(playerIds) {
             const retVal = {};
             playerIds.forEach(id => {
                 if (players[id]) {
-                    retVal[id] = `${players[id].firstName} ${players[id].lastName}`;
+                    retVal[id] = `${players[id].firstName} ${players[id].lastName[0].toUpperCase()}.`;
                 } else {
                     retVal[id] = 'Anonymous Player';
                 }
