@@ -11,73 +11,6 @@
     "lNcu9GkIvuZmoo31l9gdoFjvRAj2" : true,
     "sAysvz3egIMLFpQAQlulRsP1eW72" : true
   },
-  "answers" : {
-    "-LCU_qvWZf7LxjPDwnWa" : {
-      "correctChoiceId" : "-LCU_qvWZf7LxjPDwnWd",
-      "eventId" : "-LCUWuNIqOKlRmpPvZTE",
-      "gameId" : "-LCU_qvXC1rWVovF0Cva",
-      "responses" : {
-        "-LCU_qvWZf7LxjPDwnWo" : {
-          "HrnFh8lr76UEBtR2d32cBXBqFx33" : true
-        }
-      }
-    },
-    "-LCU_qvWZf7LxjPDwnWf" : {
-      "correctChoiceId" : "-LCU_qvWZf7LxjPDwnWi",
-      "eventId" : "-LCUWuNIqOKlRmpPvZTE",
-      "gameId" : "-LCU_qvXC1rWVovF0Cva",
-      "responses" : {
-        "-LCU_qvWZf7LxjPDwnWo" : {
-          "HrnFh8lr76UEBtR2d32cBXBqFx33" : true
-        }
-      }
-    },
-    "-LCU_qvWZf7LxjPDwnWk" : {
-      "correctChoiceId" : "-LCU_qvWZf7LxjPDwnWl",
-      "eventId" : "-LCUWuNIqOKlRmpPvZTE",
-      "gameId" : "-LCU_qvXC1rWVovF0Cva",
-      "responses" : {
-        "-LCU_qvWZf7LxjPDwnWo" : {
-          "HrnFh8lr76UEBtR2d32cBXBqFx33" : true
-        }
-      }
-    },
-    "-LCU_qvWZf7LxjPDwnWp" : {
-      "correctChoiceId" : "-LCU_qvWZf7LxjPDwnWs",
-      "eventId" : "-LCUWuNIqOKlRmpPvZTE",
-      "gameId" : "-LCU_qvXC1rWVovF0Cva"
-    },
-    "-LCU_qvWZf7LxjPDwnWu" : {
-      "correctChoiceId" : "-LCU_qvXC1rWVovF0CvY",
-      "eventId" : "-LCUWuNIqOKlRmpPvZTE",
-      "gameId" : "-LCU_qvXC1rWVovF0Cva"
-    },
-    "-LCUjYNIiCbBWln2OOtm" : {
-      "correctChoiceId" : "-LCUjYNIiCbBWln2OOtp",
-      "eventId" : "-LCUWuNIqOKlRmpPvZTE",
-      "gameId" : "-LCUjYNIiCbBWln2OOuA"
-    },
-    "-LCUjYNIiCbBWln2OOtr" : {
-      "correctChoiceId" : "-LCUjYNIiCbBWln2OOtu",
-      "eventId" : "-LCUWuNIqOKlRmpPvZTE",
-      "gameId" : "-LCUjYNIiCbBWln2OOuA"
-    },
-    "-LCUjYNIiCbBWln2OOtw" : {
-      "correctChoiceId" : "-LCUjYNIiCbBWln2OOty",
-      "eventId" : "-LCUWuNIqOKlRmpPvZTE",
-      "gameId" : "-LCUjYNIiCbBWln2OOuA"
-    },
-    "-LCUjYNIiCbBWln2OOu0" : {
-      "correctChoiceId" : "-LCUjYNIiCbBWln2OOu1",
-      "eventId" : "-LCUWuNIqOKlRmpPvZTE",
-      "gameId" : "-LCUjYNIiCbBWln2OOuA"
-    },
-    "-LCUjYNIiCbBWln2OOu5" : {
-      "correctChoiceId" : "-LCUjYNIiCbBWln2OOu8",
-      "eventId" : "-LCUWuNIqOKlRmpPvZTE",
-      "gameId" : "-LCUjYNIiCbBWln2OOuA"
-    }
-  },
   "disableAll" : false,
   "events" : {
     "-LCUWuNIqOKlRmpPvZTE" : {
@@ -105,7 +38,7 @@
         "-LCU_qvWZf7LxjPDwnWa" : {
           "choices" : {
             "-LCU_qvWZf7LxjPDwnWb" : {
-              "chosenCount" : 1,
+              "chosenCount" : 0,
               "text" : "William and Elizabeth"
             },
             "-LCU_qvWZf7LxjPDwnWc" : {
@@ -163,7 +96,7 @@
               "text" : "Scout"
             },
             "-LCU_qvWZf7LxjPDwnWo" : {
-              "chosenCount" : 1,
+              "chosenCount" : 0,
               "text" : "Tulip"
             }
           },
@@ -221,7 +154,7 @@
       "showGameOver" : false,
       "showGameResults" : false,
       "showQuestionResults" : false,
-      "startTime" : 1526233800000
+      "startTime" : 1528822800000
     },
     "-LCUjYNIiCbBWln2OOuA" : {
       "activeQuestionId" : false,
@@ -348,191 +281,6 @@
       "showGameResults" : false,
       "showQuestionResults" : false,
       "startTime" : 1528830000000
-    }
-  },
-  "leaderboardCurrent" : {
-    "event" : [ {
-      "name" : "Anna Scheuler",
-      "score" : 1500000
-    }, {
-      "name" : "Ryan Heap",
-      "score" : 38
-    }, {
-      "name" : "Aaron Ladage",
-      "score" : 37
-    } ],
-    "game" : [ {
-      "name" : "Anna Scheuler",
-      "score" : 42
-    }, {
-      "name" : "Aaron Ladage",
-      "score" : 7
-    }, {
-      "name" : "Ryan Heap",
-      "score" : 1
-    } ]
-  },
-  "mostRecentEvent" : "-LCUWuNIqOKlRmpPvZTE",
-  "mostRecentGame" : "-LCU_qvXC1rWVovF0Cva",
-  "playerResultsEvent" : {
-    "-LCUWuNIqOKlRmpPvZTE" : {
-      "5biIuUJKBDV6dOVvRzSoXpDyEaN2" : 1,
-      "HrnFh8lr76UEBtR2d32cBXBqFx33" : 3
-    }
-  },
-  "playerResultsGame" : {
-    "-LCU_qvXC1rWVovF0Cva" : {
-      "5biIuUJKBDV6dOVvRzSoXpDyEaN2" : 1,
-      "HrnFh8lr76UEBtR2d32cBXBqFx33" : 3
-    }
-  },
-  "players" : {
-    "4e38F7Zk6lcScxpcajk2Z5hnUkA2" : {
-      "active" : true,
-      "email" : "aladage@degdigital.com",
-      "event" : 12345,
-      "firstName" : "Aaron",
-      "lastName" : "Ladage"
-    },
-    "6WJI9uKv9sfjhgEG94VH1Tub7DC3" : {
-      "active" : true,
-      "email" : "aladage@degdigital.com",
-      "event" : 12345,
-      "firstName" : "Aaron",
-      "lastName" : "Ladage"
-    },
-    "E1xVLfxsBXUIKTXPzteQ310FtbW2" : {
-      "active" : true,
-      "email" : "ascheuler@degdigital.com",
-      "event" : 12345,
-      "firstName" : "Anna",
-      "lastName" : "Scheuler"
-    },
-    "Enm1NEzXbaP4e7ZRBPMlTunBTle2" : {
-      "active" : true,
-      "email" : "aladage@degdigital.com",
-      "event" : 12345,
-      "firstName" : "Aaron",
-      "lastName" : "Ladage"
-    },
-    "KQcFGhN7ViQl2uGUQDzFLalwBBA3" : {
-      "active" : true,
-      "email" : "aladage@degdigital.com",
-      "event" : 12345,
-      "firstName" : "Ryan",
-      "lastName" : "Ladage"
-    },
-    "L52nl4r7uvZ3haE3n3q7tDREqot2" : {
-      "active" : true,
-      "email" : "ascheuler@degdigital.com",
-      "event" : 12345,
-      "firstName" : "Anna",
-      "lastName" : "Scheuler"
-    },
-    "LKmy2anBIDgkag8j2aoPVkV128q1" : {
-      "active" : true,
-      "email" : "aladage@degdigital.com",
-      "event" : 12345,
-      "firstName" : "Aaron",
-      "lastName" : "Ladage"
-    },
-    "PBywcqY7Zqg6zHwunK1vdCRKnTz1" : {
-      "active" : true,
-      "email" : "aladage@degdigital.com",
-      "event" : 12345,
-      "firstName" : "Aaron",
-      "lastName" : "Ladage"
-    },
-    "PenNu9IWScYiaGy2FYOV6QNPIwv1" : {
-      "active" : true,
-      "email" : "test@test.com",
-      "event" : 12345,
-      "firstName" : "test",
-      "lastName" : "test"
-    },
-    "SQ0okBrPQGZ5xvBa6xWmSBTvdrc2" : {
-      "active" : true,
-      "email" : "bgraves@degdigital.com",
-      "event" : 12345,
-      "firstName" : "Brian",
-      "lastName" : "Graves"
-    },
-    "ShoSStE1XsOKLZztXeP0EnaOoJp2" : {
-      "active" : true,
-      "email" : "aladage@gmail.com",
-      "event" : 12345,
-      "firstName" : "Aaron",
-      "lastName" : "Ladage"
-    },
-    "TseVKLkzpcPGJfX1xWdYVjS4U0T2" : {
-      "active" : true,
-      "email" : "aladage@degdigital.com",
-      "event" : 12345,
-      "firstName" : "Aaron",
-      "lastName" : "Ladage"
-    },
-    "aIb75HtqrlhzYo3C8hbXrwWxIwG3" : {
-      "active" : true,
-      "email" : "test@test.com",
-      "event" : 12345,
-      "firstName" : "Tarl",
-      "lastName" : "Fartnoise"
-    },
-    "bmDoovzMpacsibKIjyU21oBhGP62" : {
-      "active" : true,
-      "email" : "aladage@degdigital.com",
-      "event" : 12345,
-      "firstName" : "Aaron",
-      "lastName" : "Ladage"
-    },
-    "ekC8ohVcgIR9hBtAlXnfQKlhEEm1" : {
-      "active" : true,
-      "email" : "aladage@degdigital.com",
-      "event" : 12345,
-      "firstName" : "Aaron",
-      "lastName" : "Ladage"
-    },
-    "nRZ8XF1ibzaUSE6b5PylbCKZSfK2" : {
-      "active" : true,
-      "email" : "aladage@degdigital.com",
-      "event" : 12345,
-      "firstName" : "Aaron",
-      "lastName" : "Ladage"
-    },
-    "s2kyjeU1eRgEJitxCPEHacP1ySr1" : {
-      "active" : true,
-      "email" : "dflowerday@degdigital.com",
-      "event" : 12345,
-      "firstName" : "Drew",
-      "lastName" : "Flowerday"
-    },
-    "shDGukMYByabaEKWOCv0QQd3c5y1" : {
-      "active" : true,
-      "email" : "aladage@degdigital.com",
-      "event" : 12345,
-      "firstName" : "Aaron",
-      "lastName" : "Ladage"
-    },
-    "svei5gb0JjUCwmojGyNKiFus8ZZ2" : {
-      "active" : true,
-      "email" : "aladage@degdigital.com",
-      "event" : 12345,
-      "firstName" : "Aaron",
-      "lastName" : "Ladage"
-    },
-    "ub0X2Xpm4GgPJM3sDgHwauzPqkA2" : {
-      "active" : true,
-      "email" : "aladage@degdigital.com",
-      "event" : 12345,
-      "firstName" : "Aaron",
-      "lastName" : "Ladage"
-    },
-    "unkkbmjhHSZAzoDqyD0k7nrLM373" : {
-      "active" : true,
-      "email" : "jon@snow.com",
-      "event" : 12345,
-      "firstName" : "Jon",
-      "lastName" : "Snow"
     }
   },
   "questionDuration" : 10000,
