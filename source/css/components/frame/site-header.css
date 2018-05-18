@@ -1,0 +1,10 @@
+.site-header {
+	display: flex;
+	justify-content: flex-end;
+	padding: .5em 1em;
+	width: 100%;
+}
+
+.logo {
+	height: 1.5em;
+}
