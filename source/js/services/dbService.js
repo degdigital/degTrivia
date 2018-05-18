@@ -73,11 +73,12 @@ const dbService = function() {
 	}
 
 	function submitAnswer(questionId, choiceId, playerId) {
-		if (questionId && choiceId && playerId){
-			return db.ref(`answers/${questionId}/responses/${choiceId}`).update({
-				[playerId]: true
-			});
-		}
+		const submitA = firebase.functions().httpsCallable('setActiveQuestion');
+		submitA({
+			questionId,
+			choiceId,
+			playerId
+		});
 	}
 
 	function setActiveQuestion(gameId, questionId) {

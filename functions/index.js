@@ -8,6 +8,7 @@ const cacheLeaderboardData = require('./components/cacheLeaderboardData');
 const updateMostRecentEventId = require('./components/updateMostRecentEventId');
 const updateMostRecentGameId = require('./components/updateMostRecentGameId');
 const setActiveQuestion = require('./components/setActiveQuestion');
+const submitAnswer = require('./components/submitAnswer');
 
 admin.initializeApp(functions.config().firebase);
 const db = admin.database();
@@ -31,4 +32,7 @@ exports.updateMostRecentGameId = functions.database.ref('events/{eventId}/active
     .onUpdate((change, context) => updateMostRecentGameId(db, change, context));
 
 exports.setActiveQuestion = functions.https
-	.onCall((data, context) => setActiveQuestion(data, context, db, functions));
+    .onCall((data, context) => setActiveQuestion(data, context, db, functions));
+    
+exports.submitAnswer = functions.https
+	.onCall((data, context) => submitAnswer(db, functions, data));
