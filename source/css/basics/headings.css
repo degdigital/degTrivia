@@ -37,3 +37,7 @@ h6 {
 	font-weight: 300;
 	margin-bottom: .75em;
 }
+
+.page-title--centered {
+	text-align: center;
+}
