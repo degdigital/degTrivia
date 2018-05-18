@@ -5,8 +5,9 @@ module.exports = function(db, functions, data) {
 
     function init() {
         if (questionId && choiceId && playerId){
+            const submissionTime = Date.now();
 			return db.ref(`answers/${questionId}/responses/${choiceId}`).update({
-                [playerId]: Date.now(),
+                [playerId]: submissionTime,
 			});
         } else {
             throw new functions.https.HttpsError('unexpected parameter', 'Missing ID. Could not save answer')

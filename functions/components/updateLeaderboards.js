@@ -1,17 +1,31 @@
-function updateScore(db, ref) {
-    return db.ref(ref).transaction(currentVal => (currentVal || 0) + 1);
+function updateScore(db, ref, timeElapsed) {
+    return db.ref(ref).transaction(currentVal => {
+        const newVal = currentVal;
+        if (currentVal) {
+            newVal.score++;
+            newVal.timeElapsed = currentVal.timeElapsed + timeElapsed;
+        } else {
+            newVal.score = 1;
+            newVal.timeElapsed = timeElapsed;
+        }
+        return newVal;
+    });
 }
 
-function updatePlayerScore(db, playerId, eventId, gameId) {
+function updatePlayerScore(db, playerId, eventId, gameId, timeElapsed) {
     if (playerId) {
         const gameBoardRef = db.ref(`playerResultsGame/${gameId}/${playerId}`);
         const eventBoardRef = db.ref(`playerResultsEvent/${eventId}/${playerId}`);
         const promises = [
-            updateScore(db, gameBoardRef),
-            updateScore(db, eventBoardRef)
+            updateScore(db, gameBoardRef, timeElapsed),
+            updateScore(db, eventBoardRef, timeElapsed)
         ];
         return Promise.all(promises);
     }
+}
+
+function getElapsedTime(qStartTime, answerTime) {
+    return answerTime - qStartTime;
 }
 
 module.exports = function(db, event, context){
@@ -22,7 +36,8 @@ module.exports = function(db, event, context){
             if (questionRespData && questionRespData.responses) {
                 const playersList = questionRespData.responses[questionRespData.correctChoiceId] || [];
                 const promises = Object.keys(playersList).map(playerId => {
-                    updatePlayerScore(db, playerId, questionRespData.eventId, questionRespData.gameId);
+                    const timeElapsed = getElapsedTime(questionRespData.startTime, playersList[playerId]); 
+                    updatePlayerScore(db, playerId, questionRespData.eventId, questionRespData.gameId, timeElapsed);
                 });
                 return Promise.all(promises);
             }
