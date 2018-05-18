@@ -1,21 +1,13 @@
-<main class="page-width">
+{{> components-site-header }}
+<main class="main page-width">
 	{{# pregame }}
-		{{# showCountdown }}
-			{{> components-countdown }}
-		{{/ showCountdown }}
-		{{# showNextGameTime }}
-			<p>
-	            Next game starts at 
-	            <time datetime="2018-07-18T14:30:00.000">
-	           		2:30pm
-	            </time>
-	        </p>
-		{{/ showNextGameTime }}
+	<div class="pregame">
+		{{# showNextGame }}
+			{{> components-next-game }}
+		{{/ showNextGame }}		
 		{{# showNoNextGame }}
-			<p>No other games are currently scheduled.</p>
-		{{/ showNoNextGame}}
-		{{# showGameReady }}
-			<p>The next game will be starting momentarily.</p>
-		{{/ showGameReady }}
+			<p>No games are currently scheduled.</p>
+		{{/ showNoNextGame}}		
+	</div>
 	{{/ pregame }}
 </main>
