@@ -1,6 +1,8 @@
 {
 	"pregame": {
-		"countdown": "00:15",
+		"countdown": {
+			"value": "15:00"
+		},
         "showCountdown": true
     }
 }

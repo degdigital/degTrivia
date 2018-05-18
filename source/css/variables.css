@@ -9,18 +9,20 @@
 	--color-gray-dark-60: #383838;
 
 	--color-blue: #0080c7;
+	--color-blue-light-10: #38acd3;
 	--color-blue-dark-10: #006095;
+	
 
 	--color-green: #c3d600;
 	--color-green-dark-10: color(var(--color-green) shade(10%));
 	--color-green-dark-20: color(var(--color-green) shade(20%));
 	  
-	--color-text: var(--color-black);
+	--color-text: var(--color-white);
 
 	--font-family-primary: 'Open Sans', sans-serif;
 	--base-font-size: 1em;
 
-	--width-page: 48rem;
+	--width-page: 25rem;
 
 	--spacing-vertical: 1.5em;
 
