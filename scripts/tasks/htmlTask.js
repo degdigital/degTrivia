@@ -1,7 +1,7 @@
 const path = require('path');
 const fse = require('fs-extra');
 
-const filesToProcess = ['index.html', 'admin/index.html'];
+const filesToProcess = ['index.html', 'admin/index.html', 'leaderboard/index.html'];
 
 function copyFile(srcFilepath, destFilepath) {
 	return fse.copy(srcFilepath, destFilepath)
