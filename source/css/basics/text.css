@@ -9,3 +9,7 @@ body {
 p {
 	margin: 0 0 var(--spacing-vertical) 0;
 }
+
+.text--centered {
+	text-align: center;
+}
