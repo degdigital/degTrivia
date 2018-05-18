@@ -8,13 +8,22 @@ module.exports = function(data, context, db, functions) {
 		if (questionId === false) {
 			return saveGameVals();
 		} else {
-			return getQuestionExpiration().then(questionExpirationTime => saveGameVals(questionId, questionExpirationTime));
+			return getQuestionExpiration().then(times => {
+				return Promise.all([
+					saveGameVals(questionId, times.expirationTime),
+					updateAnswersNode(questionId, times.startTime)
+				]);
+			});
 		}
 	}
 
 	function getQuestionExpiration() {
 		return db.ref('questionDuration').once('value').then(snapshot => {
-			return snapshot.val() + Date.now();
+			const startTime = Date.now();
+			return {
+				expirationTime: snapshot.val() + startTime,
+				startTime: startTime
+			};
 		});
 	}
 
@@ -22,6 +31,12 @@ module.exports = function(data, context, db, functions) {
 		return db.ref(`/games/${gameId}`).update({
 			activeQuestionId: questionId,
 			questionExpirationTime: questionExpirationTime
+		});
+	}
+
+	function updateAnswersNode(questionId, qStartTime) {
+		return db.ref(`/answers/${questionId}`).update({
+			startTime: qStartTime
 		});
 	}
 
