@@ -1,5 +1,5 @@
 .form-error-message {
-	background-color: color(var(--color-error) a(70%));
+	background-color: var(--color-error);
 	padding: .5em .75em;
 	border-radius: .5em;
 	margin-bottom: 1em;
