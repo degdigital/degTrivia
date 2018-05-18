@@ -12,6 +12,7 @@
 	--color-blue-light-10: #38acd3;
 	--color-blue-dark-10: #006095;
 	
+	--color-teal: #85dadf;
 
 	--color-green: #c3d600;
 	--color-green-dark-10: color(var(--color-green) shade(10%));
@@ -29,6 +30,7 @@
 	--border-radius: 0.25rem;
 
 	--anim-duration: 0.5s;
+	--anim-duration-fast: 0.25s;
 	--anim-easing: ease-in-out;
 
 }

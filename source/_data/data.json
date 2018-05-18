@@ -107,14 +107,37 @@
                 }
             }
         },
+        "company": {
+            "field": {
+                "id": "company",
+                "label": {
+                    "content": "Company"
+                },
+                "input": {
+                    "isRequired": true
+                }
+            }
+        },
         "emailAddress": {
             "field": {
                 "id": "emailAddress",
                 "label": {
-                    "content": "Email Address"
+                    "content": "Company Email Address"
                 },
                 "input": {
                     "type": "email",
+                    "isRequired": true
+                }
+            }
+        },
+        "phone": {
+            "field": {
+                "id": "phone",
+                "label": {
+                    "content": "Phone"
+                },
+                "input": {
+                    "type": "tel",
                     "isRequired": true
                 }
             }
