@@ -10,6 +10,8 @@
 	font-weight: bold;
 	cursor: pointer;
 	text-align: center;
+	transition: color var(--anim-duration-fast) var(--anim-easing),
+		background-color var(--anim-duration-fast) var(--anim-easing);
 
 	&:hover, &:focus {
 		background-color: var(--color-green-dark-10);
@@ -22,10 +24,15 @@
 	&:disabled {
 		background-color: var(--color-gray-light-40);
 		color: var(--color-gray);
+		opacity: .5;
 		cursor: default;
 
 		&:hover, &:focus, &:active {
 			background-color: var(--color-gray-light-40);
 		}
 	}
+}
+
+.button--large {
+	padding: .75em 2.5em;
 }
