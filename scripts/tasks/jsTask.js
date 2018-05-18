@@ -16,6 +16,12 @@ const bundles = [
 		entryFilepath: 'source/js/admin/index.js',
 		bundleFilepath: 'public/js/admin-bundle.js',
 		noModulesBundleFilepath: 'public/js/admin-bundle-nomodules.js'
+	},
+	{
+		name: 'leaderboard',
+		entryFilepath: 'source/js/leaderboard/index.js',
+		bundleFilepath: 'public/js/leaderboard-bundle.js',
+		noModulesBundleFilepath: 'public/js/leaderboard-bundle-nomodules.js'
 	}
 ];
 

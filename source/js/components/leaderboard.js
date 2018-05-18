@@ -11,7 +11,7 @@ function loadLeaderboardData() {
 function renderTableBody(leaderData) {
     return leaderData.map((leader, index) => (
         `<tr>
-            <td>${index + 1}.</td>
+            <td>${index + 1}</td>
             <td>${leader.name}</td>
             <td>${leader.score}</td>
         </tr>`
