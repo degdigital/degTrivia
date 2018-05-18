@@ -23,12 +23,16 @@
 }
 
 .choice-result--correct {
+	border: .25em solid var(--color-green);
+
 	.choice-result__meter {
 		background-color: var(--color-green);
 	}
 }
 
 .choice-result--incorrect {
+	border: .25em solid var(--color-orange);
+
 	.choice-result__meter {
 		background-color: var(--color-orange);
 	}
