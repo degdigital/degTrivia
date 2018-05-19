@@ -112,8 +112,7 @@
 		},
 		"leaderboardCurrent": {
 			".read": "auth !== null",
-			".write": "root.child('admins/'+auth.uid).exists()",
-
+			".write": "root.child('admins/'+auth.uid).exists()"
 		},
 		"mostRecentEvent": {
 			".indexOn": ".value",
