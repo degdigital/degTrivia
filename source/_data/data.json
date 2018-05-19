@@ -44,36 +44,36 @@
         "text": "This is a form error message"
     },
     "table": {
-        "tableColumns": [
-            { "heading" : "Table Heading 1" },
-            { "heading" : "Table Heading 2" },
-            { "heading" : "Table Heading 3" },
-            { "heading" : "Table Heading 4" },
-            { "heading" : "Table Heading 5" }
-        ],
+        "tableCaption": "leaderboard",
         "tableData": [
             { "row" : [
-                    { "heading": "Table Heading 1", "content": "Table Cell A1" },
-                    { "heading": "Table Heading 2", "content": "Table Cell A2" },
-                    { "heading": "Table Heading 3", "content": "Table Cell A3" },
-                    { "heading": "Table Heading 4", "content": "Table Cell A4" },
-                    { "heading": "Table Heading 5", "content": "Table Cell A5" }
+                    { "heading": "Position", "content": "1" },
+                    { "heading": "Name", "content": "Jon Snow" },
+                    { "heading": "Score", "content": "70" }
                 ]
             },
             { "row" : [
-                    { "heading": "Table Heading 1", "content": "Table Cell B1" },
-                    { "heading": "Table Heading 2", "content": "Table Cell B2" },
-                    { "heading": "Table Heading 3", "content": "Table Cell B3" },
-                    { "heading": "Table Heading 4", "content": "Table Cell B4" },
-                    { "heading": "Table Heading 5", "content": "Table Cell B5" }
+                    { "heading": "Position", "content": "2" },
+                    { "heading": "Name", "content": "Danerys Targaryen" },
+                    { "heading": "Score", "content": "65" }
                 ]
             },
             { "row" : [
-                    { "heading": "Table Heading 1", "content": "Table Cell C1" },
-                    { "heading": "Table Heading 2", "content": "Table Cell C2" },
-                    { "heading": "Table Heading 3", "content": "Table Cell C3" },
-                    { "heading": "Table Heading 4", "content": "Table Cell C4" },
-                    { "heading": "Table Heading 5", "content": "Table Cell C5" }
+                    { "heading": "Position", "content": "3" },
+                    { "heading": "Name", "content": "Cersie Lannister" },
+                    { "heading": "Score", "content": "64" }
+                ]
+            },
+            { "row" : [
+                    { "heading": "Position", "content": "4" },
+                    { "heading": "Name", "content": "Euron Greyjoy" },
+                    { "heading": "Score", "content": "20" }
+                ]
+            },
+            { "row" : [
+                    { "heading": "Position", "content": "5" },
+                    { "heading": "Name", "content": "Hodor" },
+                    { "heading": "Score", "content": "1" }
                 ]
             }
         ]
@@ -189,5 +189,11 @@
     ],
     "question": {
         "text": "Do you think you could throw this football over those mountains?"
+    },
+    "nextGame": {
+        "showCountdown": true
+    },
+    "pregame": {
+        "showNextGame": true
     }
 }

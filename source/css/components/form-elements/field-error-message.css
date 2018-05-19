@@ -1,5 +1,5 @@
 .field-error-messages {
-	background-color: color(var(--color-error) a(70%));
+	background-color: var(--color-error);
 	padding: .375em .5em .5em .5em;
 	border-radius: 0 0 .5em .5em;
 	font-size: .9375em;
