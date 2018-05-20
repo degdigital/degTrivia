@@ -33,6 +33,7 @@ const playerService = function() {
 					.then(user => createPlayer(playerVals, activeEventId, user.uid))
 					.then(user => resolve('User created!'))
 					.catch(error => {
+						auth.signOut();
 						console.log(error);
 						reject('Something went wrong');
 					});

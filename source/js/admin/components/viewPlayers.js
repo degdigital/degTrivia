@@ -64,6 +64,9 @@ const viewPlayers = function(wrapperEl) {
 	}
 
 	function renderTableRows(data) {
+		if (!data) {
+			return;
+		}
 		const rows = Object.keys(data).reduce((output, key) => {
 			if (eventId === 'all-events' || data[key].event.toString() === eventId.toString()) {
 				return `
