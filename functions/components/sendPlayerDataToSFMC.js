@@ -16,7 +16,7 @@ module.exports = function(db, snapshot, context) {
 				.then(validTokenObj => cacheTokenVals(validTokenObj))
 				.then(tokenVals => submitPlayerVals(tokenVals.accessToken, rawPlayerVals))
 				.then(response => {
-					console.log(response);
+					console.info(response);
 					resolve(response);
 				})
 				.catch(error => {
@@ -30,13 +30,11 @@ module.exports = function(db, snapshot, context) {
 				getCachedTokenVals()
 					.then(cachedTokenVals => {
 						if (cachedTokenIsValid(cachedTokenVals)) {
-							console.info('cached token valid');
 							resolve({
 								needsCaching: false,
 								tokenVals: cachedTokenVals
 							});
 						} else {
-							console.info('cached token not valid');
 							getNewTokenVals()
 								.then(newTokenVals => resolve({
 									needsCaching: true,
