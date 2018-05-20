@@ -42,7 +42,9 @@ const registration = function({element}) {
 			const formVals = formMapper.getValues(el);
 			playerService.register(formVals)
 				.then(successMsg => renderPostRegisterMessage(element, successMsg))
-				.catch(errorMsg => renderPostRegisterMessage(errorPlaceholderEl, errorMsg));
+				.catch(errorMsg => {
+					renderPostRegisterMessage(errorPlaceholderEl, errorMsg)
+				});
 		}
 	}
 
