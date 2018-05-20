@@ -111,14 +111,14 @@ module.exports = function(db, snapshot, context) {
 			return [
 			    {
 			        "keys": {
-			            "Company Email": playerVals.companyEmail || null
+			            "Company Email": playerVals.email || null
 			        },
 			        "values": {
 			            "First Name": playerVals.firstName || null,
-			            "Name Name": playerVals.lastName || null,
+			            "Last Name": playerVals.lastName || null,
 			            "Company Name": playerVals.companyName || null,
 			            "Phone Number": playerVals.phoneNumber || null,               
-			            "Event ID": playerVals.eventId || null                     
+			            "Event ID": playerVals.eventAlias || null                     
 			        }
 			    }
 			];
