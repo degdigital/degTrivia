@@ -283,6 +283,71 @@
       "startTime" : 1528830000000
     }
   },
+  "players" : {
+    "HrnFh8lr76UEBtR2d32cBXBqFx33": {
+      "active" : true,
+      "email" : "aladage@degdigital.com",
+      "event" : "-LCUWuNIqOKlRmpPvZTE",
+      "firstName" : "Aaron",
+      "lastName" : "Ladage"
+    },
+    "5biIuUJKBDV6dOVvRzSoXpDyEaN2": {
+      "active" : true,
+      "email" : "ascheuler@degdigital.com",
+      "event" : "-LCUWuNIqOKlRmpPvZTE",
+      "firstName" : "Anna",
+      "lastName" : "Scheuler"
+    },
+    "aK6xWtxovRTz0gaAjIlFgn6dhgo1": {
+      "active" : true,
+      "email" : "rheap@degdigital.com",
+      "event" : "-LCUWuNIqOKlRmpPvZTE",
+      "firstName" : "Ryan",
+      "lastName" : "Heap"
+    },
+    "cjDL28OF3AN4qnyq6p4yZt2HOpB3": {
+      "active" : true,
+      "email" : "aladage@degdigital.com",
+      "event" : "-LCUWuNIqOKlRmpPvZTE",
+      "firstName" : "Aaron",
+      "lastName" : "Ladage"
+    },
+    "0s3r7yEj7gRzNoFaW2wGfzwWyub2": {
+      "active" : true,
+      "email" : "ascheuler@degdigital.com",
+      "event" : "-LCUWuNIqOKlRmpPvZTE",
+      "firstName" : "Anna",
+      "lastName" : "Scheuler"
+    },
+    "lNcu9GkIvuZmoo31l9gdoFjvRAj2": {
+      "active" : true,
+      "email" : "rheap@degdigital.com",
+      "event" : "-LCUWuNIqOKlRmpPvZTE",
+      "firstName" : "Ryan",
+      "lastName" : "Heap"
+    },
+    "sAysvz3egIMLFpQAQlulRsP1eW72": {
+      "active" : true,
+      "email" : "aladage@degdigital.com",
+      "event" : "-LCUWuNIqOKlRmpPvZTE",
+      "firstName" : "Aaron",
+      "lastName" : "Ladage"
+    },
+    "h1eWfB0CfTTcr7XKnqyav8ceHgq2": {
+      "active" : true,
+      "email" : "ascheuler@degdigital.com",
+      "event" : "-LCUWuNIqOKlRmpPvZTE",
+      "firstName" : "Anna",
+      "lastName" : "Scheuler"
+    },
+    "5j6igMzdffTqGY3BuunaKPWVVQN2": {
+      "active" : true,
+      "email" : "rheap@degdigital.com",
+      "event" : "-LCUWuNIqOKlRmpPvZTE",
+      "firstName" : "Ryan",
+      "lastName" : "Heap"
+    }
+  },
   "questionDuration" : 10000,
   "resetApp" : false
 }
