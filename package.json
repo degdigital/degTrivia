@@ -71,8 +71,9 @@
     "last 2 versions"
   ],
   "dependencies": {
+    "@firebase/functions": "^0.2.2",
     "babel-polyfill": "^6.26.0",
-    "firebase": "^4.13.1",
-    "@firebase/functions": "^0.2.2"
+    "degjs-numericycle": "git+https://git@github.com/degjs/numericycle.git",
+    "firebase": "^4.13.1"
   }
 }

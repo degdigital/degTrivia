@@ -7,6 +7,7 @@ const updateLeaderboards = require('./components/updateLeaderboards');
 const cacheLeaderboardData = require('./components/cacheLeaderboardData');
 const updateMostRecentEventId = require('./components/updateMostRecentEventId');
 const updateMostRecentGameId = require('./components/updateMostRecentGameId');
+const sendPlayerDataToSFMC = require('./components/sendPlayerDataToSFMC');
 const setActiveQuestion = require('./components/setActiveQuestion');
 const submitAnswer = require('./components/submitAnswer');
 
@@ -23,13 +24,16 @@ exports.updateLeaderboards = functions.database.ref('games/{gameId}/activeQuesti
     .onUpdate((change, context) => updateLeaderboards(db, change, context));
 
 exports.cacheLeaderboardData = functions.database.ref('games/{gameId}/showGameOver')
-    .onUpdate((change, context) => cacheLeaderboardData(change, context, db));
+    .onUpdate((change, context) => cacheLeaderboardData(db, change, context));
 
 exports.updateMostRecentEventId = functions.database.ref('activeEventId')
     .onUpdate((change, context) => updateMostRecentEventId(db, change, context));
 
 exports.updateMostRecentGameId = functions.database.ref('events/{eventId}/activeGameId')
     .onUpdate((change, context) => updateMostRecentGameId(db, change, context));
+
+exports.sendPlayerDataToSFMC = functions.database.ref(`players/{playerId}`)
+	.onCreate((snapshot, context) => sendPlayerDataToSFMC(db, snapshot, context));
 
 exports.setActiveQuestion = functions.https
     .onCall((data, context) => setActiveQuestion(data, context, db, functions));

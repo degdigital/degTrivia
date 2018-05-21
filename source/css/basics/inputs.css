@@ -6,7 +6,9 @@
 	border-style: solid;
 	border-color: color(var(--color-teal) a(50%));
 	padding: .375em .125em;
+	margin: 0;
 	width: 100%;
+	max-width: 25em;
 	font-family: var(--font-family-primary);
 	transition: border-color var(--anim-duration-fast) var(--anim-easing);
 
@@ -14,4 +16,8 @@
 		border-color: var(--color-white);
 		outline: 0;
 	}
+}
+
+.input--invalid {
+	border-color: var(--color-error);
 }

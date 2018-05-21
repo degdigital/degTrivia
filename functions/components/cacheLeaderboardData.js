@@ -86,7 +86,7 @@ function setShowResultsFlag(dbRef) {
     })
 }
 
-module.exports = function(event, context, db) {
+module.exports = function(db, event, context) {
     if (event.after.val()){
         if (!database) {
             database = db;

@@ -31,7 +31,7 @@
     "fieldErrorMessages": {
         "items": [
             {
-                "content": "This is a validation error message"
+                "text": "This is a validation error message"
             }
         ]
     },
@@ -165,29 +165,44 @@
         {
             "choice": {
                 "id": "choice-1",
-                "text": "Choice 1"
+                "text": "Choice 1",
+                "percent": 10,
+                "meterScale": 0.1
             }
         },
         {
             "choice": {
                 "id": "choice-2",
-                "text": "Choice 2"
+                "text": "Choice 2",
+                "percent": 25,
+                "meterScale": 0.25
             }
         },
         {
             "choice": {
                 "id": "choice-3",
-                "text": "Choice 3"
+                "text": "Choice 3",
+                "percent": 50,
+                "meterScale": 0.5,
+                "isCorrect": true
             }
         },
         {
             "choice": {
                 "id": "choice-4",
-                "text": "Choice 4"
+                "text": "Choice 4",
+                "percent": 15,
+                "meterScale": 0.15
             }
         }
     ],
     "question": {
         "text": "Do you think you could throw this football over those mountains?"
+    },
+    "nextGame": {
+        "showCountdown": true
+    },
+    "pregame": {
+        "showNextGame": true
     }
 }

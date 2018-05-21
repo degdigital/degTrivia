@@ -1,0 +1,7 @@
+{{# choice }}
+	<div class="choice-result{{#isCorrect}} choice-result--correct{{/isCorrect}}{{#isIncorrect}} choice-result--incorrect{{/isIncorrect}}">
+		<div class="choice-result__meter" style="transform: scaleX({{meterScale}});"></div>
+		<span class="choice-result__text">{{text}}</span>
+		<span class="choice-result__total">{{percent}}%</span>
+	</div>
+{{/ choice }}
