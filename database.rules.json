@@ -133,7 +133,7 @@
 				".indexOn": "indexVal",
 				".validate": "newData.isBoolean() || (newData.isString() && newData.val().length > 0 && newData.val().length === 20)",
 				"$playerId": {
-					".validate": "newData.isBoolean()"
+					".validate": "newData.hasChildren(['indexVal', 'score', 'timeElapsed', 'timeRemaining'])"
 				}
 			}
 			
@@ -145,7 +145,7 @@
 				".indexOn": "indexVal",
 				".validate": "newData.isBoolean() || (newData.isString() && newData.val().length > 0 && newData.val().length === 20)",
 				"$playerId": {
-					".validate": "newData.isBoolean()"
+					".validate": "newData.hasChildren(['indexVal', 'score', 'timeElapsed', 'timeRemaining'])"
 				}
 			}
 			
