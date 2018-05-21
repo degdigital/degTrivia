@@ -73,7 +73,7 @@ const dbService = function() {
 	}
 
 	function submitAnswer(questionId, choiceId, playerId) {
-		const submitA = firebase.functions().httpsCallable('setActiveQuestion');
+		const submitA = firebase.functions().httpsCallable('submitAnswer');
 		submitA({
 			questionId,
 			choiceId,
