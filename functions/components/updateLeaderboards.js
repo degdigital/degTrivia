@@ -41,7 +41,12 @@ function getElapsedTime(qStartTime, answerTime) {
 }
 
 function getTimeLeft(qEndTime, answerTime) {
-    return qEndTime - answerTime;
+    let timeLeft = (qEndTime - answerTime).toString();
+    const numToPad = 5 - timeLeft.length;
+    for( let i = 0; i < numToPad; i++) {
+        timeLeft = '0' + timeLeft;
+    }
+    return timeLeft;
 }
 
 module.exports = function(db, event, context){

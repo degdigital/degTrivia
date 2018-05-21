@@ -130,7 +130,7 @@
 			".read": "auth !== null",
 			".write": "auth !== null",
 			"$eventId": {
-				".indexOn": ".value",
+				".indexOn": "indexVal",
 				".validate": "newData.isBoolean() || (newData.isString() && newData.val().length > 0 && newData.val().length === 20)",
 				"$playerId": {
 					".validate": "newData.isBoolean()"
@@ -142,7 +142,7 @@
 			".read": "auth !== null",
 			".write": "auth !== null",
 			"$gameId": {
-				".indexOn": ".value",
+				".indexOn": "indexVal",
 				".validate": "newData.isBoolean() || (newData.isString() && newData.val().length > 0 && newData.val().length === 20)",
 				"$playerId": {
 					".validate": "newData.isBoolean()"
