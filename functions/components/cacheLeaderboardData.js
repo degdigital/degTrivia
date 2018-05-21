@@ -58,7 +58,7 @@ function writeCurrentLeaderboard(leaderboardData, idToNameMap) {
             }
         })
     
-        return database.ref(`leaderboardCurrent/${leaderboardData.type}`).set(currentLeaderboardData);
+        return database.ref(`leaderboardCurrent/${leaderboardData.type}`).update(currentLeaderboardData);
     }
     return Promise.resolve();
 }

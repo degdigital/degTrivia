@@ -27,7 +27,7 @@
 				"responses": {
 					"$responseId": {
 						"$playerId": {
-							".validate": "newData.isBoolean() && newData.val() === true"
+							".validate": "newData.isNumber() && newData.val <= 999999999999999"
 						}
 					}
 				}
