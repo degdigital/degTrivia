@@ -11,7 +11,7 @@ module.exports = function(data, context, db, functions) {
 			return getQuestionExpiration().then(times => {
 				return Promise.all([
 					saveGameVals(questionId, times.expirationTime),
-					updateAnswersNode(questionId, times.startTime)
+					updateAnswersNode(questionId, times.startTime, times.expirationTime)
 				]);
 			});
 		}
@@ -34,9 +34,10 @@ module.exports = function(data, context, db, functions) {
 		});
 	}
 
-	function updateAnswersNode(questionId, qStartTime) {
+	function updateAnswersNode(questionId, qStartTime, qEndTime) {
 		return db.ref(`/answers/${questionId}`).update({
-			startTime: qStartTime
+			startTime: qStartTime,
+			endTime: qEndTime
 		});
 	}
 
