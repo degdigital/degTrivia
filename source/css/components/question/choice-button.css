@@ -15,10 +15,10 @@
 
 .choice-button--disabled {
 	cursor: default;
-	background-color: var(--color-blue);
+	background-color: color(var(--color-teal) a(25%));
 
 	&:hover, &:focus, &:active {
-		background-color: var(--color-blue);
+		background-color: color(var(--color-teal) a(25%));
 	}
 }
 

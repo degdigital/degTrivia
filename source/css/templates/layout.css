@@ -1,11 +1,8 @@
-html, body {
-	min-height: 100%;
-}
-
 body {
 	background: linear-gradient(to bottom, var(--color-blue-light-10) 0%, var(--color-blue-dark-10) 100%);
 	display: flex;
 	flex-direction: column;
+	min-height: 100vh;
 }
 
 .page-width {

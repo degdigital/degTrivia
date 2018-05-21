@@ -22,6 +22,10 @@
 	}
 }
 
+.choice-result--correct, .choice-result--incorrect {
+	padding: .5em 1em;
+}
+
 .choice-result--correct {
 	border: .25em solid var(--color-green);
 
