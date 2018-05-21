@@ -73,11 +73,12 @@ const dbService = function() {
 	}
 
 	function submitAnswer(questionId, choiceId, playerId) {
-		if (questionId && choiceId && playerId){
-			return db.ref(`answers/${questionId}/responses/${choiceId}`).update({
-				[playerId]: true
-			});
-		}
+		const submitA = firebase.functions().httpsCallable('submitAnswer');
+		submitA({
+			questionId,
+			choiceId,
+			playerId
+		});
 	}
 
 	function setActiveQuestion(gameId, questionId) {
@@ -120,7 +121,7 @@ const dbService = function() {
 
 	async function getPlayerScore(playerId) {
 		const recentGameId = await getMostRecentGameId();
-		return db.ref(`playerResultsGame/${recentGameId}/${playerId}`).once('value').then(snapshot => snapshot.val());
+		return db.ref(`playerResultsGame/${recentGameId}/${playerId}`).once('value').then(snapshot => snapshot.val() || 0);
 	}
 
 	return {

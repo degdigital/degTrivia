@@ -1,17 +1,52 @@
-function updateScore(db, ref) {
-    return db.ref(ref).transaction(currentVal => (currentVal || 0) + 1);
+function updateScore(db, ref, timeElapsed, timeRemaining) {
+    return db.ref(ref).transaction(currentVal => {
+        let newScore;
+        let newTimeElapsed;
+        let newTimeRemaining;
+        let indexVal;
+
+        if (currentVal) {
+            newScore = currentVal.score + 1;
+            newTimeElapsed = currentVal.timeElapsed + timeElapsed;
+            newTimeRemaining = currentVal.timeRemaining + timeRemaining;
+        } else {
+            newScore = 1;
+            newTimeElapsed = timeElapsed;
+            newTimeRemaining = timeRemaining;
+        }
+        indexVal = `${newScore}||${newTimeRemaining}`; // necessary evil for optimized sorting
+        return {
+            score: newScore,
+            timeElapsed: newTimeElapsed,
+            timeRemaining: newTimeRemaining,
+            indexVal
+        };
+    });
 }
 
-function updatePlayerScore(db, playerId, eventId, gameId) {
+function updatePlayerScore(db, playerId, eventId, gameId, timeElapsed, timeRemaining) {
     if (playerId) {
         const gameBoardRef = db.ref(`playerResultsGame/${gameId}/${playerId}`);
         const eventBoardRef = db.ref(`playerResultsEvent/${eventId}/${playerId}`);
         const promises = [
-            updateScore(db, gameBoardRef),
-            updateScore(db, eventBoardRef)
+            updateScore(db, gameBoardRef, timeElapsed, timeRemaining),
+            updateScore(db, eventBoardRef, timeElapsed, timeRemaining)
         ];
         return Promise.all(promises);
     }
+}
+
+function getElapsedTime(qStartTime, answerTime) {
+    return answerTime - qStartTime;
+}
+
+function getTimeLeft(qEndTime, answerTime) {
+    let timeLeft = (qEndTime - answerTime).toString();
+    const numToPad = 5 - timeLeft.length;
+    for( let i = 0; i < numToPad; i++) {
+        timeLeft = '0' + timeLeft;
+    }
+    return timeLeft;
 }
 
 module.exports = function(db, event, context){
@@ -22,7 +57,9 @@ module.exports = function(db, event, context){
             if (questionRespData && questionRespData.responses) {
                 const playersList = questionRespData.responses[questionRespData.correctChoiceId] || [];
                 const promises = Object.keys(playersList).map(playerId => {
-                    updatePlayerScore(db, playerId, questionRespData.eventId, questionRespData.gameId);
+                    const timeElapsed = getElapsedTime(questionRespData.startTime, playersList[playerId]);
+                    const timeLeftInQ = getTimeLeft(questionRespData.endTime, playersList[playerId]);
+                    updatePlayerScore(db, playerId, questionRespData.eventId, questionRespData.gameId, timeElapsed, timeLeftInQ);
                 });
                 return Promise.all(promises);
             }

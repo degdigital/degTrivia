@@ -9,6 +9,7 @@ const updateMostRecentEventId = require('./components/updateMostRecentEventId');
 const updateMostRecentGameId = require('./components/updateMostRecentGameId');
 const sendPlayerDataToSFMC = require('./components/sendPlayerDataToSFMC');
 const setActiveQuestion = require('./components/setActiveQuestion');
+const submitAnswer = require('./components/submitAnswer');
 
 admin.initializeApp(functions.config().firebase);
 const db = admin.database();
@@ -35,4 +36,7 @@ exports.sendPlayerDataToSFMC = functions.database.ref(`players/{playerId}`)
 	.onCreate((snapshot, context) => sendPlayerDataToSFMC(db, snapshot, context));
 
 exports.setActiveQuestion = functions.https
-	.onCall((data, context) => setActiveQuestion(data, context, db, functions));
+    .onCall((data, context) => setActiveQuestion(data, context, db, functions));
+    
+exports.submitAnswer = functions.https
+	.onCall((data, context) => submitAnswer(db, functions, data));

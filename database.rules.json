@@ -27,7 +27,7 @@
 				"responses": {
 					"$responseId": {
 						"$playerId": {
-							".validate": "newData.isBoolean() && newData.val() === true"
+							".validate": "newData.isNumber() && newData.val <= 999999999999999"
 						}
 					}
 				}
@@ -130,10 +130,10 @@
 			".read": "auth !== null",
 			".write": "auth !== null",
 			"$eventId": {
-				".indexOn": ".value",
+				".indexOn": "indexVal",
 				".validate": "newData.isBoolean() || (newData.isString() && newData.val().length > 0 && newData.val().length === 20)",
 				"$playerId": {
-					".validate": "newData.isBoolean()"
+					".validate": "newData.hasChildren(['indexVal', 'score', 'timeElapsed', 'timeRemaining'])"
 				}
 			}
 			
@@ -142,10 +142,10 @@
 			".read": "auth !== null",
 			".write": "auth !== null",
 			"$gameId": {
-				".indexOn": ".value",
+				".indexOn": "indexVal",
 				".validate": "newData.isBoolean() || (newData.isString() && newData.val().length > 0 && newData.val().length === 20)",
 				"$playerId": {
-					".validate": "newData.isBoolean()"
+					".validate": "newData.hasChildren(['indexVal', 'score', 'timeElapsed', 'timeRemaining'])"
 				}
 			}
 			

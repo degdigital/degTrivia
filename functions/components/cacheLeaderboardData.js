@@ -11,7 +11,7 @@ function formatBoard(idRef, leaderboardRef, type) {
     return database.ref(idRef).once('value').then(snapshot => {
         const id = snapshot.val();
         if (id) {
-            return database.ref(`${leaderboardRef}/${id}`).orderByValue().limitToLast(10).once('value').then(leaderboardSnap => {
+            return database.ref(`${leaderboardRef}/${id}`).orderByChild('indexVal').limitToLast(10).once('value').then(leaderboardSnap => {
                 const leaderboardData = leaderboardSnap.val();
                 return {
                     type,
@@ -35,7 +35,7 @@ function getPlayerNameIdMap(playerIds) {
             const retVal = {};
             playerIds.forEach(id => {
                 if (players[id]) {
-                    retVal[id] = `${players[id].firstName} ${players[id].lastName}`;
+                    retVal[id] = `${players[id].firstName} ${players[id].lastName[0].toUpperCase()}.`;
                 } else {
                     retVal[id] = 'Anonymous Player';
                 }
@@ -46,23 +46,6 @@ function getPlayerNameIdMap(playerIds) {
     })
 }
 
-// sorts leaderboard from highest to lowest scores
-function sortLeaderboard(currentLeaderboardData) {
-    if (currentLeaderboardData) {
-        const data = [...currentLeaderboardData];
-        data.sort((person1, person2) => {
-            if (person1.score > person2.score) {
-                return -1;
-            }
-            if (person2.score > person1.score) {
-                return 1;
-            }
-            return 0;
-        })
-        return data;
-    }
-    return currentLeaderboardData;
-}
 
 // writes leaderboard data to current leaderboard node
 function writeCurrentLeaderboard(leaderboardData, idToNameMap) {
@@ -70,11 +53,12 @@ function writeCurrentLeaderboard(leaderboardData, idToNameMap) {
         const currentLeaderboardData = Object.keys(leaderboardData.leaders).map(id => {
             return {
                 name: idToNameMap[id],
-                score: leaderboardData.leaders[id]
+                score: leaderboardData.leaders[id].score,
+                timeElapsed: leaderboardData.leaders[id].timeElapsed
             }
         })
     
-        return database.ref(`leaderboardCurrent/${leaderboardData.type}`).set(sortLeaderboard(currentLeaderboardData));
+        return database.ref(`leaderboardCurrent/${leaderboardData.type}`).update(currentLeaderboardData);
     }
     return Promise.resolve();
 }
