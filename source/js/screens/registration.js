@@ -26,8 +26,14 @@ const registration = function({element}) {
 				<label for="email">Email address</label><br>
 				<input type="email" id="email" name="email" required><br><br>
 
-				<label for="eventAlias">Event Code</label><br>
-				<input type="text" id="eventAlias" name="eventAlias" required"><br><br>
+				<label for="companyName">Company</label><br>
+				<input type="text" id="companyName" name="companyName" required><br><br>
+
+				<label for="phoneNumber">Phone Number</label><br>
+				<input type="number" id="phoneNumber" name="phoneNumber" required><br><br>
+
+				<label for="event">Event Code</label><br>
+				<input type="text" id="event" name="event" required"><br><br>
 
 				<button type="submit">Submit</button>
 			</form>
@@ -42,7 +48,9 @@ const registration = function({element}) {
 			const formVals = formMapper.getValues(el);
 			playerService.register(formVals)
 				.then(successMsg => renderPostRegisterMessage(element, successMsg))
-				.catch(errorMsg => renderPostRegisterMessage(errorPlaceholderEl, errorMsg));
+				.catch(errorMsg => {
+					renderPostRegisterMessage(errorPlaceholderEl, errorMsg)
+				});
 		}
 	}
 
