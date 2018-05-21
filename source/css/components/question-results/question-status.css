@@ -1,0 +1,17 @@
+.question-status {
+	border-radius: .25em;
+	font-size: 1.25em;
+	padding: .25em .75em;
+	display: inline-block;
+	margin: .7em auto 1em auto;
+	color: var(--color-black);
+	font-weight: bold;
+}
+
+.question-status--correct {
+	background-color: var(--color-green);
+}
+
+.question-status--incorrect {
+	background-color: var(--color-orange);
+}
