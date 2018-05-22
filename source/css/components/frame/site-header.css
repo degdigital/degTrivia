@@ -1,10 +1,20 @@
 .site-header {
 	display: flex;
-	justify-content: flex-end;
-	padding: .5em 1em;
+	flex-direction: row-reverse;
+	justify-content: space-between;
+	align-items: center;
+	padding: .5em 1.5em;
 	width: 100%;
 }
 
 .logo {
-	height: 1.5em;
+	height: 2.3125em;
+    width: 4em;
+}
+
+.game-hashtag {
+	color: var(--color-teal);
+	font-weight: 500;
+	font-size: 1.0625em;
+	letter-spacing: var(--letter-spacing-wide);
 }

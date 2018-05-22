@@ -14,11 +14,11 @@
 		background-color var(--anim-duration-fast) var(--anim-easing);
 
 	&:hover, &:focus {
-		background-color: var(--color-green-dark-10);
+		background-color: var(--color-green-light-20);
 	}
 
 	&:active {
-		background-color: var(--color-green-dark-20);
+		background-color: var(--color-green-light-40);
 	}
 
 	&:disabled {

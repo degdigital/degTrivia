@@ -9,7 +9,7 @@
 	--color-gray-dark-60: #383838;
 
 	--color-blue: #0080c7;
-	--color-blue-light-10: #38acd3;
+	--color-blue-light-10: #43add3;
 	--color-blue-dark-10: #006095;
 	
 	--color-teal: #85dadf;
@@ -19,6 +19,8 @@
 	--color-green: #c3d600;
 	--color-green-dark-10: color(var(--color-green) shade(10%));
 	--color-green-dark-20: color(var(--color-green) shade(20%));
+	--color-green-light-20: color(var(--color-green) tint(20%));
+	--color-green-light-40: color(var(--color-green) tint(40%));
 
 	--color-red: #c00;
 	  
@@ -27,12 +29,13 @@
 
 	--font-family-primary: 'Open Sans', sans-serif;
 	--base-font-size: 1em;
+	--letter-spacing-wide: .0625em;
 
 	--width-page: 25rem;
 
 	--spacing-vertical: 1.5em;
 
-	--border-radius: 0.25rem;
+	--border-radius: 0.375em;
 
 	--anim-duration: 0.5s;
 	--anim-duration-fast: 0.25s;
