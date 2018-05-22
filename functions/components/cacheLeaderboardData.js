@@ -46,6 +46,24 @@ function getPlayerNameIdMap(playerIds) {
     })
 }
 
+function sortLeaderboard(currentLeaderboardData) {
+    if (currentLeaderboardData) {
+        const data = [...currentLeaderboardData];
+        data.sort((person1, person2) => {
+            if (person1.score > person2.score) {
+                return -1;
+            }
+            if (person2.score > person1.score) {
+                return 1;
+            }
+            if (person1.score === person2.score) {
+                return person1.timeElapsed < person2.timeElapsed ? -1 : 1;
+            }
+        })
+        return data;
+    }
+    return currentLeaderboardData;
+}
 
 // writes leaderboard data to current leaderboard node
 function writeCurrentLeaderboard(leaderboardData, idToNameMap) {
@@ -57,8 +75,7 @@ function writeCurrentLeaderboard(leaderboardData, idToNameMap) {
                 timeElapsed: leaderboardData.leaders[id].timeElapsed
             }
         })
-    
-        return database.ref(`leaderboardCurrent/${leaderboardData.type}`).update(currentLeaderboardData);
+        return database.ref(`leaderboardCurrent/${leaderboardData.type}`).set(sortLeaderboard(currentLeaderboardData));
     }
     return Promise.resolve();
 }
