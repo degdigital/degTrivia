@@ -1,6 +1,7 @@
 // Utils
 import router from './utils/router.js';
-import {getUrlSegment} from './utils/urlUtils';
+import {getUrlSegment} from './utils/urlUtils.js';
+import audioPlayer from './utils/audioPlayer.js';
 import routes from './routes.js';
 
 // Services
@@ -25,9 +26,15 @@ function initGame(appConfig) {
 
 	eventsService.subscribe('onPlayerUnauthenticated', () => router.route('registration'));
 	eventsService.subscribe('onNoActiveEvent', infoObj => router.route('info', infoObj));
-	eventsService.subscribe('onGameCountdown', () => router.route('pregameCountdown'));
+	eventsService.subscribe('onGameCountdown', () => {
+		audioPlayer.play('countdown');
+		router.route('pregameCountdown')
+	});
 	eventsService.subscribe('onGameStart', gameData => router.route('gameWaitBeforeQuestions', gameData));
-	eventsService.subscribe('onQuestionAsked', questionData => router.route('gameQuestion', questionData));
+	eventsService.subscribe('onQuestionAsked', questionData => {
+		audioPlayer.stopAll();
+		router.route('gameQuestion', questionData);
+	});
 	eventsService.subscribe('onQuestionResults', questionData => router.route('gameQuestionResults', questionData));
 	eventsService.subscribe('onPostgameResults', gameScore => router.route('postgameResults', gameScore));
 	// TODO: figure out logic for showing pregameCountdown after game.

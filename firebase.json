@@ -10,6 +10,10 @@
         "destination": "/css"
       },
       {
+        "source": "/audio/**",
+        "destination": "/audio"
+      },
+      {
         "source": "**",
         "destination": "/index.html"
       }
