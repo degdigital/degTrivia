@@ -30,10 +30,10 @@ const registration = function({element}) {
 				<input type="text" id="companyName" name="companyName" required><br><br>
 
 				<label for="phoneNumber">Phone Number</label><br>
-				<input type="number" id="phoneNumber" name="phoneNumber" required><br><br>
+				<input type="tel" id="phoneNumber" name="phoneNumber" required minlength="10" maxlength="14" pattern="[0-9-+\s()]*$" placeholder="XXX-XXX-XXXX"><br><br>
 
 				<label for="eventAlias">Event Code</label><br>
-				<input type="text" id="eventAlias" name="eventAlias" required" autocapitalize="none"><br><br>
+				<input type="text" id="eventAlias" name="eventAlias" required autocapitalize="none"><br><br>
 
 				<button type="submit">Submit</button>
 			</form>
