@@ -1,4 +1,7 @@
 {
+    "siteHeader": {
+        "showGameHashtag": true
+    },
     "registrationForm": {
         "isFormInvalid": true,
         "formErrorMessage": {

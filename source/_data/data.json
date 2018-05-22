@@ -2,6 +2,7 @@
 	"title" : "DEG Trivia",
 	"lang": "en-us",
 	"url": "#",
+    "gameHashtag": "#CNXTRIVIA",
 	"button": {
 		"content": "Button"
 	},
@@ -77,6 +78,9 @@
                 ]
             }
         ]
+    },
+    "siteHeader": {
+        "showGameHashtag": false
     },
     "registrationForm": {
         "firstName": {
