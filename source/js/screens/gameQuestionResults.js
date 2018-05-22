@@ -54,7 +54,7 @@ function renderScreen(element, data) {
 	replaceContent(element, html);
 }
 
-export default function({element}) {
+export default function(element) {
 
 	return {
 		render: (data) => renderScreen(element, data)

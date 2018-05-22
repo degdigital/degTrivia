@@ -1,6 +1,3 @@
-// Config
-import {getAppConfig} from '../config/appConfig.js';
-
 // Firebase
 import firebase from '@firebase/app';
 import firebaseConfig from '../config/firebaseConfig.js';
@@ -51,8 +48,5 @@ const admin = function(el) {
 	init();
 };
 
-const appConfig = getAppConfig();
-
-if(appConfig.element) {
-	admin(appConfig.element);
-}
+const rootEl = document.getElementById('app');
+admin(rootEl);

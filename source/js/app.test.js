@@ -84,13 +84,6 @@ describe('app should route to', () => {
         expect(routeSpy).toHaveBeenCalledWith('postgameResults', dataObj);
     });
 
-    test('pregame countdown page when a game ends', () => {
-		eventsService.__fireEvent('onGameEnd');
-
-        expect(routeSpy).toHaveBeenCalledTimes(1);
-        expect(routeSpy).toHaveBeenCalledWith('pregameCountdown');
-    });
-
     test('error page when an error occurs', () => {
 		eventsService.__fireEvent('onError');
 

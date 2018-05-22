@@ -8,7 +8,7 @@ import formErrorMessage from '../components/forms/formErrorMessage.js';
 
 const registationFormAttr = 'data-registration-form';
 
-const registration = function({element}) {
+const registration = function(element) {
 
     function bindEvents() {
         element.addEventListener('submit', onFormSubmit);

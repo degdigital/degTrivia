@@ -5,7 +5,7 @@ import { format as formatDate, isSameDay, differenceInMilliseconds } from 'date-
 
 const countdownThreshold = 900000; //15 minutes in milliseconds
 
-const pregameCountdown = function({element}) {
+const pregameCountdown = function(element) {
     let countdownInst;
 
     function renderNoNextGameMessage() {

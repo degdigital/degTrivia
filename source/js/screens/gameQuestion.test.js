@@ -47,7 +47,7 @@ beforeEach(() => {
 
 describe('calling render()', () => {
 	test('renders out a question and choices', async () => {
-		gameQuestion({element}).render(data);
+		gameQuestion(element).render(data);
 		expect(element).toMatchSnapshot();
 	});
 
@@ -62,7 +62,7 @@ describe('calling render()', () => {
 
 		const startSpy = jest.spyOn(countdownInst, 'start');
 
-		const gameQuestionInst = gameQuestion({element});
+		const gameQuestionInst = gameQuestion(element);
 	 	gameQuestionInst.render(data);
 		gameQuestionInst.teardown(); 
 
@@ -79,7 +79,7 @@ describe('selecting a choice', () => {
 	test('calls the dbService submitAnswer() method', () => {
 		const submitAnswerSpy = jest.spyOn(dbService, 'submitAnswer');
 
-		gameQuestion({element}).render(data);
+		gameQuestion(element).render(data);
 
 		const firstChoiceButtonEl = element.querySelector('.choice-button');
 		firstChoiceButtonEl.click();
@@ -91,7 +91,7 @@ describe('selecting a choice', () => {
 	});
 
 	test('disables the choice buttons', () => {
-		gameQuestion({element}).render(data);
+		gameQuestion(element).render(data);
 
 		const firstChoiceButtonEl = element.querySelector('.choice-button');
 		firstChoiceButtonEl.click();
@@ -109,7 +109,7 @@ describe('calling teardown()', () => {
 
 		const stopSpy = jest.spyOn(countdownInst, 'stop');
 
-		const gameQuestionInst = gameQuestion({element});
+		const gameQuestionInst = gameQuestion(element);
 		gameQuestionInst.render(data);
 		gameQuestionInst.teardown(); 
 
