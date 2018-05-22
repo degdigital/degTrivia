@@ -37,7 +37,7 @@ const dbService = function() {
 	}
 
 	function getEvent(eventAlias) {
-		return db.ref('events').orderByChild('alias').equalTo(eventAlias).once('value').then(snapshot => snapshot.val());
+		return db.ref('events').orderByChild('alias').equalTo(eventAlias.toLowerCase()).once('value').then(snapshot => snapshot.val());
 	}
 
 	function createPendingPlayer(playerVals, eventKey, userId) {

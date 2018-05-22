@@ -35,7 +35,7 @@ const addEvent = function(wrapperEl, initialData) {
 			const newKey = eventsRef.push().key;
 			eventsRef.child(newKey).update({
 				activeGameId: false,
-				alias: data.alias,
+				alias: data.alias.toLowerCase(),
 				games: false,
 				name: data.name
 			});
