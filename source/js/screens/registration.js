@@ -22,7 +22,7 @@ const registration = function({element}) {
                        ${formErrorMessage({errorMessage})}
                        <div class="field">
                        ${label({content: 'First Name', inputId: 'firstName'})}
-                       ${textInput({id: 'firstName', isRequired: true, hasAutofocus: true})}
+                       ${textInput({id: 'firstName', isRequired: true, additionalAttrs:{autofocus: true}})}
                        </div>
                        <div class="field">
                        ${label({content: 'Last Name', inputId: 'lastName'})}
@@ -42,7 +42,7 @@ const registration = function({element}) {
                        </div>
                        <div class="field">
                        ${label({content: 'Event Code', inputId: 'event'})}
-                       ${textInput({id: 'event', isRequired: true})}
+                       ${textInput({id: 'event', isRequired: true, additionalAttrs:{autocapitalize: 'off'}})}
                        </div>
                        <div class="button-group button-group--centered">
                        ${button({content: 'Let\'s Play'})}
