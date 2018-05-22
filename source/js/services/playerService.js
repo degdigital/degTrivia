@@ -46,6 +46,8 @@ const playerService = function() {
 		const formattedPlayerVals = {
 			firstName: playerVals.firstName,
 			lastName: playerVals.lastName,
+			companyName: playerVals.companyName,
+			phoneNumber: playerVals.phoneNumber,
 			email: playerVals.email,
 			event: eventKey,
 			active: true

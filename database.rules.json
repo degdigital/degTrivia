@@ -155,17 +155,17 @@
 			".read": "auth !== null",
 			".write": "auth !== null",
 			"$playerId": {
-				".validate": "newData.hasChildren(['active', 'companyName', 'email', 'eventAlias', 'firstName', 'lastName', 'phoneNumber'])",
+				".validate": "newData.hasChildren(['active', 'companyName', 'email', 'event', 'firstName', 'lastName', 'phoneNumber'])",
 				"active": {
 					".validate": "newData.isBoolean()"
 				},
 				"companyName": {
-					".validate": "newData.isString() && newData.val().length > 0 && newData.val().length === 50"
+					".validate": "newData.isString() && newData.val().length > 0 && newData.val().length <= 50"
 				},
 				"email": {
 					".validate": "newData.isString() && newData.val().matches(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}$/i) && newData.val().length <= 100"
 				},
-				"eventAlias": {
+				"event": {
 					".validate": "newData.isString() && newData.val().length > 0 && newData.val().length === 20"
 				},
 				"firstName": {
@@ -173,6 +173,9 @@
 				},
 				"lastName": {
 					".validate": "newData.isString() && newData.val().length > 0 && newData.val().length <= 50"
+				},
+				"phoneNumber": {
+					".validate": "newData.isString() && newData.val().length > 0 && newData.val().length <= 20"
 				},
 				"$other": {
 					".validate": false
