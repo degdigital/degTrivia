@@ -1,71 +1,81 @@
 import {replaceContent} from '../utils/domUtils.js';
 import formMapper from '../utils/formMapper.js';
 import playerService from '../services/playerService.js';
+import label from '../components/forms/label.js';
+import textInput from '../components/forms/textInput.js';
+import button from '../components/forms/button.js';
+import formErrorMessage from '../components/forms/formErrorMessage.js';
+
+const registationFormAttr = 'data-registration-form';
 
 const registration = function({element}) {
-
-	const registrationFormClass = 'registrationForm';
-	const errorPlaceholderClass = 'error-placeholder';
-	let errorPlaceholderEl;
-
-	function bindEvents() {
-		element.addEventListener('submit', onFormSubmit);
-	}
-
-	function render() {
-		replaceContent(element, `
-			<h1>Welcome to DEG Trivia!</h1>
-			<span class="${errorPlaceholderClass}"></span>
-			<form class="${registrationFormClass}">
-				<label for="firstName">First name</label><br>
-				<input type="text" id="firstName" name="firstName" autofocus required><br><br>
-
-				<label for="lastName">Last name</label><br>
-				<input type="text" id="lastName" name="lastName" required><br><br>
-
-				<label for="email">Email address</label><br>
-				<input type="email" id="email" name="email" required><br><br>
-
-				<label for="companyName">Company</label><br>
-				<input type="text" id="companyName" name="companyName" required><br><br>
-
-				<label for="phoneNumber">Phone Number</label><br>
-				<input type="number" id="phoneNumber" name="phoneNumber" required><br><br>
-
-				<label for="eventAlias">Event Code</label><br>
-				<input type="text" id="eventAlias" name="eventAlias" required" autocapitalize="none"><br><br>
-
-				<button type="submit">Submit</button>
-			</form>
-		`);
-		errorPlaceholderEl = element.querySelector(`.${errorPlaceholderClass}`);
-	}
-
-	function onFormSubmit(e) {
-		const el = e.target;
-		if (el.classList.contains(registrationFormClass)) {
-			e.preventDefault();
-			const formVals = formMapper.getValues(el);
-			playerService.register(formVals)
-				.then(successMsg => renderPostRegisterMessage(element, successMsg))
-				.catch(errorMsg => {
-					renderPostRegisterMessage(errorPlaceholderEl, errorMsg)
-				});
-		}
-	}
-
-	function renderPostRegisterMessage(el, message) {
-		replaceContent(el, `
-			<p>${message}</p>
-		`);
-	}
-
-	bindEvents();
-
-	return {
-		render
-	};
-
+    
+    function bindEvents() {
+        element.addEventListener('submit', onFormSubmit);
+    }
+    
+    function render({errorMessage=null}) {
+        
+        replaceContent(element, `
+                       <h1 class="page-title page-title--small">Welcome to DEG Trivia!</h1>
+                       <form ${registationFormAttr}>
+                       ${formErrorMessage({errorMessage})}
+                       <div class="field">
+                       ${label({content: 'First Name', inputId: 'firstName'})}
+                       ${textInput({id: 'firstName', isRequired: true, additionalAttrs:{autofocus: true}})}
+                       </div>
+                       <div class="field">
+                       ${label({content: 'Last Name', inputId: 'lastName'})}
+                       ${textInput({id: 'lastName', isRequired: true})}
+                       </div>
+                       <div class="field">
+                       ${label({content: 'Company', inputId: 'company'})}
+                       ${textInput({id: 'company', isRequired: true})}
+                       </div>
+                       <div class="field">
+                       ${label({content: 'Company Email', inputId: 'email'})}
+                       ${textInput({id: 'email', type: 'email', isRequired: true})}
+                       </div>
+                       <div class="field">
+                       ${label({content: 'Phone', inputId: 'phoneNumber'})}
+                       ${textInput({id: 'phoneNumber', type: 'tel', isRequired: true})}
+                       </div>
+                       <div class="field">
+                       ${label({content: 'Event Code', inputId: 'event'})}
+                       ${textInput({id: 'event', isRequired: true, additionalAttrs:{autocapitalize: 'off'}})}
+                       </div>
+                       <div class="button-group button-group--centered">
+                       ${button({content: 'Let\'s Play'})}
+                       </div>
+                       </form>
+                       `);
+    }
+    
+    function onFormSubmit(e) {
+        const el = e.target;
+        if (el.hasAttribute(registationFormAttr)) {
+            e.preventDefault();
+            const formVals = formMapper.getValues(el);
+            playerService.register(formVals)
+            .then(successMsg => renderPostRegisterMessage(element, successMsg))
+            .catch(errorMsg => {
+                   renderPostRegisterMessage(errorPlaceholderEl, errorMsg)
+                   });
+        }
+    }
+    
+    function renderPostRegisterMessage(el, message) {
+        replaceContent(el, `
+                       <p>${message}</p>
+                       `);
+    }
+    
+    bindEvents();
+    
+    return {
+    render: () => render({})
+    };
+    
 };
 
 export default registration;
