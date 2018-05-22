@@ -32,8 +32,8 @@ const registration = function({element}) {
 				<label for="phoneNumber">Phone Number</label><br>
 				<input type="number" id="phoneNumber" name="phoneNumber" required><br><br>
 
-				<label for="event">Event Code</label><br>
-				<input type="text" id="event" name="event" required"><br><br>
+				<label for="eventAlias">Event Code</label><br>
+				<input type="text" id="eventAlias" name="eventAlias" required" autocapitalize="none"><br><br>
 
 				<button type="submit">Submit</button>
 			</form>
