@@ -1,6 +1,3 @@
-// Config
-import {getAppConfig} from '../config/appConfig.js';
-
 // Firebase
 import firebase from '@firebase/app';
 import firebaseConfig from '../config/firebaseConfig.js';
@@ -34,8 +31,5 @@ const leaderboardTV = function(el) {
 	init();
 };
 
-const appConfig = getAppConfig();
-
-if(appConfig.element) {
-	leaderboardTV(appConfig.element);
-}
+const rootEl = document.getElementById('app');
+leaderboardTV(rootEl);

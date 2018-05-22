@@ -2,6 +2,7 @@
 import router from './utils/router.js';
 import {getUrlSegment} from './utils/urlUtils';
 import routes from './routes.js';
+import {replaceContent} from './utils/domUtils.js';
 
 // Services
 import dbService from './services/dbService.js';
@@ -12,16 +13,21 @@ import playerService from './services/playerService.js';
 import firebase from '@firebase/app';
 import firebaseConfig from './config/firebaseConfig.js';
 
+// Components
+import siteHeader from './components/siteHeader.js';
+
 function init(appConfig) {
 	firebase.initializeApp(firebaseConfig);
 	dbService.init();
 	playerService.init();
+
+	const mainEl = render();
 	
-	initGame(appConfig);
+	routes.init(mainEl, appConfig);
+	initGame();
 }
 
-function initGame(appConfig) {
-	routes.init(appConfig);
+function initGame() {	
 
 	eventsService.subscribe('onPlayerUnauthenticated', () => router.route('registration'));
 	eventsService.subscribe('onNoActiveEvent', infoObj => router.route('info', infoObj));
@@ -39,10 +45,21 @@ function initGame(appConfig) {
 	eventsService.init(); // Must be run after all eventsService.subscribe() calls
 }
 
+function render() {
+	const rootEl = document.getElementById('app');
+
+	const html = `
+		${siteHeader({gameHashtag: '#CNXTRIVIA', showGameHashtag: true})}
+		<main class="main page-width" data-main></main>
+	`;
+
+	replaceContent(rootEl, html);
+
+	return rootEl.querySelector('[data-main]');
+}
+
 function app(appConfig) {
-	if (appConfig.element) {
-		init(appConfig);
-	}
+	init(appConfig);
 }
 
 export default app;

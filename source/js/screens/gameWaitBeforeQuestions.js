@@ -1,6 +1,6 @@
 import {replaceContent} from '../utils/domUtils.js';
 
-const gameWaitBeforeQuestions = function({element}) {
+const gameWaitBeforeQuestions = function(element) {
 
 	function render() {
 		replaceContent(element, `

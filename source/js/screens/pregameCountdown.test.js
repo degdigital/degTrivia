@@ -38,7 +38,7 @@ describe('pregameCountdown renders', () => {
     });
 
     it('no next game message if there is not a next game', async () => {
-        await pregameCountdown({element}).render();
+        await pregameCountdown(element).render();
         expect(element).toMatchSnapshot('no next game message');
     });
 
@@ -51,7 +51,7 @@ describe('pregameCountdown renders', () => {
 
         const expectedCountdownTime = fifteenMinutesFromNow.getTime() - Date.now();
 
-        await pregameCountdown({element}).render();
+        await pregameCountdown(element).render();
     
         expect(startSpy).toHaveBeenCalledTimes(1);
         expect(startSpy).toHaveBeenCalledWith(expectedCountdownTime, 'milliseconds');
@@ -67,7 +67,7 @@ describe('pregameCountdown renders', () => {
 
         const expectedCountdownTime = tenMinutesFromNow.getTime() - Date.now();
 
-        await pregameCountdown({element}).render();
+        await pregameCountdown(element).render();
     
         expect(startSpy).toHaveBeenCalledTimes(1);
         expect(startSpy).toHaveBeenCalledWith(expectedCountdownTime, 'milliseconds');
@@ -81,7 +81,7 @@ describe('pregameCountdown renders', () => {
 
         const startSpy = jest.spyOn(countdown.__getInstance(), 'start');
 
-        await pregameCountdown({element}).render();
+        await pregameCountdown(element).render();
     
         expect(startSpy).not.toHaveBeenCalled();
         expect(element).toMatchSnapshot('game time message');
@@ -94,7 +94,7 @@ describe('pregameCountdown renders', () => {
 
         const startSpy = jest.spyOn(countdown.__getInstance(), 'start');
 
-        await pregameCountdown({element}).render();
+        await pregameCountdown(element).render();
     
         expect(startSpy).not.toHaveBeenCalled();
         expect(element).toMatchSnapshot('game ready message');
@@ -105,7 +105,7 @@ describe('pregameCountdown renders', () => {
 
         dbService.__setNextGameTime(oneMinuteFromNow);
         
-        await pregameCountdown({element}).render();
+        await pregameCountdown(element).render();
 
         countdown.__complete();
 
