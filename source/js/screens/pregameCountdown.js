@@ -18,7 +18,6 @@ const pregameCountdown = function(element) {
     }
 
     function renderNextGameTime(nextGameTime) {
-        console.log(nextGameTime);
         const timeText = formatDate(nextGameTime, 'h:mma'); 
 
         return `<time datetime="${nextGameTime.toISOString()}" class="next-game__time">
