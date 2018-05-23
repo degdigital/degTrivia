@@ -28,6 +28,8 @@ function ref(path) {
             return getGameVals(true);
         case 'games/noQuestions':
             return getGameVals(false);
+        case 'questionDuration':
+            return wrapDBVal(500);
         default:
             return {
                 update: (updateVal) => Promise.resolve(updateVal)
