@@ -5,6 +5,7 @@ import eventsService from './services/eventsService';
 
 jest.mock('./utils/router');
 jest.mock('./services/eventsService');
+jest.mock('classnames');
 
 let appConfig;
 
