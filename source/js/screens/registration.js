@@ -5,8 +5,23 @@ import label from '../components/forms/label.js';
 import textInput from '../components/forms/textInput.js';
 import button from '../components/forms/button.js';
 import formErrorMessage from '../components/forms/formErrorMessage.js';
+import fieldErrorMessages from '../components/forms/fieldErrorMessages.js';
 
 const registationFormAttr = 'data-registration-form';
+const formErrorMessageAttr = 'data-form-error-message';
+
+const errorMessages = {
+    invalidField: 'Oh no, something\'s wrong! Please fix the invalid form field(s) below.'
+};
+
+const defaultFormData = {
+    firstName: {value: ''},
+    lastName: {value: ''},
+    companyName: {value: ''},
+    email: {value: ''},
+    phoneNumber: {value: ''},
+    eventAlias: {value: ''}
+};
 
 const registration = function(element) {
 
@@ -14,35 +29,40 @@ const registration = function(element) {
         element.addEventListener('submit', onFormSubmit);
     }
 
-    function render({errorMessage=null}) {
-
+    function render(formData, errorMessage=null) {
         replaceContent(element, `
             <h1 class="page-title page-title--small">Welcome to DEG Trivia!</h1>
             <form ${registationFormAttr}>
-                ${formErrorMessage({errorMessage})}
+                ${formErrorMessage({errorMessage, dataAttr: formErrorMessageAttr})}
                 <div class="field">
                     ${label({content: 'First Name', inputId: 'firstName'})}
-                    ${textInput({id: 'firstName', isRequired: true, additionalAttrs:{autofocus: true}})}
+                    ${textInput({id: 'firstName', value: formData.firstName.value, isRequired: true, isInvalid: formData.firstName.isInvalid, additionalAttrs:{autofocus: true}})}
+                    ${fieldErrorMessages(formData.firstName.errorMessages)}
                 </div>
                 <div class="field">
                     ${label({content: 'Last Name', inputId: 'lastName'})}
-                    ${textInput({id: 'lastName', isRequired: true})}
+                    ${textInput({id: 'lastName', value: formData.lastName.value, isRequired: true, isInvalid: formData.lastName.isInvalid})}
+                    ${fieldErrorMessages(formData.lastName.errorMessages)}
                 </div>
                 <div class="field">
-                    ${label({content: 'Company', inputId: 'company'})}
-                    ${textInput({id: 'company', isRequired: true})}
+                    ${label({content: 'Company', inputId: 'companyName'})}
+                    ${textInput({id: 'companyName', value: formData.companyName.value, isRequired: true, isInvalid: formData.companyName.isInvalid})}
+                    ${fieldErrorMessages(formData.companyName.errorMessages)}
                 </div>
                 <div class="field">
                     ${label({content: 'Company Email', inputId: 'email'})}
-                    ${textInput({id: 'email', type: 'email', isRequired: true})}
+                    ${textInput({id: 'email', type: 'email', value: formData.email.value, isRequired: true, isInvalid: formData.email.isInvalid})}
+                    ${fieldErrorMessages(formData.email.errorMessages)}
                 </div>
                 <div class="field">
                     ${label({content: 'Phone', inputId: 'phoneNumber'})}
-                    ${textInput({id: 'phoneNumber', type: 'tel', isRequired: true, pattern: '[0-9-+\s()]*$', additionalAttrs:{minlength: '10', maxlength: '14', placeholder: 'XXX-XXX-XXXX'}})}
+                    ${textInput({id: 'phoneNumber', type: 'tel', value: formData.phoneNumber.value, isRequired: true, isInvalid: formData.phoneNumber.isInvalid, pattern: '[0-9-+\s()]*$', additionalAttrs:{minlength: '10', maxlength: '14', placeholder: 'XXX-XXX-XXXX'}})}
+                    ${fieldErrorMessages(formData.phoneNumber.errorMessages)}
                 </div>
                 <div class="field">
-                    ${label({content: 'Event Code', inputId: 'event'})}
-                    ${textInput({id: 'event', isRequired: true, additionalAttrs:{autocapitalize: 'off'}})}
+                    ${label({content: 'Event Code', inputId: 'eventAlias'})}
+                    ${textInput({id: 'eventAlias', value: formData.eventAlias.value, isRequired: true, isInvalid: formData.eventAlias.isInvalid, additionalAttrs:{autocapitalize: 'off'}})}
+                    ${fieldErrorMessages(formData.eventAlias.errorMessages)}
                 </div>
                 <div class="button-group button-group--centered">
                     ${button({content: 'Let\'s Play'})}
@@ -55,25 +75,53 @@ const registration = function(element) {
         const el = e.target;
         if (el.hasAttribute(registationFormAttr)) {
             e.preventDefault();
-            const formVals = formMapper.getValues(el);
-            playerService.register(formVals)
-            .then(successMsg => renderPostRegisterMessage(element, successMsg))
-            .catch(errorMsg => {
-                renderPostRegisterMessage(errorPlaceholderEl, errorMsg)
-            });
+            registerPlayer(el);
         }
     }
 
-    function renderPostRegisterMessage(el, message) {
-        replaceContent(el, `
-            <p>${message}</p>
-        `);
+    function registerPlayer(formEl) {
+         const formVals = formMapper.getValues(formEl);
+
+         playerService.register(formVals)
+            .catch(error => onRegisterPlayerError(error, formVals));
+    }
+
+    function onRegisterPlayerError(error, formVals) {
+        const formData = mapFormValsToFormData(formVals);
+        let errorMessage;
+
+        if(error.prop) {
+            const formDataProp = formData[error.prop];
+            formDataProp.isInvalid = true;
+            formDataProp.errorMessages = [error.message];
+
+            errorMessage = errorMessages.invalidField;
+        } else {
+            errorMessage = error.message;
+        }
+
+        render(formData, errorMessage);
+        scrollFormErrorMessageIntoView();
+    }
+
+    function mapFormValsToFormData(formVals) {
+        return Object.keys(defaultFormData).reduce((formData, key) => {
+            formData[key] = {
+                value: formVals[key]
+            };
+            return formData;
+        }, {});
+    }
+
+    function scrollFormErrorMessageIntoView() {
+        const formErrorMessageEl = document.querySelector(`[${formErrorMessageAttr}]`);
+        formErrorMessageEl.scrollIntoView({behavior: "smooth"});
     }
 
     bindEvents();
 
     return {
-        render: () => render({})
+        render: () => render(defaultFormData)
     };
 
 };
