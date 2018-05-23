@@ -1,17 +1,20 @@
 {{# nextGame }}
 <div class="next-game">
-	<img src="../../images/clock.svg" alt="Clock" class="next-game__clock-image" />
-	<h1 class="next-game__title">
-		<div class="next-game__title-intro">Next Game{{# showCountdown }}<br />Begins In{{/ showCountdown}}</div>
-		{{# showCountdown}}
-			{{> components-countdown:next-game__time}}
-		{{/ showCountdown}}
-		{{^ showCountdown }}
-			<time datetime="2018-07-18T12:30:00.000" class="next-game__time">
-	       		12:30PM PST
-	        </time>
-		{{/ showCountdown }}
-	</h1>
+	<div class="next-game__primary">
+		<img src="../../images/clock.svg" alt="Clock" class="next-game__clock-image" />
+		<h1 class="next-game__title">
+			<div class="next-game__title-intro">Next Game{{# showCountdown }}<br />Begins In{{/ showCountdown}}</div>
+			{{# showCountdown}}
+				{{> components-countdown:next-game__time}}
+			{{/ showCountdown}}
+			{{^ showCountdown }}
+				<time datetime="2018-07-18T12:30:00.000" class="next-game__time">
+		       		12:30PM PST
+		        </time>
+			{{/ showCountdown }}
+		</h1>
+		{{> basics-event-hashtag:next-game__event-hashtag }}
+	</div>
 	<p class="next-game__message">Speed counts! Answer as quickly as you can.</p>
 </div>
 {{/ nextGame }}
