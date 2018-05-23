@@ -36,6 +36,7 @@ const addEvent = function(wrapperEl, initialData) {
 			eventsRef.child(newKey).update({
 				activeGameId: false,
 				alias: data.alias.toLowerCase(),
+				hashtag: data.hashtag,
 				games: false,
 				name: data.name
 			});
@@ -54,6 +55,10 @@ const addEvent = function(wrapperEl, initialData) {
 					<div class="field">
 						<label for="alias">Alias (this will be the password players enter during signup)</label><br>
 						<input id="alias" name="alias" type="text" required>
+					</div>
+					<div class="field">
+						<label for="hashtag">Hashtag</label><br>
+						<input id="hashtag" name="hashtag" type="text">
 					</div>
 					<button type="submit">Submit</button>
 				</fieldset>

@@ -1,12 +1,35 @@
-function renderGameHashtag(gameHashtag, showGameHashtag) {
-	return showGameHashtag ? `<div class="game-hashtag">${gameHashtag}</div>` : '';
+import { replaceContent } from '../utils/domUtils.js';
+
+function renderEventHashtag(eventHashtag) {
+	return eventHashtag ? `<div class="event-hashtag">${eventHashtag}</div>` : '';
 }
 
-export default function siteHeader({gameHashtag, showGameHashtag}) {
+function renderContents({eventHashtag}) {
 	return `
-		<header role="banner" class="site-header page-width">
-			<img src="/images/deg-logo.svg" alt="DEG logo" class="logo" />
-			${renderGameHashtag(gameHashtag, showGameHashtag)}
+		<img src="/images/deg-logo.svg" alt="DEG logo" class="logo" />
+		${renderEventHashtag(eventHashtag)}`;
+}
+
+function render(containerEl, options) {
+	const html = `
+		<header role="banner" class="site-header page-width" data-site-header>
+			${renderContents(options)}
 		</header>
 	`;
+
+	containerEl.insertAdjacentHTML('beforeend', html);
+
+	return containerEl.querySelector('[data-site-header]');
+}
+
+function update(headerEl, options) {
+	replaceContent(headerEl, renderContents(options)); 
+}
+
+export default function siteHeader(containerEl, options = {}) {
+	const headerEl = render(containerEl, options);
+
+	return {
+		update: options => update(headerEl, options)
+	};
 }
