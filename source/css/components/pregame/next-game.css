@@ -1,6 +1,10 @@
+.next-game {
+	padding: 1.5em 0;
+}
+
 .next-game__clock-image {
-	width: 2.5em;
-    margin: 0 0 1.5em .75em;
+	width: 3em;
+    margin: 0 0 3em .75em;
 }
 
 .next-game__title {
@@ -12,17 +16,51 @@
 	line-height: 1.25;
 	padding-left: .75em;
     margin-bottom: .75em;
+    letter-spacing: var(--letter-spacing-wide);
 }
 
 .next-game__time {
-	font-size: 2.5em;
+	font-size: 2em;
 	background-color: var(--color-teal);
 	line-height: 1;
 	padding: .125em .25em;
 	display: inline-block;
-    min-width: 4.5em;
+    min-width: 6.75em;
+}
+
+.next-game__event-hashtag {
+	font-size: 1.25em;
+	margin-top: 1em; 
 }
 
 .next-game__message {
-	margin-top: 3em;
+	font-size: 1.25em;
+	font-weight: 300;
+	margin-top: 2em;
+}
+
+@media (min-width: 20em) {
+	.next-game__time {
+		font-size: 2.5em;
+	}
+}
+
+@media (min-height: 30em) {
+	.next-game {
+		flex-grow: 1;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		padding-top: 10vh;
+	}
+}
+
+@media (min-height: 42em) {
+	.next-game {
+		justify-content: flex-start;
+	}
+
+	.next-game__message {
+		margin-top: 5em;
+	}
 }
