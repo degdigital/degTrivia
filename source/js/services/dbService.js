@@ -36,6 +36,12 @@ const dbService = function() {
 		return db.ref('activeEventId').once('value').then(snapshot => snapshot.val());
 	}
 
+	function getEventById(id) {
+		return db.ref(`events/${id}`)
+			.once('value')
+			.then(snapshot => snapshot.val());
+	}
+
 	function getEvent(eventAlias) {
 		return db.ref('events').orderByChild('alias').equalTo(eventAlias.toLowerCase()).once('value').then(snapshot => snapshot.val());
 	}
@@ -130,6 +136,7 @@ const dbService = function() {
 		getInitialData,
 		getActiveEventId,
 		getEvent,
+		getEventById,
 		getNextGameTime,
 		submitAnswer,
 		setActiveQuestion,
