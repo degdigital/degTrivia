@@ -17,9 +17,13 @@ describe('updateMostRecentEventId', () => {
                 eventId: 'eventId1'
             }
         }
+    });
+
+    afterEach(() => {
+        db.clearGameVals();
     })
 
-    it('should init answers node with q data', () => {
+    xit('should init answers node with q data', () => {
         const expectedOutput = {
             questionId1: {
                 eventId: 'eventId1',
@@ -28,8 +32,18 @@ describe('updateMostRecentEventId', () => {
             }
         };
 
+        db.__setGameVals({
+            gameId1: {
+                questions: {
+                    questionId1: {
+                        correctChoice: 'optId1'
+                    }
+                }
+            }
+        });
+
         return initQuestionResponses(db, change, context).then(resp => {
-            expect(resp).toBeTruthy();
+            expect(Array.isArray(resp)).toBe(true);
             expect(resp).toHaveLength(1);
             expect(resp[0]).toEqual(expectedOutput);
         })
@@ -46,12 +60,16 @@ describe('updateMostRecentEventId', () => {
     })
 
     it('should handle game without questions', () => {
-        change.after = {
-            val: () => 'noQuestions'
-        }
+        db.__setGameVals({
+            gameId1: {
+                questionId1: {
+                    questions: {}
+                }
+            }
+        });
 
         return initQuestionResponses(db, change, context).then(resp => {
-            expect(resp).toBeTruthy();
+            expect(Array.isArray(resp)).toBe(true);
             expect(resp).toHaveLength(0);
         })
     })
