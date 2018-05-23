@@ -1,6 +1,19 @@
 'use strict';
 
 const db = {};
+const pathRegEx = {
+    games: RegExp(/\bgames\/\b/)
+}
+let gameVals = {};
+
+// utility functions
+function __setGameVals(vals) {
+    gameVals = vals;
+}
+
+function clearGameVals() {
+    gameVals = {};
+}
 
 function wrapDBVal(retData) {
     return {
@@ -10,30 +23,25 @@ function wrapDBVal(retData) {
     }
 }
 
-function getGameVals(includeQuestions) {
-    const questions = {
-        questionId1: {
-            correctChoice: 'optId1'
-        }
-    };
-
-    const retVal = includeQuestions ? {questions} : {};
-
-    return wrapDBVal(retVal);
+// mock
+function getGameVals(gameId) {
+    return wrapDBVal(gameVals[gameId]);
 }
 
 function ref(path) {
-    switch (path) {
-        case 'games/gameId1':
-            return getGameVals(true);
-        case 'games/noQuestions':
-            return getGameVals(false);
-        default:
-            return {
-                update: (updateVal) => Promise.resolve(updateVal)
-            }
+    if (path) {
+        if (pathRegEx.games.test(path)) {
+            const gameId = path.split('/')[1];
+            return getGameVals(gameId);
+        }
+    }
+
+    return {
+        update: updateVal => Promise.resolve(updateVal)
     }
 }
 
+db.__setGameVals = __setGameVals;
+db.clearGameVals = clearGameVals;
 db.ref = ref;
 module.exports = db;
