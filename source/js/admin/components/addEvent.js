@@ -58,7 +58,7 @@ const addEvent = function(wrapperEl, initialData) {
 					</div>
 					<div class="field">
 						<label for="hashtag">Hashtag</label><br>
-						<input id="hashtag" name="hashtag" type="text" required>
+						<input id="hashtag" name="hashtag" type="text">
 					</div>
 					<button type="submit">Submit</button>
 				</fieldset>
