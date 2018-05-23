@@ -2,23 +2,42 @@ const initActiveQuestionCountdown = require('../components/initActiveQuestionCou
 const db = require('./__mocks__/db');
 
 describe('initActiveQuestionCountdown', () => {
+    const updateChild = {
+        update: val => val
+    };
     let change = {};
     let context = {};
 
     beforeEach(() => {
         change = {
             after: {
-                val: () => 'gameId1',
+                val: () => 'questionId1',
                 ref: {
                     parent: {
+                        child: () => updateChild,
                         update: val => val
                     }
                 }
             }
         }
-        jest.useFakeTimers();
-        jest.setTimeout(500);
+
+        db.__setAnswerVals({
+            questionId1: {
+                responses: {
+                    optId1: {
+                        playerId1: 1527005651093
+                    },
+                    optId2: {
+                        playerId2: 1527005651093
+                    }
+                }
+            }
+        })
     })
+
+    function getChangeInst() {
+        return change;
+    }
 
     it('should handle empty question id', () => {
         change.after = {
@@ -35,26 +54,41 @@ describe('initActiveQuestionCountdown', () => {
         const expectedOutput = {
             activeQuestionId: false
         }
-        const promise = initActiveQuestionCountdown(db, change);
-        console.log('invoked method');
-        jest.advanceTimersByTime(500);
-        return promise.then(resp => {
+        return initActiveQuestionCountdown(db, change).then(resp => {
             expect(resp).toHaveLength(2);
             expect(resp[0]).toEqual(expectedOutput);
         });
     });
 
-    xit('should handle no questions duration', () => {
+    it('should update question counts', () => {
+        const ref = change.after.ref.parent.child();
+        const writeSpy = jest.spyOn(ref, 'update');
+        const expectedWriteObj = {chosenCount: 1};
 
+        return initActiveQuestionCountdown(db, change).then(resp => {
+            expect(resp).toHaveLength(2);
+            expect(writeSpy).toHaveBeenCalledTimes(2);
+            expect(writeSpy).toHaveBeenCalledWith(expectedWriteObj);
+        });
     });
 
-    xit('should update question counts', () => {
+    it('should handle no responses recorded', () => {
+        db.__setAnswerVals({
+            questionId1: {}
+        })
 
+        return initActiveQuestionCountdown(db, change).then(resp => {
+            expect(resp).toHaveLength(2);
+        });
+    })
+
+    it('should update showQuestionResults flag', () => {
+        const expectedOutput = {
+            showQuestionResults: 'questionId1'
+        }
+        return initActiveQuestionCountdown(db, change).then(resp => {
+            expect(resp).toHaveLength(2);
+            expect(resp[1]).toEqual(expectedOutput);
+        });
     });
-
-    xit('should update showQuestionResults flag', () => {
-
-    });
-
-   
 });

@@ -31,11 +31,11 @@ module.exports = function(db, change, context) {
         .then(snapshot => {
             const questionDuration = snapshot.val();
             return new Promise((resolve, reject) => {
-                setTimeout(() => {
-                    return Promise.all([
+                setTimeout(() => { 
+                    resolve(Promise.all([
                         updateFlag(change, {activeQuestionId: false}),
-                        // generateCounts(db, change, activeQuestionId)
-                    ]);
+                        generateCounts(db, change, activeQuestionId)
+                    ]));
                 }, questionDuration);
             });
         })

@@ -23,7 +23,7 @@ describe('updateMostRecentEventId', () => {
         db.clearGameVals();
     })
 
-    xit('should init answers node with q data', () => {
+    it('should init answers node with q data', () => {
         const expectedOutput = {
             questionId1: {
                 eventId: 'eventId1',
