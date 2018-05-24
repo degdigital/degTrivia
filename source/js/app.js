@@ -42,8 +42,8 @@ function initGame() {
 	// right now this was bypassing the postgameResults screen
 	// eventsService.subscribe('onGameEnd', () => router.route('pregameCountdown'));
 	eventsService.subscribe('onError', () => router.route('error'));
-	// eventsService.subscribe('onErrorResolved', infoObj => router.route('info', infoObj));
-	eventsService.subscribe('onResetApp', () => location.reload());
+	eventsService.subscribe('onDatabaseReconnect', () => location.reload(true));
+	eventsService.subscribe('onResetApp', () => location.reload(true));
 	eventsService.init(); // Must be run after all eventsService.subscribe() calls
 }
 
