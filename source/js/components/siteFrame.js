@@ -3,7 +3,7 @@ import siteHeader from './siteHeader.js';
 function render(containerEl, options) {
 	const siteHeaderInst = siteHeader(containerEl, options);
 
-	const mainHtml = `<main class="main page-width" data-main></main>`;
+	const mainHtml = `<main class="main" data-main></main>`;
 	containerEl.insertAdjacentHTML('beforeend', mainHtml);
 
 	const mainEl = containerEl.querySelector('[data-main]');
