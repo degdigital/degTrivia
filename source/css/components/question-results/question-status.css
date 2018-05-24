@@ -1,11 +1,12 @@
 .question-status {
 	border-radius: .25em;
-	font-size: 1.25em;
-	padding: .25em .75em;
+	font-size: 1em;
+	padding: .375em 2em;
 	display: inline-block;
-	margin: .7em auto 1em auto;
+	margin: 1em auto 1.3125em;
 	color: var(--color-black);
 	font-weight: bold;
+	text-transform: uppercase
 }
 
 .question-status--correct {

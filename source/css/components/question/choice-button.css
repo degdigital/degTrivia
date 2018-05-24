@@ -5,27 +5,27 @@
 	background-color: var(--color-gray-light-40);
 
 	&:hover, &:focus {
-		background-color: var(--color-white);
+		background-color: var(--color-gray-light-50);
 	}
 
 	&:active {
-		background-color: var(--color-green);
+		background-color: var(--color-white);
 	}
 }
 
 .choice-button--disabled {
 	cursor: default;
-	background-color: color(var(--color-teal) a(25%));
+	background-color: color(var(--color-gray-light-50) a(25%));
 
 	&:hover, &:focus, &:active {
-		background-color: color(var(--color-teal) a(25%));
+		background-color: color(var(--color-gray-light-50) a(25%));
 	}
 }
 
 .choice-button--selected {
-	background-color: var(--color-gray-light-40);
+	background-color: var(--color-white);
 	
 	&:hover, &:focus, &:active {
-		background-color: var(--color-gray-light-40);
+		background-color: var(--color-white);
 	}
 }
