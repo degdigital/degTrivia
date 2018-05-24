@@ -12,7 +12,7 @@ function renderContents({eventHashtag}) {
 
 function render(containerEl, options) {
 	const html = `
-		<header role="banner" class="site-header page-width" data-site-header>
+		<header role="banner" class="site-header" data-site-header>
 			${renderContents(options)}
 		</header>
 	`;
