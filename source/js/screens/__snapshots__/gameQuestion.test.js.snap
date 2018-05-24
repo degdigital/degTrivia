@@ -4,54 +4,113 @@ exports[`calling render() renders out a question and choices 1`] = `
 <div>
   
 		
-  <div>
+  <div
+    class="question"
+  >
     
 			
-    <h1>
-      Question #1
+    <div
+      class="countdown question__countdown"
+      data-countdown=""
+    />
+    
+			
+    <h1
+      class="question__text"
+    >
+      Who is the most dashing Kansas City Royal of all time?
     </h1>
     
 			
     <div
-      class="countdown-container"
-    />
-    
-			
-    <p>
-      Who is the most dashing Kansas City Royal of all time?
-    </p>
-    
-			
-    <div
       class="choices"
+      data-choices=""
     >
       
-				
-      <button
-        class="choice-button"
-        data-id="100"
+		
+      <div
+        class="choice-field"
       >
-        Bob Hamelin
-      </button>
-      
-
-      <button
-        class="choice-button"
-        data-id="101"
-      >
-        Danny Tartabul
-      </button>
-      
-
-      <button
-        class="choice-button"
-        data-id="102"
-      >
-        Steve Balboni
-      </button>
-      
-
+        
 			
+        <input
+          class="is-vishidden"
+          data-choice-input=""
+          id="choice-100"
+          name="choice"
+          type="radio"
+          value="100"
+        />
+        
+			
+        <label
+          class="button choice-button"
+          for="choice-100"
+          tabindex="0"
+        >
+          Bob Hamelin
+        </label>
+        
+		
+      </div>
+      
+	
+		
+      <div
+        class="choice-field"
+      >
+        
+			
+        <input
+          class="is-vishidden"
+          data-choice-input=""
+          id="choice-101"
+          name="choice"
+          type="radio"
+          value="101"
+        />
+        
+			
+        <label
+          class="button choice-button"
+          for="choice-101"
+          tabindex="0"
+        >
+          Danny Tartabul
+        </label>
+        
+		
+      </div>
+      
+	
+		
+      <div
+        class="choice-field"
+      >
+        
+			
+        <input
+          class="is-vishidden"
+          data-choice-input=""
+          id="choice-102"
+          name="choice"
+          type="radio"
+          value="102"
+        />
+        
+			
+        <label
+          class="button choice-button"
+          for="choice-102"
+          tabindex="0"
+        >
+          Steve Balboni
+        </label>
+        
+		
+      </div>
+      
+	
     </div>
     
 		
