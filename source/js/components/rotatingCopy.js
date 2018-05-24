@@ -12,7 +12,6 @@ const rotatingCopy = function(element) {
 	let dbRefs = [];
 	let copyArray = [];
 	let currentIndex = 0;
-	let timer = null;
 
 	function start({path}) {
 		if (element && path) {
@@ -33,15 +32,16 @@ const rotatingCopy = function(element) {
 		dbRefs.push({
 			path,
 			ref: newDbRef,
+			timer: null
 		});
 		return newDbRef;
 	}
 
 	function addDbRefListener(ref) {
-		ref.on('value', snapshot => onRefValueChange(snapshot.val()));
+		ref.on('value', snapshot => onRefValueChange(ref, snapshot.val()));
 	}
 
-	function onRefValueChange(copyObj) {
+	function onRefValueChange(ref, copyObj) {
 		copyArray = getCopyArray(copyObj);
 		if (copyArray && Array.isArray(copyArray) && copyArray.length > 0) {
 			if (initialDataHasLoaded === false) {
@@ -49,9 +49,9 @@ const rotatingCopy = function(element) {
 				replaceContent(element, copyArray[0]);
 			}
 			if (copyArray.length > 1) {
-				startTimer();
+				startTimer(ref);
 			} else {
-				stopTimer();
+				stopTimer(ref);
 				replaceContent(element, copyArray[0]);
 			}
 		} else {
@@ -61,9 +61,9 @@ const rotatingCopy = function(element) {
 		
 	}
 
-	function startTimer() {
-		if (!timer) {
-			timer = setInterval(() => {
+	function startTimer(ref) {
+		if (!ref.timer) {
+			ref.timer = setInterval(() => {
 				const copyCount = copyArray.length;
 				if (copyCount > 1) {
 					currentIndex = currentIndex + 2 <= copyCount ? currentIndex + 1 : 0;
@@ -73,10 +73,10 @@ const rotatingCopy = function(element) {
 		}
 	}
 
-	function stopTimer() {
-		if (timer) {
-			clearInterval(timer);
-			timer = null;
+	function stopTimer(ref) {
+		if (ref.timer) {
+			clearInterval(ref.timer);
+			ref.timer = null;
 		}
 	}
 
@@ -92,9 +92,11 @@ const rotatingCopy = function(element) {
 	}
 
 	function teardown() {
-		dbRefs.forEach(dbRef => removebRefListener(dbRef));
+		dbRefs.forEach(dbRef => {
+			removebRefListener(dbRef);
+			stopTimer(dbRef);
+		});
 		dbRefs = [];
-		stopTimer();
 	}
 
 	return {
