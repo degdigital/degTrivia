@@ -1,7 +1,7 @@
 import {replaceContent} from '../utils/domUtils.js';
 import leaderboard from '../components/leaderboard.js';
 
-const leaderboardScreen = function({element}) {
+const leaderboardScreen = function(element) {
 
 	function render() {
 		leaderboard().renderToElement(element);

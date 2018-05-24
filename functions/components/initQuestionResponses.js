@@ -14,7 +14,7 @@ module.exports = function(db, change, context) {
         return db.ref(`games/${gameId}`).once('value').then(gameSnap => {
             const data = gameSnap.val();
             if (data) {
-                const questions = data.questions;
+                const questions = data.questions || [];
                 const promises = Object.keys(questions).map(qId => {
                     return initQuestionResponsesNode(db, context.params.eventId, gameId, qId, questions[qId].correctChoice);
                 })

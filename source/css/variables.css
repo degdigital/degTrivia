@@ -4,6 +4,7 @@
 	--color-white: #fff;
 
 	--color-gray: #999;
+	--color-gray-light-30: #c5cacd;
 	--color-gray-light-40: #d5dadd;
 	--color-gray-dark-20: #7c868d;
 	--color-gray-dark-60: #383838;
@@ -13,6 +14,7 @@
 	--color-blue-dark-10: #006095;
 	
 	--color-teal: #85dadf;
+	--color-teal-light-20: color(var(--color-teal) tint(20%));
 
 	--color-orange: #f98e2b;
 

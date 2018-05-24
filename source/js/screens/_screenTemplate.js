@@ -1,6 +1,6 @@
 import {replaceContent} from '../utils/domUtils.js';
 
-const screenTemplate = function({element}) {
+const screenTemplate = function(element) {
 
 	function init() {
 

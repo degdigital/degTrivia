@@ -81,7 +81,7 @@ function teardown(element, onClickBound, countdownInst) {
 	countdownInst.stop();
 }
 
-export default function({element}) {
+export default function(element) {
 	let onClickBound;
 	let countdownInst;
 

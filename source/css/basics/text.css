@@ -13,3 +13,10 @@ p {
 .text--centered {
 	text-align: center;
 }
+
+.event-hashtag {
+	color: var(--color-teal-light-20);
+	font-weight: 500;
+	font-size: 1.0625em;
+	letter-spacing: var(--letter-spacing-wide);
+}

@@ -11,10 +11,3 @@
 	height: 2.3125em;
     width: 4em;
 }
-
-.game-hashtag {
-	color: var(--color-teal);
-	font-weight: 500;
-	font-size: 1.0625em;
-	letter-spacing: var(--letter-spacing-wide);
-}

@@ -12,17 +12,25 @@ import playerService from './services/playerService.js';
 import firebase from '@firebase/app';
 import firebaseConfig from './config/firebaseConfig.js';
 
+// Components
+import siteFrame from './components/siteFrame.js';
+
+let siteFrameInst;
+
 function init(appConfig) {
 	firebase.initializeApp(firebaseConfig);
 	dbService.init();
 	playerService.init();
+
+	siteFrameInst = render();
 	
-	initGame(appConfig);
+	routes.init(siteFrameInst.getMainEl(), appConfig);
+	initGame();
 }
 
-function initGame(appConfig) {
-	routes.init(appConfig);
+function initGame() {	
 
+	eventsService.subscribe('onActiveEventChanged', onActiveEventChanged);
 	eventsService.subscribe('onPlayerUnauthenticated', () => router.route('registration'));
 	eventsService.subscribe('onNoActiveEvent', infoObj => router.route('info', infoObj));
 	eventsService.subscribe('onGameCountdown', () => router.route('pregameCountdown'));
@@ -39,10 +47,19 @@ function initGame(appConfig) {
 	eventsService.init(); // Must be run after all eventsService.subscribe() calls
 }
 
+function render() {
+	const rootEl = document.getElementById('app');
+	return siteFrame(rootEl);
+}
+
+function onActiveEventChanged(eventData) {
+	siteFrameInst.update({
+		eventHashtag: eventData ? eventData.hashtag : null
+	});	
+}
+
 function app(appConfig) {
-	if (appConfig.element) {
-		init(appConfig);
-	}
+	init(appConfig);
 }
 
 export default app;
