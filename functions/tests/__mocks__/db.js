@@ -11,6 +11,8 @@ const pathRegEx = {
 let gameVals = {}; // games node
 let answerVals = {}; // answers node
 let gameResultVals = {}; // gameResults node
+let players = {}; // players node
+let leaderboard = {}; // leaderboardCurrent node
 
 function __setGameVals(vals) {
     gameVals = vals;
@@ -22,6 +24,10 @@ function __setAnswerVals(vals) {
 
 function __setGameResultVals(vals) {
     gameResultVals = vals;
+}
+
+function __setPlayers(vals) {
+    players = vals;
 }
 
 function wrapDBVal(retData) {
@@ -44,6 +50,10 @@ function transaction(callback) {
     return Promise.resolve(callback(gameResultVals));
 }
 
+function set(newVal) {
+    leaderboard = newVal;
+}
+
 function ref(path) {
     if (path) {
         if (pathRegEx.games.test(path)) {
@@ -63,10 +73,14 @@ function ref(path) {
         if (pathRegEx.mostRecent.test(path)) {
             return wrapDBVal('mostRecentId1');
         }
+        if (path === 'players') {
+            return wrapDBVal(players);
+        }
     }
     return {
         update: updateVal => Promise.resolve(updateVal),
-        transaction
+        transaction,
+        set
     }
 }
 
@@ -74,5 +88,7 @@ db.__setGameVals = __setGameVals;
 db.clearGameVals = () => __setGameVals({});
 db.__setAnswerVals = __setAnswerVals;
 db.__setGameResultVals = __setGameResultVals;
+db.__setPlayers = __setPlayers;
+db.getLeaderboard = () => leaderboard;
 db.ref = ref;
 module.exports = db;
