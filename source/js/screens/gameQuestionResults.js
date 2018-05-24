@@ -1,53 +1,107 @@
 import {replaceContent} from '../utils/domUtils.js';
+import classnames from 'classnames';
 
-function renderChoiceResults(results, correctChoice, resultsPending) {
-	let chosenPercentages;
-	if (resultsPending !== true) {
-		chosenPercentages = calculateChosenPercentages(results);
-	}
-	return Object.keys(results).reduce((html, optId) => {
-		const resultCssClasses = ['choice-result'];
-		
-		if(optId.toString() === correctChoice.toString()) {
-			resultCssClasses.push('choice-result--is-correct');
-		}
+function renderPendingResult(result) {
+	return `
+		<div class="choice-result">
+			<span class="choice-result__text">${result.text}</span>
+		</div>
+	`;
+}
 
-		const resultHtml = `
-			<div class="${resultCssClasses.join(' ')}">
-				<span>${results[optId].text}</span>
-				${chosenPercentages ? `<span>${chosenPercentages[optId]}</span>` : ``}
-			</div>
-		`;
+function renderResult(result) {
+	const resultCssClasses = classnames('choice-result', {
+		'choice-result--correct': result.isCorrectChoice,
+		'choice-result--incorrect': result.isIncorrectUserChoice
+	});
+
+	const animationDuration = result.fraction * 2; //fraction of 2 seconds
+
+	return `
+		<div class="${resultCssClasses}">
+			<div class="choice-result__meter" style="transform: scaleX(${result.fraction}); animation-duration: ${animationDuration}s;"></div>
+			<span class="choice-result__text">${result.text}</span>
+			<span class="choice-result__total">${formatPercentage(result.fraction)}</span>
+		</div>
+	`;
+}
+
+function renderChoiceResults(results) {
+	return results.reduce((html, result) => {
+		const resultHtml = result.isPending ? 
+			renderPendingResult(result) :
+			renderResult(result);
 	
 		return html + resultHtml;
 	}, '');
 }
 
-function calculateChosenPercentages(results) {
-	const resultsKeys = Object.keys(results);
-	const total = resultsKeys.reduce((output, key) => output + results[key].chosenCount, 0);
-	let output = {};
-	resultsKeys.forEach(key => {
-		if (results[key].chosenCount === 0) {
-			output[key] = '0%';
-		} else {
-			output[key] = Math.round((results[key].chosenCount / total) * 100) + '%';
-		}
+function formatPercentage(val) {
+	return Math.round(val * 100) + '%';
+}
+
+function getTotalResponses(choices) {
+	return Object.keys(choices).reduce((total, key) => 
+		total + choices[key].chosenCount
+	, 0);
+}
+
+function buildPendingResults(choices) {
+	return Object.keys(choices).map(choiceId => (
+		{
+			id: choiceId,
+			text: choices[choiceId].text,
+			isPending: true	
+		}));
+}
+
+function buildResults(choices, correctChoice, userChoiceId) {
+	const totalResponses = getTotalResponses(choices);
+
+	return Object.keys(choices).map(choiceId => {
+		const choice = choices[choiceId];
+		const isCorrectChoice = choiceId === correctChoice;
+		const isIncorrectUserChoice = (choiceId === userChoiceId) && !isCorrectChoice;
+		const fraction = totalResponses > 0 ? choice.chosenCount / totalResponses : 0;
+
+		return {
+			id: choiceId,
+			text: choice.text,
+			fraction,
+			isCorrectChoice,
+			isIncorrectUserChoice
+		};
 	});
-	return output;
+}
+
+function renderStatus(isUserChoiceCorrect) {
+	const cssClasses = classnames('question-status', {
+		'question-status--correct': isUserChoiceCorrect,
+		'question-status--incorrect': !isUserChoiceCorrect
+	});
+
+	return `<div class="${cssClasses}">${isUserChoiceCorrect ? 'Correct' : 'Incorrect'}</div>`;	
 }
 
 function renderScreen(element, data) {
-	const {questionData} = data;
+	const {questionData, userChoiceId} = data;
+	/* REMOVE THE FOLLOWING LINE ONCE userChoiceId is populated from the DB */
+	const fakeUserChoiceId = Object.keys(questionData.choices)[0];  
 	const resultsPending = data.resultsPending && data.resultsPending === true;
+	const isUserChoiceCorrect = fakeUserChoiceId === questionData.correctChoice;
+
+	const results = resultsPending ?
+		buildPendingResults(questionData.choices) :
+		buildResults(questionData.choices, questionData.correctChoice, fakeUserChoiceId);
 
 	const html = `
-		<div>
-			<h1>Question #${questionData.order + 1}</h1>			
-			<p>${questionData.question}</p>
-			${resultsPending === true ? '<p>Calculating results...</p>' : ''}
+		<div class="question">
+			<header class="question-header">
+				${renderStatus(isUserChoiceCorrect)}
+				<h1 class="question__text">${questionData.question}</h1>
+			</header>	
 			<div class="choice-results">
-				${renderChoiceResults(questionData.choices, questionData.correctChoice, resultsPending)}
+				${renderChoiceResults(results)}
 			</div>
 		</div>`;
 
