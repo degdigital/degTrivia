@@ -6,7 +6,8 @@ const eventsService = function() {
 	
 	const callbacks = [];
 	let appHasError = false;
-	let initialAppConnect = true;
+	let initialAppLoad = true;
+	let initialDbConnect = true;
 
 	function init() {
 		bindBustedAppEvents();
@@ -14,7 +15,7 @@ const eventsService = function() {
 	}
 
 	function bindBustedAppEvents() {
-		dbService.getDb().ref('.info/connected').on('value', snapshot => onErrorStateChanged(snapshot.val() === false));
+		dbService.getDb().ref('.info/connected').on('value', snapshot => onDbConnectionStateChange(snapshot.val() === true));
 		dbService.getDb().ref('disableAll').on('value', snapshot => onErrorStateChanged(snapshot.val() === true));
 		dbService.getDb().ref('resetApp').on('value', snapshot => onResetAppChanged(snapshot.val() === true));
 	}
@@ -89,21 +90,25 @@ const eventsService = function() {
 		}
 	}
 
-	function onErrorStateChanged(isError = false) {
-		if (initialAppConnect === true) {
-			initialAppConnect = false;
+	function onDbConnectionStateChange(isConnected) {
+		if (initialAppLoad === true) {
+			initialAppLoad = false;
+		} else if (initialDbConnect === true) {
+			initialDbConnect = false;
 		} else {
-			appHasError = isError;
-			if (appHasError === true) {
-				runSubscribedCallbacks('onError');
+			if (isConnected === true) {
+				runSubscribedCallbacks('onDatabaseReconnect');
+			} else {
+				onErrorStateChanged(true);
 			}
-			// else {
-			// 	runSubscribedCallbacks('onErrorResolved', {
-			// 		message: 'Error resolved, back to normal shortly...'
-			// 	});
-			// }
 		}
-		
+	}
+
+	function onErrorStateChanged(isError = false) {
+		appHasError = isError;
+		if (appHasError === true) {
+			runSubscribedCallbacks('onError');
+		}	
 	}
 
 	function onResetAppChanged(isReset) {
@@ -132,7 +137,7 @@ const eventsService = function() {
 	function runSubscribedCallbacks(name, response) {
 		const subscribedCallBacks = callbacks.filter(callback => callback.name === name);
 		subscribedCallBacks.forEach(callback => {
-			if (appHasError === false || callback.name === 'onError') {
+			if (appHasError === false || callback.name === 'onError' || callback.name === 'onDatabaseReconnect') {
 				callback.fn(response);
 			}
 		});
