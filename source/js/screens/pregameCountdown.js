@@ -1,12 +1,14 @@
 import {replaceContent} from '../utils/domUtils.js';
 import countdown from '../components/countdown.js';
 import dbService from '../services/dbService.js';
+import rotatingCopy from '../components/rotatingCopy.js';
 import { format as formatDate, isSameDay, differenceInMilliseconds } from 'date-fns';
 
 const countdownThreshold = 900000; //15 minutes in milliseconds
 
 const pregameCountdown = function({element}) {
     let countdownInst;
+    let rotatingCopyInst;
 
     function renderNoNextGameMessage() {
         replaceContent(element, `<p>No other games are currently scheduled.</p>`);
@@ -16,6 +18,7 @@ const pregameCountdown = function({element}) {
         const timeTilNextGame = differenceInMilliseconds(nextGameTime, new Date());
         replaceContent(element, `
             <div class="countdown-container"></div>
+            <div class="countdown-rotating-copy"></div>
         `);
         const containerElement = document.querySelector('.countdown-container');
         countdownInst = countdown({
@@ -42,6 +45,7 @@ const pregameCountdown = function({element}) {
                 <time datetime="${nextGameTime.toISOString()}">
                     ${timeText} 
                 </time>
+                <div class="countdown-rotating-copy"></div>
             </div>`);
     }
 
@@ -59,18 +63,40 @@ const pregameCountdown = function({element}) {
         return difference < 0;
     }
 
+    function startRotatingCopy(activeEventId) {
+        if (!rotatingCopyInst) {
+            const el = element.querySelector('.countdown-rotating-copy');
+            if (el) {
+                rotatingCopyInst = rotatingCopy(el);
+            }
+        }
+        rotatingCopyInst.start({
+            path: `events/${activeEventId}/pregameRotatingCopy`
+        });
+    }
+
 	async function render() {
-        const nextGameTime = await dbService.getNextGameTime();
+        const promises = await Promise.all([
+            dbService.getNextGameTime(),
+            dbService.getActiveEventId()
+        ]);
+        const nextGameTime = promises[0];
+        const activeEventId = promises[1];
         if (nextGameTime) {
             if(isGameTimeWithinCountdownThreshold(nextGameTime)) {
                 renderCountdown(nextGameTime);
+                startRotatingCopy(activeEventId);
+                
             } else if(hasGameTimePassed(nextGameTime)) {
                 renderGameReadyMessage();
+                rotatingCopyInst.teardown();
             } else {
                 renderNextGameTimeMessage(nextGameTime);
+                startRotatingCopy(activeEventId);
             }
         } else {
             renderNoNextGameMessage();
+            rotatingCopyInst.teardown();
         }	
 	}
 
@@ -79,6 +105,9 @@ const pregameCountdown = function({element}) {
         teardown: () => {
             if (countdownInst) {
                 countdownInst.stop();
+            }
+            if (rotatingCopyInst) {
+                rotatingCopyInst.teardown();
             }
         }
 	};
