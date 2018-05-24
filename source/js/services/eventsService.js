@@ -19,14 +19,19 @@ const eventsService = function() {
 		dbService.getDb().ref('resetApp').on('value', snapshot => onResetAppChanged(snapshot.val() === true));
 	}
 
-	function onActiveEventStateChanged(activeEventId) {
+	async function onActiveEventStateChanged(activeEventId) {
+		let eventData = null;
+
 		if (activeEventId) {
 			playerService.getAuth().onAuthStateChanged(user => onAuthStateChanged(user, activeEventId));
+			eventData = await dbService.getEventById(activeEventId);
 		} else {
 			runSubscribedCallbacks('onNoActiveEvent', {
 				message: 'There are no active events at this time.'
 			});
 		}
+
+		runSubscribedCallbacks('onActiveEventChanged', eventData);
 	}
 
 	function onAuthStateChanged(user, activeEventId) {
@@ -46,7 +51,8 @@ const eventsService = function() {
 			dbService.getDb().ref(`games/${gameId}/showGameResults`).on('value', snapshot => onShowGameResultsChange(snapshot.val()));
 			dbService.getDb().ref(`games/${gameId}/showGameOver`).on('value', snapshot => onShowGameOverChange(snapshot.val()));
 		} else {
-			runSubscribedCallbacks('onGameCountdown');
+			const eventVals = await dbService.getEventById(activeEventId);
+			runSubscribedCallbacks('onGameCountdown', eventVals);
 		}
 	}
 

@@ -2,7 +2,6 @@
 import router from './utils/router.js';
 import {getUrlSegment} from './utils/urlUtils';
 import routes from './routes.js';
-import {replaceContent} from './utils/domUtils.js';
 
 // Services
 import dbService from './services/dbService.js';
@@ -14,24 +13,27 @@ import firebase from '@firebase/app';
 import firebaseConfig from './config/firebaseConfig.js';
 
 // Components
-import siteHeader from './components/siteHeader.js';
+import siteFrame from './components/siteFrame.js';
+
+let siteFrameInst;
 
 function init(appConfig) {
 	firebase.initializeApp(firebaseConfig);
 	dbService.init();
 	playerService.init();
 
-	const mainEl = render();
+	siteFrameInst = render();
 	
-	routes.init(mainEl, appConfig);
+	routes.init(siteFrameInst.getMainEl(), appConfig);
 	initGame();
 }
 
 function initGame() {	
 
+	eventsService.subscribe('onActiveEventChanged', onActiveEventChanged);
 	eventsService.subscribe('onPlayerUnauthenticated', () => router.route('registration'));
 	eventsService.subscribe('onNoActiveEvent', infoObj => router.route('info', infoObj));
-	eventsService.subscribe('onGameCountdown', () => router.route('pregameCountdown'));
+	eventsService.subscribe('onGameCountdown', (eventData) => router.route('pregameCountdown', eventData));
 	eventsService.subscribe('onGameStart', gameData => router.route('gameWaitBeforeQuestions', gameData));
 	eventsService.subscribe('onQuestionAsked', questionData => router.route('gameQuestion', questionData));
 	eventsService.subscribe('onQuestionResults', questionData => router.route('gameQuestionResults', questionData));
@@ -47,15 +49,13 @@ function initGame() {
 
 function render() {
 	const rootEl = document.getElementById('app');
+	return siteFrame(rootEl);
+}
 
-	const html = `
-		${siteHeader({gameHashtag: '#CNXTRIVIA', showGameHashtag: true})}
-		<main class="main page-width" data-main></main>
-	`;
-
-	replaceContent(rootEl, html);
-
-	return rootEl.querySelector('[data-main]');
+function onActiveEventChanged(eventData) {
+	siteFrameInst.update({
+		eventHashtag: eventData ? eventData.hashtag : null
+	});	
 }
 
 function app(appConfig) {

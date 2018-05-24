@@ -21,3 +21,16 @@
 .input--invalid {
 	border-color: var(--color-error);
 }
+
+::-webkit-input-placeholder { 
+  	color: var(--color-gray-light-30);
+}
+::-moz-placeholder {
+	color: var(--color-gray-light-30);
+}
+:-ms-input-placeholder {
+ 	color: var(--color-gray-light-30);
+}
+:-moz-placeholder { 
+ 	color: var(--color-gray-light-30);
+}

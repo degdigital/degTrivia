@@ -18,7 +18,10 @@ const playerService = function() {
 	function register(playerVals = {}) {
 		return new Promise(async(resolve, reject) => {
 			if (!playerVals.email || playerVals.email.length === 0) {
-				reject('You must provide an email address.');
+				reject({
+					prop: 'email',
+					message: 'You must provide an email address.'
+				});
 			}
 			const promises = await Promise.all([
 				dbService.getActiveEventId(),
@@ -27,15 +30,20 @@ const playerService = function() {
 			const activeEventId = promises[0];
 			const requestedRegistrationEvent = promises[1];
 			if (!activeEventId || !requestedRegistrationEvent || activeEventId !== Object.keys(requestedRegistrationEvent)[0]) {
-				reject('The event code is invalid.');
+				reject({
+					prop: 'eventAlias',
+					message: 'The event code is invalid.'
+				});
 			} else {
 				auth.signInAnonymously()
 					.then(user => createPlayer(playerVals, activeEventId, user.uid))
-					.then(user => resolve('User created!'))
+					.then(user => resolve())
 					.catch(error => {
 						auth.signOut();
 						console.log(error);
-						reject('Something went wrong');
+						reject({
+							message: 'Something went wrong'
+						});
 					});
 			}
 			

@@ -29,6 +29,7 @@ const viewEvents = function(wrapperEl) {
 					<tr>
 						<th>Name</th>
 						<th>Alias</th>
+						<th>Hashtag</th>
 						<th>ID</th>
 						<th>Games</th>
 						<th>Active Game</th>
@@ -45,6 +46,7 @@ const viewEvents = function(wrapperEl) {
 			<tr>
 				<td>${data[key].name}</td>
 				<td>${data[key].alias}</td>
+				<td>${data[key].hashtag ? data[key].hashtag : 'None'}</td>
 				<td>${key}</td>
 				<td>${renderObjKeysToList(data[key].games)}</td>
 				<td>${data[key].activeGameId ? data[key].activeGameId : 'None'}</td>

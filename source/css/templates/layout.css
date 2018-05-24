@@ -2,6 +2,9 @@ body {
 	background-image: url(../images/body-bg.png), linear-gradient(to bottom, var(--color-blue-light-10) 0%, var(--color-blue-dark-10) 100%);
 	background-repeat: repeat-x;
 	background-position: center bottom;
+}
+
+.app {
 	display: flex;
 	flex-direction: column;
 	min-height: 100vh;
