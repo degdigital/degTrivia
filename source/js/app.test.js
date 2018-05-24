@@ -47,10 +47,11 @@ describe('app should route to', () => {
     });
 
     test('pregame countdown page when there is an active event', () => {
-		eventsService.__fireEvent('onGameCountdown');
+        const dataObj = {}; 
+        eventsService.__fireEvent('onGameCountdown', dataObj);
 
         expect(routeSpy).toHaveBeenCalledTimes(1);
-        expect(routeSpy).toHaveBeenCalledWith('pregameCountdown');
+        expect(routeSpy).toHaveBeenCalledWith('pregameCountdown', dataObj);
     });
 
     test('game wait page when a game starts', () => {

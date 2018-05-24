@@ -76,9 +76,7 @@ function renderScreen(element, data) {
 		<div class="question">
 			<div class="countdown question__countdown" ${dataAttrs.countdown}></div>
 			<h1 class="question__text">${questionData.question}</h1>
-			<div class="${cssClasses.choices}">
-				${renderChoices(questionData.choices)}
-			</div>
+			${renderChoices(questionData.choices)}
 		</div>`;
 
 	replaceContent(element, html);
