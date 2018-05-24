@@ -88,12 +88,12 @@ const rotatingCopy = function(element) {
 	}
 
 	function removebRefListener(ref) {
-		dbRef.ref.off();
+		ref.off();
 	}
 
 	function teardown() {
 		dbRefs.forEach(dbRef => {
-			removebRefListener(dbRef);
+			removebRefListener(dbRef.ref);
 			stopTimer(dbRef);
 		});
 		dbRefs = [];
