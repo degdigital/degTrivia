@@ -34,7 +34,7 @@ const pregameCountdown = function(element) {
         return introHtml;
     }
 
-    function renderNextGame(nextGameTime, showCountdown) {
+    function renderNextGame(nextGameTime, showCountdown, eventData) {
         return `
             <div class="next-game">
                 <div class="next-game__primary">
@@ -43,7 +43,7 @@ const pregameCountdown = function(element) {
                         <div class="next-game__title-intro">${renderNextGameTimeIntro(showCountdown)}</div>
                         ${showCountdown ? renderCountdown() : renderNextGameTime(nextGameTime)}
                     </h1>
-                    <div class="event-hashtag next-game__event-hashtag">#CNXTRIVIA</div>
+                    ${eventData.hashtag ? `<div class="event-hashtag next-game__event-hashtag">${eventData.hashtag}</div>` : ''}
                 </div>
                 <p class="next-game__message countdown-rotating-copy"></p>
             </div>
@@ -88,18 +88,7 @@ const pregameCountdown = function(element) {
         return (difference <= countdownThreshold && difference >= 0); 
     }
 
-    async function renderContent() {
-        const nextGameTime = await dbService.getNextGameTime();
-        if (nextGameTime) {
-            const showCountdown = isGameTimeWithinCountdownThreshold(nextGameTime);
-
-            return renderNextGame(nextGameTime, showCountdown);
-        } 
-        
-        return renderNoNextGameMessage();
-    }
-
-	async function render() {
+	async function render(eventData) {
         const promises = await Promise.all([
             dbService.getNextGameTime(),
             dbService.getActiveEventId()
@@ -111,7 +100,7 @@ const pregameCountdown = function(element) {
             false;
 
         const contentHtml = nextGameTime ?
-            renderNextGame(nextGameTime, showCountdown) :
+            renderNextGame(nextGameTime, showCountdown, eventData) :
             renderNoNextGameMessage()
 
         const html = `
