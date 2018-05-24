@@ -46,6 +46,11 @@
     },
     "table": {
         "tableCaption": "leaderboard",
+        "tableColumns": [
+            {"cssClass": "table__col--small"},
+            {"cssClass": ""},
+            {"cssClass": ""}
+        ],
         "tableData": [
             { "row" : [
                     { "heading": "Position", "content": "1" },

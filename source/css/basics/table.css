@@ -15,6 +15,14 @@
     line-height: 2em;
 }
 
+.table__row--header {
+    border-bottom: 0;
+}
+
+.table__col--small {
+    width: 12%;
+}
+
 .table__data-cell {
     text-transform: uppercase;
 }
