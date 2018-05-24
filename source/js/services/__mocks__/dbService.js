@@ -29,9 +29,14 @@ function __setNextGameTime(newNextGameTime) {
 	nextGameTime = newNextGameTime;
 }
 
+function getActiveEventId() {
+	return 'eventId1';
+}
+
 dbService.submitAnswer = submitAnswer;
 dbService.getLeaderboardData = getLeaderboardData;
 dbService.getNextGameTime = getNextGameTime;
 dbService.__setNextGameTime = __setNextGameTime;
+dbService.getActiveEventId = getActiveEventId;
 
 export default dbService;

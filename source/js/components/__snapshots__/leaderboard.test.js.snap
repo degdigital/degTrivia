@@ -3,250 +3,160 @@
 exports[`leaderboard should render 1`] = `
 <div>
   
-        
-  <div
-    class="tabs-container"
+            
+  <table
+    class="table"
   >
     
-            
-    <div
-      class="tab-group"
+                
+    <caption
+      class="table__caption"
     >
+      Leaders
+    </caption>
+    
+                
+    <colgroup>
+      
+                    
+      <col
+        class="table__col table__col--small"
+      />
+      
+                    
+      <col
+        class="table__col"
+      />
+      
+                    
+      <col
+        class="table__col"
+      />
       
                 
-      <button
-        class="button button--short tab-button tab-button--active"
-        data-tab-index="0"
+    </colgroup>
+    
+                
+    <thead
+      class="table__header-row"
+    >
+      
+                    
+      <tr
+        class="table__row table__row--header"
       >
-        Game
-      </button>
+        
+                        
+        <th
+          class="table__heading"
+        />
+        
+                        
+        <th
+          class="table__heading"
+        />
+        
+                        
+        <th
+          class="table__heading"
+        />
+        
+                    
+      </tr>
       
                 
-      <button
-        class="button button--short tab-button"
-        data-tab-index="1"
+    </thead>
+    
+                
+    <tbody
+      class="table__table-body"
+    >
+      <tr
+        class="table__row table__data-row"
       >
-        Event
-      </button>
-      
+        
             
-    </div>
+        <td
+          class="table__data-cell"
+        >
+          1
+        </td>
+        
+            
+        <td
+          class="table__data-cell"
+        >
+          Anna
+        </td>
+        
+            
+        <td
+          class="table__data-cell"
+        >
+          1500000
+        </td>
+        
+        
+      </tr>
+      <tr
+        class="table__row table__data-row"
+      >
+        
+            
+        <td
+          class="table__data-cell"
+        >
+          2
+        </td>
+        
+            
+        <td
+          class="table__data-cell"
+        >
+          Aaron
+        </td>
+        
+            
+        <td
+          class="table__data-cell"
+        >
+          140
+        </td>
+        
+        
+      </tr>
+      <tr
+        class="table__row table__data-row"
+      >
+        
+            
+        <td
+          class="table__data-cell"
+        >
+          3
+        </td>
+        
+            
+        <td
+          class="table__data-cell"
+        >
+          Ryan
+        </td>
+        
+            
+        <td
+          class="table__data-cell"
+        >
+          42
+        </td>
+        
+        
+      </tr>
+    </tbody>
     
             
-    <div
-      class="tab-section tab-section--game"
-    >
-      
-                
-      <div>
-        Top 10 Players
-      </div>
-      
-            
-      <table>
-        
-                
-        <thead>
-          
-                    
-          <tr>
-            
-                        
-            <th />
-            
-                        
-            <th>
-              Name
-            </th>
-            
-                        
-            <th>
-              Score
-            </th>
-            
-                    
-          </tr>
-          
-                
-        </thead>
-        
-                
-        <tbody>
-          <tr>
-            
-            
-            <td>
-              1
-            </td>
-            
-            
-            <td>
-              Anna
-            </td>
-            
-            
-            <td>
-              1500000
-            </td>
-            
-        
-          </tr>
-          <tr>
-            
-            
-            <td>
-              2
-            </td>
-            
-            
-            <td>
-              Aaron
-            </td>
-            
-            
-            <td>
-              140
-            </td>
-            
-        
-          </tr>
-          <tr>
-            
-            
-            <td>
-              3
-            </td>
-            
-            
-            <td>
-              Ryan
-            </td>
-            
-            
-            <td>
-              42
-            </td>
-            
-        
-          </tr>
-        </tbody>
-        
-            
-      </table>
-      
-        
-            
-    </div>
-    
-            
-    <div
-      class="tab-section tab-section--event is-hidden"
-    >
-      
-                
-      <div>
-        Top 10 Players
-      </div>
-      
-            
-      <table>
-        
-                
-        <thead>
-          
-                    
-          <tr>
-            
-                        
-            <th />
-            
-                        
-            <th>
-              Name
-            </th>
-            
-                        
-            <th>
-              Score
-            </th>
-            
-                    
-          </tr>
-          
-                
-        </thead>
-        
-                
-        <tbody>
-          <tr>
-            
-            
-            <td>
-              1
-            </td>
-            
-            
-            <td>
-              Aaron
-            </td>
-            
-            
-            <td>
-              1500001
-            </td>
-            
-        
-          </tr>
-          <tr>
-            
-            
-            <td>
-              2
-            </td>
-            
-            
-            <td>
-              Aaron
-            </td>
-            
-            
-            <td>
-              200
-            </td>
-            
-        
-          </tr>
-          <tr>
-            
-            
-            <td>
-              3
-            </td>
-            
-            
-            <td>
-              Ryan
-            </td>
-            
-            
-            <td>
-              43
-            </td>
-            
-        
-          </tr>
-        </tbody>
-        
-            
-      </table>
-      
-        
-            
-    </div>
-    
-        
-  </div>
+  </table>
   
-    
+        
 </div>
 `;
