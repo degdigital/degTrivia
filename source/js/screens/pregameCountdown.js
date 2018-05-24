@@ -43,7 +43,7 @@ const pregameCountdown = function(element) {
                         <div class="next-game__title-intro">${renderNextGameTimeIntro(showCountdown)}</div>
                         ${showCountdown ? renderCountdown() : renderNextGameTime(nextGameTime)}
                     </h1>
-                    <div class="event-hashtag next-game__event-hashtag">${eventData.hashtag}</div>
+                    ${eventData.hashtag ? `<div class="event-hashtag next-game__event-hashtag">${eventData.hashtag}</div>` : ''}
                 </div>
                 <p class="next-game__message countdown-rotating-copy"></p>
             </div>
