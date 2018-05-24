@@ -88,7 +88,9 @@ const rotatingCopy = function(element) {
 	}
 
 	function removebRefListener(ref) {
-		ref.off();
+		if (ref) {
+			ref.off();
+		}
 	}
 
 	function teardown() {
