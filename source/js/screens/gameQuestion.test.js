@@ -81,8 +81,8 @@ describe('selecting a choice', () => {
 
 		gameQuestion(element).render(data);
 
-		const firstChoiceButtonEl = element.querySelector('.choice-button');
-		firstChoiceButtonEl.click();
+		const firstChoiceInputEl = element.querySelector('[data-choice-input]');
+		firstChoiceInputEl.click();
 
 		const expectedChoiceId = Object.keys(data.questionData.choices)[0];
 
@@ -93,13 +93,13 @@ describe('selecting a choice', () => {
 	test('disables the choice buttons', () => {
 		gameQuestion(element).render(data);
 
-		const firstChoiceButtonEl = element.querySelector('.choice-button');
-		firstChoiceButtonEl.click();
+		const firstChoiceInputEl = element.querySelector('[data-choice-input]');
+		firstChoiceInputEl.click();
 
-		const choiceButtonsEls = [...element.querySelectorAll('.choice-button')];
-		expect(choiceButtonsEls[0].disabled).toBe(true);
-		expect(choiceButtonsEls[1].disabled).toBe(true);
-		expect(choiceButtonsEls[2].disabled).toBe(true);
+		const choiceInputEls = [...element.querySelectorAll('[data-choice-input]')];
+		expect(choiceInputEls[0].disabled).toBe(true);
+		expect(choiceInputEls[1].disabled).toBe(true);
+		expect(choiceInputEls[2].disabled).toBe(true);
 	});
 });
 
