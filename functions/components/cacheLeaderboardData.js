@@ -29,21 +29,24 @@ function formatBoard(idRef, leaderboardRef, type) {
  * @returns {Object} an object where the keys are player ids and the values are the display name for the player
  */
 function getPlayerNameIdMap(playerIds) {
-    return database.ref('players').once('value').then(snap => {
-        const players = snap.val();
-        if (players) {
-            const retVal = {};
-            playerIds.forEach(id => {
-                if (players[id]) {
-                    retVal[id] = `${players[id].firstName} ${players[id].lastName[0].toUpperCase()}.`;
-                } else {
-                    retVal[id] = 'Anonymous Player';
-                }
-            })
-            return retVal;
-        }
-        return {};
-    })
+    if (playerIds && playerIds.length) {
+        return database.ref('players').once('value').then(snap => {
+            const players = snap.val();
+            if (players) {
+                const retVal = {};
+                playerIds.forEach(id => {
+                    if (players[id]) {
+                        retVal[id] = `${players[id].firstName} ${players[id].lastName[0].toUpperCase()}.`;
+                    } else {
+                        retVal[id] = 'Anonymous Player';
+                    }
+                })
+                return retVal;
+            }
+            return {};
+        })
+    }
+    return Promise.resolve({});
 }
 
 function sortLeaderboard(currentLeaderboardData) {
@@ -110,5 +113,5 @@ module.exports = function(db, event, context) {
             })
         })
     }
-    return Promise.resolve().then(() => setShowResultsFlag(event.after));
+    return Promise.resolve();
 }

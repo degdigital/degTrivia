@@ -4,7 +4,9 @@ const db = {};
 const pathRegEx = {
     games: RegExp(/\bgames\/\b/),
     questionDuration: RegExp(/\bquestionDuration\b/),
-    answers: RegExp(/\banswers\/\b/)
+    answers: RegExp(/\banswers\/\b/),
+    mostRecent: RegExp(/(\bmostRecent)+.*/),
+    results: RegExp(/.*\/\bmostRecentId1\b/)
 }
 let gameVals = {}; // games node
 let answerVals = {}; // answers node
@@ -30,6 +32,14 @@ function wrapDBVal(retData) {
     }
 }
 
+function getQueryObj() {
+    return {
+        orderByChild: () => ({
+            limitToLast: () => wrapDBVal(gameResultVals)
+        })
+    }
+}
+
 function transaction(callback) {
     return Promise.resolve(callback(gameResultVals));
 }
@@ -45,8 +55,14 @@ function ref(path) {
         }
         if (pathRegEx.answers.test(path)) {
             const questionId = path.split('/')[1];
-            return wrapDBVal(answerVals[questionId])
-        } 
+            return wrapDBVal(answerVals[questionId]);
+        }
+        if (pathRegEx.results.test(path)) {
+            return getQueryObj();
+        }
+        if (pathRegEx.mostRecent.test(path)) {
+            return wrapDBVal('mostRecentId1');
+        }
     }
     return {
         update: updateVal => Promise.resolve(updateVal),
