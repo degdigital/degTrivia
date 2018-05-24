@@ -127,7 +127,7 @@ const dbService = function() {
 
 	async function getPlayerScore(playerId) {
 		const recentGameId = await getMostRecentGameId();
-		return db.ref(`playerResultsGame/${recentGameId}/${playerId}`).once('value').then(snapshot => (snapshot.val() && snaphot.val().score) || 0);
+		return db.ref(`playerResultsGame/${recentGameId}/${playerId}`).once('value').then(snapshot => (snapshot.val() && snapshot.val().score) || 0);
 	}
 
 	return {

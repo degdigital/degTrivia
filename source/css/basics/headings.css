@@ -41,3 +41,7 @@ h6 {
 .page-title--centered {
 	text-align: center;
 }
+
+.subheading {
+	font-weight: 300;
+}

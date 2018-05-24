@@ -1,8 +1,5 @@
 import {replaceContent} from '../utils/domUtils.js';
 import dbService from '../services/dbService.js';
-import tabs from './tabs.js';
-
-const leaderboardSections = ['game', 'event'];
 
 function loadLeaderboardData() {
     return dbService.getLeaderboardData();
@@ -10,10 +7,10 @@ function loadLeaderboardData() {
 
 function renderTableBody(leaderData) {
     return leaderData.map((leader, index) => (
-        `<tr>
-            <td>${index + 1}</td>
-            <td>${leader.name}</td>
-            <td>${leader.score}</td>
+        `<tr class="table__row table__data-row">
+            <td class="table__data-cell">${index + 1}</td>
+            <td class="table__data-cell">${leader.name}</td>
+            <td class="table__data-cell">${leader.score}</td>
         </tr>`
     )).join('');
 }
@@ -21,17 +18,22 @@ function renderTableBody(leaderData) {
 function renderLeaderboard(data) {
     let returnMarkup;
     if (data) {
-        returnMarkup = '<div>Top 10 Players</div>';
-        returnMarkup += `
-            <table>
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th>Name</th>
-                        <th>Score</th>
+        returnMarkup = `
+            <table class="table">
+                <caption class="table__caption">Leaders</caption>
+                <colgroup>
+                    <col class="table__col table__col--small"></col>
+                    <col class="table__col"></col>
+                    <col class="table__col"></col>
+                </colgroup>
+                <thead class="table__header-row">
+                    <tr class="table__row table__row--header">
+                        <th class="table__heading"></th>
+                        <th class="table__heading"></th>
+                        <th class="table__heading"></th>
                     </tr>
                 </thead>
-                <tbody>${renderTableBody(data)}</tbody>
+                <tbody class="table__table-body">${renderTableBody(data)}</tbody>
             </table>
         `;
     } else {
@@ -43,21 +45,7 @@ function renderLeaderboard(data) {
 
 async function render(containerElement) {
     const leaderboardData = await loadLeaderboardData();
-    replaceContent(containerElement, `
-        <div class="tabs-container">
-            <div class="tab-group">
-                <button class="button button--short tab-button tab-button--active" data-tab-index="0">Game</button>
-                <button class="button button--short tab-button" data-tab-index="1">Event</button>
-            </div>
-            <div class="tab-section tab-section--game">
-                ${renderLeaderboard(leaderboardData.game)}
-            </div>
-            <div class="tab-section tab-section--event is-hidden">
-                ${renderLeaderboard(leaderboardData.event)}
-            </div>
-        </div>
-    `);
-    tabs(document.querySelector('.tabs-container'));
+    replaceContent(containerElement, renderLeaderboard(leaderboardData.game));
 }
 
 export default function() {

@@ -6,7 +6,11 @@ const postgameResults = function(element) {
 
 	function render(gameScore) {
 		replaceContent(element, `
-			Your game score was ${gameScore}
+			<div class="results-screen__intro">
+				<h1 class="page-title page-title--centered">Game Results</h1>
+				<p class="subheading text--centered">Congrats on seeing your name in lights. Don't let someone steal your thunder. Play again to maintain your spot.</p>
+			</div>
+
 			<div class="${leaderboardContainerClass}"></div>
 		`);
 		leaderboard().renderToElement(document.querySelector(`.${leaderboardContainerClass}`))
