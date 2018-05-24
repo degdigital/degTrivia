@@ -14,7 +14,7 @@ function updateScore(db, ref, timeElapsed, timeRemaining) {
             newTimeElapsed = timeElapsed;
             newTimeRemaining = timeRemaining;
         }
-        indexVal = `${newScore}||${newTimeRemaining}`; // necessary evil for optimized sorting
+        indexVal = `${newScore}||${padTimeLeft(newTimeRemaining.toString())}`; // necessary evil for optimized sorting
         return {
             score: newScore,
             timeElapsed: newTimeElapsed,
@@ -34,18 +34,19 @@ function updatePlayerScore(db, playerId, eventId, gameId, timeElapsed, timeRemai
         ];
         return Promise.all(promises);
     }
+    return Promise.reject('No player id to update score');
 }
 
 function getElapsedTime(qStartTime, answerTime) {
     return answerTime - qStartTime;
 }
 
-function getTimeLeft(qEndTime, answerTime) {
-    let timeLeft = (qEndTime - answerTime).toString();
+function padTimeLeft(timeLeft) {
     const numToPad = 5 - timeLeft.length;
     for( let i = 0; i < numToPad; i++) {
         timeLeft = '0' + timeLeft;
     }
+
     return timeLeft;
 }
 
@@ -58,9 +59,10 @@ module.exports = function(db, event, context){
                 const playersList = questionRespData.responses[questionRespData.correctChoiceId] || [];
                 const promises = Object.keys(playersList).map(playerId => {
                     const timeElapsed = getElapsedTime(questionRespData.startTime, playersList[playerId]);
-                    const timeLeftInQ = getTimeLeft(questionRespData.endTime, playersList[playerId]);
-                    updatePlayerScore(db, playerId, questionRespData.eventId, questionRespData.gameId, timeElapsed, timeLeftInQ);
+                    const timeLeftInQ = questionRespData.endTime - playersList[playerId];
+                    return updatePlayerScore(db, playerId, questionRespData.eventId, questionRespData.gameId, timeElapsed, timeLeftInQ);
                 });
+
                 return Promise.all(promises);
             }
             return Promise.resolve();

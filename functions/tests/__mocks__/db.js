@@ -6,16 +6,20 @@ const pathRegEx = {
     questionDuration: RegExp(/\bquestionDuration\b/),
     answers: RegExp(/\banswers\/\b/)
 }
-let gameVals = {};
-let answerVals = {};
+let gameVals = {}; // games node
+let answerVals = {}; // answers node
+let gameResultVals = {}; // gameResults node
 
-// utility functions
 function __setGameVals(vals) {
     gameVals = vals;
 }
 
 function __setAnswerVals(vals) {
     answerVals = vals;
+}
+
+function __setGameResultVals(vals) {
+    gameResultVals = vals;
 }
 
 function wrapDBVal(retData) {
@@ -26,7 +30,10 @@ function wrapDBVal(retData) {
     }
 }
 
-// mock
+function transaction(callback) {
+    return Promise.resolve(callback(gameResultVals));
+}
+
 function ref(path) {
     if (path) {
         if (pathRegEx.games.test(path)) {
@@ -39,17 +46,17 @@ function ref(path) {
         if (pathRegEx.answers.test(path)) {
             const questionId = path.split('/')[1];
             return wrapDBVal(answerVals[questionId])
-        }
+        } 
     }
-
     return {
-        update: updateVal => Promise.resolve(updateVal)
+        update: updateVal => Promise.resolve(updateVal),
+        transaction
     }
 }
 
 db.__setGameVals = __setGameVals;
 db.clearGameVals = () => __setGameVals({});
 db.__setAnswerVals = __setAnswerVals;
-db.clearAnswerVals = () => __setAnswerVals({});
+db.__setGameResultVals = __setGameResultVals;
 db.ref = ref;
 module.exports = db;
