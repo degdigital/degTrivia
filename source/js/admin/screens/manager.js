@@ -18,6 +18,7 @@ import endGameInterface from '../components/endGameInterface.js';
 import addEvent from '../components/addEvent.js';
 import viewEvents from '../components/viewEvents.js';
 import addGame from '../components/addGame.js';
+import addCopy from '../components/addCopy.js';
 import viewGames from '../components/viewGames.js';
 import viewPlayers from '../components/viewPlayers.js';
 
@@ -34,6 +35,7 @@ const manager = function(el) {
 	const viewEventsWrapperClass = 'viewevents-wrapper';
 	const addGameWrapperClass = 'addgame-wrapper';
 	const viewGamesWrapperClass = 'viewgames-wrapper';
+	const addCopyWrapperClass = 'addcopy-wrapper';
 	const viewPlayersWrapperClass = 'viewplayers-wrapper';
 	let activeGameInst;
 	let activeQuestionInst;
@@ -46,6 +48,7 @@ const manager = function(el) {
 				<li><button class="tab-trigger" data-target="gameplay">Manage Gameplay</button></li>
 				<li><button class="tab-trigger" data-target="events">Events</button></li>
 				<li><button class="tab-trigger" data-target="games">Games</button></li>
+				<li><button class="tab-trigger" data-target="copy">Copy</button></li>
 				<li><button class="tab-trigger" data-target="players">Players</button></li>
 				<li><button class="tab-trigger" data-target="system">System</button></li>
 			</ul>
@@ -62,6 +65,9 @@ const manager = function(el) {
 			<div class="tab-section" data-section="games">
 				<div class="${addGameWrapperClass}"></div> 
 				<div class="${viewGamesWrapperClass}"></div> 
+			</div>
+			<div class="tab-section" data-section="copy">
+				<div class="${addCopyWrapperClass}"></div> 
 			</div>
 			<div class="tab-section" data-section="players">
 				<div class="${viewPlayersWrapperClass}"></div> 
@@ -93,6 +99,7 @@ const manager = function(el) {
 		addEvent(el.querySelector(`.${addEventWrapperClass}`), initialData);
 		viewEvents(el.querySelector(`.${viewEventsWrapperClass}`));
 		addGame(el.querySelector(`.${addGameWrapperClass}`), initialData);
+		addCopy(el.querySelector(`.${addCopyWrapperClass}`), initialData);
 		viewGames(el.querySelector(`.${viewGamesWrapperClass}`));
 		viewPlayers(el.querySelector(`.${viewPlayersWrapperClass}`));
 	}
