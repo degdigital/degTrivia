@@ -51,7 +51,8 @@ const eventsService = function() {
 			dbService.getDb().ref(`games/${gameId}/showGameResults`).on('value', snapshot => onShowGameResultsChange(snapshot.val()));
 			dbService.getDb().ref(`games/${gameId}/showGameOver`).on('value', snapshot => onShowGameOverChange(snapshot.val()));
 		} else {
-			runSubscribedCallbacks('onGameCountdown');
+			const eventVals = await dbService.getEventById(activeEventId);
+			runSubscribedCallbacks('onGameCountdown', eventVals);
 		}
 	}
 

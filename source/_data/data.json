@@ -46,6 +46,11 @@
     },
     "table": {
         "tableCaption": "leaderboard",
+        "tableColumns": [
+            {"cssClass": "table__col--small"},
+            {"cssClass": ""},
+            {"cssClass": ""}
+        ],
         "tableData": [
             { "row" : [
                     { "heading": "Position", "content": "1" },
@@ -224,5 +229,9 @@
     },
     "pregame": {
         "showNextGame": true
+    },
+    "infoText": {
+        "heading": "Oh no!",
+        "subheading": "We’re experiencing some technical difficulties. Stay with us. The page will refresh when ready."
     }
 }
