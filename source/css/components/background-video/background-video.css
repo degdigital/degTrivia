@@ -1,0 +1,10 @@
+.background__video-wrap {
+	overflow: hidden;
+}
+
+.background__video {
+    min-height: 100%;
+    position: fixed;
+    height: 100%;
+    transform: translate(-7%);
+}
