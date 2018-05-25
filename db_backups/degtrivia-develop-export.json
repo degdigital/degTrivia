@@ -20,13 +20,21 @@
         "-LCU_qvXC1rWVovF0Cva" : true,
         "-LCUjYNIiCbBWln2OOuA" : true
       },
-      "name" : "Connections 2018"
+      "hashtag" : "#CNXTRIVIA",
+      "name" : "Connections 2018",
+      "pregameRotatingCopy" : {
+        "-LDF7W8t6PWGH5OY6RYL" : "Speed counts! Answer as quickly as you can."
+      }
     },
     "-LCUbqaXAuNRGFOJBXEL" : {
       "activeGameId" : false,
       "alias" : "beer30",
       "games" : false,
-      "name" : "Beer:30"
+      "hashtag" : "#DEGBEER30",
+      "name" : "DEG Beer:30",
+      "pregameRotatingCopy" : {
+        "-LDJD82xkiDFFFwg6N6G" : "Speed counts! Answer as quickly as you can."
+      }
     },
     "-LD84ESzyLp4oyyDckO2" : {
       "activeGameId" : false,
@@ -39,7 +47,11 @@
         "-LD8KdB8YCBVcXHGpQSH" : true,
         "-LD8MSLGcb5uw-GhlJlp" : true
       },
-      "name" : "CNX 2018"
+      "hashtag" : "#CNXTRIVIA",
+      "name" : "CNX 2018",
+      "pregameRotatingCopy" : {
+        "-LDJD75YE0FKMqPMa3wA" : "Speed counts! Answer as quickly as you can."
+      }
     }
   },
   "games" : {
@@ -47,6 +59,7 @@
       "activeQuestionId" : false,
       "event" : "-LCUWuNIqOKlRmpPvZTE",
       "name" : "12 p.m. Game",
+      "questionExpirationTime" : 1527274284982,
       "questions" : {
         "-LCU_qvWZf7LxjPDwnWa" : {
           "choices" : {
@@ -167,12 +180,13 @@
       "showGameOver" : false,
       "showGameResults" : false,
       "showQuestionResults" : false,
-      "startTime" : 1528822800000
+      "startTime" : 1527191100000
     },
     "-LCUjYNIiCbBWln2OOuA" : {
       "activeQuestionId" : false,
       "event" : "-LCUWuNIqOKlRmpPvZTE",
       "name" : "2 p.m. Game",
+      "questionExpirationTime" : 1527190041875,
       "questions" : {
         "-LCUjYNIiCbBWln2OOtm" : {
           "choices" : {
@@ -299,6 +313,7 @@
       "activeQuestionId" : false,
       "event" : "-LD84ESzyLp4oyyDckO2",
       "name" : "Game 1",
+      "questionExpirationTime" : 1527192389177,
       "questions" : {
         "-LD8FrG-yF6EXlmDHn4_" : {
           "choices" : {
@@ -638,8 +653,8 @@
             "-LD8IC8IgIeTajeoNg9E" : {
               "chosenCount" : 0,
               "text" : "1984"
-    }
-  },
+            }
+          },
           "correctChoice" : "-LD8IC8IgIeTajeoNg9E",
           "order" : 1,
           "question" : "What year is also the title of the dystopian George Orwell novel about the always-watching Big Brother? "
@@ -1190,19 +1205,15 @@
       "startTime" : 1528858800000
     }
   },
-  "mostRecentEvent" : "-LCUWuNIqOKlRmpPvZTE",
-  "mostRecentGame" : "-LCUjYNIiCbBWln2OOuA",
   "players" : {
-    "2F8q6TcjuqfDB6Uw8XIgcwc0RG62" : {
+    "5biIuUJKBDV6dOVvRzSoXpDyEaN2": {
       "active" : true,
-      "companyName" : "DEG",
-      "email" : "scheul93@gmail.com",
+      "email" : "ascheuler@degdigital.com",
       "event" : "-LCUWuNIqOKlRmpPvZTE",
       "firstName" : "Anna",
-      "lastName" : "Scheuler",
-      "phoneNumber" : "3146231436"
-    },
-    "5biIuUJKBDV6dOVvRzSoXpDyEaN2" : {
+      "lastName" : "Scheuler"
+      },
+    "0s3r7yEj7gRzNoFaW2wGfzwWyub2" : {
       "active" : true,
       "email" : "ascheuler@degdigital.com",
       "event" : "-LCUWuNIqOKlRmpPvZTE",
@@ -1222,15 +1233,6 @@
       "event" : "-LCUWuNIqOKlRmpPvZTE",
       "firstName" : "Aaron",
       "lastName" : "Ladage"
-    },
-    "PePLgOFrvcQsiBAaHnuXA9sCHQf2" : {
-      "active" : true,
-      "companyName" : "DEG",
-      "email" : "scheul93@gmail.com",
-      "event" : "-LCUWuNIqOKlRmpPvZTE",
-      "firstName" : "Anna",
-      "lastName" : "Scheuler",
-      "phoneNumber" : "3146231436"
     },
     "aK6xWtxovRTz0gaAjIlFgn6dhgo1" : {
       "active" : true,
@@ -1259,6 +1261,13 @@
       "event" : "-LCUWuNIqOKlRmpPvZTE",
       "firstName" : "Ryan",
       "lastName" : "Heap"
+    },
+    "sAysvz3egIMLFpQAQlulRsP1eW72" : {
+      "active" : true,
+      "email" : "aladage@degdigital.com",
+      "event" : "-LCUWuNIqOKlRmpPvZTE",
+      "firstName" : "Aaron",
+      "lastName" : "Ladage"
     }
   },
   "questionDuration" : 10000,
