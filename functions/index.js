@@ -3,7 +3,7 @@ const admin = require('firebase-admin');
 
 const initActiveQuestionCountdown = require('./components/initActiveQuestionCountdown');
 const initQuestionReponses = require('./components/initQuestionResponses');
-const updateLeaderboards = require('./components/updateLeaderboards');
+const updateGameResults = require('./components/updateGameResults');
 const cacheLeaderboardData = require('./components/cacheLeaderboardData');
 const updateMostRecentEventId = require('./components/updateMostRecentEventId');
 const updateMostRecentGameId = require('./components/updateMostRecentGameId');
@@ -20,8 +20,8 @@ exports.initActiveQuestionCountdown = functions.database.ref(`/games/{gameId}/ac
 exports.initQuestionResponses = functions.database.ref('events/{eventId}/activeGameId')
     .onUpdate((change, context) => initQuestionReponses(db, change, context));
 
-exports.updateLeaderboards = functions.database.ref('games/{gameId}/activeQuestionId')
-    .onUpdate((change, context) => updateLeaderboards(db, change, context));
+exports.updateGameResults = functions.database.ref('games/{gameId}/activeQuestionId')
+    .onUpdate((change, context) => updateGameResults(db, change, context));
 
 exports.cacheLeaderboardData = functions.database.ref('games/{gameId}/showGameOver')
     .onUpdate((change, context) => cacheLeaderboardData(db, change, context));

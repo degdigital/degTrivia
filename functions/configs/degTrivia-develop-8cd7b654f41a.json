@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "degtrivia-develop",
+  "private_key_id": "8cd7b654f41a2faae58e23ed20e813de8fe524cf",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDQimN1v1o20hnI\nIdu54Fi3t+VDt6AY7x40y693ceWSfdd7MA2tTRDW2YXXCiCTjIK3ECC1atiobqS0\nKHxWqTOcMtAjFW9yamt8AcQpzKvTtClj5dZv0FWH46YTIt8EhTZAtiCA5t4Cdsy0\nltWX6YuJG9chLHEPRb/YFjnYFNUXthJV+LFRiVDcAOI4n3NE4wQM3dXokH9zjAzY\nEFlBA3rNwPblFdcH8Ma5OjhAGPhgIeCxBvH46N5VDCmuGRXOev3nH/wftP4zU17L\nNuzOIiHZbrx3E7oSJs0zXJw8EqOJNPNL+t/kpjzNxILSqDNmShx20P7UhjFIJ2K8\nyK2g/2TDAgMBAAECggEAAj2dFaH24K7qOwBuIXWmeQw0nkEmAGPqrFY3Q5ke29pB\nS0q4DZF4lFkQUJVZxewVEs14Dyr05VO8WPk0Y3lRm3nfoE410oIP4exiRLFfyUMJ\nd3rROTCrsphAwQ+MsOTo29Ij0EQVb5ZXhbs3KU4yQx4K9jQe34ii0o9j6Lf0lYVz\nfY2WXj7cBhBsoxfJ0dG/JWMEq0FQOUBjFLIsS/xttjDnS2nJGOd93mCdtLFxwgWj\nprPbdwNx9pFvbmf6oIFuoaY/zgACoaAOMQAFvIW2HV18bHHhM48KWjRZoboUyGSq\nfmnEyeI8ITMgx1X1Wac20i4FXfl0gQ5/kwVvZ7FyCQKBgQDx3JjXOmf01r1s/AT/\nzKlw7if3yw1Ro792Bxo2IxMLWT+6CtJTziih6oG6/0B55K1ukm1t0ZzI5UkPumdT\nLR9woIw+ko1QExNrOM6+vdLs2WBC4XTAvwqEMhaVMej8U27HRlpmO5qfGe1g4EgP\njoIdAj37GeclJkWRiLO763jEeQKBgQDcuyYTeIolVYF9xhzv00UpCTODu/dXSx+p\nJTZ8+isyst9XhNxhtcfc30SMC+T+Z1CxvNy2T1IHvO6qw1/zDHZYG2spIdqPS87V\nMf0HRM0BlzI9gKrL9r3LXrFlHFLKmtwWLiC8Mflff6NGIhiif+ZdG67epgYuqlVw\nbm2d3TUMGwKBgQCxswlcwN3WRtwgMb4ejylC/sfAyKA9hljKiAdbFUQNx4IJ15+W\n0VaLODgewyGFLV27arwZvrM56zRV6Pe3ZeS+pEbGRnirB4jx82f7Po61VDTkjq9w\nWiyI2iA7d9MdaNNweCE9EbfWA3+j+MUZIPQ6Cgat8echJVBh0BV2EVjGyQKBgQDG\nrjXxpLhELpjmCyMUw8gmzb9uvgw+qMIQ0AwhplSnx9W8wzxTPvptVxIuNK6kR36c\n3XCVMQSXLnptfnqpHPiRCe0FExHVldjQkbQ9jLIy0lNIhL435RqlKdDnP/1NnOKp\nnE+e1iSuzwa6JAqkihdii351rl82Nd+92cgVJn2PLQKBgExJW9TA+s6HSNXwg2+E\naP2ZLB/5GNn4YscRbsByGk8Ynq3nHHqB9jycit6edqjZNKZs2370tlp8Ey+6m4kH\nXNJkJErOG0J/HrVvYyC9q2zEJnMbCA7+XuqQ5PMdMWJnP+b/3nAiF59o9LQ0XAJE\nO38Du8+/Nxk+ayNeQBH3qUhI\n-----END PRIVATE KEY-----\n",
+  "client_email": "degtrivia-develop@appspot.gserviceaccount.com",
+  "client_id": "113979250575678600353",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/degtrivia-develop%40appspot.gserviceaccount.com"
+}

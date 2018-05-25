@@ -68,9 +68,11 @@ const pregameCountdown = function(element) {
                 rotatingCopyInst = rotatingCopy(el);
             }
         }
-        rotatingCopyInst.start({
-            path: `events/${activeEventId}/pregameRotatingCopy`
-        });
+        if (rotatingCopyInst) {
+            rotatingCopyInst.start({
+                path: `events/${activeEventId}/pregameRotatingCopy`
+            });
+        }
     }
 
     function stopRotatingCopy() {

@@ -61,10 +61,8 @@ exports[`pregameCountdown renders countdown if next game starts exactly 15 minut
       
                 
       <p
-        class="next-game__message"
-      >
-        Speed counts! Answer as quickly as you can.
-      </p>
+        class="next-game__message countdown-rotating-copy"
+      />
       
             
     </div>
@@ -138,10 +136,8 @@ exports[`pregameCountdown renders countdown if next game starts less than 15 min
       
                 
       <p
-        class="next-game__message"
-      >
-        Speed counts! Answer as quickly as you can.
-      </p>
+        class="next-game__message countdown-rotating-copy"
+      />
       
             
     </div>
@@ -215,10 +211,8 @@ exports[`pregameCountdown renders game ready message after countdown completes: 
       
                 
       <p
-        class="next-game__message"
-      >
-        Speed counts! Answer as quickly as you can.
-      </p>
+        class="next-game__message countdown-rotating-copy"
+      />
       
             
     </div>
@@ -275,8 +269,8 @@ exports[`pregameCountdown renders game ready message if next game start time has
             datetime="1980-09-22T04:59:00.000Z"
           >
             
-                    11:59pm
-                
+                11:59pm
+            
           </time>
           
                     
@@ -294,10 +288,8 @@ exports[`pregameCountdown renders game ready message if next game start time has
       
                 
       <p
-        class="next-game__message"
-      >
-        Speed counts! Answer as quickly as you can.
-      </p>
+        class="next-game__message countdown-rotating-copy"
+      />
       
             
     </div>
@@ -354,8 +346,8 @@ exports[`pregameCountdown renders game time message if next game starts more tha
             datetime="1980-09-22T05:20:00.000Z"
           >
             
-                    12:20am
-                
+                12:20am
+            
           </time>
           
                     
@@ -373,10 +365,8 @@ exports[`pregameCountdown renders game time message if next game starts more tha
       
                 
       <p
-        class="next-game__message"
-      >
-        Speed counts! Answer as quickly as you can.
-      </p>
+        class="next-game__message countdown-rotating-copy"
+      />
       
             
     </div>
