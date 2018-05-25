@@ -97,9 +97,8 @@ function renderScreen(element, data) {
 	const html = `
 		<div class="question">
 			<header class="question-header">
-				${renderStatus(isUserChoiceCorrect)}
+				${resultsPending === true ? '<p class="question-status question-status--calculating">Calculating results...</p>' : renderStatus(isUserChoiceCorrect)}
 				<h1 class="question__text">${questionData.question}</h1>
-				${resultsPending === true ? '<p>Calculating results...</p>' : ''}
 			</header>	
 			<div class="choice-results">
 				${renderChoiceResults(results)}
