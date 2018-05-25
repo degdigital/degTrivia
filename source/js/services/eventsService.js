@@ -28,6 +28,7 @@ const eventsService = function() {
 			eventData = await dbService.getEventById(activeEventId);
 		} else {
 			runSubscribedCallbacks('onNoActiveEvent', {
+				heading: 'Bad timing.',
 				message: 'There are no active events at this time.'
 			});
 		}
