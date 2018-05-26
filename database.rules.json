@@ -163,7 +163,7 @@
 					".validate": "newData.isString() && newData.val().length > 0 && newData.val().length <= 50"
 				},
 				"phoneNumber": {
-					".validate": "newData.isString() && newData.val().length >= 10 && newData.val().length <= 14"
+					".validate": "newData.isString() && newData.val().length >= 10 && newData.val().length <= 20"
 				},
 				"$other": {
 					".validate": false

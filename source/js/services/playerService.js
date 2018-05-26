@@ -55,21 +55,12 @@ const playerService = function() {
 			firstName: playerVals.firstName,
 			lastName: playerVals.lastName,
 			companyName: playerVals.companyName,
-			phoneNumber: formatPhoneNumber(playerVals.phoneNumber),
+			phoneNumber: playerVals.phoneNumber,
 			email: playerVals.email,
 			event: eventKey,
 			active: true
 		};
 		return dbService.getDb().ref(`/players/${uid}`).update(formattedPlayerVals);
-	}
-
-	function formatPhoneNumber(str = '') {
-		const strWithSpecialCharsRemoved = str.replace(/\D/g, '');
-		if (strWithSpecialCharsRemoved.length === 10) {
-			return `1${strWithSpecialCharsRemoved}`;
-		} else {
-			return strWithSpecialCharsRemoved;
-		}
 	}
 
 	function authorize(eventAlias) {

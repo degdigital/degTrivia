@@ -56,7 +56,7 @@ const registration = function(element) {
                 </div>
                 <div class="field">
                     ${label({content: 'Phone', inputId: 'phoneNumber'})}
-                    ${textInput({id: 'phoneNumber', type: 'tel', value: formData.phoneNumber.value, isRequired: true, isInvalid: formData.phoneNumber.isInvalid, pattern: '[0-9-+\s()]*$', additionalAttrs:{minlength: '10', maxlength: '14', placeholder: 'XXX-XXX-XXXX'}})}
+                    ${textInput({id: 'phoneNumber', type: 'tel', value: formData.phoneNumber.value, isRequired: true, isInvalid: formData.phoneNumber.isInvalid, additionalAttrs:{minlength: '10', maxlength: '14', placeholder: 'XXX-XXX-XXXX'}})}
                     ${fieldErrorMessages(formData.phoneNumber.errorMessages)}
                 </div>
                 <div class="field">
