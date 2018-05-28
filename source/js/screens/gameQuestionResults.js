@@ -85,9 +85,6 @@ function renderStatus(isUserChoiceCorrect) {
 
 function renderScreen(element, data) {
 	const {questionData, userChoiceId} = data;
-	console.log(questionData);
-	console.log(userChoiceId);
-	debugger;
 	/* REMOVE THE FOLLOWING LINE ONCE userChoiceId is populated from the DB */
 	const fakeUserChoiceId = Object.keys(questionData.choices)[0];  
 	const resultsPending = data.resultsPending && data.resultsPending === true;
