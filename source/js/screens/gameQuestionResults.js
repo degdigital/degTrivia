@@ -1,6 +1,10 @@
 import {replaceContent} from '../utils/domUtils.js';
 import classnames from 'classnames';
 
+// Services
+import dbService from '../services/dbService';
+import playerService from '../services/playerService';
+
 function renderPendingResult(result) {
 	return `
 		<div class="choice-result">
@@ -85,14 +89,12 @@ function renderStatus(isUserChoiceCorrect) {
 
 function renderScreen(element, data) {
 	const {questionData, userChoiceId} = data;
-	/* REMOVE THE FOLLOWING LINE ONCE userChoiceId is populated from the DB */
-	const fakeUserChoiceId = Object.keys(questionData.choices)[0];  
 	const resultsPending = data.resultsPending && data.resultsPending === true;
-	const isUserChoiceCorrect = fakeUserChoiceId === questionData.correctChoice;
+	const isUserChoiceCorrect = userChoiceId === questionData.correctChoice;
 
 	const results = resultsPending ?
 		buildPendingResults(questionData.choices) :
-		buildResults(questionData.choices, questionData.correctChoice, fakeUserChoiceId);
+		buildResults(questionData.choices, questionData.correctChoice, userChoiceId);
 
 	const html = `
 		<div class="question">
