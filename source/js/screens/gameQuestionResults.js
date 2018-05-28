@@ -1,10 +1,6 @@
 import {replaceContent} from '../utils/domUtils.js';
 import classnames from 'classnames';
 
-// Services
-import dbService from '../services/dbService';
-import playerService from '../services/playerService';
-
 function renderPendingResult(result) {
 	return `
 		<div class="choice-result">
