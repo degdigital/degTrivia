@@ -86,6 +86,7 @@ const eventsService = function() {
 
 	async function onShowGameResultsChange(shouldShowGameResults) {
 		if (shouldShowGameResults) {
+			// TODO: re-render marketing screen with leaderboard button
 			const gameScore = await dbService.getPlayerScore(playerService.getAuth().currentUser.uid);
 			runSubscribedCallbacks('onPostgameResults', gameScore);
 		}
@@ -93,6 +94,7 @@ const eventsService = function() {
 
 	function onShowGameOverChange(shouldShowGameResults) {
 		if (shouldShowGameResults) {
+			// TODO: show marketing screen
 			runSubscribedCallbacks('onGameEnd');
 		}
 	}
