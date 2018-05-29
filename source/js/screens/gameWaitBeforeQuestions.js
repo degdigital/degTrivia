@@ -25,7 +25,7 @@ const gameWaitBeforeQuestions = function(element) {
 					poster="../../images/App-Hex-Ani-Congratulations.jpg"
 					type="video/mp4"
 				>
-					<source src="../../images/app-hex-ani-375.mp4" type="video/mp4">
+					<source src="../../images/App-Hex-Ani-375.mp4" type="video/mp4">
 				</video>
 			</div>
 			<div class="game-begin__content">
