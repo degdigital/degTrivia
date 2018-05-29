@@ -1,0 +1,27 @@
+.game-begin__content {
+    position: relative;
+    z-index: 1;
+}
+
+.game-begin-heading {
+    margin: 8em 0;
+
+    .logo {
+        margin: 0 auto;
+    }
+
+    .page-title {
+        letter-spacing: var(--letter-spacing-wide);
+        margin: .25em 0;
+    }
+
+    .hashtag {
+        font-size: 1.125em;
+    }
+}
+
+@media screen and (min-width: 38em) {
+    .game-begin-heading {
+        margin: 5em 0;
+    }
+}

@@ -34,13 +34,10 @@ function initGame() {
 	eventsService.subscribe('onPlayerUnauthenticated', () => router.route('registration'));
 	eventsService.subscribe('onNoActiveEvent', infoObj => router.route('info', infoObj));
 	eventsService.subscribe('onGameCountdown', (eventData) => router.route('pregameCountdown', eventData));
-	eventsService.subscribe('onGameStart', gameData => router.route('gameWaitBeforeQuestions', gameData));
+	eventsService.subscribe('onGameStart', eventData => router.route('gameWaitBeforeQuestions', eventData));
 	eventsService.subscribe('onQuestionAsked', questionData => router.route('gameQuestion', questionData));
 	eventsService.subscribe('onQuestionResults', questionData => router.route('gameQuestionResults', questionData));
 	eventsService.subscribe('onPostgameResults', gameScore => router.route('postgameResults', gameScore));
-	// TODO: figure out logic for showing pregameCountdown after game.
-	// right now this was bypassing the postgameResults screen
-	// eventsService.subscribe('onGameEnd', () => router.route('pregameCountdown'));
 	eventsService.subscribe('onError', () => router.route('error'));
 	eventsService.subscribe('onDatabaseReconnect', () => location.reload(true));
 	eventsService.subscribe('onResetApp', () => location.reload(true));
