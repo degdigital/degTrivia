@@ -34,7 +34,7 @@ const gameWaitBeforeQuestions = function(element) {
 					<h1 class="page-title page-title--centered">Let's Play!</h1>
 					<p class="hashtag text--centered">${eventData.hashtag || ''}</p>
 				</div>
-				<p class="subheading text--centered">Answer all six questions (not stopping for wrong answers) as fast as you can. 10 seconds per question. Speed and accuracy wins. Here comes the first question.</p>
+				<p class="subheading text--centered">Answer all six questions (no stopping for wrong answers) as fast as you can. 10 seconds per question. Speed and accuracy wins. Here comes the first question.</p>
 			</div>
 		`);
 	}
