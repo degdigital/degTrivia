@@ -1,9 +1,10 @@
 .game-begin__content {
+    position: relative;
     z-index: 1;
 }
 
 .game-begin-heading {
-    margin: 10em 0;
+    margin: 8em 0;
 
     .logo {
         margin: 0 auto;
