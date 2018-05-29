@@ -87,13 +87,14 @@ const eventsService = function() {
 	async function onShowGameResultsChange(shouldShowGameResults) {
 		if (shouldShowGameResults) {
 			const gameScore = await dbService.getPlayerScore(playerService.getAuth().currentUser.uid);
-			runSubscribedCallbacks('onPostgameResults', gameScore);
+			runSubscribedCallbacks('onPostgameResults', {gameScore, showLeaderboard: true});
 		}
 	}
 
-	function onShowGameOverChange(shouldShowGameResults) {
+	async function onShowGameOverChange(shouldShowGameResults) {
 		if (shouldShowGameResults) {
-			runSubscribedCallbacks('onGameEnd');
+			const gameScore = await dbService.getPlayerScore(playerService.getAuth().currentUser.uid);
+			runSubscribedCallbacks('onPostgameResults', {gameScore, showLeaderboard: false});
 		}
 	}
 
