@@ -70,12 +70,28 @@ const dbService = function() {
 		return Promise.resolve(nextGameTime);
 	}
 
-	async function getQuestionResults(gameId, questionId) {
-		const questionResults = await db.ref(`games/${gameId}/questions/${questionId}`).once('value').then(snapshot => snapshot.val());
+	async function getQuestionResults(gameId, questionId, uid) {
+		const promises = await Promise.all([
+			db.ref(`games/${gameId}/questions/${questionId}`).once('value').then(snapshot => snapshot.val()),
+			db.ref(`answers/${questionId}/responses`).once('value').then(snapshot => snapshot.val())
+		]);
+		const questionResults = promises[0];
+		const answers = promises[1];
 		questionResults.id = questionId;
 		return {
-			questionData: questionResults
+			questionData: questionResults,
+			userChoiceId: getUserChoiceId(answers, uid)
 		};
+	}
+
+	function getUserChoiceId(answers, uid) {
+		if (!answers) {
+			return null;
+		}
+		const userChoiceId = Object.keys(answers).find(key => {
+			return Object.keys(answers[key]).includes(uid);
+		});
+		return userChoiceId || null; 
 	}
 
 	function submitAnswer(questionId, choiceId, playerId) {
