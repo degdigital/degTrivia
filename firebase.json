@@ -10,6 +10,10 @@
         "destination": "/css"
       },
       {
+        "source": "/images/**",
+        "destination": "/images"
+      },
+      {
         "source": "**",
         "destination": "/index.html"
       }

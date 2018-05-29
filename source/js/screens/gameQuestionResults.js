@@ -85,19 +85,17 @@ function renderStatus(isUserChoiceCorrect) {
 
 function renderScreen(element, data) {
 	const {questionData, userChoiceId} = data;
-	/* REMOVE THE FOLLOWING LINE ONCE userChoiceId is populated from the DB */
-	const fakeUserChoiceId = Object.keys(questionData.choices)[0];  
 	const resultsPending = data.resultsPending && data.resultsPending === true;
-	const isUserChoiceCorrect = fakeUserChoiceId === questionData.correctChoice;
+	const isUserChoiceCorrect = userChoiceId === questionData.correctChoice;
 
 	const results = resultsPending ?
 		buildPendingResults(questionData.choices) :
-		buildResults(questionData.choices, questionData.correctChoice, fakeUserChoiceId);
+		buildResults(questionData.choices, questionData.correctChoice, userChoiceId);
 
 	const html = `
 		<div class="question">
 			<header class="question-header">
-				${renderStatus(isUserChoiceCorrect)}
+				${resultsPending === true ? '<p class="question-status question-status--calculating">Calculating results...</p>' : renderStatus(isUserChoiceCorrect)}
 				<h1 class="question__text">${questionData.question}</h1>
 			</header>	
 			<div class="choice-results">

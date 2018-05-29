@@ -16,3 +16,8 @@
 .question-status--incorrect {
 	background-color: var(--color-orange);
 }
+
+.question-status--calculating {
+	background-color: transparent;
+	color: var(--color-white);
+}
