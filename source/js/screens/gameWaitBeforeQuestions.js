@@ -12,7 +12,7 @@ const gameWaitBeforeQuestions = function(element) {
 		}
 	}
 
-	function render() {
+	function render(eventData) {
 		hideSiteHeader();
 		replaceContent(element, `
 			<div class="background__video-wrap">
@@ -32,7 +32,7 @@ const gameWaitBeforeQuestions = function(element) {
 				<div class="game-begin-heading">
 					<img src="../../images/deg-logo.svg" alt="DEG logo" class="logo" />
 					<h1 class="page-title page-title--centered">Let's Play!</h1>
-					<p class="hashtag text--centered">#CNXTRIVIA</p>
+					<p class="hashtag text--centered">${eventData.hashtag || ''}</p>
 				</div>
 				<p class="subheading text--centered">Answer all six questions (not stopping for wrong answers) as fast as you can. 10 seconds per question. Speed and accuracy wins. Here comes the first question.</p>
 			</div>

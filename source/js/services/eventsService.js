@@ -46,8 +46,13 @@ const eventsService = function() {
 
 	async function onGameActivationChange(gameId, activeEventId) {
 		if (gameId) {
-			const gameVals = await dbService.getActiveGameData(gameId);
-			runSubscribedCallbacks('onGameStart', gameVals);
+			const responses = await Promise.all([
+				dbService.getActiveGameData(gameId),
+				dbService.getEventById(activeEventId)
+			]);
+			const gameVals = responses[0];
+			const eventVals = responses[1];
+			runSubscribedCallbacks('onGameStart', eventVals);
 			dbService.getDb().ref(`games/${gameId}/activeQuestionId`).on('value', snapshot => onQuestionActivationChange(snapshot.val(), gameVals, gameId));
 			dbService.getDb().ref(`games/${gameId}/showQuestionResults`).on('value', snapshot => onQuestionResultsChange(snapshot.val(), gameId));
 			dbService.getDb().ref(`games/${gameId}/showGameResults`).on('value', snapshot => onShowGameResultsChange(snapshot.val()));
