@@ -7,7 +7,7 @@ const postgameResults = function(element) {
 	function bindEventListeners(eventVals) {
 		const btnEl = document.querySelector('[data-leaderboard-btn]');
 		if (btnEl) {
-			btnEl.addEventListener('click', routeToLeaderboard, eventVals);
+			btnEl.addEventListener('click', () => routeToLeaderboard(eventVals));
 		}
 	}
 
