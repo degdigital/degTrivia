@@ -6,6 +6,10 @@ import dbService from '../../services/dbService.js';
 
 const manager = function(el) {
 
+    function getTimeElapsed(ms) {
+        return Math.round((ms * 1000), 2);
+    }
+
     function renderTableBody(data) {
         let returnMarkup = '';
         if (data) {
@@ -14,6 +18,7 @@ const manager = function(el) {
                      <td class="table__data-cell">${index + 1}</td>
                      <td class="table__data-cell">${leader.name}</td>
                      <td class="table__data-cell">${leader.score}</td>
+                     <td class="table__data-cell">${getTimeElapsed(leader.timeElapsed)}s</td>
                 </tr>`
             )).join('');
         } else {
