@@ -31,12 +31,39 @@ const gameWaitBeforeQuestions = function(element) {
 			<div class="game-begin__content">
 				<div class="game-begin-heading">
 					<img src="../../images/deg-logo.svg" alt="DEG logo" class="logo" />
-					<h1 class="page-title page-title--centered">Let's Play!</h1>
-					<p class="hashtag text--centered">${eventData.hashtag || ''}</p>
+					${renderTitle(eventData.gameWaitBeforeQuestionsCopy.title)}
+					${renderHashtag(eventData.hashtag)}
 				</div>
-				<p class="subheading text--centered">Answer all six questions (no stopping for wrong answers) as fast as you can. 10 seconds per question. Speed and accuracy wins. Here comes the first question.</p>
+				${renderDescription(eventData.gameWaitBeforeQuestionsCopy.description)}
 			</div>
 		`);
+	}
+
+	function renderTitle(title = null) {
+		if (!title) {
+			return '';
+		}
+		return `
+			<h1 class="page-title page-title--centered">${title}</h1>
+		`;
+	}
+
+	function renderHashtag(hashtag = null) {
+		if (!hashtag) {
+			return '';
+		}
+		return `
+			<p class="hashtag text--centered">${hashtag}</p>
+		`;
+	}
+
+	function renderDescription(description = null) {
+		if (!description) {
+			return '';
+		}
+		return `
+			<p class="subheading text--centered">${description}</p>
+		`;
 	}
 
 	function teardown() {

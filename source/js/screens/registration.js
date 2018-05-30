@@ -22,6 +22,7 @@ const defaultFormData = {
     phoneNumber: {value: ''},
     eventAlias: {value: ''}
 };
+let cachedEventData;
 
 const registration = function(element) {
 
@@ -29,9 +30,9 @@ const registration = function(element) {
         element.addEventListener('submit', onFormSubmit);
     }
 
-    function render(formData, errorMessage=null) {
+    function render(formData, errorMessage = null, eventData) {
         replaceContent(element, `
-            <h1 class="page-title page-title--small">Welcome to DEG Trivia!</h1>
+            <h1 class="page-title page-title--small">${eventData.registrationCopy.title}</h1>
             <form ${registationFormAttr}>
                 ${formErrorMessage({errorMessage, dataAttr: formErrorMessageAttr})}
                 <div class="field">
@@ -100,7 +101,7 @@ const registration = function(element) {
             errorMessage = error.message;
         }
 
-        render(formData, errorMessage);
+        render(formData, errorMessage, cachedEventData);
         scrollFormErrorMessageIntoView();
     }
 
@@ -121,7 +122,10 @@ const registration = function(element) {
     bindEvents();
 
     return {
-        render: () => render(defaultFormData)
+        render: (eventData) => {
+            cachedEventData = eventData;
+            render(defaultFormData, null, eventData);
+        }
     };
 
 };

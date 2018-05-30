@@ -36,11 +36,12 @@ const eventsService = function() {
 		runSubscribedCallbacks('onActiveEventChanged', eventData);
 	}
 
-	function onAuthStateChanged(user, activeEventId) {
+	async function onAuthStateChanged(user, activeEventId) {
 		if (user) {
 			dbService.getDb().ref(`events/${activeEventId}/activeGameId`).on('value', snapshot => onGameActivationChange(snapshot.val(), activeEventId));
 		} else {
-			runSubscribedCallbacks('onPlayerUnauthenticated');
+			const eventData = await dbService.getEventById(activeEventId);
+			runSubscribedCallbacks('onPlayerUnauthenticated', eventData);
 		}
 	}
 
@@ -55,8 +56,8 @@ const eventsService = function() {
 			runSubscribedCallbacks('onGameStart', eventVals);
 			dbService.getDb().ref(`games/${gameId}/activeQuestionId`).on('value', snapshot => onQuestionActivationChange(snapshot.val(), gameVals, gameId));
 			dbService.getDb().ref(`games/${gameId}/showQuestionResults`).on('value', snapshot => onQuestionResultsChange(snapshot.val(), gameId));
-			dbService.getDb().ref(`games/${gameId}/showGameResults`).on('value', snapshot => onShowGameResultsChange(snapshot.val()));
-			dbService.getDb().ref(`games/${gameId}/showGameOver`).on('value', snapshot => onShowGameOverChange(snapshot.val()));
+			dbService.getDb().ref(`games/${gameId}/showGameResults`).on('value', snapshot => onShowGameResultsChange(snapshot.val(), eventVals));
+			dbService.getDb().ref(`games/${gameId}/showGameOver`).on('value', snapshot => onShowGameOverChange(snapshot.val(), eventVals));
 		} else {
 			const eventVals = await dbService.getEventById(activeEventId);
 			runSubscribedCallbacks('onGameCountdown', eventVals);
@@ -84,17 +85,17 @@ const eventsService = function() {
 		}
 	}
 
-	async function onShowGameResultsChange(shouldShowGameResults) {
+	async function onShowGameResultsChange(shouldShowGameResults, eventVals) {
 		if (shouldShowGameResults) {
 			const gameScore = await dbService.getPlayerScore(playerService.getAuth().currentUser.uid);
-			runSubscribedCallbacks('onPostgameResults', {gameScore, showLeaderboard: true});
+			runSubscribedCallbacks('onPostgameResults', {gameScore, showLeaderboard: true, eventVals});
 		}
 	}
 
-	async function onShowGameOverChange(shouldShowGameResults) {
+	async function onShowGameOverChange(shouldShowGameResults, eventVals) {
 		if (shouldShowGameResults) {
 			const gameScore = await dbService.getPlayerScore(playerService.getAuth().currentUser.uid);
-			runSubscribedCallbacks('onPostgameResults', {gameScore, showLeaderboard: false});
+			runSubscribedCallbacks('onPostgameResults', {gameScore, showLeaderboard: false, eventVals});
 		}
 	}
 

@@ -68,6 +68,10 @@ select {
 	margin-bottom: 1rem;
 }
 
+.input--extra-wide {
+	width: 52rem;
+}
+
 .input--wide {
 	width: 18rem;
 }
