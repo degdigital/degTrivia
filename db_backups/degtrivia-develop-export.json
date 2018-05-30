@@ -16,29 +16,59 @@
     "-LCUWuNIqOKlRmpPvZTE" : {
       "activeGameId" : false,
       "alias" : "connections2018",
+      "gameWaitBeforeQuestionsCopy" : {
+        "description" : "Answer all six questions (no stopping for wrong answers) as fast as you can. 10 seconds per question. Speed and accuracy wins. Here comes the first question.",
+        "title" : "Let's Play!"
+      },
       "games" : {
         "-LCU_qvXC1rWVovF0Cva" : true,
         "-LCUjYNIiCbBWln2OOuA" : true
       },
       "hashtag" : "#CNXTRIVIA",
+      "leaderboardCopy" : {
+        "description" : "Congrats on seeing your name in lights. Don't let someone steal your thunder. Play again to maintain your spot."
+      },
       "name" : "Connections 2018",
+      "postgameResultsCopy" : {
+        "description" : "Come visit DEG at booth #303 to learn more about how we can help your company market to the moment."
+      },
       "pregameRotatingCopy" : {
         "-LDF7W8t6PWGH5OY6RYL" : "Speed counts! Answer as quickly as you can."
+      },
+      "registrationCopy" : {
+        "title" : "Welcome to Connections Trivia, presented by DEG."
       }
     },
     "-LCUbqaXAuNRGFOJBXEL" : {
-      "activeGameId" : false,
+      "activeGameId" : "-LD84ESzyLp4oyyDckO2",
       "alias" : "beer30",
+      "gameWaitBeforeQuestionsCopy" : {
+        "description" : "Answer all six questions (no stopping for wrong answers) as fast as you can. 10 seconds per question. Speed and accuracy wins. Here comes the first question.",
+        "title" : "Let's Play!"
+      },
       "games" : false,
       "hashtag" : "#DEGBEER30",
+      "leaderboardCopy" : {
+        "description" : "Congrats on seeing your name in lights. Don't let someone steal your thunder. Play again to maintain your spot."
+      },
       "name" : "DEG Beer:30",
+      "postgameResultsCopy" : {
+        "description" : "Thanks for playing! See you again next week."
+      },
       "pregameRotatingCopy" : {
         "-LDJD82xkiDFFFwg6N6G" : "Speed counts! Answer as quickly as you can."
+      },
+      "registrationCopy" : {
+        "title" : "Welcome to DEG Trivia!"
       }
     },
     "-LD84ESzyLp4oyyDckO2" : {
       "activeGameId" : false,
       "alias" : "cnxtrivia2018",
+      "gameWaitBeforeQuestionsCopy" : {
+        "description" : "Answer all six questions (no stopping for wrong answers) as fast as you can. 10 seconds per question. Speed and accuracy wins. Here comes the first question.",
+        "title" : "Let's Play!"
+      },
       "games" : {
         "-LD8FrG0NCS0bNPLXHlU" : true,
         "-LD8Gu0OMUVi02Ixl4Yp" : true,
@@ -48,9 +78,18 @@
         "-LD8MSLGcb5uw-GhlJlp" : true
       },
       "hashtag" : "#CNXTRIVIA",
+      "leaderboardCopy" : {
+        "description" : "Congrats on seeing your name in lights. Don't let someone steal your thunder. Play again to maintain your spot."
+      },
       "name" : "CNX 2018",
+      "postgameResultsCopy" : {
+        "description" : "Come visit DEG at booth #303 to learn more about how we can help your company market to the moment."
+      },
       "pregameRotatingCopy" : {
         "-LDJD75YE0FKMqPMa3wA" : "Speed counts! Answer as quickly as you can."
+      },
+      "registrationCopy" : {
+        "title" : "Welcome to Connections Trivia, presented by DEG."
       }
     }
   },
@@ -59,7 +98,7 @@
       "activeQuestionId" : false,
       "event" : "-LCUWuNIqOKlRmpPvZTE",
       "name" : "12 p.m. Game",
-      "questionExpirationTime" : 1527274284982,
+      "questionExpirationTime" : 1527643538337,
       "questions" : {
         "-LCU_qvWZf7LxjPDwnWa" : {
           "choices" : {
@@ -313,7 +352,7 @@
       "activeQuestionId" : false,
       "event" : "-LD84ESzyLp4oyyDckO2",
       "name" : "Game 1",
-      "questionExpirationTime" : 1527192389177,
+      "questionExpirationTime" : 1527644974024,
       "questions" : {
         "-LD8FrG-yF6EXlmDHn4_" : {
           "choices" : {
@@ -1206,14 +1245,14 @@
     }
   },
   "players" : {
-    "5biIuUJKBDV6dOVvRzSoXpDyEaN2": {
+    "0s3r7yEj7gRzNoFaW2wGfzwWyub2" : {
       "active" : true,
       "email" : "ascheuler@degdigital.com",
       "event" : "-LCUWuNIqOKlRmpPvZTE",
       "firstName" : "Anna",
       "lastName" : "Scheuler"
-      },
-    "0s3r7yEj7gRzNoFaW2wGfzwWyub2" : {
+    },
+    "5biIuUJKBDV6dOVvRzSoXpDyEaN2" : {
       "active" : true,
       "email" : "ascheuler@degdigital.com",
       "event" : "-LCUWuNIqOKlRmpPvZTE",

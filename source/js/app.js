@@ -31,7 +31,7 @@ function init(appConfig) {
 function initGame() {	
 
 	eventsService.subscribe('onActiveEventChanged', onActiveEventChanged);
-	eventsService.subscribe('onPlayerUnauthenticated', () => router.route('registration'));
+	eventsService.subscribe('onPlayerUnauthenticated', (eventData) => router.route('registration', eventData));
 	eventsService.subscribe('onNoActiveEvent', infoObj => router.route('info', infoObj));
 	eventsService.subscribe('onGameCountdown', (eventData) => router.route('pregameCountdown', eventData));
 	eventsService.subscribe('onGameStart', eventData => router.route('gameWaitBeforeQuestions', eventData));

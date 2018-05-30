@@ -36,9 +36,22 @@ const addEvent = function(wrapperEl, initialData) {
 			eventsRef.child(newKey).update({
 				activeGameId: false,
 				alias: data.alias.toLowerCase(),
-				hashtag: data.hashtag,
+				gameWaitBeforeQuestionsCopy: {
+					description: data.gameWaitBeforeQuestionsCopyDescription,
+					title: data.gameWaitBeforeQuestionsCopyTitle
+				},
 				games: false,
-				name: data.name
+				hashtag: data.hashtag,
+				leaderboardCopy: {
+					description: data.leaderboardCopyDescription
+				},
+				name: data.name,
+				postgameResultsCopy: {
+					description: data.postgameResultsCopyDescription
+				},
+				registrationCopy: {
+					title: data.registrationCopyTitle
+				}
 			});
 		}
 	}
@@ -59,6 +72,26 @@ const addEvent = function(wrapperEl, initialData) {
 					<div class="field">
 						<label for="hashtag">Hashtag</label><br>
 						<input id="hashtag" name="hashtag" type="text">
+					</div>
+					<div class="field">
+						<label for="gameWaitBeforeQuestionsCopyTitle">Game Wait Before Questions Title</label><br>
+						<input class="input--extra-wide" id="gameWaitBeforeQuestionsCopyTitle" name="gameWaitBeforeQuestionsCopyTitle" type="text" value="Let's Play!">
+					</div>
+					<div class="field">
+						<label for="gameWaitBeforeQuestionsCopyDescription">Game Wait Before Questions Description</label><br>
+						<input class="input--extra-wide" id="gameWaitBeforeQuestionsCopyDescription" name="gameWaitBeforeQuestionsCopyDescription" type="text" value="Answer the questions (no stopping for wrong answers) as fast as you can. 10 seconds per question. Speed and accuracy wins. Here comes the first question.">
+					</div>
+					<div class="field">
+						<label for="leaderboardCopyDescription">Leaderboard Description</label><br>
+						<input class="input--extra-wide" id="leaderboardCopyDescription" name="leaderboardCopyDescription" type="text" value="Congrats on seeing your name in lights. Don't let someone steal your thunder. Play again to maintain your spot.">
+					</div>
+					<div class="field">
+						<label for="postgameResultsCopyDescription">Postgame Results Description</label><br>
+						<input class="input--extra-wide" id="postgameResultsCopyDescription" name="postgameResultsCopyDescription" type="text" value="Thanks for playing! See you again next week.">
+					</div>
+					<div class="field">
+						<label for="registrationCopyTitle">Registration Title</label><br>
+						<input class="input--extra-wide" id="registrationCopyTitle" name="registrationCopyTitle" type="text" value="Welcome to DEG Trivia!">
 					</div>
 					<button type="submit">Submit</button>
 				</fieldset>

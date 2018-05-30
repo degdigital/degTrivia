@@ -4,10 +4,10 @@ import leaderboard from '../components/leaderboard.js';
 
 const postgameResults = function(element) {
 
-	function bindEventListeners() {
+	function bindEventListeners(eventVals) {
 		const btnEl = document.querySelector('[data-leaderboard-btn]');
 		if (btnEl) {
-			btnEl.addEventListener('click', routeToLeaderboard);
+			btnEl.addEventListener('click', routeToLeaderboard, eventVals);
 		}
 	}
 
@@ -18,8 +18,8 @@ const postgameResults = function(element) {
 		}
 	}
 
-	function routeToLeaderboard() {
-		router.route('leaderboard');
+	function routeToLeaderboard(eventVals) {
+		router.route('leaderboard', eventVals);
 	}
 
 	function renderLeaderboardBtn(shouldRender) {
@@ -29,17 +29,25 @@ const postgameResults = function(element) {
 		return '';
 	}
 
-	function render({gameScore, showLeaderboardBtn}) {
-		// TODO: replace subheading with content from DB
+	function render({gameScore, showLeaderboardBtn, eventVals}) {
 		replaceContent(element, `
 			<div class="results-screen__intro">
 				<h1 class="page-title page-title--centered">Game Results</h1>
 				<h2 class="results-screen__score text--centered">Your score: ${gameScore}</h2>
 			</div>
-			<p class="subheading text--centered">Come visit DEG at booth #303 to learn more about how we can help your company market to the moment.</p>
+			${renderDescription(eventVals.postgameResultsCopy.description)}
 			${renderLeaderboardBtn(showLeaderboardBtn)}
 		`);
-		bindEventListeners();
+		bindEventListeners(eventVals);
+	}
+
+	function renderDescription(description = null) {
+		if (!description) {
+			return '';
+		}
+		return `
+			<p class="subheading text--centered">${description}</p>
+		`;
 	}
 
 	function teardown() {
