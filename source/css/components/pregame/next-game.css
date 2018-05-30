@@ -19,6 +19,11 @@
     letter-spacing: var(--letter-spacing-wide);
 }
 
+.next-game__title-intro--lg {
+	font-size: 1.75em;
+	margin-bottom: .25em;
+}
+
 .next-game__time {
 	font-size: 2em;
 	background-color: var(--color-teal);

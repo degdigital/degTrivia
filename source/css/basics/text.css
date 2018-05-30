@@ -14,6 +14,11 @@ p {
 	text-align: center;
 }
 
+.text--emphasis {
+	color: var(--color-green);
+	font-weight: bold;
+}
+
 .event-hashtag {
 	color: var(--color-teal-light-20);
 	font-weight: 500;

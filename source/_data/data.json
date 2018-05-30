@@ -233,5 +233,6 @@
     "infoText": {
         "heading": "Oh no!",
         "subheading": "We’re experiencing some technical difficulties. Stay with us. The page will refresh when ready."
-    }
+    },
+    "appStyleModifier": "page-width"
 }
