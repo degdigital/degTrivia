@@ -29,14 +29,14 @@ const postgameResults = function(element) {
 		return '';
 	}
 
-	function render({gameScore, showLeaderboardBtn, eventVals}) {
+	function render({gameScore, showLeaderboard, eventVals}) {
 		replaceContent(element, `
 			<div class="results-screen__intro">
 				<h1 class="page-title page-title--centered">Game Results</h1>
 				<h2 class="results-screen__score text--centered">Your score: ${gameScore}</h2>
 			</div>
 			${renderDescription(eventVals.postgameResultsCopy.description)}
-			${renderLeaderboardBtn(showLeaderboardBtn)}
+			${renderLeaderboardBtn(showLeaderboard)}
 		`);
 		bindEventListeners(eventVals);
 	}
