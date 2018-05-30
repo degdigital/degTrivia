@@ -5,11 +5,6 @@ import '@firebase/functions';
 const dbService = function() {
 
 	let db = null;
-	const nodeNames = {
-		events: 'events',
-		games: 'games',
-		pendingPlayers: 'pendingPlayers'
-	};
 	const defaultNodesToGet = [
 		'events',
 		'games'
@@ -44,13 +39,6 @@ const dbService = function() {
 
 	function getEvent(eventAlias) {
 		return db.ref('events').orderByChild('alias').equalTo(eventAlias.toLowerCase()).once('value').then(snapshot => snapshot.val());
-	}
-
-	function createPendingPlayer(playerVals, eventKey, userId) {
-		const pendingPlayerKey = db.ref(nodeNames.pendingPlayers).push().key;
-		
-		return db.ref(`/${nodeNames.pendingPlayers}/${pendingPlayerKey}`).update(formattedPlayerVals)
-			.then(() => pendingPlayerKey);
 	}
 
 	async function getNextGameTime() {
