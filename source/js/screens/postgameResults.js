@@ -4,32 +4,38 @@ import leaderboard from '../components/leaderboard.js';
 
 const postgameResults = function(element) {
 
-	function bindEventListeners(eventVals) {
-		const btnEl = document.querySelector('[data-leaderboard-btn]');
+	const buttonAttr = 'data-leaderboard-btn';
+	let cachedEventVals;
+
+	function bindEventListeners() {
+		const btnEl = document.querySelector(`[${buttonAttr}]`);
 		if (btnEl) {
-			btnEl.addEventListener('click', () => routeToLeaderboard(eventVals));
+			btnEl.addEventListener('click', routeToLeaderboard);
 		}
 	}
 
 	function unbindEventListeners() {
-		const btnEl = document.querySelector('[data-leaderboard-btn]');
+		const btnEl = document.querySelector(`[${buttonAttr}]`);
 		if (btnEl) {
 			btnEl.removeEventListener('click', routeToLeaderboard);
 		}
 	}
 
-	function routeToLeaderboard(eventVals) {
-		router.route('leaderboard', eventVals);
+	function routeToLeaderboard() {
+		router.route('leaderboard', cachedEventVals);
 	}
 
 	function renderLeaderboardBtn(shouldRender) {
 		if (shouldRender) {
-			return '<button class="button results-screen__button" data-leaderboard-btn>View the leaderboard</button>';
+			return `
+				<button class="button results-screen__button" ${buttonAttr}>View the leaderboard</button>
+			`;
 		}
 		return '';
 	}
 
 	function render({gameScore, showLeaderboard, eventVals}) {
+		cachedEventVals = eventVals;
 		replaceContent(element, `
 			<div class="results-screen__intro">
 				<h1 class="page-title page-title--centered">Game Results</h1>
@@ -38,7 +44,7 @@ const postgameResults = function(element) {
 			${renderDescription(eventVals.postgameResultsCopy.description)}
 			${renderLeaderboardBtn(showLeaderboard)}
 		`);
-		bindEventListeners(eventVals);
+		bindEventListeners();
 	}
 
 	function renderDescription(description = null) {
