@@ -6,6 +6,10 @@ import dbService from '../../services/dbService.js';
 
 const manager = function(el) {
 
+    function getTimeElapsed(ms) {
+        return Math.round((ms * 1000), 2);
+    }
+
     function renderTableBody(data) {
         let returnMarkup = '';
         if (data) {
@@ -14,6 +18,7 @@ const manager = function(el) {
                      <td class="table__data-cell">${index + 1}</td>
                      <td class="table__data-cell">${leader.name}</td>
                      <td class="table__data-cell">${leader.score}</td>
+                     <td class="table__data-cell">${getTimeElapsed(leader.timeElapsed)}s</td>
                 </tr>`
             )).join('');
         } else {
@@ -48,8 +53,7 @@ const manager = function(el) {
             leaderboardData = await dbService.getLeaderboardData();
         }
         replaceContent(el, `
-        <div class="page-width page-width--wide">
-			<h1 class="page-title page-title--centered">DEG Trivia Leaderboard</h1>
+			<h1 class="page-title page-title--centered">Trivia Leaderboard</h1>
             <div class="columns columns--two">
                 <div class="column">
                     ${renderLeaderboard(leaderboardData.game, 'Last Game')}
@@ -58,7 +62,6 @@ const manager = function(el) {
                     ${renderLeaderboard(leaderboardData.event, 'Event')}
                 </div>
             </div>
-        </div>
         `);
         return Promise.resolve();
 	}

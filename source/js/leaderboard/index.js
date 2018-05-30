@@ -8,7 +8,8 @@ import playerService from '../services/playerService.js';
 
 // Screens
 import login from '../admin/screens/login.js';
-import manager from './screens/manager.js';
+import leaderboardScreen from './screens/leaderboardScreen.js';
+import marketingScreen from './screens/marketingMessage.js';
 
 const leaderboardTV = function(el) {
 
@@ -40,7 +41,7 @@ const leaderboardTV = function(el) {
 
 		db = dbService.getDb();
 		loginInst = login(el);
-		managerInst = manager(el);
+		managerInst = leaderboardScreen(el);
 		
 		setUpListeners(managerInst);
 	}
@@ -48,5 +49,5 @@ const leaderboardTV = function(el) {
 	init();
 };
 
-const rootEl = document.getElementById('app');
+const rootEl = document.querySelector('.main');
 leaderboardTV(rootEl);
