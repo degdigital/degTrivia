@@ -53,8 +53,7 @@ const manager = function(el) {
             leaderboardData = await dbService.getLeaderboardData();
         }
         replaceContent(el, `
-        <div class="page-width page-width--wide">
-			<h1 class="page-title page-title--centered">DEG Trivia Leaderboard</h1>
+			<h1 class="page-title page-title--centered">Trivia Leaderboard</h1>
             <div class="columns columns--two">
                 <div class="column">
                     ${renderLeaderboard(leaderboardData.game, 'Last Game')}
@@ -63,7 +62,6 @@ const manager = function(el) {
                     ${renderLeaderboard(leaderboardData.event, 'Event')}
                 </div>
             </div>
-        </div>
         `);
         return Promise.resolve();
 	}

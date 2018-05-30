@@ -4,5 +4,7 @@
 @import "basics/table.css";
 @import "basics/text.css";
 @import "basics/typography.css";
+@import "components/pregame/next-game";
+@import "components/tv-screen/tv-screen";
 @import "templates/layout.css";
 @import "templates/columns.css";
