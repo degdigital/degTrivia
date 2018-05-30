@@ -37,7 +37,7 @@ function initGame() {
 	eventsService.subscribe('onGameStart', eventData => router.route('gameWaitBeforeQuestions', eventData));
 	eventsService.subscribe('onQuestionAsked', questionData => router.route('gameQuestion', questionData));
 	eventsService.subscribe('onQuestionResults', questionData => router.route('gameQuestionResults', questionData));
-	eventsService.subscribe('onPostgameResults', gameScore => router.route('postgameResults', gameScore));
+	eventsService.subscribe('onPostgameResults', props => router.route('postgameResults', props));
 	eventsService.subscribe('onError', () => router.route('error'));
 	eventsService.subscribe('onDatabaseReconnect', () => location.reload(true));
 	eventsService.subscribe('onResetApp', () => location.reload(true));

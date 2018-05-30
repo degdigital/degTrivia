@@ -29,7 +29,7 @@ const postgameResults = function(element) {
 		return '';
 	}
 
-	function render({gameScore, showLeaderboardBtn}) {
+	function render({gameScore, showLeaderboard}) {
 		// TODO: replace subheading with content from DB
 		replaceContent(element, `
 			<div class="results-screen__intro">
@@ -37,7 +37,7 @@ const postgameResults = function(element) {
 				<h2 class="results-screen__score text--centered">Your score: ${gameScore}</h2>
 			</div>
 			<p class="subheading text--centered">Come visit DEG at booth #303 to learn more about how we can help your company market to the moment.</p>
-			${renderLeaderboardBtn(showLeaderboardBtn)}
+			${renderLeaderboardBtn(showLeaderboard)}
 		`);
 		bindEventListeners();
 	}
