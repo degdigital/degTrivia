@@ -26,13 +26,6 @@ function renderLeaderboard(data) {
                     <col class="table__col"></col>
                     <col class="table__col"></col>
                 </colgroup>
-                <thead class="table__header-row">
-                    <tr class="table__row table__row--header">
-                        <th class="table__heading"></th>
-                        <th class="table__heading"></th>
-                        <th class="table__heading"></th>
-                    </tr>
-                </thead>
                 <tbody class="table__table-body">${renderTableBody(data)}</tbody>
             </table>
         `;
