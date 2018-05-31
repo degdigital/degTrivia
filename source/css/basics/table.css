@@ -1,0 +1,29 @@
+.table {
+    max-width: 40em;
+    width: 100%;
+}
+
+.table__caption {
+    font-size: 1.25em;
+    letter-spacing: var(--letter-spacing-wide);
+    margin-bottom: .75em;
+    text-align: left;
+    text-transform: uppercase;
+}
+
+.table__row {
+    border-bottom: .125em solid color(var(--color-teal) a(50%));
+    line-height: 2em;
+}
+
+.table__row--header {
+    border-bottom: 0;
+}
+
+.table__col--small {
+    width: 12%;
+}
+
+.table__data-cell {
+    letter-spacing: var(--letter-spacing-wide);
+}

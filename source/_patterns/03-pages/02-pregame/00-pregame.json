@@ -1,0 +1,11 @@
+{
+	"pregame": {
+		"showNextGame": true,
+		"nextGame": {
+			"showCountdown": true,
+			"countdown": {
+				"value": "15:00"
+			}
+		}    
+    }
+}

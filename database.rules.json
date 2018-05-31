@@ -1,0 +1,199 @@
+{
+	"rules": {
+		"activeEventId": {
+			".indexOn": ".value",
+			".read": true,
+			".write": "root.child('admins/'+auth.uid).exists()",
+			".validate": "newData.isBoolean() || (newData.isString() && newData.val().length > 0 && newData.val().length === 20)"
+		},
+		"admins": {
+			".indexOn": ".value",
+			".read": "auth !== null",
+			".write": false
+		},
+		"answers": {
+			".read": "auth !== null",
+			".write": "auth !== null",
+			"$answerId": {
+				"correctChoiceId": {
+					".validate": "newData.isBoolean() || (newData.isString() && newData.val().length > 0 && newData.val().length === 20)"
+				},
+				"eventId": {
+					".validate": "newData.isBoolean() || (newData.isString() && newData.val().length > 0 && newData.val().length === 20)"
+				},
+				"gameId": {
+					".validate": "newData.isBoolean() || (newData.isString() && newData.val().length > 0 && newData.val().length === 20)"
+				},
+				"responses": {
+					"$responseId": {
+						"$playerId": {
+							".validate": "newData.isNumber() && newData.val() <= 999999999999999"
+						}
+					}
+				}
+			}
+		},
+		"disableAll": {
+			".indexOn": ".value",
+			".read": true,
+			".write": "root.child('admins/'+auth.uid).exists()",
+			".validate": "newData.isBoolean()"
+		},
+		"events": {
+			".indexOn": "alias",
+			".read": true,
+			".write": true
+		},
+		"games": {
+			".indexOn": "event",
+			".read": "auth !== null",
+      		".write":  "root.child('admins/'+auth.uid).exists()",
+			"$gameId": {
+				"activeQuestionId": {
+					".validate": "newData.isBoolean() || (newData.isString() && newData.val().length > 0 && newData.val().length === 20)"
+				},
+				"event": {
+					".validate": "newData.isString() && newData.val().length > 0 && newData.val().length === 20"
+				},
+				"name": {
+					".validate": "newData.isString() && newData.val().length > 0 && newData.val().length <= 100"
+				},
+				"questionExpirationTime": {
+					".validate": "newData.isNumber() && newData.val() > now && newData.val() <= 9999999999999"
+				},
+				"questions": {
+					"$questionId": {
+						"choices": {
+							"$choiceId": {
+								"chosenCount": {
+									".validate": "newData.isNumber() && newData.val() >= 0"
+								},
+								"text": {
+									".validate": "newData.isString() && newData.val().length > 0 && newData.val().length <= 200"
+								}
+							}
+						},
+						"correctChoice": {
+							".validate": "newData.isString() && newData.val().length > 0 && newData.val().length === 20"
+						},
+						"order": {
+							".validate": "newData.isNumber() && newData.val() < 100"
+						},
+						"question": {
+							".validate": "newData.isString() && newData.val().length > 0 && newData.val().length <= 300"
+						}
+					}
+				},
+				"showGameOver": {
+					".validate": "newData.isBoolean() || (newData.isString() && newData.val().length > 0 && newData.val().length === 20)"
+				},
+				"showGameResults": {
+					".validate": "newData.isBoolean() || (newData.isString() && newData.val().length > 0 && newData.val().length === 20)"
+				},
+				"showQuestionResults": {
+					".validate": "newData.isBoolean() || (newData.isString() && newData.val().length > 0 && newData.val().length === 20)"
+				},
+				"startTime": {
+					".validate": "newData.isNumber() && newData.val() > now && newData.val() <= 9999999999999"
+				}
+			}
+		},
+		"leaderboardCurrent": {
+			".read": "auth !== null",
+			".write": "root.child('admins/'+auth.uid).exists()"
+		},
+		"mostRecentEvent": {
+			".indexOn": ".value",
+			".read": "auth !== null",
+			".write": "root.child('admins/'+auth.uid).exists()",
+			".validate": "newData.isBoolean() || (newData.isString() && newData.val().length > 0 && newData.val().length === 20)"
+		},
+		"mostRecentGame": {
+			".indexOn": ".value",
+			".read": "auth !== null",
+			".write": "root.child('admins/'+auth.uid).exists()",
+			".validate": "newData.isBoolean() || (newData.isString() && newData.val().length > 0 && newData.val().length === 20)"
+		},
+		"playerResultsEvent": {
+			".read": "auth !== null",
+			".write": "auth !== null",
+			"$eventId": {
+				".indexOn": "indexVal",
+				".validate": "newData.isBoolean() || (newData.isString() && newData.val().length > 0 && newData.val().length === 20)",
+				"$playerId": {
+					".validate": "newData.hasChildren(['indexVal', 'score', 'timeElapsed', 'timeRemaining'])"
+				}
+			}
+			
+		},
+		"playerResultsGame": {
+			".read": "auth !== null",
+			".write": "auth !== null",
+			"$gameId": {
+				".indexOn": "indexVal",
+				".validate": "newData.isBoolean() || (newData.isString() && newData.val().length > 0 && newData.val().length === 20)",
+				"$playerId": {
+					".validate": "newData.hasChildren(['indexVal', 'score', 'timeElapsed', 'timeRemaining'])"
+				}
+			}
+			
+		},
+		"players": {
+			".indexOn": "alias",
+			".read": "auth !== null",
+			".write": "auth !== null",
+			"$playerId": {
+				".validate": "newData.hasChildren(['active', 'companyName', 'email', 'event', 'firstName', 'lastName', 'phoneNumber'])",
+				"active": {
+					".validate": "newData.isBoolean()"
+				},
+				"companyName": {
+					".validate": "newData.isString() && newData.val().length > 0 && newData.val().length <= 50"
+				},
+				"email": {
+					".validate": "newData.isString() && newData.val().matches(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}$/i) && newData.val().length <= 100"
+				},
+				"event": {
+					".validate": "newData.isString() && newData.val().length > 0 && newData.val().length === 20"
+				},
+				"firstName": {
+					".validate": "newData.isString() && newData.val().length > 0 && newData.val().length <= 50"
+				},
+				"lastName": {
+					".validate": "newData.isString() && newData.val().length > 0 && newData.val().length <= 50"
+				},
+				"phoneNumber": {
+					".validate": "newData.isString() && newData.val().length >= 10 && newData.val().length <= 14"
+				},
+				"$other": {
+					".validate": false
+				}
+			}
+		},
+		"questionDuration": {
+			".indexOn": ".value",
+			".read": "auth !== null",
+			".write": "root.child('admins/'+auth.uid).exists()",
+			".validate": "newData.isNumber() && newData.val() <= 60000"
+		},
+		"resetApp": {
+			".indexOn": ".value",
+			".read": true,
+			".write": "root.child('admins/'+auth.uid).exists()",
+			".validate": "newData.isBoolean()"
+		},
+		"sfmc": {
+			".read": "root.child('admins/'+auth.uid).exists()",
+			".write": "root.child('admins/'+auth.uid).exists()",
+			"accessToken": {
+				".validate": "newData.isString()"
+			},
+			"expiresIn": {
+				".validate": "newData.isNumber() && newData.val() <= 3600000"
+			},
+			"timestamp": {
+				".validate": "newData.isNumber() && newData.val() > now"
+			}
+		}
+	}
+}

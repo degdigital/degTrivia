@@ -1,0 +1,35 @@
+{
+	"ignore": [
+		"node_modules/**"
+	],
+	"plugins": [
+		"transform-runtime",
+		"external-helpers",
+	 	"syntax-async-functions",
+	 	"transform-object-rest-spread",
+	    ["transform-regenerator", {
+	    	"asyncGenerators": false,
+	    	"generators": false,
+	    	"async": true
+		}]
+	],
+	"presets": [
+		["env", {
+			"modules": false,
+      		"targets": {
+        		"browsers": [">1%", "ie 11", "not op_mini all"]
+     	 	}
+    	}]
+    ],
+  	"env": {
+		"test": {
+	      	"presets": [
+	      		["env", {
+	      			"targets": {
+	      				"node": "current"
+	      			}
+	      		}]
+	      	]
+	    }
+	}
+}

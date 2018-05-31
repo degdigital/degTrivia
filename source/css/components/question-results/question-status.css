@@ -1,0 +1,23 @@
+.question-status {
+	border-radius: .25em;
+	font-size: 1em;
+	padding: .375em 2em;
+	display: inline-block;
+	margin: 1em auto 1.3125em;
+	color: var(--color-black);
+	font-weight: bold;
+	text-transform: uppercase
+}
+
+.question-status--correct {
+	background-color: var(--color-green);
+}
+
+.question-status--incorrect {
+	background-color: var(--color-orange);
+}
+
+.question-status--calculating {
+	background-color: transparent;
+	color: var(--color-white);
+}

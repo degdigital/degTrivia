@@ -1,0 +1,132 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`calling render() renders out a question and choice results 1`] = `
+<div>
+  
+		
+  <div
+    class="question"
+  >
+    
+			
+    <header
+      class="question-header"
+    >
+      
+				
+      <div
+        class="question-status question-status--incorrect"
+      >
+        Incorrect
+      </div>
+      
+				
+      <h1
+        class="question__text"
+      >
+        Who is the most dashing Kansas City Royal of all time?
+      </h1>
+      
+			
+    </header>
+    	
+			
+    <div
+      class="choice-results"
+    >
+      
+				
+		
+      <div
+        class="choice-result choice-result--incorrect"
+      >
+        
+			
+        <div
+          class="choice-result__meter"
+          style="transform: scaleX(0.1339712918660287); animation-duration: 0.2679425837320574s;"
+        />
+        
+			
+        <span
+          class="choice-result__text"
+        >
+          Bob Hamelin
+        </span>
+        
+			
+        <span
+          class="choice-result__total"
+        >
+          13%
+        </span>
+        
+		
+      </div>
+      
+	
+		
+      <div
+        class="choice-result"
+      >
+        
+			
+        <div
+          class="choice-result__meter"
+          style="transform: scaleX(0.18660287081339713); animation-duration: 0.37320574162679426s;"
+        />
+        
+			
+        <span
+          class="choice-result__text"
+        >
+          Danny Tartabul
+        </span>
+        
+			
+        <span
+          class="choice-result__total"
+        >
+          19%
+        </span>
+        
+		
+      </div>
+      
+	
+		
+      <div
+        class="choice-result"
+      >
+        
+			
+        <div
+          class="choice-result__meter"
+          style="transform: scaleX(0.6794258373205742); animation-duration: 1.3588516746411483s;"
+        />
+        
+			
+        <span
+          class="choice-result__text"
+        >
+          Steve Balboni
+        </span>
+        
+			
+        <span
+          class="choice-result__total"
+        >
+          68%
+        </span>
+        
+		
+      </div>
+      
+	
+			
+    </div>
+    
+		
+  </div>
+</div>
+`;

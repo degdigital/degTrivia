@@ -1,0 +1,9 @@
+<header class="question-header">
+	{{# showCountdown }}
+		{{> components-countdown:question__countdown }}
+	{{/ showCountdown }}
+	{{# showStatus }}
+		{{> components-question-status }}
+	{{/ showStatus }}
+	<h1 class="question__text">{{text}}</h1>
+</header>

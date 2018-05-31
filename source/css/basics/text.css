@@ -1,0 +1,45 @@
+body {
+	color: var(--color-text);
+	font-family: var(--font-family-primary);
+	font-size: var(--base-font-size);
+	font-weight: 400;
+	line-height: 1.4375;
+}
+
+p {
+	margin: 0 0 var(--spacing-vertical) 0;
+}
+
+.text--centered {
+	text-align: center;
+}
+
+.text--emphasis {
+	color: var(--color-green);
+	font-weight: bold;
+}
+
+.event-hashtag {
+	color: var(--color-teal-light-20);
+	font-weight: 500;
+	font-size: 1.0625em;
+	letter-spacing: var(--letter-spacing-wide);
+}
+
+.disclosure {
+	color: var(--color-gray-light-50);
+	font-size: 0.75em;
+	font-style: italic;
+	margin-top: 1.5em;
+
+	a {
+		color: var(--color-gray-light-50);
+		text-decoration: underline;
+
+		&:hover {
+			color: var(--color-gray-light-30);
+		}
+
+	}
+
+}

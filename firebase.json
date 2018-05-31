@@ -1,7 +1,18 @@
 {
+  "database": {
+    "rules": "database.rules.json"
+  },
   "hosting": {
     "public": "public",
     "rewrites": [
+      {
+        "source": "/css/**",
+        "destination": "/css"
+      },
+      {
+        "source": "/images/**",
+        "destination": "/images"
+      },
       {
         "source": "**",
         "destination": "/index.html"

@@ -1,0 +1,8 @@
+{
+	"pregame": {
+		"showNextGame": true,
+		"nextGame": {
+			"showCountdown": false
+		}
+	}
+}

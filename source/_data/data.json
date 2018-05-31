@@ -1,0 +1,238 @@
+{
+	"title" : "DEG Trivia",
+	"lang": "en-us",
+	"url": "#",
+    "eventHashtag": "#CNXTRIVIA",
+	"button": {
+		"content": "Button"
+	},
+    "label": {
+        "content": "Label"
+    },
+    "input": {
+        "name": "input",
+        "type": "text",
+        "value": "",
+        "placeholder": "",
+        "options": [
+            {
+                "label": "Option 1",
+                "value": "1"
+            },
+            {
+                "label": "Option 2",
+                "value": "2"
+            },
+            {
+                "label": "Option 3",
+                "value": "3"
+            }
+        ]
+    },
+    "fieldErrorMessages": {
+        "items": [
+            {
+                "text": "This is a validation error message"
+            }
+        ]
+    },
+    "field": {
+        "id": "input"
+    },
+    "fieldGroup": {
+    },
+    "formErrorMessage": {
+        "text": "This is a form error message"
+    },
+    "table": {
+        "tableCaption": "leaderboard",
+        "tableColumns": [
+            {"cssClass": "table__col--small"},
+            {"cssClass": ""},
+            {"cssClass": ""}
+        ],
+        "tableData": [
+            { "row" : [
+                    { "heading": "Position", "content": "1" },
+                    { "heading": "Name", "content": "Jon Snow" },
+                    { "heading": "Score", "content": "70" }
+                ]
+            },
+            { "row" : [
+                    { "heading": "Position", "content": "2" },
+                    { "heading": "Name", "content": "Danerys Targaryen" },
+                    { "heading": "Score", "content": "65" }
+                ]
+            },
+            { "row" : [
+                    { "heading": "Position", "content": "3" },
+                    { "heading": "Name", "content": "Cersie Lannister" },
+                    { "heading": "Score", "content": "64" }
+                ]
+            },
+            { "row" : [
+                    { "heading": "Position", "content": "4" },
+                    { "heading": "Name", "content": "Euron Greyjoy" },
+                    { "heading": "Score", "content": "20" }
+                ]
+            },
+            { "row" : [
+                    { "heading": "Position", "content": "5" },
+                    { "heading": "Name", "content": "Hodor" },
+                    { "heading": "Score", "content": "1" }
+                ]
+            }
+        ]
+    },
+    "siteHeader": {
+        "showEventHashtag": false
+    },
+    "registrationForm": {
+        "firstName": {
+            "field": {
+                "id": "firstName",
+                "label": {
+                    "content": "First Name"
+                },
+                "input": {
+                    "isRequired": true,
+                    "attributes": [
+                        {
+                            "name": "autofocus",
+                            "value": true
+                        }
+                    ]
+                }
+            }
+        },
+        "lastName": {
+            "field": {
+                "id": "lastName",
+                "label": {
+                    "content": "Last Name"
+                },
+                "input": {
+                    "isRequired": true
+                }
+            }
+        },
+        "company": {
+            "field": {
+                "id": "company",
+                "label": {
+                    "content": "Company"
+                },
+                "input": {
+                    "isRequired": true
+                }
+            }
+        },
+        "emailAddress": {
+            "field": {
+                "id": "emailAddress",
+                "label": {
+                    "content": "Company Email Address"
+                },
+                "input": {
+                    "type": "email",
+                    "isRequired": true
+                }
+            }
+        },
+        "phone": {
+            "field": {
+                "id": "phone",
+                "label": {
+                    "content": "Phone"
+                },
+                "input": {
+                    "type": "tel",
+                    "isRequired": true
+                }
+            }
+        },
+        "eventCode": {
+            "field": {
+                "id": "eventCode",
+                "label": {
+                    "content": "Event Code"
+                },
+                "input": {
+                    "isRequired": true
+                }
+            }
+        }
+    },
+    "countdown": {
+        "value": "00:30"
+    },
+    "choice": {
+        "id": "choice-1",
+        "text": "Choice 1"
+    },
+    "choices": [
+        {
+            "choice": {
+                "id": "choice-1",
+                "text": "Choice 1",
+                "percent": 10,
+                "meterScale": 0.1,
+                "animDuration": 0.2
+            }
+        },
+        {
+            "choice": {
+                "id": "choice-2",
+                "text": "Choice 2",
+                "percent": 25,
+                "meterScale": 0.25,
+                "animDuration": 0.5
+            }
+        },
+        {
+            "choice": {
+                "id": "choice-3",
+                "text": "Choice 3",
+                "percent": 50,
+                "meterScale": 0.5,
+                "animDuration": 1,
+                "isCorrect": true
+            }
+        },
+        {
+            "choice": {
+                "id": "choice-4",
+                "text": "Choice 4",
+                "percent": 15,
+                "meterScale": 0.15,
+                "animDuration": 0.3
+            }
+        }
+    ],
+    "question": {
+        "showCountdown": true,
+        "showStatus": false,
+        "text": "Do you think you could throw this football over those mountains?"
+    },
+    "questionStatus": {
+        "status": "Correct",
+        "isCorrect": true
+    },
+    "questionResults": {
+        "showCountdown": false,
+        "showStatus": true,
+        
+        "text": "Do you think you could throw this football over those mountains?"
+    },
+    "nextGame": {
+        "showCountdown": true
+    },
+    "pregame": {
+        "showNextGame": true
+    },
+    "infoText": {
+        "heading": "Oh no!",
+        "subheading": "We’re experiencing some technical difficulties. Stay with us. The page will refresh when ready."
+    },
+    "appStyleModifier": "page-width"
+}

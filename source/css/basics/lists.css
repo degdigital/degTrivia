@@ -1,0 +1,13 @@
+ul, ol {
+	margin-bottom: var(--spacing-vertical);
+	padding-left: 2.5em;
+	list-style-type: disc;
+}
+
+li {
+	margin-bottom: .5em;
+
+	> ul, > ol {
+		margin: .5em 0;
+	}
+}

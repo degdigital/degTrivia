@@ -1,0 +1,101 @@
+{
+    "siteHeader": {
+        "showGameHashtag": true
+    },
+    "registrationForm": {
+        "isFormInvalid": true,
+        "formErrorMessage": {
+            "text": "Oh no, something's wrong! Please fix the invalid form fields below."
+        },
+        "firstName": {
+            "field": {
+                "id": "firstName",
+                "label": {
+                    "content": "First Name"
+                },
+                "input": {
+                    "isRequired": true,
+                    "value": "Johnny",
+                    "attributes": [
+                        {
+                            "name": "autofocus",
+                            "value": true
+                        }
+                    ]
+                }
+            }
+        },
+        "lastName": {
+            "field": {
+                "id": "lastName",
+                "label": {
+                    "content": "Last Name"
+                },
+                "input": {
+                    "isRequired": true,
+                    "value": "Trivia"
+                }
+            }
+        },
+        "company": {
+            "field": {
+                "id": "company",
+                "label": {
+                    "content": "Company"
+                },
+                "input": {
+                    "isRequired": true,
+                    "value": "Unemployed"
+                }
+            }
+        },
+        "emailAddress": {
+            "field": {
+                "id": "emailAddress",
+                "label": {
+                    "content": "Company Email Address"
+                },
+                "input": {
+                    "type": "email",
+                    "isRequired": true,
+                    "value": "johnnytrivia@gmail.com"
+                }
+            }
+        },
+        "phone": {
+            "field": {
+                "id": "phone",
+                "label": {
+                    "content": "Phone"
+                },
+                "input": {
+                    "type": "tel",
+                    "isRequired": true,
+                    "value": "816-123-4567"
+                }
+            }
+        },
+        "eventCode": {
+            "field": {
+                "id": "eventCode",
+                "isInvalid": true,
+                "fieldErrorMessages": [
+                    {
+                        "items": [
+                            {
+                                "text": "Invalid event code"
+                            }
+                        ]
+                    }
+                ],
+                "label": {
+                    "content": "Event Code"
+                },
+                "input": {
+                    "isRequired": true,
+                    "value": "connections2017"
+                }
+            }
+        }
+    }
+}

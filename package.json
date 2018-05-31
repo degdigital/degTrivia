@@ -1,0 +1,81 @@
+{
+  "name": "degtrivia",
+  "version": "1.0.0",
+  "description": "A trivia web app",
+  "scripts": {
+    "test": "jest",
+    "build": "node scripts/build",
+    "watch": "node scripts/watch",
+    "serve": "firebase use develop && firebase serve",
+    "serve-patternlab": "node scripts/servePatternlab",
+    "start": "node scripts/start",
+    "deploy-develop": "npm run build && firebase use develop && firebase deploy",
+    "deploy-staging": "NODE_ENV=staging npm run build && firebase use staging && firebase deploy",
+    "deploy-production": "NODE_ENV=production npm run build && firebase use production && firebase deploy"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/degdigital/degTrivia.git"
+  },
+  "keywords": [
+    "trivia"
+  ],
+  "contributors": [
+    {
+      "name": "Aaron Ladage",
+      "email": "aladage@gmail.com"
+    },
+    {
+      "name": "Anna Scheuler",
+      "email": "scheul93@gmail.com"
+    },
+    {
+      "name": "Ryan Heap",
+      "email": "heaper@gmail.com"
+    }
+  ],
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/degdigital/degTrivia/issues"
+  },
+  "homepage": "https://github.com/degdigital/degTrivia#readme",
+  "devDependencies": {
+    "@pattern-lab/patternlab-node": "^3.0.0-alpha.8",
+    "@pattern-lab/styleguidekit-assets-default": "^4.0.0-alpha.3",
+    "@pattern-lab/styleguidekit-mustache-default": "^4.0.0-alpha.1",
+    "autoprefixer": "^8.3.0",
+    "babel": "^6.23.0",
+    "babel-plugin-external-helpers": "^6.22.0",
+    "babel-plugin-syntax-async-functions": "^6.13.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-regenerator": "^6.26.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.6.1",
+    "chokidar": "^2.0.3",
+    "cssnano": "^3.10.0",
+    "date-fns": "^2.0.0-alpha.7",
+    "fs-extra": "^5.0.0",
+    "jest": "^22.4.3",
+    "mockdate": "^2.0.2",
+    "postcss": "^6.0.21",
+    "postcss-color-function": "^4.0.1",
+    "postcss-custom-properties": "^7.0.0",
+    "postcss-easy-import": "^3.0.0",
+    "postcss-nested": "^1.0.1",
+    "rollup": "^0.58.2",
+    "rollup-plugin-babel": "^3.0.4",
+    "rollup-plugin-commonjs": "^9.1.0",
+    "rollup-plugin-node-resolve": "^3.3.0",
+    "rollup-plugin-replace": "^2.0.0"
+  },
+  "browserslist": [
+    "last 2 versions"
+  ],
+  "dependencies": {
+    "@firebase/functions": "^0.2.2",
+    "babel-polyfill": "^6.26.0",
+    "classnames": "^2.2.5",
+    "degjs-numericycle": "git+https://git@github.com/degjs/numericycle.git",
+    "firebase": "^4.13.1"
+  }
+}

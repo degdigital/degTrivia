@@ -1,0 +1,36 @@
+.input {
+	font-size: 1em;
+	background-color: transparent;
+	color: var(--color-white);
+	border-width: 0 0 .3125em 0;
+	border-style: solid;
+	border-color: color(var(--color-gray-light-40) a(46%));
+	padding: .375em .125em;
+	margin: 0;
+	width: 100%;
+	max-width: 25em;
+	font-family: var(--font-family-primary);
+	transition: border-color var(--anim-duration-fast) var(--anim-easing);
+
+	&:focus {
+		border-color: var(--color-white);
+		outline: 0;
+	}
+}
+
+.input--invalid {
+	border-color: var(--color-error);
+}
+
+::-webkit-input-placeholder { 
+  	color: var(--color-gray-light-30);
+}
+::-moz-placeholder {
+	color: var(--color-gray-light-30);
+}
+:-ms-input-placeholder {
+ 	color: var(--color-gray-light-30);
+}
+:-moz-placeholder { 
+ 	color: var(--color-gray-light-30);
+}

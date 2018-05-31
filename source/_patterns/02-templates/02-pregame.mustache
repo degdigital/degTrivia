@@ -1,0 +1,13 @@
+{{> components-site-header }}
+<main class="main page-width">
+	{{# pregame }}
+	<div class="pregame">
+		{{# showNextGame }}
+			{{> components-next-game }}
+		{{/ showNextGame }}		
+		{{# showNoNextGame }}
+			<p>No games are currently scheduled.</p>
+		{{/ showNoNextGame}}		
+	</div>
+	{{/ pregame }}
+</main>

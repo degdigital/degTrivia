@@ -1,0 +1,11 @@
+.field-error-messages {
+	background-color: var(--color-error);
+	padding: .375em .5em .5em .5em;
+	border-radius: 0 0 .5em .5em;
+	font-size: .9375em;
+	box-shadow: 0 0.25em 0.25em 0 color(var(--color-black) a(10%)) inset;
+}
+
+.field-error-message + .field-error-message {
+	margin-top: .25em;
+}
