@@ -50,7 +50,8 @@ const addEvent = function(wrapperEl, initialData) {
 					description: data.postgameResultsCopyDescription
 				},
 				registrationCopy: {
-					title: data.registrationCopyTitle
+					title: data.registrationCopyTitle,
+					disclosure: data.registrationCopyDisclosure
 				}
 			});
 		}
@@ -92,6 +93,10 @@ const addEvent = function(wrapperEl, initialData) {
 					<div class="field">
 						<label for="registrationCopyTitle">Registration Title</label><br>
 						<input class="input--extra-wide" id="registrationCopyTitle" name="registrationCopyTitle" type="text" value="Welcome to DEG Trivia!">
+					</div>
+					<div class="field">
+						<label for="registrationCopyDisclosure">Registration Disclosure</label><br>
+						<input class="input--extra-wide" id="registrationCopyDisclosure" name="registrationCopyDisclosure" type="text" value="By filling out this form, you are opting in to receiving notifications regarding DEG Trivia via email and SMS, as well as general follow-up communications from the agency. Learn more about <a href='https://www.degdigital.com/deg-full-service-digital-agency/privacy-policy/' target='_blank'>DEG’s privacy policy</a>.">
 					</div>
 					<button type="submit">Submit</button>
 				</fieldset>
