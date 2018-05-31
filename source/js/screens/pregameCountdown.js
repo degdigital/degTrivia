@@ -12,7 +12,12 @@ const pregameCountdown = function(element) {
     let rotatingCopyInst;
 
     function renderNoNextGameMessage() {
-        return `<p>No other games are currently scheduled.</p>`;
+        return `
+            <div class="info-text">
+                <h1 class="page-title page-title--centered">Bad timing.</h1>
+                <p class="subheading text--centered">No other games are currently scheduled.</p>
+            </div>
+        `;
     }
 
     function renderCountdown() {
