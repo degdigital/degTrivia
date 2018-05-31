@@ -48,7 +48,7 @@ const screenRotator = function(el) {
                 message.index = message.index < message.max - 1 ? message.index + 1 : 0;
 			}
 			screenIndex = Number(screenIndex == 0);
-		}, 5000)
+		}, 30000)
     }
 
     function getNextGameTime() {
