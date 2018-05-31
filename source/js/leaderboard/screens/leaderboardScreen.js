@@ -7,7 +7,7 @@ import dbService from '../../services/dbService.js';
 const manager = function(el) {
 
     function getTimeElapsed(ms) {
-        return Math.round((ms * 1000), 2);
+        return Math.round((ms / 1000), 2);
     }
 
     function renderTableBody(data) {
@@ -39,6 +39,12 @@ const manager = function(el) {
        return `
        <table class="table">
             <caption class="table__caption">${title}</caption>
+            <colgroup>
+                <col class="table__col table__col--small"></col>
+                <col class="table__col table__col--md"></col>
+                <col class="table__col table__col--small"></col>
+                <col class="table__col"></col>
+            </colgroup>
             <tbody class="table__table-body">
                 ${renderTableBody(data)}
             </tbody>
