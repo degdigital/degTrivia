@@ -13,40 +13,21 @@
   },
   "disableAll" : false,
   "events" : {
-    "-LCUWuNIqOKlRmpPvZTE" : {
-      "activeGameId" : false,
-      "alias" : "connections2018",
-      "gameWaitBeforeQuestionsCopy" : {
-        "description" : "Answer all six questions (no stopping for wrong answers) as fast as you can. 10 seconds per question. Speed and accuracy wins. Here comes the first question.",
-        "title" : "Let's Play!"
-      },
-      "games" : {
-        "-LCU_qvXC1rWVovF0Cva" : true,
-        "-LCUjYNIiCbBWln2OOuA" : true
-      },
-      "hashtag" : "#CNXTRIVIA",
-      "leaderboardCopy" : {
-        "description" : "Congrats on seeing your name in lights. Don't let someone steal your thunder. Play again to maintain your spot."
-      },
-      "name" : "Connections 2018",
-      "postgameResultsCopy" : {
-        "description" : "Come visit DEG at booth #303 to learn more about how we can help your company market to the moment."
-      },
-      "pregameRotatingCopy" : {
-        "-LDF7W8t6PWGH5OY6RYL" : "Speed counts! Answer as quickly as you can."
-      },
-      "registrationCopy" : {
-        "title" : "Welcome to Connections Trivia, presented by DEG."
-      }
-    },
     "-LCUbqaXAuNRGFOJBXEL" : {
-      "activeGameId" : "-LD84ESzyLp4oyyDckO2",
+      "activeGameId" : false,
       "alias" : "beer30",
       "gameWaitBeforeQuestionsCopy" : {
         "description" : "Answer all six questions (no stopping for wrong answers) as fast as you can. 10 seconds per question. Speed and accuracy wins. Here comes the first question.",
         "title" : "Let's Play!"
       },
-      "games" : false,
+      "games" : {
+        "-LDqh9b_wCchDyU_C1Fj" : true,
+        "-LDqiG2CZKRF37yudI4t" : true,
+        "-LDqjcYxEOv7InRdlXem" : true,
+        "-LDqkjkaEtSZ6CvpXEEk" : true,
+        "-LDqnMbKKeZxU_ulHyPc" : true,
+        "-LDqxAKR82FLwX4sB_PE" : true
+      },
       "hashtag" : "#DEGBEER30",
       "leaderboardCopy" : {
         "description" : "Congrats on seeing your name in lights. Don't let someone steal your thunder. Play again to maintain your spot."
@@ -90,264 +71,11 @@
       },
       "registrationCopy" : {
         "title" : "Welcome to Connections Trivia, presented by DEG."
-      }
+      },
+      "url" : "cnxtrivia.com"
     }
   },
   "games" : {
-    "-LCU_qvXC1rWVovF0Cva" : {
-      "activeQuestionId" : false,
-      "event" : "-LCUWuNIqOKlRmpPvZTE",
-      "name" : "12 p.m. Game",
-      "questionExpirationTime" : 1527643538337,
-      "questions" : {
-        "-LCU_qvWZf7LxjPDwnWa" : {
-          "choices" : {
-            "-LCU_qvWZf7LxjPDwnWb" : {
-              "chosenCount" : 0,
-              "text" : "William and Elizabeth"
-            },
-            "-LCU_qvWZf7LxjPDwnWc" : {
-              "chosenCount" : 0,
-              "text" : "Joseph and Catherine"
-            },
-            "-LCU_qvWZf7LxjPDwnWd" : {
-              "chosenCount" : 0,
-              "text" : "John and Mary"
-            },
-            "-LCU_qvWZf7LxjPDwnWe" : {
-              "chosenCount" : 0,
-              "text" : "George and Anne"
-            }
-          },
-          "correctChoice" : "-LCU_qvWZf7LxjPDwnWd",
-          "order" : 0,
-          "question" : "In the year 1900 in the U.S. what were the most popular first names given to boy and girl babies?"
-        },
-        "-LCU_qvWZf7LxjPDwnWf" : {
-          "choices" : {
-            "-LCU_qvWZf7LxjPDwnWg" : {
-              "chosenCount" : 0,
-              "text" : "When it was made, in 1701"
-            },
-            "-LCU_qvWZf7LxjPDwnWh" : {
-              "chosenCount" : 0,
-              "text" : "When it rang on July 4, 1776"
-            },
-            "-LCU_qvWZf7LxjPDwnWi" : {
-              "chosenCount" : 0,
-              "text" : "In the 19th century, when it became a symbol of the abolition of slavery"
-            },
-            "-LCU_qvWZf7LxjPDwnWj" : {
-              "chosenCount" : 0,
-              "text" : "None of the above"
-            }
-          },
-          "correctChoice" : "-LCU_qvWZf7LxjPDwnWi",
-          "order" : 1,
-          "question" : "When did the Liberty Bell get its name?"
-        },
-        "-LCU_qvWZf7LxjPDwnWk" : {
-          "choices" : {
-            "-LCU_qvWZf7LxjPDwnWl" : {
-              "chosenCount" : 0,
-              "text" : "Buttermilk"
-            },
-            "-LCU_qvWZf7LxjPDwnWm" : {
-              "chosenCount" : 0,
-              "text" : "Daisy"
-            },
-            "-LCU_qvWZf7LxjPDwnWn" : {
-              "chosenCount" : 0,
-              "text" : "Scout"
-            },
-            "-LCU_qvWZf7LxjPDwnWo" : {
-              "chosenCount" : 0,
-              "text" : "Tulip"
-            }
-          },
-          "correctChoice" : "-LCU_qvWZf7LxjPDwnWl",
-          "order" : 2,
-          "question" : "In the Roy Rogers -Dale Evans Museum, you will find Roy and Dales stuffed horses. Roy's horse was named Trigger, which was Dales horse?"
-        },
-        "-LCU_qvWZf7LxjPDwnWp" : {
-          "choices" : {
-            "-LCU_qvWZf7LxjPDwnWq" : {
-              "chosenCount" : 0,
-              "text" : "A log cabin in Kentucky"
-            },
-            "-LCU_qvWZf7LxjPDwnWr" : {
-              "chosenCount" : 0,
-              "text" : "A two-story clapboard house in Tennessee"
-            },
-            "-LCU_qvWZf7LxjPDwnWs" : {
-              "chosenCount" : 0,
-              "text" : "A four-story Georgian-style home in Missouri"
-            },
-            "-LCU_qvWZf7LxjPDwnWt" : {
-              "chosenCount" : 0,
-              "text" : "A three story brick house in Arkansas"
-            }
-          },
-          "correctChoice" : "-LCU_qvWZf7LxjPDwnWs",
-          "order" : 3,
-          "question" : "The Daniel Boone museum at the home where he died can best be described how?"
-        },
-        "-LCU_qvWZf7LxjPDwnWu" : {
-          "choices" : {
-            "-LCU_qvWZf7LxjPDwnWv" : {
-              "chosenCount" : 0,
-              "text" : "Home computer"
-            },
-            "-LCU_qvXC1rWVovF0CvY" : {
-              "chosenCount" : 0,
-              "text" : "Compact disk player"
-            },
-            "-LCU_qvXC1rWVovF0CvZ" : {
-              "chosenCount" : 0,
-              "text" : "Cordless phone"
-            },
-            "-LCU_qvXC1rWVovF0Cv_" : {
-              "chosenCount" : 0,
-              "text" : "Dishwasher"
-            }
-          },
-          "correctChoice" : "-LCU_qvXC1rWVovF0CvY",
-          "order" : 4,
-          "question" : "Which of the following items was owned by the fewest U.S. homes in 1990?"
-        }
-      },
-      "showGameOver" : false,
-      "showGameResults" : false,
-      "showQuestionResults" : false,
-      "startTime" : 1527191100000
-    },
-    "-LCUjYNIiCbBWln2OOuA" : {
-      "activeQuestionId" : false,
-      "event" : "-LCUWuNIqOKlRmpPvZTE",
-      "name" : "2 p.m. Game",
-      "questionExpirationTime" : 1527190041875,
-      "questions" : {
-        "-LCUjYNIiCbBWln2OOtm" : {
-          "choices" : {
-            "-LCUjYNIiCbBWln2OOtn" : {
-              "chosenCount" : 0,
-              "text" : "Jack Nicklaus"
-            },
-            "-LCUjYNIiCbBWln2OOto" : {
-              "chosenCount" : 0,
-              "text" : "Arnold Palmer"
-            },
-            "-LCUjYNIiCbBWln2OOtp" : {
-              "chosenCount" : 0,
-              "text" : "Byron Nelson"
-            },
-            "-LCUjYNIiCbBWln2OOtq" : {
-              "chosenCount" : 0,
-              "text" : "Ben Hogan"
-            }
-          },
-          "correctChoice" : "-LCUjYNIiCbBWln2OOtp",
-          "order" : 0,
-          "question" : "Who holds the record for the most victories in a row on the professional golf tour?"
-        },
-        "-LCUjYNIiCbBWln2OOtr" : {
-          "choices" : {
-            "-LCUjYNIiCbBWln2OOts" : {
-              "chosenCount" : 0,
-              "text" : "Reggie Jackson"
-            },
-            "-LCUjYNIiCbBWln2OOtt" : {
-              "chosenCount" : 0,
-              "text" : "Harmon Killebrew"
-            },
-            "-LCUjYNIiCbBWln2OOtu" : {
-              "chosenCount" : 0,
-              "text" : "Willie Mays"
-            },
-            "-LCUjYNIiCbBWln2OOtv" : {
-              "chosenCount" : 0,
-              "text" : "Frank Robinson"
-            }
-          },
-          "correctChoice" : "-LCUjYNIiCbBWln2OOtu",
-          "order" : 1,
-          "question" : "Who is third behind Hank Aaron and Babe Ruth in major league career home runs?"
-        },
-        "-LCUjYNIiCbBWln2OOtw" : {
-          "choices" : {
-            "-LCUjYNIiCbBWln2OOtx" : {
-              "chosenCount" : 0,
-              "text" : "8"
-            },
-            "-LCUjYNIiCbBWln2OOty" : {
-              "chosenCount" : 0,
-              "text" : "18"
-            },
-            "-LCUjYNIiCbBWln2OOtz" : {
-              "chosenCount" : 0,
-              "text" : "38"
-            },
-            "-LCUjYNIiCbBWln2OOu-" : {
-              "chosenCount" : 0,
-              "text" : "58"
-            }
-          },
-          "correctChoice" : "-LCUjYNIiCbBWln2OOty",
-          "order" : 2,
-          "question" : "In 1990, in what percentage of U.S. married couples did the wife earn more money than the husband?"
-        },
-        "-LCUjYNIiCbBWln2OOu0" : {
-          "choices" : {
-            "-LCUjYNIiCbBWln2OOu1" : {
-              "chosenCount" : 0,
-              "text" : "Cocker spaniel"
-            },
-            "-LCUjYNIiCbBWln2OOu2" : {
-              "chosenCount" : 0,
-              "text" : "German shepherd"
-            },
-            "-LCUjYNIiCbBWln2OOu3" : {
-              "chosenCount" : 0,
-              "text" : "Labrador retriever"
-            },
-            "-LCUjYNIiCbBWln2OOu4" : {
-              "chosenCount" : 0,
-              "text" : "Poodle"
-            }
-          },
-          "correctChoice" : "-LCUjYNIiCbBWln2OOu1",
-          "order" : 3,
-          "question" : "During the 1980s for six consecutive years what breed of dog was the most popular in the U.S.?"
-        },
-        "-LCUjYNIiCbBWln2OOu5" : {
-          "choices" : {
-            "-LCUjYNIiCbBWln2OOu6" : {
-              "chosenCount" : 0,
-              "text" : "10 percent"
-            },
-            "-LCUjYNIiCbBWln2OOu7" : {
-              "chosenCount" : 0,
-              "text" : "15 percent"
-            },
-            "-LCUjYNIiCbBWln2OOu8" : {
-              "chosenCount" : 0,
-              "text" : "31 percent"
-            },
-            "-LCUjYNIiCbBWln2OOu9" : {
-              "chosenCount" : 0,
-              "text" : "51 percent"
-            }
-          },
-          "correctChoice" : "-LCUjYNIiCbBWln2OOu8",
-          "order" : 4,
-          "question" : "In 1985, five percent of U.S. households had telephone answering machines. By 1990 what percentage of homes had answering machines?"
-        }
-      },
-      "showGameOver" : false,
-      "showGameResults" : false,
-      "showQuestionResults" : false,
-      "startTime" : 1528830000000
-    },
     "-LD8FrG0NCS0bNPLXHlU" : {
       "activeQuestionId" : false,
       "event" : "-LD84ESzyLp4oyyDckO2",
@@ -1000,7 +728,7 @@
           "choices" : {
             "-LD8KdB8YCBVcXHGpQRz" : {
               "chosenCount" : 0,
-              "text" : "Moby-Dick"
+              "text" : "Moby Dick"
             },
             "-LD8KdB8YCBVcXHGpQS-" : {
               "chosenCount" : 0,
@@ -1040,7 +768,7 @@
           },
           "correctChoice" : "-LD8KdB8YCBVcXHGpQS6",
           "order" : 3,
-          "question" : "The term \"spam\" was first used to refer to junk messages on what TV show?"
+          "question" : "The term 'spam' was first used to refer to junk messages on what TV show?"
         },
         "-LD8KdB8YCBVcXHGpQS7" : {
           "choices" : {
@@ -1115,7 +843,7 @@
             },
             "-LD8MSLFyQsWQmfECQ6i" : {
               "chosenCount" : 0,
-              "text" : "@"
+              "text" : "#"
             }
           },
           "correctChoice" : "-LD8MSLFyQsWQmfECQ6g",
@@ -1189,7 +917,7 @@
           },
           "correctChoice" : "-LD8MSLGcb5uw-GhlJlc",
           "order" : 3,
-          "question" : "In 2016, Snoop Dogg co-starred alongside which lifestyle guru on their collaborative cooking show \"Potluck Dinner Party\"?"
+          "question" : "In 2016, Snoop Dogg co-starred alongside which lifestyle guru on their collaborative cooking show 'Potluck Dinner Party'?"
         },
         "-LD8MSLGcb5uw-GhlJlf" : {
           "choices" : {
@@ -1242,6 +970,900 @@
       "showGameResults" : false,
       "showQuestionResults" : false,
       "startTime" : 1528858800000
+    },
+    "-LDqh9b_wCchDyU_C1Fj" : {
+      "activeQuestionId" : false,
+      "event" : "-LCUbqaXAuNRGFOJBXEL",
+      "name" : "06/01/18 Game 1",
+      "questions" : {
+        "-LDqh9bYUx_8g4vk9VLP" : {
+          "choices" : {
+            "-LDqh9bYUx_8g4vk9VLQ" : {
+              "chosenCount" : 0,
+              "text" : "Westworld"
+            },
+            "-LDqh9bYUx_8g4vk9VLR" : {
+              "chosenCount" : 0,
+              "text" : "Games of Thrones"
+            },
+            "-LDqh9bZbnMrGPkrj7CP" : {
+              "chosenCount" : 0,
+              "text" : "Mickey Mouse Club"
+            },
+            "-LDqh9bZbnMrGPkrj7CQ" : {
+              "chosenCount" : 0,
+              "text" : "The Walking Dead"
+            }
+          },
+          "correctChoice" : "-LDqh9bYUx_8g4vk9VLR",
+          "order" : 0,
+          "question" : "Which HBO show was the most watched TV series of 2017?"
+        },
+        "-LDqh9bZbnMrGPkrj7CR" : {
+          "choices" : {
+            "-LDqh9bZbnMrGPkrj7CS" : {
+              "chosenCount" : 0,
+              "text" : "Newton"
+            },
+            "-LDqh9bZbnMrGPkrj7CT" : {
+              "chosenCount" : 0,
+              "text" : "Trailhead"
+            },
+            "-LDqh9bZbnMrGPkrj7CU" : {
+              "chosenCount" : 0,
+              "text" : "Carl"
+            },
+            "-LDqh9bZbnMrGPkrj7CV" : {
+              "chosenCount" : 0,
+              "text" : "Einstein"
+            }
+          },
+          "correctChoice" : "-LDqh9bZbnMrGPkrj7CV",
+          "order" : 1,
+          "question" : "What is the name of Salesforce's AI technology?"
+        },
+        "-LDqh9bZbnMrGPkrj7CW" : {
+          "choices" : {
+            "-LDqh9bZbnMrGPkrj7CX" : {
+              "chosenCount" : 0,
+              "text" : "Chance the Rapper"
+            },
+            "-LDqh9bZbnMrGPkrj7CY" : {
+              "chosenCount" : 0,
+              "text" : "Jay-Z"
+            },
+            "-LDqh9b_wCchDyU_C1FT" : {
+              "chosenCount" : 0,
+              "text" : "Kanye West"
+            },
+            "-LDqh9b_wCchDyU_C1FU" : {
+              "chosenCount" : 0,
+              "text" : "Ice Cube"
+            }
+          },
+          "correctChoice" : "-LDqh9b_wCchDyU_C1FT",
+          "order" : 2,
+          "question" : "Which Chicago-born rapper named his daughter after his hometown?"
+        },
+        "-LDqh9b_wCchDyU_C1FV" : {
+          "choices" : {
+            "-LDqh9b_wCchDyU_C1FW" : {
+              "chosenCount" : 0,
+              "text" : "Justin Timberlake"
+            },
+            "-LDqh9b_wCchDyU_C1FX" : {
+              "chosenCount" : 0,
+              "text" : "Katy Perry"
+            },
+            "-LDqh9b_wCchDyU_C1FY" : {
+              "chosenCount" : 0,
+              "text" : "Lady Gaga"
+            },
+            "-LDqh9b_wCchDyU_C1FZ" : {
+              "chosenCount" : 0,
+              "text" : "Beyoncé"
+            }
+          },
+          "correctChoice" : "-LDqh9b_wCchDyU_C1FW",
+          "order" : 3,
+          "question" : "Who performed during halftime of the 2018 Super Bowl?"
+        },
+        "-LDqh9b_wCchDyU_C1F_" : {
+          "choices" : {
+            "-LDqh9b_wCchDyU_C1Fa" : {
+              "chosenCount" : 0,
+              "text" : "Robin Williams"
+            },
+            "-LDqh9b_wCchDyU_C1Fb" : {
+              "chosenCount" : 0,
+              "text" : "Larry Bird"
+            },
+            "-LDqh9b_wCchDyU_C1Fc" : {
+              "chosenCount" : 0,
+              "text" : "Russell Crowe"
+            },
+            "-LDqh9b_wCchDyU_C1Fd" : {
+              "chosenCount" : 0,
+              "text" : "Twitter CEO Jack Dorsey"
+            }
+          },
+          "correctChoice" : "-LDqh9b_wCchDyU_C1Fb",
+          "order" : 4,
+          "question" : "Twitter's icon is named after whom?"
+        },
+        "-LDqh9b_wCchDyU_C1Fe" : {
+          "choices" : {
+            "-LDqh9b_wCchDyU_C1Ff" : {
+              "chosenCount" : 0,
+              "text" : "5 years"
+            },
+            "-LDqh9b_wCchDyU_C1Fg" : {
+              "chosenCount" : 0,
+              "text" : "14 years"
+            },
+            "-LDqh9b_wCchDyU_C1Fh" : {
+              "chosenCount" : 0,
+              "text" : "100 years"
+            },
+            "-LDqh9b_wCchDyU_C1Fi" : {
+              "chosenCount" : 0,
+              "text" : "9 years"
+            }
+          },
+          "correctChoice" : "-LDqh9b_wCchDyU_C1Fg",
+          "order" : 5,
+          "question" : "How long has DEG been a Salesforce partner?"
+        }
+      },
+      "showGameOver" : false,
+      "showGameResults" : false,
+      "showQuestionResults" : false,
+      "startTime" : 1527888600000
+    },
+    "-LDqiG2CZKRF37yudI4t" : {
+      "activeQuestionId" : false,
+      "event" : "-LCUbqaXAuNRGFOJBXEL",
+      "name" : "06/01/18 Game 2",
+      "questions" : {
+        "-LDqiG2AHnE1RgG5mo_Y" : {
+          "choices" : {
+            "-LDqiG2AHnE1RgG5mo_Z" : {
+              "chosenCount" : 0,
+              "text" : "Darth Vader"
+            },
+            "-LDqiG2BM3LJeZYqvuEl" : {
+              "chosenCount" : 0,
+              "text" : "Han Solo"
+            },
+            "-LDqiG2BM3LJeZYqvuEm" : {
+              "chosenCount" : 0,
+              "text" : "Chewbacca"
+            },
+            "-LDqiG2BM3LJeZYqvuEn" : {
+              "chosenCount" : 0,
+              "text" : "C3PO"
+            }
+          },
+          "correctChoice" : "-LDqiG2BM3LJeZYqvuEl",
+          "order" : 0,
+          "question" : "The latest movie in the Star Wars universe, released on May 25, focuses on which character?"
+        },
+        "-LDqiG2BM3LJeZYqvuEo" : {
+          "choices" : {
+            "-LDqiG2BM3LJeZYqvuEp" : {
+              "chosenCount" : 0,
+              "text" : "Erie"
+            },
+            "-LDqiG2BM3LJeZYqvuEq" : {
+              "chosenCount" : 0,
+              "text" : "Superior"
+            },
+            "-LDqiG2BM3LJeZYqvuEr" : {
+              "chosenCount" : 0,
+              "text" : "Huron"
+            },
+            "-LDqiG2BM3LJeZYqvuEs" : {
+              "chosenCount" : 0,
+              "text" : "Michigan"
+            }
+          },
+          "correctChoice" : "-LDqiG2BM3LJeZYqvuEs",
+          "order" : 1,
+          "question" : "Chicago rests on the edge of what Great Lake?"
+        },
+        "-LDqiG2BM3LJeZYqvuEt" : {
+          "choices" : {
+            "-LDqiG2BM3LJeZYqvuEu" : {
+              "chosenCount" : 0,
+              "text" : "2004"
+            },
+            "-LDqiG2BM3LJeZYqvuEv" : {
+              "chosenCount" : 0,
+              "text" : "2005"
+            },
+            "-LDqiG2BM3LJeZYqvuEw" : {
+              "chosenCount" : 0,
+              "text" : "2001"
+            },
+            "-LDqiG2BM3LJeZYqvuEx" : {
+              "chosenCount" : 0,
+              "text" : "2007"
+            }
+          },
+          "correctChoice" : "-LDqiG2BM3LJeZYqvuEu",
+          "order" : 2,
+          "question" : "What year was Facebook founded?"
+        },
+        "-LDqiG2BM3LJeZYqvuEy" : {
+          "choices" : {
+            "-LDqiG2BM3LJeZYqvuEz" : {
+              "chosenCount" : 0,
+              "text" : "Cinnamon"
+            },
+            "-LDqiG2BM3LJeZYqvuF-" : {
+              "chosenCount" : 0,
+              "text" : "Honey"
+            },
+            "-LDqiG2BM3LJeZYqvuF0" : {
+              "chosenCount" : 0,
+              "text" : "Molasses"
+            },
+            "-LDqiG2BM3LJeZYqvuF1" : {
+              "chosenCount" : 0,
+              "text" : "Maple syrup"
+            }
+          },
+          "correctChoice" : "-LDqiG2BM3LJeZYqvuF0",
+          "order" : 3,
+          "question" : "What ingredient is added to white sugar to make brown sugar?"
+        },
+        "-LDqiG2BM3LJeZYqvuF2" : {
+          "choices" : {
+            "-LDqiG2BM3LJeZYqvuF3" : {
+              "chosenCount" : 0,
+              "text" : "38"
+            },
+            "-LDqiG2BM3LJeZYqvuF4" : {
+              "chosenCount" : 0,
+              "text" : "131"
+            },
+            "-LDqiG2BM3LJeZYqvuF5" : {
+              "chosenCount" : 0,
+              "text" : "72"
+            },
+            "-LDqiG2BM3LJeZYqvuF6" : {
+              "chosenCount" : 0,
+              "text" : "300"
+            }
+          },
+          "correctChoice" : "-LDqiG2BM3LJeZYqvuF4",
+          "order" : 4,
+          "question" : "On average, how many business emails are sent and received per day per person?"
+        },
+        "-LDqiG2BM3LJeZYqvuF7" : {
+          "choices" : {
+            "-LDqiG2BM3LJeZYqvuF8" : {
+              "chosenCount" : 0,
+              "text" : "Nikon"
+            },
+            "-LDqiG2BM3LJeZYqvuF9" : {
+              "chosenCount" : 0,
+              "text" : "AMC Theatres"
+            },
+            "-LDqiG2BM3LJeZYqvuFA" : {
+              "chosenCount" : 0,
+              "text" : "PacSun"
+            },
+            "-LDqiG2BM3LJeZYqvuFB" : {
+              "chosenCount" : 0,
+              "text" : "All of the above"
+            }
+          },
+          "correctChoice" : "-LDqiG2BM3LJeZYqvuFB",
+          "order" : 5,
+          "question" : "Which brand is a DEG client?"
+        }
+      },
+      "showGameOver" : false,
+      "showGameResults" : false,
+      "showQuestionResults" : false,
+      "startTime" : 1527889200000
+    },
+    "-LDqjcYxEOv7InRdlXem" : {
+      "activeQuestionId" : false,
+      "event" : "-LCUbqaXAuNRGFOJBXEL",
+      "name" : "06/01/18 Game 3",
+      "questions" : {
+        "-LDqjcYwDPDk3mIQq1_c" : {
+          "choices" : {
+            "-LDqjcYwDPDk3mIQq1_d" : {
+              "chosenCount" : 0,
+              "text" : "Go For It"
+            },
+            "-LDqjcYwDPDk3mIQq1_e" : {
+              "chosenCount" : 0,
+              "text" : "Just Do It"
+            },
+            "-LDqjcYwDPDk3mIQq1_f" : {
+              "chosenCount" : 0,
+              "text" : "You Can Do It"
+            },
+            "-LDqjcYwDPDk3mIQq1_g" : {
+              "chosenCount" : 0,
+              "text" : "Make It Happen"
+            }
+          },
+          "correctChoice" : "-LDqjcYwDPDk3mIQq1_f",
+          "order" : 0,
+          "question" : "What is Nike's famous slogan?"
+        },
+        "-LDqjcYwDPDk3mIQq1_h" : {
+          "choices" : {
+            "-LDqjcYwDPDk3mIQq1_i" : {
+              "chosenCount" : 0,
+              "text" : "2001"
+            },
+            "-LDqjcYwDPDk3mIQq1_j" : {
+              "chosenCount" : 0,
+              "text" : "1776"
+            },
+            "-LDqjcYwDPDk3mIQq1_k" : {
+              "chosenCount" : 0,
+              "text" : "1999"
+            },
+            "-LDqjcYwDPDk3mIQq1_l" : {
+              "chosenCount" : 0,
+              "text" : "1984"
+            }
+          },
+          "correctChoice" : "-LDqjcYwDPDk3mIQq1_l",
+          "order" : 1,
+          "question" : "What year is also the title of the dystopian George Orwell novel about the always-watching Big Brother?"
+        },
+        "-LDqjcYwDPDk3mIQq1_m" : {
+          "choices" : {
+            "-LDqjcYwDPDk3mIQq1_n" : {
+              "chosenCount" : 0,
+              "text" : "Ultimate Support Bank"
+            },
+            "-LDqjcYwDPDk3mIQq1_o" : {
+              "chosenCount" : 0,
+              "text" : "Universal Serial Bus"
+            },
+            "-LDqjcYwDPDk3mIQq1_p" : {
+              "chosenCount" : 0,
+              "text" : "Universal Software Bank"
+            },
+            "-LDqjcYwDPDk3mIQq1_q" : {
+              "chosenCount" : 0,
+              "text" : "Unix Support Bus"
+            }
+          },
+          "correctChoice" : "-LDqjcYwDPDk3mIQq1_o",
+          "order" : 2,
+          "question" : "What does the acronym USB stand for when referring to a computer port?"
+        },
+        "-LDqjcYwDPDk3mIQq1_r" : {
+          "choices" : {
+            "-LDqjcYwDPDk3mIQq1_s" : {
+              "chosenCount" : 0,
+              "text" : "6"
+            },
+            "-LDqjcYwDPDk3mIQq1_t" : {
+              "chosenCount" : 0,
+              "text" : "4"
+            },
+            "-LDqjcYwDPDk3mIQq1_u" : {
+              "chosenCount" : 0,
+              "text" : "3"
+            },
+            "-LDqjcYwDPDk3mIQq1_v" : {
+              "chosenCount" : 0,
+              "text" : "5"
+            }
+          },
+          "correctChoice" : "-LDqjcYwDPDk3mIQq1_s",
+          "order" : 3,
+          "question" : "The United States is spread out across how many time zones?"
+        },
+        "-LDqjcYwDPDk3mIQq1_w" : {
+          "choices" : {
+            "-LDqjcYwDPDk3mIQq1_x" : {
+              "chosenCount" : 0,
+              "text" : "Ajay Bhatt"
+            },
+            "-LDqjcYwDPDk3mIQq1_y" : {
+              "chosenCount" : 0,
+              "text" : "Ray Tomlinson"
+            },
+            "-LDqjcYwDPDk3mIQq1_z" : {
+              "chosenCount" : 0,
+              "text" : "Paul Buchheit"
+            },
+            "-LDqjcYwDPDk3mIQq1a-" : {
+              "chosenCount" : 0,
+              "text" : "Ray Bradbury"
+            }
+          },
+          "correctChoice" : "-LDqjcYwDPDk3mIQq1_y",
+          "order" : 4,
+          "question" : "Who is credited with sending the first email?"
+        },
+        "-LDqjcYwDPDk3mIQq1a0" : {
+          "choices" : {
+            "-LDqjcYwDPDk3mIQq1a1" : {
+              "chosenCount" : 0,
+              "text" : "A full-service digital agency"
+            },
+            "-LDqjcYwDPDk3mIQq1a2" : {
+              "chosenCount" : 0,
+              "text" : "A platinum Salesforce partner"
+            },
+            "-LDqjcYwDPDk3mIQq1a3" : {
+              "chosenCount" : 0,
+              "text" : "A cross-cloud Salesforce implementation specialist"
+            },
+            "-LDqjcYwDPDk3mIQq1a4" : {
+              "chosenCount" : 0,
+              "text" : "All of the above"
+            }
+          },
+          "correctChoice" : "-LDqjcYwDPDk3mIQq1a4",
+          "order" : 5,
+          "question" : "What is DEG?"
+        }
+      },
+      "showGameOver" : false,
+      "showGameResults" : false,
+      "showQuestionResults" : false,
+      "startTime" : 1527889800000
+    },
+    "-LDqkjkaEtSZ6CvpXEEk" : {
+      "activeQuestionId" : false,
+      "event" : "-LCUbqaXAuNRGFOJBXEL",
+      "name" : "06/08/18 Game 1",
+      "questions" : {
+        "-LDqkjkYCO4Sd6CfpNZC" : {
+          "choices" : {
+            "-LDqkjkZE5saP5OxlFuH" : {
+              "chosenCount" : 0,
+              "text" : "Clothes"
+            },
+            "-LDqkjkZE5saP5OxlFuI" : {
+              "chosenCount" : 0,
+              "text" : "CDs"
+            },
+            "-LDqkjkZE5saP5OxlFuJ" : {
+              "chosenCount" : 0,
+              "text" : "Books"
+            },
+            "-LDqkjkZE5saP5OxlFuK" : {
+              "chosenCount" : 0,
+              "text" : "Safari vacations"
+            }
+          },
+          "correctChoice" : "-LDqkjkZE5saP5OxlFuJ",
+          "order" : 0,
+          "question" : "What was the first type of product sold on Amazon?"
+        },
+        "-LDqkjkZE5saP5OxlFuL" : {
+          "choices" : {
+            "-LDqkjkZE5saP5OxlFuM" : {
+              "chosenCount" : 0,
+              "text" : "England"
+            },
+            "-LDqkjkZE5saP5OxlFuN" : {
+              "chosenCount" : 0,
+              "text" : "France"
+            },
+            "-LDqkjkZE5saP5OxlFuO" : {
+              "chosenCount" : 0,
+              "text" : "Brazil"
+            },
+            "-LDqkjkaEtSZ6CvpXEEQ" : {
+              "chosenCount" : 0,
+              "text" : "Russia"
+            }
+          },
+          "correctChoice" : "-LDqkjkZE5saP5OxlFuM",
+          "order" : 1,
+          "question" : "The 2018 World Cup is taking place in what country?"
+        },
+        "-LDqkjkaEtSZ6CvpXEER" : {
+          "choices" : {
+            "-LDqkjkaEtSZ6CvpXEES" : {
+              "chosenCount" : 0,
+              "text" : "4.2 billion"
+            },
+            "-LDqkjkaEtSZ6CvpXEET" : {
+              "chosenCount" : 0,
+              "text" : "1.8 billion"
+            },
+            "-LDqkjkaEtSZ6CvpXEEU" : {
+              "chosenCount" : 0,
+              "text" : "6.1 billion"
+            },
+            "-LDqkjkaEtSZ6CvpXEEV" : {
+              "chosenCount" : 0,
+              "text" : "7.5 billion"
+            }
+          },
+          "correctChoice" : "-LDqkjkaEtSZ6CvpXEES",
+          "order" : 2,
+          "question" : "Out of the 7.6 billion people in the world, how many are Internet users?"
+        },
+        "-LDqkjkaEtSZ6CvpXEEW" : {
+          "choices" : {
+            "-LDqkjkaEtSZ6CvpXEEX" : {
+              "chosenCount" : 0,
+              "text" : "Wired"
+            },
+            "-LDqkjkaEtSZ6CvpXEEY" : {
+              "chosenCount" : 0,
+              "text" : "The Internet Movie Database"
+            },
+            "-LDqkjkaEtSZ6CvpXEEZ" : {
+              "chosenCount" : 0,
+              "text" : "MTV"
+            },
+            "-LDqkjkaEtSZ6CvpXEE_" : {
+              "chosenCount" : 0,
+              "text" : "America Online"
+            }
+          },
+          "correctChoice" : "-LDqkjkaEtSZ6CvpXEEX",
+          "order" : 3,
+          "question" : "Which company created the first web banner ad?"
+        },
+        "-LDqkjkaEtSZ6CvpXEEa" : {
+          "choices" : {
+            "-LDqkjkaEtSZ6CvpXEEb" : {
+              "chosenCount" : 0,
+              "text" : "The Bible"
+            },
+            "-LDqkjkaEtSZ6CvpXEEc" : {
+              "chosenCount" : 0,
+              "text" : "Guinness Book of World Records"
+            },
+            "-LDqkjkaEtSZ6CvpXEEd" : {
+              "chosenCount" : 0,
+              "text" : "A Tale of Two Cities"
+            },
+            "-LDqkjkaEtSZ6CvpXEEe" : {
+              "chosenCount" : 0,
+              "text" : "Twilight"
+            }
+          },
+          "correctChoice" : "-LDqkjkaEtSZ6CvpXEEc",
+          "order" : 4,
+          "question" : "Which book holds the record of being the most stolen book from public libraries?"
+        },
+        "-LDqkjkaEtSZ6CvpXEEf" : {
+          "choices" : {
+            "-LDqkjkaEtSZ6CvpXEEg" : {
+              "chosenCount" : 0,
+              "text" : "0"
+            },
+            "-LDqkjkaEtSZ6CvpXEEh" : {
+              "chosenCount" : 0,
+              "text" : "3"
+            },
+            "-LDqkjkaEtSZ6CvpXEEi" : {
+              "chosenCount" : 0,
+              "text" : "1"
+            },
+            "-LDqkjkaEtSZ6CvpXEEj" : {
+              "chosenCount" : 0,
+              "text" : "2"
+            }
+          },
+          "correctChoice" : "-LDqkjkaEtSZ6CvpXEEh",
+          "order" : 5,
+          "question" : "DEG is the only Salesforce partner to be named Marketing Cloud Partner of the Year how many times?"
+        }
+      },
+      "showGameOver" : false,
+      "showGameResults" : false,
+      "showQuestionResults" : false,
+      "startTime" : 1528493400000
+    },
+    "-LDqnMbKKeZxU_ulHyPc" : {
+      "activeQuestionId" : false,
+      "event" : "-LCUbqaXAuNRGFOJBXEL",
+      "name" : "06/08/18 Game 2",
+      "questions" : {
+        "-LDqnMbIpVGZwN4TGisl" : {
+          "choices" : {
+            "-LDqnMbIpVGZwN4TGism" : {
+              "chosenCount" : 0,
+              "text" : "Louvre"
+            },
+            "-LDqnMbIpVGZwN4TGisn" : {
+              "chosenCount" : 0,
+              "text" : "Van Gough"
+            },
+            "-LDqnMbIpVGZwN4TGiso" : {
+              "chosenCount" : 0,
+              "text" : "Rijksmuseum"
+            },
+            "-LDqnMbIpVGZwN4TGisp" : {
+              "chosenCount" : 0,
+              "text" : "British Museum"
+            }
+          },
+          "correctChoice" : "-LDqnMbIpVGZwN4TGism",
+          "order" : 0,
+          "question" : "What is the most visited museum in Europe?"
+        },
+        "-LDqnMbIpVGZwN4TGisq" : {
+          "choices" : {
+            "-LDqnMbIpVGZwN4TGisr" : {
+              "chosenCount" : 0,
+              "text" : "96 years"
+            },
+            "-LDqnMbIpVGZwN4TGiss" : {
+              "chosenCount" : 0,
+              "text" : "48 years"
+            },
+            "-LDqnMbJD6IY2O8yUvza" : {
+              "chosenCount" : 0,
+              "text" : "108 years"
+            },
+            "-LDqnMbJD6IY2O8yUvzb" : {
+              "chosenCount" : 0,
+              "text" : "59 years"
+            }
+          },
+          "correctChoice" : "-LDqnMbJD6IY2O8yUvza",
+          "order" : 1,
+          "question" : "Before winning the World Series in 2016, how many years did the Chicago Cubs go between winning a title?"
+        },
+        "-LDqnMbJD6IY2O8yUvzc" : {
+          "choices" : {
+            "-LDqnMbJD6IY2O8yUvzd" : {
+              "chosenCount" : 0,
+              "text" : "Moby Dick"
+            },
+            "-LDqnMbJD6IY2O8yUvze" : {
+              "chosenCount" : 0,
+              "text" : "The Old Man and the Sea"
+            },
+            "-LDqnMbJD6IY2O8yUvzf" : {
+              "chosenCount" : 0,
+              "text" : "Typee"
+            },
+            "-LDqnMbJD6IY2O8yUvzg" : {
+              "chosenCount" : 0,
+              "text" : "20,000 Leagues Under the Sea"
+            }
+          },
+          "correctChoice" : "-LDqnMbJD6IY2O8yUvzd",
+          "order" : 2,
+          "question" : "The name Starbucks was inspired by the first mate in what Herman Melville novel?"
+        },
+        "-LDqnMbJD6IY2O8yUvzh" : {
+          "choices" : {
+            "-LDqnMbJD6IY2O8yUvzi" : {
+              "chosenCount" : 0,
+              "text" : "The X-Files"
+            },
+            "-LDqnMbJD6IY2O8yUvzj" : {
+              "chosenCount" : 0,
+              "text" : "Saturday Night Live"
+            },
+            "-LDqnMbJD6IY2O8yUvzk" : {
+              "chosenCount" : 0,
+              "text" : "Mystery Science Theater 3000"
+            },
+            "-LDqnMbJD6IY2O8yUvzl" : {
+              "chosenCount" : 0,
+              "text" : "Monty Python"
+            }
+          },
+          "correctChoice" : "-LDqnMbJD6IY2O8yUvzl",
+          "order" : 3,
+          "question" : "The term 'spam' was first used to refer to junk messages on what TV show?"
+        },
+        "-LDqnMbJD6IY2O8yUvzm" : {
+          "choices" : {
+            "-LDqnMbJD6IY2O8yUvzn" : {
+              "chosenCount" : 0,
+              "text" : "Charles Darwin"
+            },
+            "-LDqnMbJD6IY2O8yUvzo" : {
+              "chosenCount" : 0,
+              "text" : "Oliver Cromwell"
+            },
+            "-LDqnMbKKeZxU_ulHyPW" : {
+              "chosenCount" : 0,
+              "text" : "Winston Churchill"
+            },
+            "-LDqnMbKKeZxU_ulHyPX" : {
+              "chosenCount" : 0,
+              "text" : "Sir Isaac Newton"
+            }
+          },
+          "correctChoice" : "-LDqnMbKKeZxU_ulHyPW",
+          "order" : 4,
+          "question" : "The late Diana, Princess of Wales, was distantly related to which prominent historical figure?"
+        },
+        "-LDqnMbKKeZxU_ulHyPY" : {
+          "choices" : {
+            "-LDqnMbKKeZxU_ulHyPZ" : {
+              "chosenCount" : 0,
+              "text" : "Kansas City"
+            },
+            "-LDqnMbKKeZxU_ulHyP_" : {
+              "chosenCount" : 0,
+              "text" : "Denver"
+            },
+            "-LDqnMbKKeZxU_ulHyPa" : {
+              "chosenCount" : 0,
+              "text" : "San Francisco"
+            },
+            "-LDqnMbKKeZxU_ulHyPb" : {
+              "chosenCount" : 0,
+              "text" : "New York"
+            }
+          },
+          "correctChoice" : "-LDqnMbKKeZxU_ulHyPZ",
+          "order" : 5,
+          "question" : "Where is DEG headquartered?"
+        }
+      },
+      "showGameOver" : false,
+      "showGameResults" : false,
+      "showQuestionResults" : false,
+      "startTime" : 1528494000000
+    },
+    "-LDqxAKR82FLwX4sB_PE" : {
+      "activeQuestionId" : false,
+      "event" : "-LCUbqaXAuNRGFOJBXEL",
+      "name" : "06/08/18 Game 3",
+      "questions" : {
+        "-LDqxAKQ-xghH0TEnshA" : {
+          "choices" : {
+            "-LDqxAKQ-xghH0TEnshB" : {
+              "chosenCount" : 0,
+              "text" : "&"
+            },
+            "-LDqxAKQ-xghH0TEnshC" : {
+              "chosenCount" : 0,
+              "text" : "@"
+            },
+            "-LDqxAKQ-xghH0TEnshD" : {
+              "chosenCount" : 0,
+              "text" : "%"
+            },
+            "-LDqxAKQ-xghH0TEnshE" : {
+              "chosenCount" : 0,
+              "text" : "#"
+            }
+          },
+          "correctChoice" : "-LDqxAKQ-xghH0TEnshC",
+          "order" : 0,
+          "question" : "What symbol is used in an email address to indicate where the message is intended to go?"
+        },
+        "-LDqxAKQ-xghH0TEnshF" : {
+          "choices" : {
+            "-LDqxAKQ-xghH0TEnshG" : {
+              "chosenCount" : 0,
+              "text" : "6"
+            },
+            "-LDqxAKQ-xghH0TEnshH" : {
+              "chosenCount" : 0,
+              "text" : "5"
+            },
+            "-LDqxAKQ-xghH0TEnshI" : {
+              "chosenCount" : 0,
+              "text" : "7"
+            },
+            "-LDqxAKQ-xghH0TEnshJ" : {
+              "chosenCount" : 0,
+              "text" : "4"
+            }
+          },
+          "correctChoice" : "-LDqxAKQ-xghH0TEnshI",
+          "order" : 1,
+          "question" : "How many red stripes are on the United States flag?"
+        },
+        "-LDqxAKQ-xghH0TEnshK" : {
+          "choices" : {
+            "-LDqxAKQ-xghH0TEnshL" : {
+              "chosenCount" : 0,
+              "text" : "WebCrawl"
+            },
+            "-LDqxAKQ-xghH0TEnshM" : {
+              "chosenCount" : 0,
+              "text" : "Backrub"
+            },
+            "-LDqxAKQ-xghH0TEnshN" : {
+              "chosenCount" : 0,
+              "text" : "Handshake"
+            },
+            "-LDqxAKQ-xghH0TEnshO" : {
+              "chosenCount" : 0,
+              "text" : "Hopscotch"
+            }
+          },
+          "correctChoice" : "-LDqxAKQ-xghH0TEnshM",
+          "order" : 2,
+          "question" : "What was the original name of the search engine now known as Google?"
+        },
+        "-LDqxAKQ-xghH0TEnshP" : {
+          "choices" : {
+            "-LDqxAKQ-xghH0TEnshQ" : {
+              "chosenCount" : 0,
+              "text" : "Oprah"
+            },
+            "-LDqxAKR82FLwX4sB_P1" : {
+              "chosenCount" : 0,
+              "text" : "Martha Stewart"
+            },
+            "-LDqxAKR82FLwX4sB_P2" : {
+              "chosenCount" : 0,
+              "text" : "Guy Fieri"
+            },
+            "-LDqxAKR82FLwX4sB_P3" : {
+              "chosenCount" : 0,
+              "text" : "Ina Garten"
+            }
+          },
+          "correctChoice" : "-LDqxAKR82FLwX4sB_P1",
+          "order" : 3,
+          "question" : "In 2016, Snoop Dogg co-starred alongside which lifestyle guru on their collaborative cooking show 'Potluck Dinner Party'?"
+        },
+        "-LDqxAKR82FLwX4sB_P4" : {
+          "choices" : {
+            "-LDqxAKR82FLwX4sB_P5" : {
+              "chosenCount" : 0,
+              "text" : "Marketing Cloud"
+            },
+            "-LDqxAKR82FLwX4sB_P6" : {
+              "chosenCount" : 0,
+              "text" : "Commerce Cloud"
+            },
+            "-LDqxAKR82FLwX4sB_P7" : {
+              "chosenCount" : 0,
+              "text" : "Service Cloud"
+            },
+            "-LDqxAKR82FLwX4sB_P8" : {
+              "chosenCount" : 0,
+              "text" : "Journey Cloud"
+            }
+          },
+          "correctChoice" : "-LDqxAKR82FLwX4sB_P8",
+          "order" : 4,
+          "question" : "Which of these is not one of Salesforce's Clouds?"
+        },
+        "-LDqxAKR82FLwX4sB_P9" : {
+          "choices" : {
+            "-LDqxAKR82FLwX4sB_PA" : {
+              "chosenCount" : 0,
+              "text" : "Customers"
+            },
+            "-LDqxAKR82FLwX4sB_PB" : {
+              "chosenCount" : 0,
+              "text" : "Environments"
+            },
+            "-LDqxAKR82FLwX4sB_PC" : {
+              "chosenCount" : 0,
+              "text" : "Moments"
+            },
+            "-LDqxAKR82FLwX4sB_PD" : {
+              "chosenCount" : 0,
+              "text" : "Brands"
+            }
+          },
+          "correctChoice" : "-LDqxAKR82FLwX4sB_PC",
+          "order" : 5,
+          "question" : "In DEG's tagline, the agency proclaims that it markets to what?"
+        }
+      },
+      "showGameOver" : false,
+      "showGameResults" : false,
+      "showQuestionResults" : false,
+      "startTime" : 1528494600000
     }
   },
   "players" : {
