@@ -47,11 +47,7 @@ const manager = function(el) {
     }
 
 
-	async function render(dbData) {
-        let leaderboardData = dbData;
-        if (!dbData) {
-            leaderboardData = await dbService.getLeaderboardData();
-        }
+	async function render(leaderboardData) {
         replaceContent(el, `
 			<h1 class="page-title page-title--centered">Trivia Leaderboard</h1>
             <div class="columns columns--two">
