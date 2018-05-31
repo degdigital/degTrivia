@@ -15,19 +15,17 @@ const gameWaitBeforeQuestions = function(element) {
 	function render(eventData) {
 		hideSiteHeader();
 		replaceContent(element, `
-			<div class="background__video-wrap">
-				<video class="background__video" 
-					autoplay 
-					loop 
-					muted
-					playsinline
-					preload="auto" 
-					poster="../../images/App-Hex-Ani-Congratulations.jpg"
-					type="video/mp4"
-				>
-					<source src="../../images/App-Hex-Ani-375.mp4" type="video/mp4">
-				</video>
-			</div>
+			<video class="background__video" 
+				autoplay 
+				loop 
+				muted
+				playsinline
+				preload="auto" 
+				poster="../../images/App-Hex.jpg"
+				type="video/mp4"
+			>
+				<source src="../../images/App-Hex-Ani-375.mp4" type="video/mp4">
+			</video>
 			<div class="game-begin__content">
 				<div class="game-begin-heading">
 					<img src="../../images/deg-logo.svg" alt="DEG logo" class="logo" />
