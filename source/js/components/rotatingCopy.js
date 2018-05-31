@@ -7,7 +7,7 @@ import dbService from '../services/dbService.js';
 const rotatingCopy = function(element) {
 
 	const db = dbService.getDb();
-	const rotateDelay = 5000;
+	const rotateDelay = 10000;
 	let initialDataHasLoaded = false;
 	let dbRefs = [];
 	let copyArray = [];

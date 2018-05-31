@@ -68,8 +68,18 @@ const registration = function(element) {
                 <div class="button-group button-group--centered">
                     ${button({content: 'Let\'s Play'})}
                 </div>
+                ${renderDisclosure(eventData.registrationCopy.disclosure)}
             </form>
         `);
+    }
+
+    function renderDisclosure(disclosure) {
+        if (!disclosure) {
+            return '';
+        }
+        return `
+            <p class="disclosure">${disclosure}</p>
+        `;
     }
 
     function onFormSubmit(e) {

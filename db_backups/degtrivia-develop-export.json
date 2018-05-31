@@ -17,7 +17,7 @@
       "activeGameId" : false,
       "alias" : "beer30",
       "gameWaitBeforeQuestionsCopy" : {
-        "description" : "Answer all six questions (no stopping for wrong answers) as fast as you can. 10 seconds per question. Speed and accuracy wins. Here comes the first question.",
+        "description" : "Answer all six questions (no stopping for wrong answers) as fast as you can. 10 seconds per question. Speed and accuracy win. Here comes the first question.",
         "title" : "Let's Play!"
       },
       "games" : {
@@ -37,17 +37,30 @@
         "description" : "Thanks for playing! See you again next week."
       },
       "pregameRotatingCopy" : {
-        "-LDJD82xkiDFFFwg6N6G" : "Speed counts! Answer as quickly as you can."
+        "-LDrOVz5N4PlxTiRRg4_" : "This prize isn’t going to win itself. ",
+        "-LDrOXqv8GbBfTNbojz3" : "Tip: Play as many games as you can. Scores are accumulated. Plus, we like you. ",
+        "-LDrOZCILfoMJHAgeRBZ" : "You’ve gotta ask yourself one question: “Do I feel lucky?”",
+        "-LDrO_WBpXRnWO4Cuny3" : "Tip: Try not to use all 10 seconds answering a question. Speed matters.",
+        "-LDrOb-udJuTjbd6D2dx" : "Win or lose, at least we'll have shared this moment together.",
+        "-LDrOctx12XGHvAspYac" : "Warm up those thumbs and get ready to win some prizes. ",
+        "-LDrOeIiZDpMZcgxe82T" : "Your high school teachers are about to either be very proud or very disappointed.",
+        "-LDrOfjD29eAMSHKgd4f" : "Tip: Answer every question, even if you get one wrong. We’re all about forgiveness.",
+        "-LDrOh5qJ60f9j1gZre0" : "No pressure, no diamonds.",
+        "-LDrOjHSlTHoQp2tRYrD" : "There are no participation ribbons in trivia."
       },
       "registrationCopy" : {
+        "disclosure" : "By filling out this form, you are opting in to receiving notifications regarding DEG Trivia via email and SMS, as well as general follow-up communications from the agency. Learn more about <a href=\"https://www.degdigital.com/deg-full-service-digital-agency/privacy-policy/\" target=\"_blank\">DEG’s privacy policy</a>.",
         "title" : "Welcome to DEG Trivia!"
+      },
+      "tvCopy" : {
+        "url" : "degtrivia.com"
       }
     },
     "-LD84ESzyLp4oyyDckO2" : {
       "activeGameId" : false,
       "alias" : "cnxtrivia2018",
       "gameWaitBeforeQuestionsCopy" : {
-        "description" : "Answer all six questions (no stopping for wrong answers) as fast as you can. 10 seconds per question. Speed and accuracy wins. Here comes the first question.",
+        "description" : "Answer all six questions (no stopping for wrong answers) as fast as you can. 10 seconds per question. Speed and accuracy win. Here comes the first question.",
         "title" : "Let's Play!"
       },
       "games" : {
@@ -60,17 +73,33 @@
       },
       "hashtag" : "#CNXTRIVIA",
       "leaderboardCopy" : {
-        "description" : "Congrats on seeing your name in lights. Don't let someone steal your thunder. Play again to maintain your spot."
+        "description" : "Thanks for playing Connections Trivia. If you see your name in lights, congrats! If you don’t, remember, it’s all about having fun anyway."
       },
       "name" : "CNX 2018",
       "postgameResultsCopy" : {
-        "description" : "Come visit DEG at booth #303 to learn more about how we can help your company market to the moment."
+        "description" : "Eager for more knowledge? Stop by booth #303 to learn how to make the most of your marketing program."
       },
       "pregameRotatingCopy" : {
-        "-LDJD75YE0FKMqPMa3wA" : "Speed counts! Answer as quickly as you can."
+        "-LDrNuHhq0tUD7TWilzW" : "Tip: Stop by DEG’s booth #303 while you wait. You never know when an answer could be hiding in plain sight.",
+        "-LDrO-JvIbdoE377ZJPr" : "This prize isn’t going to win itself.",
+        "-LDrO1RsFIJGm8SsaWxb" : "Tip: Play as many games as you can. Scores are accumulated. Plus, we like you.",
+        "-LDrO3Lxt0Q9KgElg7iX" : "You’ve gotta ask yourself one question: “Do I feel lucky?”",
+        "-LDrO4YkyXn3r4T8t7EJ" : "Tip: Try not to use all 10 seconds answering a question. Speed matters. ",
+        "-LDrO73iedMz3jMNATia" : "Win or lose, at least we'll have shared this moment together.",
+        "-LDrO9kjeGnJ3npSv0OR" : "Warm up those thumbs and get ready to win some prizes.",
+        "-LDrOBQ2uvwl0Tp7xPbI" : "Your high school teachers are about to either be very proud or very disappointed.",
+        "-LDrODM6s4dLH_XnzlS7" : "Tip: Answer every question, even if you get one wrong. We’re all about forgiveness.",
+        "-LDrOEyNEtZqLWcnXsfn" : "No pressure, no diamonds.",
+        "-LDrOGfpKFatEDdhPR4E" : "Tip: Do you know what city you’re in? That’s a good start.",
+        "-LDrOI_JMZ0BiVMNrpES" : "There are no participation ribbons in trivia."
       },
       "registrationCopy" : {
+        "disclosure" : "By filling out this form, you are opting in to receiving notifications regarding Connections trivia via email and SMS, as well as general follow-up communications from the agency. Learn more about <a href=\"https://www.degdigital.com/deg-full-service-digital-agency/privacy-policy/\" target=\"_blank\">DEG’s privacy policy</a>.",
         "title" : "Welcome to Connections Trivia, presented by DEG."
+      },
+      "tvCopy" : {
+        "message1" : "DEG is a full service marketing agency here to help you.",
+        "message2" : "Let us help you market to the moment."
       },
       "url" : "cnxtrivia.com"
     }
@@ -1931,6 +1960,6 @@
       "lastName" : "Ladage"
     }
   },
-  "questionDuration" : 10000,
+  "questionDuration" : 15000,
   "resetApp" : false
 }
