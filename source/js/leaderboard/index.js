@@ -8,16 +8,14 @@ import playerService from '../services/playerService.js';
 
 // Screens
 import login from '../admin/screens/login.js';
-import leaderboardScreen from './screens/leaderboardScreen.js';
-import marketingScreen from './screens/marketingMessage.js';
+import screenRotator from './components/screenRotator.js';
 
 const leaderboardTV = function(el) {
 
 	let db;
 	let loginInst;
-	let managerInst;
 
-	function setUpListeners(managerInst) {
+	function setUpListeners() {
 		playerService.getAuth().onAuthStateChanged(onAuthStateChange);
 	}
 
@@ -25,7 +23,7 @@ const leaderboardTV = function(el) {
 		if (user) {
 			const isAdmin = await db.ref(`admins/${user.uid}`).once('value').then(snapshot => snapshot.exists() && snapshot.val() === true);
 			if (isAdmin === true) {
-				dbService.getDb().ref(`leaderboardCurrent`).on('value', snapshot => managerInst.render(snapshot.val()));
+				screenRotator(el);
 			} else {
 				loginInst.renderForm();
 			}
@@ -41,9 +39,8 @@ const leaderboardTV = function(el) {
 
 		db = dbService.getDb();
 		loginInst = login(el);
-		managerInst = leaderboardScreen(el);
 		
-		setUpListeners(managerInst);
+		setUpListeners();
 	}
 
 	init();

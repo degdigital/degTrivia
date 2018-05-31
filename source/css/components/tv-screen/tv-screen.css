@@ -1,5 +1,18 @@
 .tv-screen {
     padding: 5em 0;
+
+    .next-game__title {
+        height: 11em;
+    }
+
+    .event-hashtag {
+        font-size: 1.25em;
+    }
+}
+
+.tv-screen__logo {
+    margin: 0 auto 5em;
+    width: 15em;
 }
 
 .tv-screen__copy {
