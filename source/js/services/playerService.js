@@ -86,13 +86,7 @@ const playerService = function() {
 	}
 
 	function getCurrentPlayerInfo(uid) {
-		if (cachedPlayerInfo) {
-			return Promise.resolve(cachedPlayerInfo);
-		}
-		return dbService.getDb().ref('players').child(`${uid}`).once('value').then(snapshot => {
-			cachedPlayerInfo = snapshot.val();
-			return cachedPlayerInfo;
-		});
+		return dbService.getDb().ref('players').child(`${uid}`).once('value').then(snapshot => snapshot.val());
 	}
 	
 	return {
