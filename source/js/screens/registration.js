@@ -95,11 +95,11 @@ const registration = function(element) {
          const formVals = formMapper.getValues(formEl);
 
          playerService.register(formVals)
-            .catch(error => onRegisterPlayerError(error, formVals));
+            .catch(error => onRegisterPlayerError(error, formVals, formEl));
     }
 
-    function onRegisterPlayerError(error, formVals) {
-        enableFormSubmit();
+    function onRegisterPlayerError(error, formVals, formEl) {
+        enableFormSubmit(formEl);
         const formData = mapFormValsToFormData(formVals);
         let errorMessage;
 
@@ -124,8 +124,8 @@ const registration = function(element) {
         }
     }
 
-    function enableFormSubmit() {
-        const submitButtonEl = element.querySelector(`[${registationFormAttr}] button[type="submit"]`);
+    function enableFormSubmit(formEl) {
+        const submitButtonEl = formEl.querySelector(`button[type="submit"]`);
         if (submitButtonEl) {
             submitButtonEl.removeAttribute('disabled');
         }
