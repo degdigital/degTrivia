@@ -48,38 +48,44 @@
         "tableCaption": "leaderboard",
         "tableColumns": [
             {"cssClass": "table__col--small"},
-            {"cssClass": ""},
+            {"cssClass": "table__col--md"},
+            {"cssClass": "table__col--small"},
             {"cssClass": ""}
         ],
         "tableData": [
             { "row" : [
                     { "heading": "Position", "content": "1" },
                     { "heading": "Name", "content": "Jon Snow" },
-                    { "heading": "Score", "content": "70" }
+                    { "heading": "Score", "content": "70" },
+                    { "heading": "Time", "content": "4.05s"}
                 ]
             },
             { "row" : [
                     { "heading": "Position", "content": "2" },
                     { "heading": "Name", "content": "Danerys Targaryen" },
-                    { "heading": "Score", "content": "65" }
+                    { "heading": "Score", "content": "65" },
+                    { "heading": "Time", "content": "4.5s"}
                 ]
             },
             { "row" : [
                     { "heading": "Position", "content": "3" },
                     { "heading": "Name", "content": "Cersie Lannister" },
-                    { "heading": "Score", "content": "64" }
+                    { "heading": "Score", "content": "64" },
+                    { "heading": "Time", "content": "17s"}
                 ]
             },
             { "row" : [
                     { "heading": "Position", "content": "4" },
                     { "heading": "Name", "content": "Euron Greyjoy" },
-                    { "heading": "Score", "content": "20" }
+                    { "heading": "Score", "content": "20" },
+                    { "heading": "Time", "content": "60s"}
                 ]
             },
             { "row" : [
                     { "heading": "Position", "content": "5" },
                     { "heading": "Name", "content": "Hodor" },
-                    { "heading": "Score", "content": "1" }
+                    { "heading": "Score", "content": "1" },
+                    { "heading": "Time", "content": "45.15s"}
                 ]
             }
         ]

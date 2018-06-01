@@ -86,6 +86,7 @@ const registration = function(element) {
         const el = e.target;
         if (el.hasAttribute(registationFormAttr)) {
             e.preventDefault();
+            disableFormSubmit(el);
             registerPlayer(el);
         }
     }
@@ -94,10 +95,11 @@ const registration = function(element) {
          const formVals = formMapper.getValues(formEl);
 
          playerService.register(formVals)
-            .catch(error => onRegisterPlayerError(error, formVals));
+            .catch(error => onRegisterPlayerError(error, formVals, formEl));
     }
 
-    function onRegisterPlayerError(error, formVals) {
+    function onRegisterPlayerError(error, formVals, formEl) {
+        enableFormSubmit(formEl);
         const formData = mapFormValsToFormData(formVals);
         let errorMessage;
 
@@ -113,6 +115,20 @@ const registration = function(element) {
 
         render(formData, errorMessage, cachedEventData);
         scrollFormErrorMessageIntoView();
+    }
+
+    function disableFormSubmit(formEl) {
+        const submitButtonEl = formEl.querySelector('button[type="submit"]');
+        if (submitButtonEl) {
+            submitButtonEl.disabled = true;
+        }
+    }
+
+    function enableFormSubmit(formEl) {
+        const submitButtonEl = formEl.querySelector('button[type="submit"]');
+        if (submitButtonEl) {
+            submitButtonEl.removeAttribute('disabled');
+        }
     }
 
     function mapFormValsToFormData(formVals) {
