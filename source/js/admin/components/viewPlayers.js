@@ -10,8 +10,10 @@ const viewPlayers = function(wrapperEl) {
 	const db = dbService.getDb();
 	const tableBodyClass = 'viewplayers-table-body';
 	const dropdownClass = 'viewplayers-dropdown';
+	const playerCountClass = 'playercount';
 	let tableBodyEl = null;
 	let dropdownEl = null;
+	let playercountEl = null;
 	let cachedPlayerData = {};
 	let eventId = 'all-events';
 
@@ -26,21 +28,25 @@ const viewPlayers = function(wrapperEl) {
 		db.ref('events').on('value', snapshot => renderDropdownOptions(snapshot.val()));
 		db.ref('players').on('value', snapshot => {
 			cachedPlayerData = snapshot.val();
-			renderTableRows(cachedPlayerData);
+			const filteredPlayerData = filterPlayers(cachedPlayerData);
+			renderTableRows(filteredPlayerData);
+			renderPlayerCount(filteredPlayerData);
 		});
 		dropdownEl.addEventListener('change', onDropdownChange);
 	}
 
 	function onDropdownChange(e) {
 		eventId = e.target.value;
-		renderTableRows(cachedPlayerData);
+		const filteredPlayerData = filterPlayers(cachedPlayerData);
+		renderTableRows(filteredPlayerData);
+		renderPlayerCount(filteredPlayerData);
 	}
 
 	function renderTable() {
 		replaceContent(wrapperEl, `
 			<select class="${dropdownClass}"></select><br><br>
 			<table>
-				<caption>Players</caption>
+				<caption>Players<span class="${playerCountClass}"></span></caption>
 				<thead>
 					<tr>
 						<th>First Name</th>
@@ -53,6 +59,7 @@ const viewPlayers = function(wrapperEl) {
 				<tbody class="${tableBodyClass}"></tbody>
 			</table>
 		`);
+		playercountEl = wrapperEl.querySelector(`.${playerCountClass}`);
 	}
 
 	function renderDropdownOptions(data) {
@@ -67,23 +74,37 @@ const viewPlayers = function(wrapperEl) {
 		if (!data) {
 			return;
 		}
-		const rows = Object.keys(data).reduce((output, key) => {
-			if (eventId === 'all-events' || data[key].event.toString() === eventId.toString()) {
-				return `
-					${output}
-					<tr>
-						<td>${data[key].firstName}</td>
-						<td>${data[key].lastName}</td>
-						<td>${key}</td>
-						<td>${data[key].event}</td>
-						<td>${data[key].email}</td>
-					</tr>
-				`;
-			} else {
-				return output;
-			}
-		}, '');
+		const rows = data.reduce((output, row) => `
+			${output}
+			<tr>
+				<td>${row.firstName}</td>
+				<td>${row.lastName}</td>
+				<td>${row.id}</td>
+				<td>${row.event}</td>
+				<td>${row.email}</td>
+			</tr>
+		`, '');
 		replaceContent(tableBodyEl, rows);
+	}
+
+	function filterPlayers(playersData) {
+		return Object.keys(playersData).reduce((output, key) => {
+			const playerData = playersData[key];
+			if (eventId === 'all-events' || playerData.event.toString() === eventId.toString()) {
+				playerData.id = key;
+				output.push(playerData);
+			}
+			return output;
+		}, []);
+	}
+
+	function renderPlayerCount(data) {
+		if (!data) {
+			replaceContent(playercountEl, '');
+		} else {
+			replaceContent(playercountEl, ` (${data.length})`);
+		}
+		
 	}
 
 	init();
