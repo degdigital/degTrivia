@@ -86,6 +86,7 @@ const registration = function(element) {
         const el = e.target;
         if (el.hasAttribute(registationFormAttr)) {
             e.preventDefault();
+            disableFormSubmit(el);
             registerPlayer(el);
         }
     }
@@ -98,6 +99,7 @@ const registration = function(element) {
     }
 
     function onRegisterPlayerError(error, formVals) {
+        enableFormSubmit();
         const formData = mapFormValsToFormData(formVals);
         let errorMessage;
 
@@ -113,6 +115,20 @@ const registration = function(element) {
 
         render(formData, errorMessage, cachedEventData);
         scrollFormErrorMessageIntoView();
+    }
+
+    function disableFormSubmit(formEl) {
+        const submitButtonEl = formEl.querySelector('button[type="submit"]');
+        if (submitButtonEl) {
+            submitButtonEl.disabled = true;
+        }
+    }
+
+    function enableFormSubmit() {
+        const submitButtonEl = element.querySelector(`[${registationFormAttr}] button[type="submit"]`);
+        if (submitButtonEl) {
+            submitButtonEl.removeAttribute('disabled');
+        }
     }
 
     function mapFormValsToFormData(formVals) {
