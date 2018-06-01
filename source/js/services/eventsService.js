@@ -37,12 +37,21 @@ const eventsService = function() {
 	}
 
 	async function onAuthStateChanged(user, activeEventId) {
-		if (user) {
-			dbService.getDb().ref(`events/${activeEventId}/activeGameId`).on('value', snapshot => onGameActivationChange(snapshot.val(), activeEventId));
+		if (!user) {
+			handleUnauthenticatedUser(activeEventId);
 		} else {
-			const eventData = await dbService.getEventById(activeEventId);
-			runSubscribedCallbacks('onPlayerUnauthenticated', eventData);
+			const playerInfo = await playerService.getCurrentPlayerInfo(user.uid);
+			if (playerInfo) {
+				dbService.getDb().ref(`events/${activeEventId}/activeGameId`).on('value', snapshot => onGameActivationChange(snapshot.val(), activeEventId));
+			} else {
+				handleUnauthenticatedUser(activeEventId);
+			}
 		}
+	}
+
+	async function handleUnauthenticatedUser(activeEventId) {
+		const eventData = await dbService.getEventById(activeEventId);
+		runSubscribedCallbacks('onPlayerUnauthenticated', eventData);
 	}
 
 	async function onGameActivationChange(gameId, activeEventId) {
