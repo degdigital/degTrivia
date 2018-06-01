@@ -125,7 +125,7 @@ const registration = function(element) {
     }
 
     function enableFormSubmit(formEl) {
-        const submitButtonEl = formEl.querySelector(`button[type="submit"]`);
+        const submitButtonEl = formEl.querySelector('button[type="submit"]');
         if (submitButtonEl) {
             submitButtonEl.removeAttribute('disabled');
         }
