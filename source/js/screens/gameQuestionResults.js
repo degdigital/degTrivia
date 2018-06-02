@@ -84,7 +84,7 @@ function renderStatus(isUserChoiceCorrect) {
 }
 
 function renderScreen(element, data) {
-	const {questionData, userChoiceId} = data;
+	const {questionData, userChoiceId, countText} = data;
 	const resultsPending = data.resultsPending && data.resultsPending === true;
 	const isUserChoiceCorrect = userChoiceId === questionData.correctChoice;
 
@@ -95,6 +95,7 @@ function renderScreen(element, data) {
 	const html = `
 		<div class="question">
 			<header class="question-header">
+				${countText ? `<p class="question__count">${countText}</p>` : ''}
 				${resultsPending === true ? '<p class="question-status question-status--calculating">Calculating results...</p>' : renderStatus(isUserChoiceCorrect)}
 				<h1 class="question__text">${questionData.question}</h1>
 			</header>	
