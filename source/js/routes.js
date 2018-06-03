@@ -12,18 +12,18 @@ import postgameResults from './screens/postgameResults.js';
 import leaderboard from './screens/leaderboardScreen.js';
 import error from './screens/error.js';
 
-function init(appConfig) {
+function init(el, appConfig) {
 
 	const routes = {
-		info: info(appConfig),
-		registration: registration(appConfig),
-		pregameCountdown: pregameCountdown(appConfig),
-		gameWaitBeforeQuestions: gameWaitBeforeQuestions(appConfig),
-		gameQuestion: gameQuestion(appConfig),
-		gameQuestionResults: gameQuestionResults(appConfig),
-		postgameResults: postgameResults(appConfig),
-		leaderboard: leaderboard(appConfig),
-		error: error(appConfig)
+		info: info(el),
+		registration: registration(el),
+		pregameCountdown: pregameCountdown(el),
+		gameWaitBeforeQuestions: gameWaitBeforeQuestions(el),
+		gameQuestion: gameQuestion(el),
+		gameQuestionResults: gameQuestionResults(el),
+		postgameResults: postgameResults(el),
+		leaderboard: leaderboard(el),
+		error: error(el)
 	};
 	router.init(routes, appConfig);
 }

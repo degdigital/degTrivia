@@ -6,7 +6,8 @@ const eventsService = function() {
 	
 	const callbacks = [];
 	let appHasError = false;
-	let initialAppConnect = true;
+	let initialAppLoad = true;
+	let initialDbConnect = true;
 
 	function init() {
 		bindBustedAppEvents();
@@ -14,39 +15,61 @@ const eventsService = function() {
 	}
 
 	function bindBustedAppEvents() {
-		dbService.getDb().ref('.info/connected').on('value', snapshot => onErrorStateChanged(snapshot.val() === false));
+		dbService.getDb().ref('.info/connected').on('value', snapshot => onDbConnectionStateChange(snapshot.val() === true));
 		dbService.getDb().ref('disableAll').on('value', snapshot => onErrorStateChanged(snapshot.val() === true));
 		dbService.getDb().ref('resetApp').on('value', snapshot => onResetAppChanged(snapshot.val() === true));
 	}
 
-	function onActiveEventStateChanged(activeEventId) {
+	async function onActiveEventStateChanged(activeEventId) {
+		let eventData = null;
+
 		if (activeEventId) {
 			playerService.getAuth().onAuthStateChanged(user => onAuthStateChanged(user, activeEventId));
+			eventData = await dbService.getEventById(activeEventId);
 		} else {
 			runSubscribedCallbacks('onNoActiveEvent', {
+				heading: 'Bad timing.',
 				message: 'There are no active events at this time.'
 			});
 		}
+
+		runSubscribedCallbacks('onActiveEventChanged', eventData);
 	}
 
-	function onAuthStateChanged(user, activeEventId) {
-		if (user) {
-			dbService.getDb().ref(`events/${activeEventId}/activeGameId`).on('value', snapshot => onGameActivationChange(snapshot.val(), activeEventId));
+	async function onAuthStateChanged(user, activeEventId) {
+		if (!user) {
+			handleUnauthenticatedUser(activeEventId);
 		} else {
-			runSubscribedCallbacks('onPlayerUnauthenticated');
+			const playerInfo = await playerService.getCurrentPlayerInfo(user.uid);
+			if (playerInfo) {
+				dbService.getDb().ref(`events/${activeEventId}/activeGameId`).on('value', snapshot => onGameActivationChange(snapshot.val(), activeEventId));
+			} else {
+				handleUnauthenticatedUser(activeEventId);
+			}
 		}
+	}
+
+	async function handleUnauthenticatedUser(activeEventId) {
+		const eventData = await dbService.getEventById(activeEventId);
+		runSubscribedCallbacks('onPlayerUnauthenticated', eventData);
 	}
 
 	async function onGameActivationChange(gameId, activeEventId) {
 		if (gameId) {
-			const gameVals = await dbService.getActiveGameData(gameId);
-			runSubscribedCallbacks('onGameStart', gameVals);
+			const responses = await Promise.all([
+				dbService.getActiveGameData(gameId),
+				dbService.getEventById(activeEventId)
+			]);
+			const gameVals = responses[0];
+			const eventVals = responses[1];
+			runSubscribedCallbacks('onGameStart', eventVals);
 			dbService.getDb().ref(`games/${gameId}/activeQuestionId`).on('value', snapshot => onQuestionActivationChange(snapshot.val(), gameVals, gameId));
 			dbService.getDb().ref(`games/${gameId}/showQuestionResults`).on('value', snapshot => onQuestionResultsChange(snapshot.val(), gameId));
-			dbService.getDb().ref(`games/${gameId}/showGameResults`).on('value', snapshot => onShowGameResultsChange(snapshot.val()));
-			dbService.getDb().ref(`games/${gameId}/showGameOver`).on('value', snapshot => onShowGameOverChange(snapshot.val()));
+			dbService.getDb().ref(`games/${gameId}/showGameResults`).on('value', snapshot => onShowGameResultsChange(snapshot.val(), eventVals));
+			dbService.getDb().ref(`games/${gameId}/showGameOver`).on('value', snapshot => onShowGameOverChange(snapshot.val(), eventVals));
 		} else {
-			runSubscribedCallbacks('onGameCountdown');
+			const eventVals = await dbService.getEventById(activeEventId);
+			runSubscribedCallbacks('onGameCountdown', eventVals);
 		}
 	}
 
@@ -65,39 +88,45 @@ const eventsService = function() {
 
 	async function onQuestionResultsChange(questionId, gameId) {
 		if (questionId !== false) {
-			const questionResults = await dbService.getQuestionResults(gameId, questionId);
+			const uid = playerService.getAuth().currentUser.uid;
+			const questionResults = await dbService.getQuestionResults(gameId, questionId, uid);
 			runSubscribedCallbacks('onQuestionResults', questionResults);
 		}
 	}
 
-	async function onShowGameResultsChange(shouldShowGameResults) {
+	async function onShowGameResultsChange(shouldShowGameResults, eventVals) {
 		if (shouldShowGameResults) {
 			const gameScore = await dbService.getPlayerScore(playerService.getAuth().currentUser.uid);
-			runSubscribedCallbacks('onPostgameResults', gameScore);
+			runSubscribedCallbacks('onPostgameResults', {gameScore, showLeaderboard: true, eventVals});
 		}
 	}
 
-	function onShowGameOverChange(shouldShowGameResults) {
+	async function onShowGameOverChange(shouldShowGameResults, eventVals) {
 		if (shouldShowGameResults) {
-			runSubscribedCallbacks('onGameEnd');
+			const gameScore = await dbService.getPlayerScore(playerService.getAuth().currentUser.uid);
+			runSubscribedCallbacks('onPostgameResults', {gameScore, showLeaderboard: false, eventVals});
+		}
+	}
+
+	function onDbConnectionStateChange(isConnected) {
+		if (initialAppLoad === true) {
+			initialAppLoad = false;
+		} else if (initialDbConnect === true) {
+			initialDbConnect = false;
+		} else {
+			if (isConnected === true) {
+				runSubscribedCallbacks('onDatabaseReconnect');
+			} else {
+				onErrorStateChanged(true);
+			}
 		}
 	}
 
 	function onErrorStateChanged(isError = false) {
-		if (initialAppConnect === true) {
-			initialAppConnect = false;
-		} else {
-			appHasError = isError;
-			if (appHasError === true) {
-				runSubscribedCallbacks('onError');
-			}
-			// else {
-			// 	runSubscribedCallbacks('onErrorResolved', {
-			// 		message: 'Error resolved, back to normal shortly...'
-			// 	});
-			// }
-		}
-		
+		appHasError = isError;
+		if (appHasError === true) {
+			runSubscribedCallbacks('onError');
+		}	
 	}
 
 	function onResetAppChanged(isReset) {
@@ -126,7 +155,7 @@ const eventsService = function() {
 	function runSubscribedCallbacks(name, response) {
 		const subscribedCallBacks = callbacks.filter(callback => callback.name === name);
 		subscribedCallBacks.forEach(callback => {
-			if (appHasError === false || callback.name === 'onError') {
+			if (appHasError === false || callback.name === 'onError' || callback.name === 'onDatabaseReconnect') {
 				callback.fn(response);
 			}
 		});

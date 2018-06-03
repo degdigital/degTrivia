@@ -5,8 +5,71 @@ exports[`pregameCountdown renders countdown if next game starts exactly 15 minut
   
             
   <div
-    class="countdown-container"
-  />
+    class="pregame"
+  >
+    
+                
+            
+    <div
+      class="next-game"
+    >
+      
+                
+      <div
+        class="next-game__primary"
+      >
+        
+                    
+        <img
+          alt="Clock"
+          class="next-game__clock-image"
+          src="/images/clock.svg"
+        />
+        
+                    
+        <h1
+          class="next-game__title"
+        >
+          
+                        
+          <div
+            class="next-game__title-intro"
+          >
+            Next Game
+            <br />
+            Begins In
+          </div>
+          
+                        
+          <div
+            class="countdown next-game__time"
+            data-countdown=""
+          />
+          
+                    
+        </h1>
+        
+                    
+        <div
+          class="event-hashtag next-game__event-hashtag"
+        >
+          #CNXTRIVIA
+        </div>
+        
+                
+      </div>
+      
+                
+      <p
+        class="next-game__message countdown-rotating-copy"
+      />
+      
+            
+    </div>
+    
+        
+            
+  </div>
   
         
 </div>
@@ -17,8 +80,71 @@ exports[`pregameCountdown renders countdown if next game starts less than 15 min
   
             
   <div
-    class="countdown-container"
-  />
+    class="pregame"
+  >
+    
+                
+            
+    <div
+      class="next-game"
+    >
+      
+                
+      <div
+        class="next-game__primary"
+      >
+        
+                    
+        <img
+          alt="Clock"
+          class="next-game__clock-image"
+          src="/images/clock.svg"
+        />
+        
+                    
+        <h1
+          class="next-game__title"
+        >
+          
+                        
+          <div
+            class="next-game__title-intro"
+          >
+            Next Game
+            <br />
+            Begins In
+          </div>
+          
+                        
+          <div
+            class="countdown next-game__time"
+            data-countdown=""
+          />
+          
+                    
+        </h1>
+        
+                    
+        <div
+          class="event-hashtag next-game__event-hashtag"
+        >
+          #CNXTRIVIA
+        </div>
+        
+                
+      </div>
+      
+                
+      <p
+        class="next-game__message countdown-rotating-copy"
+      />
+      
+            
+    </div>
+    
+        
+            
+  </div>
   
         
 </div>
@@ -26,43 +152,249 @@ exports[`pregameCountdown renders countdown if next game starts less than 15 min
 
 exports[`pregameCountdown renders game ready message after countdown completes: game ready message 1`] = `
 <div>
-  <p>
-    The next game will be starting momentarily.
-  </p>
+  
+            
+  <div
+    class="pregame"
+  >
+    
+                
+            
+    <div
+      class="next-game"
+    >
+      
+                
+      <div
+        class="next-game__primary"
+      >
+        
+                    
+        <img
+          alt="Clock"
+          class="next-game__clock-image"
+          src="/images/clock.svg"
+        />
+        
+                    
+        <h1
+          class="next-game__title"
+        >
+          
+                        
+          <div
+            class="next-game__title-intro"
+          >
+            Next Game
+            <br />
+            Begins In
+          </div>
+          
+                        
+          <div
+            class="countdown next-game__time"
+            data-countdown=""
+          />
+          
+                    
+        </h1>
+        
+                    
+        <div
+          class="event-hashtag next-game__event-hashtag"
+        >
+          #CNXTRIVIA
+        </div>
+        
+                
+      </div>
+      
+                
+      <p
+        class="next-game__message countdown-rotating-copy"
+      />
+      
+            
+    </div>
+    
+        
+            
+  </div>
+  
+        
 </div>
 `;
 
 exports[`pregameCountdown renders game ready message if next game start time has passed: game ready message 1`] = `
 <div>
-  <p>
-    The next game will be starting momentarily.
-  </p>
+  
+            
+  <div
+    class="pregame"
+  >
+    
+                
+            
+    <div
+      class="next-game"
+    >
+      
+                
+      <div
+        class="next-game__primary"
+      >
+        
+                    
+        <img
+          alt="Clock"
+          class="next-game__clock-image"
+          src="/images/clock.svg"
+        />
+        
+                    
+        <h1
+          class="next-game__title"
+        >
+          
+                        
+          <div
+            class="next-game__title-intro"
+          >
+            Next Game
+          </div>
+          
+                        
+          <time
+            class="next-game__time"
+            datetime="1980-09-22T04:59:00.000Z"
+          >
+            
+                11:59pm
+            
+          </time>
+          
+                    
+        </h1>
+        
+                    
+        <div
+          class="event-hashtag next-game__event-hashtag"
+        >
+          #CNXTRIVIA
+        </div>
+        
+                
+      </div>
+      
+                
+      <p
+        class="next-game__message countdown-rotating-copy"
+      />
+      
+            
+    </div>
+    
+        
+            
+  </div>
+  
+        
 </div>
 `;
 
 exports[`pregameCountdown renders game time message if next game starts more than 15 minutes from now: game time message 1`] = `
 <div>
-  <div>
+  
+            
+  <div
+    class="pregame"
+  >
     
-                Next game starts at 
                 
-    <time
-      datetime="1980-09-22T05:20:00.000Z"
+            
+    <div
+      class="next-game"
     >
       
-                    12:20am 
                 
-    </time>
+      <div
+        class="next-game__primary"
+      >
+        
+                    
+        <img
+          alt="Clock"
+          class="next-game__clock-image"
+          src="/images/clock.svg"
+        />
+        
+                    
+        <h1
+          class="next-game__title"
+        >
+          
+                        
+          <div
+            class="next-game__title-intro"
+          >
+            Next Game
+          </div>
+          
+                        
+          <time
+            class="next-game__time"
+            datetime="1980-09-22T05:20:00.000Z"
+          >
+            
+                12:20am
+            
+          </time>
+          
+                    
+        </h1>
+        
+                    
+        <div
+          class="event-hashtag next-game__event-hashtag"
+        >
+          #CNXTRIVIA
+        </div>
+        
+                
+      </div>
+      
+                
+      <p
+        class="next-game__message countdown-rotating-copy"
+      />
+      
+            
+    </div>
     
+        
             
   </div>
+  
+        
 </div>
 `;
 
 exports[`pregameCountdown renders no next game message if there is not a next game: no next game message 1`] = `
 <div>
-  <p>
-    No other games are currently scheduled.
-  </p>
+  
+            
+  <div
+    class="pregame"
+  >
+    
+                
+    <p>
+      No other games are currently scheduled.
+    </p>
+    
+            
+  </div>
+  
+        
 </div>
 `;

@@ -5,6 +5,7 @@ import eventsService from './services/eventsService';
 
 jest.mock('./utils/router');
 jest.mock('./services/eventsService');
+jest.mock('classnames');
 
 let appConfig;
 
@@ -46,10 +47,11 @@ describe('app should route to', () => {
     });
 
     test('pregame countdown page when there is an active event', () => {
-		eventsService.__fireEvent('onGameCountdown');
+        const dataObj = {}; 
+        eventsService.__fireEvent('onGameCountdown', dataObj);
 
         expect(routeSpy).toHaveBeenCalledTimes(1);
-        expect(routeSpy).toHaveBeenCalledWith('pregameCountdown');
+        expect(routeSpy).toHaveBeenCalledWith('pregameCountdown', dataObj);
     });
 
     test('game wait page when a game starts', () => {
@@ -82,13 +84,6 @@ describe('app should route to', () => {
 
         expect(routeSpy).toHaveBeenCalledTimes(1);
         expect(routeSpy).toHaveBeenCalledWith('postgameResults', dataObj);
-    });
-
-    test('pregame countdown page when a game ends', () => {
-		eventsService.__fireEvent('onGameEnd');
-
-        expect(routeSpy).toHaveBeenCalledTimes(1);
-        expect(routeSpy).toHaveBeenCalledWith('pregameCountdown');
     });
 
     test('error page when an error occurs', () => {

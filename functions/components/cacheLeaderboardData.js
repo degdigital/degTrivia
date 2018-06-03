@@ -11,7 +11,7 @@ function formatBoard(idRef, leaderboardRef, type) {
     return database.ref(idRef).once('value').then(snapshot => {
         const id = snapshot.val();
         if (id) {
-            return database.ref(`${leaderboardRef}/${id}`).orderByValue().limitToLast(10).once('value').then(leaderboardSnap => {
+            return database.ref(`${leaderboardRef}/${id}`).orderByChild('indexVal').limitToLast(10).once('value').then(leaderboardSnap => {
                 const leaderboardData = leaderboardSnap.val();
                 return {
                     type,
@@ -29,24 +29,26 @@ function formatBoard(idRef, leaderboardRef, type) {
  * @returns {Object} an object where the keys are player ids and the values are the display name for the player
  */
 function getPlayerNameIdMap(playerIds) {
-    return database.ref('players').once('value').then(snap => {
-        const players = snap.val();
-        if (players) {
-            const retVal = {};
-            playerIds.forEach(id => {
-                if (players[id]) {
-                    retVal[id] = `${players[id].firstName} ${players[id].lastName}`;
-                } else {
-                    retVal[id] = 'Anonymous Player';
-                }
-            })
-            return retVal;
-        }
-        return {};
-    })
+    if (playerIds && playerIds.length) {
+        return database.ref('players').once('value').then(snap => {
+            const players = snap.val();
+            if (players) {
+                const retVal = {};
+                playerIds.forEach(id => {
+                    if (players[id]) {
+                        retVal[id] = `${players[id].firstName} ${players[id].lastName[0].toUpperCase()}.`;
+                    } else {
+                        retVal[id] = 'Anonymous Player';
+                    }
+                })
+                return retVal;
+            }
+            return {};
+        })
+    }
+    return Promise.resolve({});
 }
 
-// sorts leaderboard from highest to lowest scores
 function sortLeaderboard(currentLeaderboardData) {
     if (currentLeaderboardData) {
         const data = [...currentLeaderboardData];
@@ -57,7 +59,9 @@ function sortLeaderboard(currentLeaderboardData) {
             if (person2.score > person1.score) {
                 return 1;
             }
-            return 0;
+            if (person1.score === person2.score) {
+                return person1.timeElapsed < person2.timeElapsed ? -1 : 1;
+            }
         })
         return data;
     }
@@ -70,10 +74,10 @@ function writeCurrentLeaderboard(leaderboardData, idToNameMap) {
         const currentLeaderboardData = Object.keys(leaderboardData.leaders).map(id => {
             return {
                 name: idToNameMap[id],
-                score: leaderboardData.leaders[id]
+                score: leaderboardData.leaders[id].score,
+                timeElapsed: leaderboardData.leaders[id].timeElapsed
             }
         })
-    
         return database.ref(`leaderboardCurrent/${leaderboardData.type}`).set(sortLeaderboard(currentLeaderboardData));
     }
     return Promise.resolve();
@@ -109,5 +113,5 @@ module.exports = function(db, event, context) {
             })
         })
     }
-    return Promise.resolve().then(() => setShowResultsFlag(event.after));
+    return Promise.resolve();
 }

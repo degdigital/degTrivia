@@ -1,41 +1,50 @@
-// Config
-import {getAppConfig} from '../config/appConfig.js';
-
 // Firebase
 import firebase from '@firebase/app';
 import firebaseConfig from '../config/firebaseConfig.js';
 
 // Services
 import dbService from '../services/dbService.js';
+import playerService from '../services/playerService.js';
 
 // Screens
-import manager from './screens/manager.js';
+import login from '../admin/screens/login.js';
+import screenRotator from './components/screenRotator.js';
 
 const leaderboardTV = function(el) {
 
 	let db;
 	let loginInst;
 
-	function setUpListeners(managerInst) {
-		dbService.getDb().ref(`leaderboardCurrent`).on('value', snapshot => managerInst.render(snapshot.val()));
+	function setUpListeners() {
+		playerService.getAuth().onAuthStateChanged(onAuthStateChange);
+	}
+
+	async function onAuthStateChange(user) {
+		if (user) {
+			const isAdmin = await db.ref(`admins/${user.uid}`).once('value').then(snapshot => snapshot.exists() && snapshot.val() === true);
+			if (isAdmin === true) {
+				screenRotator(el);
+			} else {
+				loginInst.renderForm();
+			}
+		} else {
+			loginInst.renderForm();
+		}
 	}
 
 	function init() {
 		firebase.initializeApp(firebaseConfig);
 		dbService.init();
+		playerService.init();
 
 		db = dbService.getDb();
-		const managerInst = manager(el);
-		managerInst.render();
+		loginInst = login(el);
 		
-		setUpListeners(managerInst);
+		setUpListeners();
 	}
 
 	init();
 };
 
-const appConfig = getAppConfig();
-
-if(appConfig.element) {
-	leaderboardTV(appConfig.element);
-}
+const rootEl = document.querySelector('.main');
+leaderboardTV(rootEl);

@@ -6,6 +6,10 @@ import dbService from '../../services/dbService.js';
 
 const manager = function(el) {
 
+    function getTimeElapsed(ms) {
+        return Math.round((ms / 1000), 2);
+    }
+
     function renderTableBody(data) {
         let returnMarkup = '';
         if (data) {
@@ -14,6 +18,7 @@ const manager = function(el) {
                      <td class="table__data-cell">${index + 1}</td>
                      <td class="table__data-cell">${leader.name}</td>
                      <td class="table__data-cell">${leader.score}</td>
+                     <td class="table__data-cell">${getTimeElapsed(leader.timeElapsed)}s</td>
                 </tr>`
             )).join('');
         } else {
@@ -34,6 +39,12 @@ const manager = function(el) {
        return `
        <table class="table">
             <caption class="table__caption">${title}</caption>
+            <colgroup>
+                <col class="table__col table__col--small"></col>
+                <col class="table__col table__col--md"></col>
+                <col class="table__col table__col--small"></col>
+                <col class="table__col"></col>
+            </colgroup>
             <tbody class="table__table-body">
                 ${renderTableBody(data)}
             </tbody>
@@ -42,14 +53,9 @@ const manager = function(el) {
     }
 
 
-	async function render(dbData) {
-        let leaderboardData = dbData;
-        if (!dbData) {
-            leaderboardData = await dbService.getLeaderboardData();
-        }
+	async function render(leaderboardData) {
         replaceContent(el, `
-        <div class="page-width page-width--wide">
-			<h1 class="page-title page-title--centered">DEG Trivia Leaderboard</h1>
+			<h1 class="page-title page-title--centered">Trivia Leaderboard</h1>
             <div class="columns columns--two">
                 <div class="column">
                     ${renderLeaderboard(leaderboardData.game, 'Last Game')}
@@ -58,7 +64,6 @@ const manager = function(el) {
                     ${renderLeaderboard(leaderboardData.event, 'Event')}
                 </div>
             </div>
-        </div>
         `);
         return Promise.resolve();
 	}

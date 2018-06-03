@@ -8,9 +8,14 @@
     margin-bottom: 1.5em;
 }
 
+
 @media screen and (min-width: 48em) {
     .columns {
         flex-direction: row;
+    }
+
+    .column--centered {
+        text-align: center;
     }
 
     .columns--two {

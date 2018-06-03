@@ -33,11 +33,15 @@ h6 {
 }
 
 .page-title--small {
-	font-size: 1.5em;
+	font-size: 1.0625em;
 	font-weight: 300;
-	margin-bottom: .75em;
+	margin-bottom: 1em;
 }
 
 .page-title--centered {
 	text-align: center;
+}
+
+.subheading {
+	font-weight: 300;
 }

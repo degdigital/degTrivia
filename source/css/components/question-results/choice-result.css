@@ -12,14 +12,18 @@
 	border-radius: var(--border-radius);
 	background-color: color(var(--color-teal) a(25%));
 	color: var(--color-black);
-	text-transform: uppercase;
+	text-transform: none;
 	font-weight: bold;
 	position: relative;
 	overflow: hidden;
 
 	& + .choice-result {
-		margin-top: 1em;
+		margin-top: 1.5em;
 	}
+}
+
+.choice-result--correct, .choice-result--incorrect {
+	padding: .5em 1em;
 }
 
 .choice-result--correct {

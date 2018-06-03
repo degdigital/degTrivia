@@ -1,7 +1,6 @@
 // Utils
 import router from './utils/router.js';
-import {getUrlSegment} from './utils/urlUtils.js';
-import audioPlayer from './utils/audioPlayer.js';
+import {getUrlSegment} from './utils/urlUtils';
 import routes from './routes.js';
 
 // Services
@@ -13,43 +12,57 @@ import playerService from './services/playerService.js';
 import firebase from '@firebase/app';
 import firebaseConfig from './config/firebaseConfig.js';
 
+// Components
+import siteFrame from './components/siteFrame.js';
+
+let siteFrameInst;
+
 function init(appConfig) {
 	firebase.initializeApp(firebaseConfig);
 	dbService.init();
 	playerService.init();
+
+	siteFrameInst = render();
 	
-	initGame(appConfig);
+	routes.init(siteFrameInst.getMainEl(), appConfig);
+	initGame();
 }
 
-function initGame(appConfig) {
-	routes.init(appConfig);
+function initGame() {	
 
-	eventsService.subscribe('onPlayerUnauthenticated', () => router.route('registration'));
+	eventsService.subscribe('onActiveEventChanged', onActiveEventChanged);
+	eventsService.subscribe('onPlayerUnauthenticated', (eventData) => router.route('registration', eventData));
 	eventsService.subscribe('onNoActiveEvent', infoObj => router.route('info', infoObj));
-	eventsService.subscribe('onGameCountdown', () => {
+	eventsService.subscribe('onGameCountdown', eventData => {
 		audioPlayer.play('countdown');
-		router.route('pregameCountdown')
+		router.route('pregameCountdown', eventData)
 	});
-	eventsService.subscribe('onGameStart', gameData => router.route('gameWaitBeforeQuestions', gameData));
+	eventsService.subscribe('onGameStart', eventData => router.route('gameWaitBeforeQuestions', eventData));
 	eventsService.subscribe('onQuestionAsked', questionData => {
 		audioPlayer.stopAll();
 		router.route('gameQuestion', questionData);
 	});
 	eventsService.subscribe('onQuestionResults', questionData => router.route('gameQuestionResults', questionData));
-	eventsService.subscribe('onPostgameResults', gameScore => router.route('postgameResults', gameScore));
-	// TODO: figure out logic for showing pregameCountdown after game.
-	// right now this was bypassing the postgameResults screen
-	// eventsService.subscribe('onGameEnd', () => router.route('pregameCountdown'));
+	eventsService.subscribe('onPostgameResults', props => router.route('postgameResults', props));
 	eventsService.subscribe('onError', () => router.route('error'));
-	// eventsService.subscribe('onErrorResolved', infoObj => router.route('info', infoObj));
-	eventsService.subscribe('onResetApp', () => location.reload());
+	eventsService.subscribe('onDatabaseReconnect', () => location.reload(true));
+	eventsService.subscribe('onResetApp', () => location.reload(true));
 	eventsService.init(); // Must be run after all eventsService.subscribe() calls
 }
 
+function render() {
+	const rootEl = document.getElementById('app');
+	return siteFrame(rootEl);
+}
+
+function onActiveEventChanged(eventData) {
+	siteFrameInst.update({
+		eventHashtag: eventData ? eventData.hashtag : null
+	});	
+}
+
 function app(appConfig) {
-	if (appConfig.element) {
-		init(appConfig);
-	}
+	init(appConfig);
 }
 
 export default app;

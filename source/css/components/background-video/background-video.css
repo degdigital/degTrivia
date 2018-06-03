@@ -1,0 +1,15 @@
+.background__video {
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+@media screen and (min-width: 21rem) {
+    .background__video {
+        left: auto;
+        min-width: 400px;
+        position: fixed;
+        top: auto;
+        transform: translate(-6%, -5%);
+    }
+}

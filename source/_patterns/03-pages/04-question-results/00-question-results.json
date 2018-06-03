@@ -4,14 +4,16 @@
             "choice": {
                 "text": "Choice 1",
                 "percent": 10,
-                "meterScale": 0.1
+                "meterScale": 0.1,
+                "animDuration": 0.2
             }
         },
         {
             "choice": {
                 "text": "Choice 2",
                 "percent": 25,
-                "meterScale": 0.25
+                "meterScale": 0.25,
+                "animDuration": 0.5
             }
         },
         {
@@ -19,6 +21,7 @@
                 "text": "Choice 3",
                 "percent": 50,
                 "meterScale": 0.5,
+                "animDuration": 1,
                 "isCorrect": true
             }
         },
@@ -26,6 +29,7 @@
             "choice": {
                 "text": "Choice 4",
                 "percent": 15,
+                "animDuration": 0.3,
                 "meterScale": 0.15
             }
         }

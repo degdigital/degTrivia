@@ -27,7 +27,7 @@
 				"responses": {
 					"$responseId": {
 						"$playerId": {
-							".validate": "newData.isBoolean() && newData.val() === true"
+							".validate": "newData.isNumber() && newData.val() <= 999999999999999"
 						}
 					}
 				}
@@ -47,21 +47,18 @@
 		"games": {
 			".indexOn": "event",
 			".read": "auth !== null",
+      		".write":  "root.child('admins/'+auth.uid).exists()",
 			"$gameId": {
 				"activeQuestionId": {
-					".write": "root.child('admins/'+auth.uid).exists()",
 					".validate": "newData.isBoolean() || (newData.isString() && newData.val().length > 0 && newData.val().length === 20)"
 				},
 				"event": {
-					".write": "root.child('admins/'+auth.uid).exists()",
 					".validate": "newData.isString() && newData.val().length > 0 && newData.val().length === 20"
 				},
 				"name": {
-					".write": "root.child('admins/'+auth.uid).exists()",
 					".validate": "newData.isString() && newData.val().length > 0 && newData.val().length <= 100"
 				},
 				"questionExpirationTime": {
-					".write": "root.child('admins/'+auth.uid).exists()",
 					".validate": "newData.isNumber() && newData.val() > now && newData.val() <= 9999999999999"
 				},
 				"questions": {
@@ -69,43 +66,34 @@
 						"choices": {
 							"$choiceId": {
 								"chosenCount": {
-									".write": "root.child('admins/'+auth.uid).exists()",
-									".validate": "newData.isNumber() && newData.val() > 0"
+									".validate": "newData.isNumber() && newData.val() >= 0"
 								},
 								"text": {
-									".write": "root.child('admins/'+auth.uid).exists()",
 									".validate": "newData.isString() && newData.val().length > 0 && newData.val().length <= 200"
 								}
 							}
 						},
 						"correctChoice": {
-							".write": "root.child('admins/'+auth.uid).exists()",
 							".validate": "newData.isString() && newData.val().length > 0 && newData.val().length === 20"
 						},
 						"order": {
-							".write": "root.child('admins/'+auth.uid).exists()",
 							".validate": "newData.isNumber() && newData.val() < 100"
 						},
 						"question": {
-							".write": "root.child('admins/'+auth.uid).exists()",
 							".validate": "newData.isString() && newData.val().length > 0 && newData.val().length <= 300"
 						}
 					}
 				},
 				"showGameOver": {
-					".write": "root.child('admins/'+auth.uid).exists()",
 					".validate": "newData.isBoolean() || (newData.isString() && newData.val().length > 0 && newData.val().length === 20)"
 				},
 				"showGameResults": {
-					".write": "root.child('admins/'+auth.uid).exists()",
 					".validate": "newData.isBoolean() || (newData.isString() && newData.val().length > 0 && newData.val().length === 20)"
 				},
 				"showQuestionResults": {
-					".write": "root.child('admins/'+auth.uid).exists()",
 					".validate": "newData.isBoolean() || (newData.isString() && newData.val().length > 0 && newData.val().length === 20)"
 				},
 				"startTime": {
-					".write": "root.child('admins/'+auth.uid).exists()",
 					".validate": "newData.isNumber() && newData.val() > now && newData.val() <= 9999999999999"
 				}
 			}
@@ -130,10 +118,10 @@
 			".read": "auth !== null",
 			".write": "auth !== null",
 			"$eventId": {
-				".indexOn": ".value",
+				".indexOn": "indexVal",
 				".validate": "newData.isBoolean() || (newData.isString() && newData.val().length > 0 && newData.val().length === 20)",
 				"$playerId": {
-					".validate": "newData.isBoolean()"
+					".validate": "newData.hasChildren(['indexVal', 'score', 'timeElapsed', 'timeRemaining'])"
 				}
 			}
 			
@@ -142,10 +130,10 @@
 			".read": "auth !== null",
 			".write": "auth !== null",
 			"$gameId": {
-				".indexOn": ".value",
+				".indexOn": "indexVal",
 				".validate": "newData.isBoolean() || (newData.isString() && newData.val().length > 0 && newData.val().length === 20)",
 				"$playerId": {
-					".validate": "newData.isBoolean()"
+					".validate": "newData.hasChildren(['indexVal', 'score', 'timeElapsed', 'timeRemaining'])"
 				}
 			}
 			
@@ -155,17 +143,17 @@
 			".read": "auth !== null",
 			".write": "auth !== null",
 			"$playerId": {
-				".validate": "newData.hasChildren(['active', 'companyName', 'email', 'eventAlias', 'firstName', 'lastName', 'phoneNumber'])",
+				".validate": "newData.hasChildren(['active', 'companyName', 'email', 'event', 'firstName', 'lastName', 'phoneNumber'])",
 				"active": {
 					".validate": "newData.isBoolean()"
 				},
 				"companyName": {
-					".validate": "newData.isString() && newData.val().length > 0 && newData.val().length === 50"
+					".validate": "newData.isString() && newData.val().length > 0 && newData.val().length <= 50"
 				},
 				"email": {
 					".validate": "newData.isString() && newData.val().matches(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}$/i) && newData.val().length <= 100"
 				},
-				"eventAlias": {
+				"event": {
 					".validate": "newData.isString() && newData.val().length > 0 && newData.val().length === 20"
 				},
 				"firstName": {
@@ -173,6 +161,9 @@
 				},
 				"lastName": {
 					".validate": "newData.isString() && newData.val().length > 0 && newData.val().length <= 50"
+				},
+				"phoneNumber": {
+					".validate": "newData.isString() && newData.val().length >= 10 && newData.val().length <= 14"
 				},
 				"$other": {
 					".validate": false

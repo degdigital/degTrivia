@@ -13,3 +13,33 @@ p {
 .text--centered {
 	text-align: center;
 }
+
+.text--emphasis {
+	color: var(--color-green);
+	font-weight: bold;
+}
+
+.event-hashtag {
+	color: var(--color-teal-light-20);
+	font-weight: 500;
+	font-size: 1.0625em;
+	letter-spacing: var(--letter-spacing-wide);
+}
+
+.disclosure {
+	color: var(--color-gray-light-50);
+	font-size: 0.75em;
+	font-style: italic;
+	margin-top: 1.5em;
+
+	a {
+		color: var(--color-gray-light-50);
+		text-decoration: underline;
+
+		&:hover {
+			color: var(--color-gray-light-30);
+		}
+
+	}
+
+}

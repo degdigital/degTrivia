@@ -8,16 +8,10 @@ async function endGame(gameId) {
 	if(gameData) {
 		const { event: eventId} = gameData;
 
-		const eventPromise = db.ref(`events/${eventId}`).update({
-			activeGameId: false
-		});
-
-		const gamePromise = db.ref(`games/${gameId}`).update({
+		return db.ref(`games/${gameId}`).update({
 			showGameOver: true,
 			showQuestionResults: false
 		});
-
-		return Promise.all([eventPromise, gamePromise]);
 	}
 	
 	return Promise.reject(`Error: no game found for ID ${gameId}`);

@@ -6,8 +6,18 @@
 	font-size: 1.25em;
 	margin-bottom: 1.25em;
 	text-align: left;
+	text-transform: none;
 }
 
 .question__countdown {
 	margin-bottom: .375em;
+}
+ 
+@media (max-height: 37.5em) {
+	.question {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		flex-grow: 1;
+	}
 }

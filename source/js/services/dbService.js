@@ -5,11 +5,6 @@ import '@firebase/functions';
 const dbService = function() {
 
 	let db = null;
-	const nodeNames = {
-		events: 'events',
-		games: 'games',
-		pendingPlayers: 'pendingPlayers'
-	};
 	const defaultNodesToGet = [
 		'events',
 		'games'
@@ -36,15 +31,14 @@ const dbService = function() {
 		return db.ref('activeEventId').once('value').then(snapshot => snapshot.val());
 	}
 
-	function getEvent(eventAlias) {
-		return db.ref('events').orderByChild('alias').equalTo(eventAlias).once('value').then(snapshot => snapshot.val());
+	function getEventById(id) {
+		return db.ref(`events/${id}`)
+			.once('value')
+			.then(snapshot => snapshot.val());
 	}
 
-	function createPendingPlayer(playerVals, eventKey, userId) {
-		const pendingPlayerKey = db.ref(nodeNames.pendingPlayers).push().key;
-		
-		return db.ref(`/${nodeNames.pendingPlayers}/${pendingPlayerKey}`).update(formattedPlayerVals)
-			.then(() => pendingPlayerKey);
+	function getEvent(eventAlias) {
+		return db.ref('events').orderByChild('alias').equalTo(eventAlias.toLowerCase()).once('value').then(snapshot => snapshot.val());
 	}
 
 	async function getNextGameTime() {
@@ -64,20 +58,37 @@ const dbService = function() {
 		return Promise.resolve(nextGameTime);
 	}
 
-	async function getQuestionResults(gameId, questionId) {
-		const questionResults = await db.ref(`games/${gameId}/questions/${questionId}`).once('value').then(snapshot => snapshot.val());
+	async function getQuestionResults(gameId, questionId, uid) {
+		const promises = await Promise.all([
+			db.ref(`games/${gameId}/questions/${questionId}`).once('value').then(snapshot => snapshot.val()),
+			db.ref(`answers/${questionId}/responses`).once('value').then(snapshot => snapshot.val())
+		]);
+		const questionResults = promises[0];
+		const answers = promises[1];
 		questionResults.id = questionId;
 		return {
-			questionData: questionResults
+			questionData: questionResults,
+			userChoiceId: getUserChoiceId(answers, uid)
 		};
 	}
 
-	function submitAnswer(questionId, choiceId, playerId) {
-		if (questionId && choiceId && playerId){
-			return db.ref(`answers/${questionId}/responses/${choiceId}`).update({
-				[playerId]: true
-			});
+	function getUserChoiceId(answers, uid) {
+		if (!answers) {
+			return null;
 		}
+		const userChoiceId = Object.keys(answers).find(key => {
+			return Object.keys(answers[key]).includes(uid);
+		});
+		return userChoiceId || null; 
+	}
+
+	function submitAnswer(questionId, choiceId, playerId) {
+		const submitA = firebase.functions().httpsCallable('submitAnswer');
+		submitA({
+			questionId,
+			choiceId,
+			playerId
+		});
 	}
 
 	function setActiveQuestion(gameId, questionId) {
@@ -120,7 +131,7 @@ const dbService = function() {
 
 	async function getPlayerScore(playerId) {
 		const recentGameId = await getMostRecentGameId();
-		return db.ref(`playerResultsGame/${recentGameId}/${playerId}`).once('value').then(snapshot => snapshot.val());
+		return db.ref(`playerResultsGame/${recentGameId}/${playerId}`).once('value').then(snapshot => (snapshot.val() && snapshot.val().score) || 0);
 	}
 
 	return {
@@ -129,6 +140,7 @@ const dbService = function() {
 		getInitialData,
 		getActiveEventId,
 		getEvent,
+		getEventById,
 		getNextGameTime,
 		submitAnswer,
 		setActiveQuestion,

@@ -1,52 +1,93 @@
 import {replaceContent} from '../utils/domUtils.js';
 import countdown from '../components/countdown.js';
 import dbService from '../services/dbService.js';
+import rotatingCopy from '../components/rotatingCopy.js';
 import { format as formatDate, isSameDay, differenceInMilliseconds } from 'date-fns';
 
 const countdownThreshold = 900000; //15 minutes in milliseconds
+const countdownDataAttr = 'data-countdown';
 
-const pregameCountdown = function({element}) {
+const pregameCountdown = function(element) {
     let countdownInst;
+    let rotatingCopyInst;
 
     function renderNoNextGameMessage() {
-        replaceContent(element, `<p>No other games are currently scheduled.</p>`);
+        return `
+            <div class="info-text">
+                <h1 class="page-title page-title--centered">Bad timing.</h1>
+                <p class="subheading text--centered">No other games are currently scheduled.</p>
+            </div>
+        `;
     }
 
-    function renderCountdown(nextGameTime) {
+    function renderCountdown() {
+        return `<div class="countdown next-game__time" ${countdownDataAttr}></div>`;
+    }
+
+    function renderNextGameTime(nextGameTime) {
+        const timeText = formatDate(nextGameTime, 'h:mma'); 
+        return `<time datetime="${nextGameTime.toISOString()}" class="next-game__time">
+                ${timeText}
+            </time>`;
+    }
+
+    function renderNextGameTimeIntro(showCountdown) {
+        let introHtml = 'Next Game';
+        if(showCountdown) {
+            introHtml += '<br />Begins In';
+        }
+        return introHtml;
+    }
+
+    function renderNextGame(nextGameTime, showCountdown, eventData) {
+        return `
+            <div class="next-game">
+                <div class="next-game__primary">
+                    <img src="/images/clock.svg" alt="Clock" class="next-game__clock-image" />
+                    <h1 class="next-game__title">
+                        <div class="next-game__title-intro">${renderNextGameTimeIntro(showCountdown)}</div>
+                        ${showCountdown ? renderCountdown() : renderNextGameTime(nextGameTime)}
+                    </h1>
+                    ${eventData.hashtag ? `<div class="event-hashtag next-game__event-hashtag">${eventData.hashtag}</div>` : ''}
+                </div>
+                <p class="next-game__message countdown-rotating-copy"></p>
+            </div>
+        `;
+    }
+
+    function startCountdown(countdownEl, nextGameTime) {
         const timeTilNextGame = differenceInMilliseconds(nextGameTime, new Date());
-        replaceContent(element, `
-            <div class="countdown-container"></div>
-        `);
-        const containerElement = document.querySelector('.countdown-container');
+       
         countdownInst = countdown({
-            containerElement, 
+            containerElement: countdownEl, 
             format: 'mm:ss',
             onComplete: onCountdownComplete
         });
         countdownInst.start(timeTilNextGame, 'milliseconds');
     }
 
-    function onCountdownComplete() {
-        renderGameReadyMessage();
-    }
-
-    function renderNextGameTimeMessage(nextGameTime) {
-        let timeText = formatDate(nextGameTime, 'h:mma'); 
-        if(!isSameDay(nextGameTime, new Date())) {
-            timeText = `${timeText} on ${formatDate(nextGameTime, 'dddd, MMMM do')}`;
+    function startRotatingCopy(activeEventId) {
+        if (!rotatingCopyInst) {
+            const el = element.querySelector('.countdown-rotating-copy');
+            if (el) {
+                rotatingCopyInst = rotatingCopy(el);
+            }
         }
-
-        replaceContent(element, 
-            `<div>
-                Next game starts at 
-                <time datetime="${nextGameTime.toISOString()}">
-                    ${timeText} 
-                </time>
-            </div>`);
+        if (rotatingCopyInst) {
+            rotatingCopyInst.start({
+                path: `events/${activeEventId}/pregameRotatingCopy`
+            });
+        }
     }
 
-    function renderGameReadyMessage() {
-        replaceContent(element, `<p>The next game will be starting momentarily.</p>`);
+    function stopRotatingCopy() {
+        if (rotatingCopyInst) {
+            rotatingCopyInst.teardown();
+        }
+    }
+
+    function onCountdownComplete() {
+        //Not sure if we still need to do anything here
     }
 
     function isGameTimeWithinCountdownThreshold(date) {
@@ -54,24 +95,34 @@ const pregameCountdown = function({element}) {
         return (difference <= countdownThreshold && difference >= 0); 
     }
 
-    function hasGameTimePassed(date) {
-        const difference = differenceInMilliseconds(date, new Date());
-        return difference < 0;
-    }
+	async function render(eventData) {
+        const promises = await Promise.all([
+            dbService.getNextGameTime(),
+            dbService.getActiveEventId()
+        ]);
+        const nextGameTime = promises[0];
+        const activeEventId = promises[1];
+        const showCountdown = nextGameTime ? 
+            isGameTimeWithinCountdownThreshold(nextGameTime) :
+            false;
 
-	async function render() {
-        const nextGameTime = await dbService.getNextGameTime();
-        if (nextGameTime) {
-            if(isGameTimeWithinCountdownThreshold(nextGameTime)) {
-                renderCountdown(nextGameTime);
-            } else if(hasGameTimePassed(nextGameTime)) {
-                renderGameReadyMessage();
-            } else {
-                renderNextGameTimeMessage(nextGameTime);
-            }
-        } else {
-            renderNoNextGameMessage();
-        }	
+        const contentHtml = nextGameTime ?
+            renderNextGame(nextGameTime, showCountdown, eventData) :
+            renderNoNextGameMessage()
+
+        const html = `
+            <div class="pregame">
+                ${contentHtml}
+            </div>
+        `;
+
+        replaceContent(element, html);
+
+        if(showCountdown) {
+            const countdownEl = element.querySelector(`[${countdownDataAttr}]`);
+            startCountdown(countdownEl, nextGameTime);
+        }
+        startRotatingCopy(activeEventId);
 	}
 
 	return {
@@ -80,6 +131,7 @@ const pregameCountdown = function({element}) {
             if (countdownInst) {
                 countdownInst.stop();
             }
+            stopRotatingCopy()
         }
 	};
 

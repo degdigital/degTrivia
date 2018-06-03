@@ -1,1 +1,5 @@
-{}
+{
+	"siteHeader": {
+        "showGameHashtag": true
+    }
+}

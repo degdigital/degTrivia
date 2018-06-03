@@ -1,70 +1,158 @@
 import {replaceContent} from '../utils/domUtils.js';
 import formMapper from '../utils/formMapper.js';
 import playerService from '../services/playerService.js';
+import label from '../components/forms/label.js';
+import textInput from '../components/forms/textInput.js';
+import button from '../components/forms/button.js';
+import formErrorMessage from '../components/forms/formErrorMessage.js';
+import fieldErrorMessages from '../components/forms/fieldErrorMessages.js';
 
-const registration = function({element}) {
+const registationFormAttr = 'data-registration-form';
+const formErrorMessageAttr = 'data-form-error-message';
 
-	const registrationFormClass = 'registrationForm';
-	const errorPlaceholderClass = 'error-placeholder';
-	let errorPlaceholderEl;
+const errorMessages = {
+    invalidField: 'Oh no, something\'s wrong! Please fix the invalid form field(s) below.'
+};
 
-	function bindEvents() {
-		element.addEventListener('submit', onFormSubmit);
-	}
+const defaultFormData = {
+    firstName: {value: ''},
+    lastName: {value: ''},
+    companyName: {value: ''},
+    email: {value: ''},
+    phoneNumber: {value: ''},
+    eventAlias: {value: ''}
+};
+let cachedEventData;
 
-	function render() {
-		replaceContent(element, `
-			<h1>Welcome to DEG Trivia!</h1>
-			<span class="${errorPlaceholderClass}"></span>
-			<form class="${registrationFormClass}">
-				<label for="firstName">First name</label><br>
-				<input type="text" id="firstName" name="firstName" autofocus required><br><br>
+const registration = function(element) {
 
-				<label for="lastName">Last name</label><br>
-				<input type="text" id="lastName" name="lastName" required><br><br>
+    function bindEvents() {
+        element.addEventListener('submit', onFormSubmit);
+    }
 
-				<label for="email">Email address</label><br>
-				<input type="email" id="email" name="email" required><br><br>
+    function render(formData, errorMessage = null, eventData) {
+        replaceContent(element, `
+            <h1 class="page-title page-title--small">${eventData.registrationCopy.title}</h1>
+            <form ${registationFormAttr}>
+                ${formErrorMessage({errorMessage, dataAttr: formErrorMessageAttr})}
+                <div class="field">
+                    ${label({content: 'First Name', inputId: 'firstName'})}
+                    ${textInput({id: 'firstName', value: formData.firstName.value, isRequired: true, isInvalid: formData.firstName.isInvalid, additionalAttrs:{autofocus: true}})}
+                    ${fieldErrorMessages(formData.firstName.errorMessages)}
+                </div>
+                <div class="field">
+                    ${label({content: 'Last Name', inputId: 'lastName'})}
+                    ${textInput({id: 'lastName', value: formData.lastName.value, isRequired: true, isInvalid: formData.lastName.isInvalid})}
+                    ${fieldErrorMessages(formData.lastName.errorMessages)}
+                </div>
+                <div class="field">
+                    ${label({content: 'Company', inputId: 'companyName'})}
+                    ${textInput({id: 'companyName', value: formData.companyName.value, isRequired: true, isInvalid: formData.companyName.isInvalid})}
+                    ${fieldErrorMessages(formData.companyName.errorMessages)}
+                </div>
+                <div class="field">
+                    ${label({content: 'Company Email', inputId: 'email'})}
+                    ${textInput({id: 'email', type: 'email', value: formData.email.value, isRequired: true, isInvalid: formData.email.isInvalid})}
+                    ${fieldErrorMessages(formData.email.errorMessages)}
+                </div>
+                <div class="field">
+                    ${label({content: 'Phone', inputId: 'phoneNumber'})}
+                    ${textInput({id: 'phoneNumber', type: 'tel', value: formData.phoneNumber.value, isRequired: true, isInvalid: formData.phoneNumber.isInvalid, additionalAttrs:{minlength: '10', maxlength: '14', placeholder: 'XXX-XXX-XXXX'}})}
+                    ${fieldErrorMessages(formData.phoneNumber.errorMessages)}
+                </div>
+                <div class="field">
+                    ${label({content: 'Event Code', inputId: 'eventAlias'})}
+                    ${textInput({id: 'eventAlias', value: formData.eventAlias.value, isRequired: true, isInvalid: formData.eventAlias.isInvalid, additionalAttrs:{autocapitalize: 'off'}})}
+                    ${fieldErrorMessages(formData.eventAlias.errorMessages)}
+                </div>
+                <div class="button-group button-group--centered">
+                    ${button({content: 'Let\'s Play'})}
+                </div>
+                ${renderDisclosure(eventData.registrationCopy.disclosure)}
+            </form>
+        `);
+    }
 
-				<label for="companyName">Company</label><br>
-				<input type="text" id="companyName" name="companyName" required><br><br>
+    function renderDisclosure(disclosure) {
+        if (!disclosure) {
+            return '';
+        }
+        return `
+            <p class="disclosure">${disclosure}</p>
+        `;
+    }
 
-				<label for="phoneNumber">Phone Number</label><br>
-				<input type="number" id="phoneNumber" name="phoneNumber" required><br><br>
+    function onFormSubmit(e) {
+        const el = e.target;
+        if (el.hasAttribute(registationFormAttr)) {
+            e.preventDefault();
+            disableFormSubmit(el);
+            registerPlayer(el);
+        }
+    }
 
-				<label for="event">Event Code</label><br>
-				<input type="text" id="event" name="event" required"><br><br>
+    function registerPlayer(formEl) {
+         const formVals = formMapper.getValues(formEl);
 
-				<button type="submit">Submit</button>
-			</form>
-		`);
-		errorPlaceholderEl = element.querySelector(`.${errorPlaceholderClass}`);
-	}
+         playerService.register(formVals)
+            .catch(error => onRegisterPlayerError(error, formVals, formEl));
+    }
 
-	function onFormSubmit(e) {
-		const el = e.target;
-		if (el.classList.contains(registrationFormClass)) {
-			e.preventDefault();
-			const formVals = formMapper.getValues(el);
-			playerService.register(formVals)
-				.then(successMsg => renderPostRegisterMessage(element, successMsg))
-				.catch(errorMsg => {
-					renderPostRegisterMessage(errorPlaceholderEl, errorMsg)
-				});
-		}
-	}
+    function onRegisterPlayerError(error, formVals, formEl) {
+        enableFormSubmit(formEl);
+        const formData = mapFormValsToFormData(formVals);
+        let errorMessage;
 
-	function renderPostRegisterMessage(el, message) {
-		replaceContent(el, `
-			<p>${message}</p>
-		`);
-	}
+        if(error.prop) {
+            const formDataProp = formData[error.prop];
+            formDataProp.isInvalid = true;
+            formDataProp.errorMessages = [error.message];
 
-	bindEvents();
+            errorMessage = errorMessages.invalidField;
+        } else {
+            errorMessage = error.message;
+        }
 
-	return {
-		render
-	};
+        render(formData, errorMessage, cachedEventData);
+        scrollFormErrorMessageIntoView();
+    }
+
+    function disableFormSubmit(formEl) {
+        const submitButtonEl = formEl.querySelector('button[type="submit"]');
+        if (submitButtonEl) {
+            submitButtonEl.disabled = true;
+        }
+    }
+
+    function enableFormSubmit(formEl) {
+        const submitButtonEl = formEl.querySelector('button[type="submit"]');
+        if (submitButtonEl) {
+            submitButtonEl.removeAttribute('disabled');
+        }
+    }
+
+    function mapFormValsToFormData(formVals) {
+        return Object.keys(defaultFormData).reduce((formData, key) => {
+            formData[key] = {
+                value: formVals[key]
+            };
+            return formData;
+        }, {});
+    }
+
+    function scrollFormErrorMessageIntoView() {
+        const formErrorMessageEl = document.querySelector(`[${formErrorMessageAttr}]`);
+        formErrorMessageEl.scrollIntoView({behavior: "smooth"});
+    }
+
+    bindEvents();
+
+    return {
+        render: (eventData) => {
+            cachedEventData = eventData;
+            render(defaultFormData, null, eventData);
+        }
+    };
 
 };
 
