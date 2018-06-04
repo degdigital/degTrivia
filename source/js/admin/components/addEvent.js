@@ -92,7 +92,7 @@ const addEvent = function(wrapperEl, initialData) {
 					</div>
 					<div class="field">
 						<label for="gameBetweenQuestionsCopyDescription">Game Between Questions Description</label><br>
-						<input class="input--extra-wide" id="gameBetweenQuestionsCopyDescription" name="gameBetweenQuestionsCopyDescription" type="text" value="The next question is on it's way.">
+						<input class="input--extra-wide" id="gameBetweenQuestionsCopyDescription" name="gameBetweenQuestionsCopyDescription" type="text" value="The next question is on its way.">
 					</div>
 					<div class="field">
 						<label for="leaderboardCopyDescription">Leaderboard Description</label><br>

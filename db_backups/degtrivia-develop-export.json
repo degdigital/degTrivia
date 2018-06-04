@@ -17,7 +17,7 @@
       "activeGameId" : false,
       "alias" : "beer30",
       "betweenQuestionsCopy": {
-        "description": "The next question is on it's way.",
+        "description": "The next question is on its way.",
         "title": "Get ready!"
       },
       "gameWaitBeforeQuestionsCopy" : {
@@ -65,7 +65,7 @@
       "activeGameId" : false,
       "alias" : "cnxtrivia2018",
       "betweenQuestionsCopy": {
-        "description": "The next question is on it's way.",
+        "description": "The next question is on its way.",
         "title": "Get ready!"
       },
       "gameWaitBeforeQuestionsCopy" : {
