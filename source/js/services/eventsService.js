@@ -64,7 +64,7 @@ const eventsService = function() {
 			const eventVals = responses[1];
 			runSubscribedCallbacks('onGameStart', eventVals);
 			dbService.getDb().ref(`games/${gameId}/activeQuestionId`).on('value', snapshot => onQuestionActivationChange(snapshot.val(), gameVals, gameId));
-			dbService.getDb().ref(`games/${gameId}/showQuestionResults`).on('value', snapshot => onQuestionResultsChange(snapshot.val(), gameId));
+			dbService.getDb().ref(`games/${gameId}/showQuestionResults`).on('value', snapshot => onQuestionResultsChange(snapshot.val(), gameVals, gameId));
 			dbService.getDb().ref(`games/${gameId}/showGameResults`).on('value', snapshot => onShowGameResultsChange(snapshot.val(), eventVals));
 			dbService.getDb().ref(`games/${gameId}/showGameOver`).on('value', snapshot => onShowGameOverChange(snapshot.val(), eventVals));
 		} else {
@@ -79,6 +79,7 @@ const eventsService = function() {
 			let activeQuestion = gameVals.questions[activeQuestionId];
 			activeQuestion.id = activeQuestionId;
 			activeQuestion.expirationTime = questionExpirationTime;
+			activeQuestion.countText = getQuestionCountText(gameVals.questions, activeQuestionId);
 			runSubscribedCallbacks('onQuestionAsked', {
 				gameId: gameId,
 				questionData: activeQuestion
@@ -86,10 +87,11 @@ const eventsService = function() {
 		}
 	}
 
-	async function onQuestionResultsChange(questionId, gameId) {
+	async function onQuestionResultsChange(questionId, gameVals, gameId) {
 		if (questionId !== false) {
 			const uid = playerService.getAuth().currentUser.uid;
-			const questionResults = await dbService.getQuestionResults(gameId, questionId, uid);
+			let questionResults = await dbService.getQuestionResults(gameId, questionId, uid);
+			questionResults.countText = getQuestionCountText(gameVals.questions, questionId);
 			runSubscribedCallbacks('onQuestionResults', questionResults);
 		}
 	}
@@ -141,6 +143,15 @@ const eventsService = function() {
 				}
 			}
 		}
+	}
+
+	function getQuestionCountText(questions, questionId) {
+		if (!questions || !questionId) {
+			return null;
+		}
+		const questionsCount = Object.keys(questions).length;
+		const questionSpot = questions[questionId].order + 1;
+		return `Question ${questionSpot} of ${questionsCount}`;
 	}
 
 	function subscribe(name = null, callback = null) {

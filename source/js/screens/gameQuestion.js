@@ -74,8 +74,11 @@ function renderScreen(element, data) {
 
 	const html = `
 		<div class="question">
-			<div class="countdown question__countdown" ${dataAttrs.countdown}></div>
-			<h1 class="question__text">${questionData.question}</h1>
+			<header class="question-header">
+				${questionData.countText ? `<p class="question__count">${questionData.countText}</p>` : ''}
+				<div class="countdown question__countdown" ${dataAttrs.countdown}></div>
+				<h1 class="question__text">${questionData.question}</h1>
+			</header>
 			${renderChoices(questionData.choices)}
 		</div>`;
 
