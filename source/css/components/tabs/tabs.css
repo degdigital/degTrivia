@@ -1,0 +1,39 @@
+.tab-group {
+    margin-bottom: 1.5em;
+    text-align: center;
+}
+
+.tab__button {
+    background-color: var(--color-gray-light-40);
+	text-transform: none;
+
+	&:hover, &:focus {
+		background-color: var(--color-gray-light-50);
+	}
+
+	&:active {
+		background-color: var(--color-white);
+    }
+    
+    &:first-child {
+        border-bottom-right-radius: 0px;
+        border-top-right-radius: 0px;
+    }
+
+    &:last-child {
+        border-bottom-left-radius: 0px;
+        border-top-left-radius: 0px;
+    }
+}
+
+.tab__button--active {
+    background-color: var(--color-green);
+
+    &:hover, &:focus {
+		background-color: var(--color-green-light-20);
+	}
+
+	&:active {
+		background-color: var(--color-green-light-40);
+	}
+}
