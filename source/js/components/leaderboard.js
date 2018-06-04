@@ -42,9 +42,10 @@ function renderLeaderboard(data) {
     return returnMarkup;
 }
 
-async function render(containerElement) {
+// dataType is either "game" or "event"
+async function render(containerElement, dataType) {
     const leaderboardData = await loadLeaderboardData();
-    replaceContent(containerElement, renderLeaderboard(leaderboardData.game));
+    replaceContent(containerElement, renderLeaderboard(leaderboardData[dataType]));
 }
 
 export default function() {
