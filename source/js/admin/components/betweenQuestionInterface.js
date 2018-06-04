@@ -40,7 +40,7 @@ function betweenQuestionInterface(wrapperEl, gameId) {
 	bindEvents(wrapperEl, boundClickHandler);
 
 	return {
-		render: gameId => render(wrapperEl),
+		render: () => render(wrapperEl),
 		teardown: () => teardown(boundClickHandler, wrapperEl)
 	};
 }
