@@ -67,6 +67,7 @@ const eventsService = function() {
 			dbService.getDb().ref(`games/${gameId}/showQuestionResults`).on('value', snapshot => onQuestionResultsChange(snapshot.val(), gameVals, gameId));
 			dbService.getDb().ref(`games/${gameId}/showGameResults`).on('value', snapshot => onShowGameResultsChange(snapshot.val(), eventVals));
 			dbService.getDb().ref(`games/${gameId}/showGameOver`).on('value', snapshot => onShowGameOverChange(snapshot.val(), eventVals));
+			dbService.getDb().ref(`games/${gameId}/showBetweenQuestions`).on('value', snapshot => onBetweenQuestions(snapshot.val(), eventVals));
 		} else {
 			const eventVals = await dbService.getEventById(activeEventId);
 			runSubscribedCallbacks('onGameCountdown', eventVals);
@@ -107,6 +108,16 @@ const eventsService = function() {
 		if (shouldShowGameResults) {
 			const gameScore = await dbService.getPlayerScore(playerService.getAuth().currentUser.uid);
 			runSubscribedCallbacks('onPostgameResults', {gameScore, showLeaderboard: false, eventVals});
+		}
+	}
+
+	function onBetweenQuestions(shouldShowBetweenQuestions, eventVals) {
+		if (shouldShowBetweenQuestions) {
+			const data = {
+				heading: eventVals.betweenQuestionsCopy.title,
+				message: eventVals.betweenQuestionsCopy.description
+			};
+			runSubscribedCallbacks('onBetweenQuestions', data);
 		}
 	}
 

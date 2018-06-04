@@ -4,15 +4,19 @@ import {replaceContent} from '../../utils/domUtils';
 // Services
 import dbService from '../../services/dbService.js';
 
+import betweenQuestionInterface from './betweenQuestionInterface.js';
+
 const activeQuestion = function(wrapperEl, options ={}) {
 
 	const db = dbService.getDb();
 	const triggerClass = 'activequestion-trigger';
+	const betweenQuestionClass = 'between-question-btn';
 	const defaults = {
 		onActiveQuestionChangeCallback: null
 	};
 	let settings = Object.assign({}, defaults, options);
 	let activeGameId;
+	let betweenQuestionInterfaceInst;
 
 	function bindEvents() {
 		wrapperEl.addEventListener('change', onWrapperChange);
@@ -47,9 +51,12 @@ const activeQuestion = function(wrapperEl, options ={}) {
 				<select class="${triggerClass}" id="activeQuestion" name="activeQuestion">
 					${renderDropdownOptions(questions, activeQuestionId)}
 				</select>
+				<span class="${betweenQuestionClass}"></span>
 			`;
 		}
 		replaceContent(wrapperEl, content);
+		betweenQuestionInterfaceInst = betweenQuestionInterface(document.querySelector(`.${betweenQuestionClass}`), gameId);
+		betweenQuestionInterfaceInst.render(gameId);
 	}
 
 	function renderDropdownOptions(questions, activeQuestionId) {

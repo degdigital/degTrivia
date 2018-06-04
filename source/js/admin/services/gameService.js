@@ -17,10 +17,18 @@ async function endGame(gameId) {
 	return Promise.reject(`Error: no game found for ID ${gameId}`);
 }
 
+function showBetweenQuestionScreen(gameId) {
+	return dbService.getDb().ref(`games/${gameId}`).update({
+		showQuestionResults: false,
+		showBetweenQuestions: true
+	})
+}
+
 
 function gameService() {
 	return {
-		endGame
+		endGame,
+		showBetweenQuestionScreen
 	};
 }
 

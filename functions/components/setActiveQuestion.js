@@ -30,7 +30,8 @@ module.exports = function(data, context, db, functions) {
 	function saveGameVals(questionId = false, questionExpirationTime = null) {
 		return db.ref(`/games/${gameId}`).update({
 			activeQuestionId: questionId,
-			questionExpirationTime: questionExpirationTime
+			questionExpirationTime: questionExpirationTime,
+			showBetweenQuestions: false
 		});
 	}
 

@@ -14,6 +14,7 @@ exports[`calling render() renders out a question and choice results 1`] = `
     >
       
 				
+				
       <div
         class="question-status question-status--incorrect"
       >
