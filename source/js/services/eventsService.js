@@ -149,9 +149,8 @@ const eventsService = function() {
 		if (!questions || !questionId) {
 			return null;
 		}
-		const questionsKeys = Object.keys(questions);
-		const questionsCount = questionsKeys.length;
-		const questionSpot = questionsKeys.indexOf(questionId) + 1;
+		const questionsCount = Object.keys(questions).length;
+		const questionSpot = questions[questionId].order + 1;
 		return `Question ${questionSpot} of ${questionsCount}`;
 	}
 
