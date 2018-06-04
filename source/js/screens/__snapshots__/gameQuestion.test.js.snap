@@ -9,17 +9,26 @@ exports[`calling render() renders out a question and choices 1`] = `
   >
     
 			
-    <div
-      class="countdown question__countdown"
-      data-countdown=""
-    />
-    
-			
-    <h1
-      class="question__text"
+    <header
+      class="question-header"
     >
-      Who is the most dashing Kansas City Royal of all time?
-    </h1>
+      
+				
+				
+      <div
+        class="countdown question__countdown"
+        data-countdown=""
+      />
+      
+				
+      <h1
+        class="question__text"
+      >
+        Who is the most dashing Kansas City Royal of all time?
+      </h1>
+      
+			
+    </header>
     
 			
     <div

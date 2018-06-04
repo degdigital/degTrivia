@@ -78,6 +78,14 @@ describe('app should route to', () => {
         expect(routeSpy).toHaveBeenCalledWith('gameQuestionResults', dataObj);
     });
 
+    test('in between question screen', () => {
+        const dataObj = {};
+        eventsService.__fireEvent('onBetweenQuestions', dataObj);
+
+        expect(routeSpy).toHaveBeenCalledTimes(1);
+        expect(routeSpy).toHaveBeenCalledWith('info', dataObj);
+    });
+
     test('game results page when game results are ready', () => {
         const dataObj = {}; 
         eventsService.__fireEvent('onPostgameResults', dataObj);

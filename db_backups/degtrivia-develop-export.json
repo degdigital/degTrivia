@@ -16,6 +16,10 @@
     "-LCUbqaXAuNRGFOJBXEL" : {
       "activeGameId" : false,
       "alias" : "beer30",
+      "betweenQuestionsCopy": {
+        "description": "The next question is on it's way.",
+        "title": "Get ready!"
+      },
       "gameWaitBeforeQuestionsCopy" : {
         "description" : "Answer all six questions (no stopping for wrong answers) as fast as you can. 10 seconds per question. Speed and accuracy win. Here comes the first question.",
         "title" : "Let's Play!"
@@ -60,6 +64,10 @@
     "-LD84ESzyLp4oyyDckO2" : {
       "activeGameId" : false,
       "alias" : "cnxtrivia2018",
+      "betweenQuestionsCopy": {
+        "description": "The next question is on it's way.",
+        "title": "Get ready!"
+      },
       "gameWaitBeforeQuestionsCopy" : {
         "description" : "Answer all six questions (no stopping for wrong answers) as fast as you can. 10 seconds per question. Speed and accuracy win. Here comes the first question.",
         "title" : "Let's Play!"

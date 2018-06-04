@@ -39,6 +39,7 @@ function initGame() {
 	eventsService.subscribe('onQuestionResults', questionData => router.route('gameQuestionResults', questionData));
 	eventsService.subscribe('onPostgameResults', props => router.route('postgameResults', props));
 	eventsService.subscribe('onError', () => router.route('error'));
+	eventsService.subscribe('onBetweenQuestions', data => router.route('info', data));
 	eventsService.subscribe('onDatabaseReconnect', () => location.reload(true));
 	eventsService.subscribe('onResetApp', () => location.reload(true));
 	eventsService.init(); // Must be run after all eventsService.subscribe() calls
