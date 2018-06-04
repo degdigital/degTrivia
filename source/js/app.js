@@ -1,6 +1,7 @@
 // Utils
 import router from './utils/router.js';
 import {getUrlSegment} from './utils/urlUtils';
+import audioPlayer from './utils/audioPlayer.js';
 import routes from './routes.js';
 
 // Services
@@ -37,9 +38,12 @@ function initGame() {
 		audioPlayer.play('countdown');
 		router.route('pregameCountdown', eventData)
 	});
-	eventsService.subscribe('onGameStart', eventData => router.route('gameWaitBeforeQuestions', eventData));
-	eventsService.subscribe('onQuestionAsked', questionData => {
+	eventsService.subscribe('onGameStart', eventData => {
 		audioPlayer.stopAll();
+		router.route('gameWaitBeforeQuestions', eventData);
+	});
+	eventsService.subscribe('onQuestionAsked', questionData => {
+		audioPlayer.play('ticktock');
 		router.route('gameQuestion', questionData);
 	});
 	eventsService.subscribe('onQuestionResults', questionData => router.route('gameQuestionResults', questionData));

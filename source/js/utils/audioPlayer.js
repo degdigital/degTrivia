@@ -6,6 +6,11 @@ const audioPlayer = function() {
             id: 'countdown',
             url: '/audio/countdown.mp3',
             buffer: null
+        },
+        {
+            id: 'ticktock',
+            url: '/audio/ticktock.mp3',
+            buffer: null
         }
     ];
     let filesPlaying = [];
