@@ -12,7 +12,7 @@ describe('leaderboard', () => {
 	})
 
     it('should render', async () => {
-		await leaderboard().renderToElement(element);
-		expect(element).toMatchSnapshot();
+			await leaderboard().renderToElement(element, 'game');
+			expect(element).toMatchSnapshot();
     });
 });

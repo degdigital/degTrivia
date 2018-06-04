@@ -1,0 +1,113 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`tabs should change content on tab click 1`] = `
+<div
+  class="tabs-container"
+>
+  <div
+    class="tab-group"
+  >
+    
+            
+    <button
+      class="button tab-button"
+      data-tab-index="0"
+    >
+      
+                Game
+            
+    </button>
+    
+        
+            
+    <button
+      class="button tab-button tab-button--active"
+      data-tab-index="1"
+    >
+      
+                Event
+            
+    </button>
+    
+        
+  </div>
+  
+        
+  <div
+    class="tabs-container"
+  >
+    
+            
+    <div
+      class="tab-section tab-section--game is-hidden"
+      data-tab-name="Game"
+    />
+    
+            
+    <div
+      class="tab-section tab-section--event"
+      data-tab-name="Event"
+    />
+    
+        
+  </div>
+  
+        
+</div>
+`;
+
+exports[`tabs should render tabs 1`] = `
+<div
+  class="tabs-container"
+>
+  <div
+    class="tab-group"
+  >
+    
+            
+    <button
+      class="button tab-button tab-button--active"
+      data-tab-index="0"
+    >
+      
+                Game
+            
+    </button>
+    
+        
+            
+    <button
+      class="button tab-button "
+      data-tab-index="1"
+    >
+      
+                Event
+            
+    </button>
+    
+        
+  </div>
+  
+        
+  <div
+    class="tabs-container"
+  >
+    
+            
+    <div
+      class="tab-section tab-section--game"
+      data-tab-name="Game"
+    />
+    
+            
+    <div
+      class="tab-section tab-section--event is-hidden"
+      data-tab-name="Event"
+    />
+    
+        
+  </div>
+  
+        
+</div>
+`;
