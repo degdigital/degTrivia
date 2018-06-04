@@ -36,6 +36,10 @@ const addEvent = function(wrapperEl, initialData) {
 			eventsRef.child(newKey).update({
 				activeGameId: false,
 				alias: data.alias.toLowerCase(),
+				betweenQuestionsCopy: {
+					description: data.gameBetweenQuestionsCopyDescription,
+					title: data.gameBetweenQuestionsCopyTitle
+				},
 				gameWaitBeforeQuestionsCopy: {
 					description: data.gameWaitBeforeQuestionsCopyDescription,
 					title: data.gameWaitBeforeQuestionsCopyTitle
@@ -81,6 +85,14 @@ const addEvent = function(wrapperEl, initialData) {
 					<div class="field">
 						<label for="gameWaitBeforeQuestionsCopyDescription">Game Wait Before Questions Description</label><br>
 						<input class="input--extra-wide" id="gameWaitBeforeQuestionsCopyDescription" name="gameWaitBeforeQuestionsCopyDescription" type="text" value="Answer the questions (no stopping for wrong answers) as fast as you can. 10 seconds per question. Speed and accuracy wins. Here comes the first question.">
+					</div>
+					<div class="field">
+						<label for="gameBetweenQuestionsCopyTitle">Game Between Questions Title</label><br>
+						<input class="input--extra-wide" id="gameBetweenQuestionsCopyTitle" name="gameBetweenQuestionsCopyTitle" type="text" value="Get Ready">
+					</div>
+					<div class="field">
+						<label for="gameBetweenQuestionsCopyDescription">Game Between Questions Description</label><br>
+						<input class="input--extra-wide" id="gameBetweenQuestionsCopyDescription" name="gameBetweenQuestionsCopyDescription" type="text" value="The next question is on it's way.">
 					</div>
 					<div class="field">
 						<label for="leaderboardCopyDescription">Leaderboard Description</label><br>
