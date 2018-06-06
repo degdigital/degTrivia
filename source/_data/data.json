@@ -57,35 +57,35 @@
                     { "heading": "Position", "content": "1" },
                     { "heading": "Name", "content": "Jon Snow" },
                     { "heading": "Score", "content": "70" },
-                    { "heading": "Time", "content": "4.05s"}
+                    { "heading": "Time", "content": "4.05s", "styleModifier": "table__data-cell--thin"}
                 ]
             },
             { "row" : [
                     { "heading": "Position", "content": "2" },
                     { "heading": "Name", "content": "Danerys Targaryen" },
                     { "heading": "Score", "content": "65" },
-                    { "heading": "Time", "content": "4.5s"}
+                    { "heading": "Time", "content": "4.5s", "styleModifier": "table__data-cell--thin"}
                 ]
             },
             { "row" : [
                     { "heading": "Position", "content": "3" },
                     { "heading": "Name", "content": "Cersie Lannister" },
                     { "heading": "Score", "content": "64" },
-                    { "heading": "Time", "content": "17s"}
+                    { "heading": "Time", "content": "17s", "styleModifier": "table__data-cell--thin"}
                 ]
             },
             { "row" : [
                     { "heading": "Position", "content": "4" },
                     { "heading": "Name", "content": "Euron Greyjoy" },
                     { "heading": "Score", "content": "20" },
-                    { "heading": "Time", "content": "60s"}
+                    { "heading": "Time", "content": "60s", "styleModifier": "table__data-cell--thin"}
                 ]
             },
             { "row" : [
                     { "heading": "Position", "content": "5" },
                     { "heading": "Name", "content": "Hodor" },
                     { "heading": "Score", "content": "1" },
-                    { "heading": "Time", "content": "45.15s"}
+                    { "heading": "Time", "content": "45.15s", "styleModifier": "table__data-cell--thin"}
                 ]
             }
         ]

@@ -1,6 +1,13 @@
 .tv-screen {
     padding: 5em 0;
 
+    .page-title {
+        font-weight: bold;
+        letter-spacing: var(--letter-spacing-wide);
+        margin-bottom: 1.5em;
+        text-transform: uppercase;
+    }
+
     .next-game__title-intro {
         font-size: 1.75em;
         letter-spacing: .1em;

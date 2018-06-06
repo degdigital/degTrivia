@@ -20,7 +20,8 @@
 
     .columns--two {
         .column {
-            margin-right: 1em;
+            margin-left: 2em;
+            margin-right: 2em;
             width: calc(50% - .5em);
 
             &:last-child {
@@ -33,7 +34,8 @@
 @media screen and (min-width: 64em) {
     .columns--two {
         .column {
-            margin-right: 2em;
+            margin-left: 4em;
+            margin-right: 4em;
             width: calc(50% - 1em);
 
             &:last-child {
