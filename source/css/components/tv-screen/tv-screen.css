@@ -1,5 +1,5 @@
 .tv-screen {
-    padding: 5em 0;
+    /* padding: 5em 0; */
 
     .page-title {
         font-weight: bold;
@@ -34,6 +34,9 @@
     margin: 1.5em 0 .25em;
 }
 
+.tv-screen__content {
+    padding: 5em 0;
+}
 .tv-screen__content--centered {
     text-align: center;
 }
