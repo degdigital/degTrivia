@@ -46,5 +46,5 @@ const leaderboardTV = function(el) {
 	init();
 };
 
-const rootEl = document.querySelector('.main');
+const rootEl = document.querySelector('.app');
 leaderboardTV(rootEl);
