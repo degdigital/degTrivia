@@ -14,7 +14,7 @@ function updateScore(db, ref, timeElapsed, timeRemaining) {
             newTimeElapsed = timeElapsed;
             newTimeRemaining = timeRemaining;
         }
-        indexVal = `${newScore}||${padTimeLeft(newTimeRemaining.toString())}`; // necessary evil for optimized sorting
+        indexVal = `${padTimeLeft(newScore.toString(), 4)}||${padTimeLeft(newTimeRemaining.toString(), 8)}`; // necessary evil for optimized sorting
         return {
             score: newScore,
             timeElapsed: newTimeElapsed,
@@ -41,8 +41,8 @@ function getElapsedTime(qStartTime, answerTime) {
     return answerTime - qStartTime;
 }
 
-function padTimeLeft(timeLeft) {
-    const numToPad = 5 - timeLeft.length;
+function padTimeLeft(timeLeft, maxDigits) {
+    const numToPad = maxDigits - timeLeft.length;
     for( let i = 0; i < numToPad; i++) {
         timeLeft = '0' + timeLeft;
     }

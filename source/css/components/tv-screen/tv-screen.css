@@ -1,21 +1,42 @@
 .tv-screen {
-    padding: 5em 0;
+    /* padding: 5em 0; */
 
-    .next-game__title {
-        height: 11em;
+    .page-title {
+        font-weight: bold;
+        letter-spacing: var(--letter-spacing-wide);
+        margin-bottom: 1.5em;
+        text-transform: uppercase;
+    }
+
+    .next-game__title-intro {
+        font-size: 1.75em;
+        letter-spacing: .1em;
+        margin-bottom: .75em;
+    }
+
+    .next-game__time {
+        padding: .325em .75em;
     }
 
     .event-hashtag {
-        font-size: 1.25em;
+        color: var(--color-white);
+        font-size: 1.325em;
     }
 }
 
 .tv-screen__logo {
-    margin: 0 auto 5em;
-    width: 15em;
+    margin: 0 auto 2em;
+    width: 13em;
 }
 
 .tv-screen__copy {
-    font-size: 1.5em;
-    margin: 2em 0;
+    font-size: 1.75em;
+    margin: 1.5em 0 .25em;
+}
+
+.tv-screen__content {
+    padding: 5em 0;
+}
+.tv-screen__content--centered {
+    text-align: center;
 }

@@ -3,6 +3,7 @@
 	max-width: 25em;
 	text-align: left;
 	background-color: var(--color-gray-light-40);
+	text-transform: none;
 
 	&:hover, &:focus {
 		background-color: var(--color-gray-light-50);

@@ -18,7 +18,7 @@ const manager = function(el) {
                      <td class="table__data-cell">${index + 1}</td>
                      <td class="table__data-cell">${leader.name}</td>
                      <td class="table__data-cell">${leader.score}</td>
-                     <td class="table__data-cell">${getTimeElapsed(leader.timeElapsed)}s</td>
+                     <td class="table__data-cell table__data-cell--thin">${getTimeElapsed(leader.timeElapsed)}s</td>
                 </tr>`
             )).join('');
         } else {
@@ -52,9 +52,23 @@ const manager = function(el) {
        `;
     }
 
+    function renderEventHashtag(hashtag) {
+        return hashtag ? `<div class="event-hashtag">${hashtag}</div>` : '';
+    }
+    
+    function renderContents({hashtag}) {
+        return `
+            <img src="/images/deg-logo.svg" alt="DEG logo" class="logo" />
+            ${renderEventHashtag(hashtag)}`;
+    }
 
-	async function render(leaderboardData) {
+
+	async function render(leaderboardData, eventData) {
         replaceContent(el, `
+        <header role="banner" class="site-header" data-site-header>
+			${renderContents(eventData)}
+		</header>
+        <main class="main tv-screen page-width page-width--wide">
 			<h1 class="page-title page-title--centered">Trivia Leaderboard</h1>
             <div class="columns columns--two">
                 <div class="column">
@@ -64,6 +78,7 @@ const manager = function(el) {
                     ${renderLeaderboard(leaderboardData.event, 'Event')}
                 </div>
             </div>
+        </main>
         `);
         return Promise.resolve();
 	}

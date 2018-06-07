@@ -35,7 +35,7 @@ describe('updateGameResults', () => {
         })
 
         db.__setGameResultVals({
-            indexVal: '1||05000',
+            indexVal: '0001||00005000',
             score: 1,
             timeElapsed: 8000,
             timeRemaining: 5000
@@ -83,7 +83,7 @@ describe('updateGameResults', () => {
             score: 1,
             timeElapsed: 5000,
             timeRemaining: 5000,
-            indexVal: '1||05000' 
+            indexVal: '0001||00005000' 
         };
         const expectedOutput = [newScoreVal, newScoreVal];
         db.__setGameResultVals(null);
@@ -101,7 +101,7 @@ describe('updateGameResults', () => {
             score: 2,
             timeElapsed: 13000,
             timeRemaining: 10000,
-            indexVal: '2||10000' 
+            indexVal: '0002||00010000' 
         };
         const expectedOutput = [newScoreVal, newScoreVal];
 
@@ -113,16 +113,16 @@ describe('updateGameResults', () => {
         })
     })
 
-    it('pads indexVal to be at least 5 characters', () => {
+    it('pads indexVal', () => {
         const newScoreVal = { 
             score: 2,
             timeElapsed: 13000,
             timeRemaining: 7000,
-            indexVal: '2||07000' 
+            indexVal: '0002||00007000' 
         };
         const expectedOutput = [newScoreVal, newScoreVal];
         db.__setGameResultVals({
-            indexVal: '1||02000',
+            indexVal: '0001||00002000',
             score: 1,
             timeElapsed: 8000,
             timeRemaining: 2000

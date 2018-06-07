@@ -1,5 +1,4 @@
 import {replaceContent} from '../utils/domUtils.js';
-import router from '../utils/router.js';
 
 const info = function(element) {
 

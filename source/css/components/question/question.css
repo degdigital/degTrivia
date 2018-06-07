@@ -12,7 +12,11 @@
 .question__countdown {
 	margin-bottom: .375em;
 }
- 
+
+.question__count {
+	margin-bottom: .75em;
+}
+
 @media (max-height: 37.5em) {
 	.question {
 		display: flex;

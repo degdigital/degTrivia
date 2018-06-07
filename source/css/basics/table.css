@@ -31,3 +31,7 @@
 .table__data-cell {
     letter-spacing: var(--letter-spacing-wide);
 }
+
+.table__data-cell--thin {
+    font-weight: 300;
+}

@@ -34,18 +34,12 @@ const screenRotator = function(el) {
     
     function startRotator() {
         let screenIndex = 0;
-        let message = {
-            index: 0,
-            max: Object.keys(cachedEventData.tvCopy).length
-        };
-        marketingScreenInst.render(cachedEventData, message.index);
-        message.index = message.index < message.max - 1 ? message.index + 1 : 0;
+        marketingScreenInst.render(cachedEventData);
         setInterval(() => {
 			if (screenIndex === 0) {
-				leaderboardScreenInst.render(cachedLeaderboardData);
+				leaderboardScreenInst.render(cachedLeaderboardData, cachedEventData);
 			} else {
-                marketingScreenInst.render(cachedEventData, message.index);
-                message.index = message.index < message.max - 1 ? message.index + 1 : 0;
+                marketingScreenInst.render(cachedEventData);
 			}
 			screenIndex = Number(screenIndex == 0);
 		}, 30000)

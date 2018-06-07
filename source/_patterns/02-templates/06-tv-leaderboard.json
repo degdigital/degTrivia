@@ -1,3 +1,6 @@
 {
-    "appStyleModifier": ""
+    "appStyleModifier": "",
+    "siteHeader": {
+        "showEventHashtag": true
+    }
 }

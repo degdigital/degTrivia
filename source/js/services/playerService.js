@@ -58,6 +58,7 @@ const playerService = function() {
 			phoneNumber: formatPhoneNumber(playerVals.phoneNumber),
 			email: playerVals.email,
 			event: eventKey,
+			eventAlias: playerVals.eventAlias,
 			active: true
 		};
 		return dbService.getDb().ref(`/players/${uid}`).update(formattedPlayerVals);

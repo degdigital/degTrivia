@@ -17,19 +17,19 @@ describe('cacheLeaderboardData', () => {
         }
         db.__setGameResultVals({
             playerId1: {
-                indexVal: '2||05000',
+                indexVal: '0002||05000',
                 score: 2,
                 timeElapsed: 5000,
                 timeRemaining: 5000
             },
             playerId2: {
-                indexVal: '3||05000',
+                indexVal: '0003||05000',
                 score: 3,
                 timeElapsed: 5000,
                 timeRemaining: 5000
             },
             playerId3: {
-                indexVal: '1||05000',
+                indexVal: '0001||05000',
                 score: 1,
                 timeElapsed: 5000,
                 timeRemaining: 5000
@@ -115,19 +115,58 @@ describe('cacheLeaderboardData', () => {
 
         db.__setGameResultVals({
             playerId1: {
-                indexVal: '2||03000',
+                indexVal: '0002||03000',
                 score: 2,
                 timeElapsed: 7000,
                 timeRemaining: 3000
             },
             playerId2: {
-                indexVal: '2||05000',
+                indexVal: '0002||05000',
                 score: 2,
                 timeElapsed: 5000,
                 timeRemaining: 5000
             },
             playerId3: {
-                indexVal: '1||05000',
+                indexVal: '0001||05000',
+                score: 1,
+                timeElapsed: 5000,
+                timeRemaining: 5000
+            }
+        });
+
+        return cacheLeaderboardData(db, change).then(resp => {
+            expect(resp).toEqual(expectedOutput);
+            expect(db.getLeaderboard()).toEqual(expectedLeaderboard);
+        })
+    })
+
+    it('should sort with multi-digit scores', () => {
+        const expectedOutput = {
+            showGameOver: false,
+            showGameResults: true
+        };
+
+        const expectedLeaderboard = [ 
+            { name: 'Player 2.', score: 12, timeElapsed: 5000 },
+            { name: 'Player 1.', score: 9, timeElapsed: 7000 },
+            { name: 'Player 3.', score: 1, timeElapsed: 5000 } 
+        ];
+
+        db.__setGameResultVals({
+            playerId1: {
+                indexVal: '0009||03000',
+                score: 9,
+                timeElapsed: 7000,
+                timeRemaining: 3000
+            },
+            playerId2: {
+                indexVal: '0012||05000',
+                score: 12,
+                timeElapsed: 5000,
+                timeRemaining: 5000
+            },
+            playerId3: {
+                indexVal: '0001||05000',
                 score: 1,
                 timeElapsed: 5000,
                 timeRemaining: 5000

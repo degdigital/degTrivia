@@ -32,10 +32,10 @@ describe('app should route to', () => {
 
 
 	test('registration page when user is unauthenticated', () => {
-		eventsService.__fireEvent('onPlayerUnauthenticated');
+		eventsService.__fireEvent('onPlayerUnauthenticated', {});
 
         expect(routeSpy).toHaveBeenCalledTimes(1);
-        expect(routeSpy).toHaveBeenCalledWith('registration');
+        expect(routeSpy).toHaveBeenCalledWith('registration', {});
     });
 
     test('info page when there is no active event', () => {
@@ -76,6 +76,14 @@ describe('app should route to', () => {
 
         expect(routeSpy).toHaveBeenCalledTimes(1);
         expect(routeSpy).toHaveBeenCalledWith('gameQuestionResults', dataObj);
+    });
+
+    test('in between question screen', () => {
+        const dataObj = {};
+        eventsService.__fireEvent('onBetweenQuestions', dataObj);
+
+        expect(routeSpy).toHaveBeenCalledTimes(1);
+        expect(routeSpy).toHaveBeenCalledWith('info', dataObj);
     });
 
     test('game results page when game results are ready', () => {

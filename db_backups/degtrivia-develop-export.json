@@ -16,6 +16,10 @@
     "-LCUbqaXAuNRGFOJBXEL" : {
       "activeGameId" : false,
       "alias" : "beer30",
+      "betweenQuestionsCopy": {
+        "description": "The next question is on its way.",
+        "title": "Get ready!"
+      },
       "gameWaitBeforeQuestionsCopy" : {
         "description" : "Answer all six questions (no stopping for wrong answers) as fast as you can. 10 seconds per question. Speed and accuracy win. Here comes the first question.",
         "title" : "Let's Play!"
@@ -60,6 +64,10 @@
     "-LD84ESzyLp4oyyDckO2" : {
       "activeGameId" : false,
       "alias" : "cnxtrivia2018",
+      "betweenQuestionsCopy": {
+        "description": "The next question is on its way.",
+        "title": "Get ready!"
+      },
       "gameWaitBeforeQuestionsCopy" : {
         "description" : "Answer all six questions (no stopping for wrong answers) as fast as you can. 10 seconds per question. Speed and accuracy win. Here comes the first question.",
         "title" : "Let's Play!"
@@ -251,6 +259,7 @@
           "question" : "How long has DEG been a Salesforce partner?"
         }
       },
+      "showBetweenQuestions": false,
       "showGameOver" : false,
       "showGameResults" : false,
       "showQuestionResults" : false,
@@ -400,6 +409,7 @@
           "question" : "Which brand is a DEG client?"
         }
       },
+      "showBetweenQuestions": false,
       "showGameOver" : false,
       "showGameResults" : false,
       "showQuestionResults" : false,
@@ -549,6 +559,7 @@
           "question" : "What is DEG?"
         }
       },
+      "showBetweenQuestions": false,
       "showGameOver" : false,
       "showGameResults" : false,
       "showQuestionResults" : false,
@@ -698,6 +709,7 @@
           "question" : "DEG is the only Salesforce partner to be named Marketing Cloud Partner of the Year how many times?"
         }
       },
+      "showBetweenQuestions": false,
       "showGameOver" : false,
       "showGameResults" : false,
       "showQuestionResults" : false,
@@ -847,6 +859,7 @@
           "question" : "Where is DEG headquartered?"
         }
       },
+      "showBetweenQuestions": false,
       "showGameOver" : false,
       "showGameResults" : false,
       "showQuestionResults" : false,
@@ -996,6 +1009,7 @@
           "question" : "In DEG's tagline, the agency proclaims that it markets to what?"
         }
       },
+      "showBetweenQuestions": false,
       "showGameOver" : false,
       "showGameResults" : false,
       "showQuestionResults" : false,
@@ -1145,6 +1159,7 @@
           "question" : "How long has DEG been a Salesforce partner?"
         }
       },
+      "showBetweenQuestions": false,
       "showGameOver" : false,
       "showGameResults" : false,
       "showQuestionResults" : false,
@@ -1294,6 +1309,7 @@
           "question" : "Which brand is a DEG client?"
         }
       },
+      "showBetweenQuestions": false,
       "showGameOver" : false,
       "showGameResults" : false,
       "showQuestionResults" : false,
@@ -1323,7 +1339,7 @@
               "text" : "Make It Happen"
             }
           },
-          "correctChoice" : "-LDqjcYwDPDk3mIQq1_f",
+          "correctChoice" : "-LDqjcYwDPDk3mIQq1_e",
           "order" : 0,
           "question" : "What is Nike's famous slogan?"
         },
@@ -1443,6 +1459,7 @@
           "question" : "What is DEG?"
         }
       },
+      "showBetweenQuestions": false,
       "showGameOver" : false,
       "showGameResults" : false,
       "showQuestionResults" : false,
@@ -1592,6 +1609,7 @@
           "question" : "DEG is the only Salesforce partner to be named Marketing Cloud Partner of the Year how many times?"
         }
       },
+      "showBetweenQuestions": false,
       "showGameOver" : false,
       "showGameResults" : false,
       "showQuestionResults" : false,
@@ -1741,6 +1759,7 @@
           "question" : "Where is DEG headquartered?"
         }
       },
+      "showBetweenQuestions": false,
       "showGameOver" : false,
       "showGameResults" : false,
       "showQuestionResults" : false,
@@ -1890,6 +1909,7 @@
           "question" : "In DEG's tagline, the agency proclaims that it markets to what?"
         }
       },
+      "showBetweenQuestions": false,
       "showGameOver" : false,
       "showGameResults" : false,
       "showQuestionResults" : false,
