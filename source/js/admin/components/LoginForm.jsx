@@ -6,8 +6,6 @@ class LoginForm extends React.Component {
     constructor(props) {
         super(props);
         this.settings = {
-            emailInputClass: 'js-email-input',
-            passwordInputClass: 'js-password-input',
             errorClass: 'text--error'
         };
         this.state = {
@@ -50,11 +48,11 @@ class LoginForm extends React.Component {
                     <legend>Login</legend>
                     <div className="field">
                         <label htmlFor="email">Email address</label><br/>
-                        <input className={this.settings.emailInputClass} onChange={this.updateFormVal.bind(this)} name="email" id="email" type="email" required />
+                        <input onChange={this.updateFormVal.bind(this)} name="email" id="email" type="email" required />
                     </div>
                     <div className="field">
                         <label htmlFor="password">Password</label><br />
-                        <input className={this.settings.passwordInputClass} onChange={this.updateFormVal.bind(this)} name="password" id="password" type="password" required />
+                        <input onChange={this.updateFormVal.bind(this)} name="password" id="password" type="password" required />
                     </div>
                     <button type="submit">Login</button>
                 </fieldset>
