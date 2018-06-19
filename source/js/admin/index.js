@@ -7,46 +7,62 @@ import playerService from '../services/playerService.js';
 import dbService from '../services/dbService.js';
 
 // Screens
+import LoginForm from './components/LoginForm.jsx';
 import login from './screens/login.js';
 import manager from './screens/manager.js';
 
-const admin = function(el) {
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-	let db;
-	let loginInst;
-	let managerInst;
-
-	function bindEvents() {
-		playerService.getAuth().onAuthStateChanged(onAuthStateChange);
-	}
-
-	async function onAuthStateChange(user) {
-		if (user) {
-			const isAdmin = await db.ref(`admins/${user.uid}`).once('value').then(snapshot => snapshot.exists() && snapshot.val() === true);
-			if (isAdmin === true) {
-				managerInst.render();
-			} else {
-				loginInst.renderForm();
-			}
-		} else {
-			loginInst.renderForm();
+class AdminApp extends React.Component {
+	constructor(props) {
+		super(props);
+		this.init();
+		this.state = {
+			isAdmin: false,
+			isLoading: true
 		}
 	}
 
-	function init() {
+	bindEvents(db) {
+		playerService.getAuth().onAuthStateChanged(user => this.onAuthStateChange(user, db));
+	}
+
+	async onAuthStateChange(user, db) {
+		if (user) {
+			const isAdmin = await db.ref(`admins/${user.uid}`).once('value').then(snapshot => snapshot.exists() && snapshot.val() === true);
+			this.setState({isAdmin, isLoading: false});
+		} else {
+			this.setState({isLoading: false});
+		}
+	}
+
+	init() {
 		firebase.initializeApp(firebaseConfig);
 		dbService.init();
 		playerService.init();
 
-		db = dbService.getDb();
-		loginInst = login(el);
-		managerInst = manager(el);
+		const el = this.props.element;
+		// this.loginInst = login(el);
+		// this.managerInst = manager(el);
 
-		bindEvents();
+		this.bindEvents(dbService.getDb());
 	}
 
-	init();
-};
+	render() {
+		const childEl = this.state.isAdmin ?
+						<div>You're in</div> :
+						<LoginForm /> ;
+		return <div>
+			{ this.state.isLoading ?
+				<h1>Loading...</h1> :
+				childEl
+			}
+		</div>
+	}
+}
 
-const rootEl = document.getElementById('app');
-admin(rootEl);
+ReactDOM.render(
+	<AdminApp element={document.getElementById('app')} />,
+	document.getElementById('app')
+)

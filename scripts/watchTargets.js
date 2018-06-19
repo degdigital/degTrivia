@@ -12,7 +12,7 @@ const watchTargets = [
 		taskName: 'css'
 	},
 	{
-		paths: ['source/js/**/*.js'],
+		paths: ['source/js/**/*.(js|jsx)'],
 		taskName: 'js'
 	}
 ];
