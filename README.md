@@ -26,7 +26,8 @@ If you do not have a public directory, copy the source directory and rename it *
 ## Commands
 Use command `npm test` to run jest tests
 
-Use command `npm run build` to run build tasks
+Use command `BABEL_ENV= npm run build` to run build tasks
+Where BABEL_ENV can equal `development`, `test` or `production`
 
 Use command `npm run watch` to run watcher on files
 

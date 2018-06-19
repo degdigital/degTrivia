@@ -3,6 +3,7 @@ const nodeResolve =  require('rollup-plugin-node-resolve');
 const commonjs = require('rollup-plugin-commonjs');
 const babel = require('rollup-plugin-babel');
 const replace = require('rollup-plugin-replace');
+const globals = require('rollup-plugin-node-globals');
 
 const bundles = [
 	{
@@ -28,17 +29,25 @@ const bundles = [
 async function buildBundle(bundleInfo) {
 	const inputOptions = {
 		input: bundleInfo.entryFilepath,
+		external: [ 'node_modules/react', 'node_modules/react-dom'],
 		plugins: [
 			replace({
 	      		exclude: 'node_modules/**',
-	      		ENVIRONMENT: JSON.stringify(process.env.NODE_ENV || 'development'),
+				ENVIRONMENT: JSON.stringify(process.env.NODE_ENV || 'development'),
+				BABEL_ENV: JSON.stringify(process.env.BABEL_ENV || 'development')
 	    	}),
 			babel({
 				exclude: 'node_modules/**',
 				runtimeHelpers: true
 			}),
 			nodeResolve(), 
-			commonjs()
+			commonjs({
+				namedExports: {
+					'react': ['React'],
+					'react-dom': ['ReactDOM']
+				}
+			}),
+			globals()
 		]
 	};
 
@@ -47,13 +56,21 @@ async function buildBundle(bundleInfo) {
 
 		const modulesPromise = bundle.write({
 	    	file: bundleInfo.bundleFilepath,
-	    	format: 'es'
+			format: 'es',
+			globals: {
+				react: 'React',
+				'react-dom': 'ReactDOM'
+			}
 	    });
 
 	    const noModulesPromise = bundle.write({
 	    	file: bundleInfo.noModulesBundleFilepath,
 	    	name: bundleInfo.name,
-	    	format: 'iife'
+			format: 'iife',
+			globals: {
+				react: 'React',
+				'react-dom': 'ReactDOM'
+			}
 	    });
 
 	    await modulesPromise;

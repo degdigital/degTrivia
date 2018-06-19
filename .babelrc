@@ -14,7 +14,8 @@
 		}]
 	],
 	"presets": [
-		["env", {
+		"react-app",
+		[ "env", {
 			"modules": false,
       		"targets": {
         		"browsers": [">1%", "ie 11", "not op_mini all"]
