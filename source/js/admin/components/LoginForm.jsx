@@ -17,13 +17,15 @@ class LoginForm extends React.Component {
         this.onLoginError = this.onLoginError.bind(this);
     }
 
+    updateFormVal(e) {
+        this.setState({
+            [e.target.name]: e.target.value
+        });
+    }
+
     onFormSubmit(e) {
         e.preventDefault();
-        let el = e.target;
-        const email = el.querySelector(`.${this.settings.emailInputClass}`).value;
-        const password = el.querySelector(`.${this.settings.passwordInputClass}`).value;
-
-        playerService.getAuth().signInWithEmailAndPassword(email, password)
+        playerService.getAuth().signInWithEmailAndPassword(this.state.email, this.state.password)
             .catch(this.onLoginError);
     }
 
@@ -48,11 +50,11 @@ class LoginForm extends React.Component {
                     <legend>Login</legend>
                     <div className="field">
                         <label htmlFor="email">Email address</label><br/>
-                        <input className={this.settings.emailInputClass} name="email" id="email" type="email" required />
+                        <input className={this.settings.emailInputClass} onChange={this.updateFormVal.bind(this)} name="email" id="email" type="email" required />
                     </div>
                     <div className="field">
                         <label htmlFor="password">Password</label><br />
-                        <input className={this.settings.passwordInputClass} name="password" id="password" type="password" required />
+                        <input className={this.settings.passwordInputClass} onChange={this.updateFormVal.bind(this)} name="password" id="password" type="password" required />
                     </div>
                     <button type="submit">Login</button>
                 </fieldset>
