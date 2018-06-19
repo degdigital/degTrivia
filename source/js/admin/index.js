@@ -8,8 +8,7 @@ import dbService from '../services/dbService.js';
 
 // Screens
 import LoginForm from './components/LoginForm.jsx';
-import login from './screens/login.js';
-import manager from './screens/manager.js';
+import Manager from './components/Manager.jsx';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -42,16 +41,12 @@ class AdminApp extends React.Component {
 		dbService.init();
 		playerService.init();
 
-		const el = this.props.element;
-		// this.loginInst = login(el);
-		// this.managerInst = manager(el);
-
 		this.bindEvents(dbService.getDb());
 	}
 
 	render() {
 		const childEl = this.state.isAdmin ?
-						<div>You're in</div> :
+						<Manager /> :
 						<LoginForm /> ;
 		return <div>
 			{ this.state.isLoading ?
@@ -63,6 +58,6 @@ class AdminApp extends React.Component {
 }
 
 ReactDOM.render(
-	<AdminApp element={document.getElementById('app')} />,
+	<AdminApp />,
 	document.getElementById('app')
 )

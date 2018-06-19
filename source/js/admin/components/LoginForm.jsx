@@ -1,6 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-
 import playerService from '../../services/playerService.js';
 
 class LoginForm extends React.Component {
