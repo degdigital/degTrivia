@@ -2,6 +2,9 @@
 import {emptyElements, replaceContent, removeElements} from '../../utils/domUtils';
 import formMapper from '../../utils/formMapper';
 
+// Plugins
+import autoQuestion from './autoQuestion.js';
+
 const questionManager = function(wrapperEl, options = {}) {
 
 	const formWrapperClass = 'form-wrapper';
@@ -11,6 +14,7 @@ const questionManager = function(wrapperEl, options = {}) {
 	const formcancelTriggerClass = 'form-cancel-trigger';
 	const hiddenClass = 'is-hidden';
 	const addQuestionTriggerClass = 'add-question-trigger';
+	const addQuestionAutoTriggerClass = 'add-question-auto-trigger';
 	const choicesClass = 'choices';
 	const choiceClass = 'choice';
 	const addChoiceClass = 'add-choice';
@@ -21,6 +25,7 @@ const questionManager = function(wrapperEl, options = {}) {
 	const defaults = {
 		onSaveCallback: null
 	};
+	const autoQuestionInst = autoQuestion();
 	let settings;
 	let questionsWrapperEl;
 	let formWrapperEl;
@@ -58,13 +63,9 @@ const questionManager = function(wrapperEl, options = {}) {
 		const el = e.target;
 		if (el.matches(`.${formClass}`)) {
 			e.preventDefault();
-			const questionVals = formatQuestionVals();
-			questionsVals.push(questionVals);
-			renderSummary(questionsVals);
-			hideAddQuestionForm();
-			if (settings.onSaveCallback !== null) {
-				settings.onSaveCallback(questionVals);
-			}
+			const formVals = formMapper.getValues(formWrapperEl);
+			const formattedQuestionVals = formatQuestionVals(formVals);
+			handleQuestionAdd(formattedQuestionVals);
 		}
 	}
 
@@ -73,6 +74,9 @@ const questionManager = function(wrapperEl, options = {}) {
 		if (el.matches(`.${addQuestionTriggerClass}`)) {
 			addChoice(true);
 			showAddQuestionForm();
+		}
+		if (el.matches(`.${addQuestionAutoTriggerClass}`)) {
+			addAutoQuestion();
 		}
 	}
 
@@ -93,7 +97,8 @@ const questionManager = function(wrapperEl, options = {}) {
 		}
 		replaceContent(questionsWrapperEl, `
 			${summation}
-			<button class="${addQuestionTriggerClass}" type="button">Add a Question</button>
+			<button class="${addQuestionTriggerClass}" type="button">Manually Add a Question</button>
+			<button class="${addQuestionAutoTriggerClass}" type="button">Automatically Generate a Question</button>
 		`)
 	}
 
@@ -151,6 +156,15 @@ const questionManager = function(wrapperEl, options = {}) {
 		}
 	}
 
+	function handleQuestionAdd(questionVals) {
+		questionsVals.push(questionVals);
+		renderSummary(questionsVals);
+		hideAddQuestionForm();
+		if (settings.onSaveCallback !== null) {
+			settings.onSaveCallback(questionVals);
+		}
+	}
+
 	function showAddQuestionForm() {
 		wrapperEl.classList.add(hiddenClass);
 		Array.from(formWrapperEl.querySelectorAll('input')).forEach(el => el.removeAttribute('disabled'));
@@ -166,8 +180,7 @@ const questionManager = function(wrapperEl, options = {}) {
 		formWrapperEl.classList.add(hiddenClass);
 	}
 
-	function formatQuestionVals() {
-		const formVals = formMapper.getValues(formWrapperEl);
+	function formatQuestionVals(formVals) {
 		const formattedVals = Object.keys(formVals).reduce((output, key) => {
 			if (key.includes('choice-input-')) {
 				output.choices = output.choices || [];
@@ -178,6 +191,13 @@ const questionManager = function(wrapperEl, options = {}) {
 			return output;
 		}, {});
 		return formattedVals;
+	}
+
+	async function addAutoQuestion() {
+		const questionData = await autoQuestionInst.add();
+		if (questionData) {
+			handleQuestionAdd(questionData);
+		}
 	}
 
 	function getQuestionVals() {
