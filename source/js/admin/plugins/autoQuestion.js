@@ -25,7 +25,7 @@ Answers:${renderConfirmationAnswers(formattedQuestionObj)}`);
 
 	async function getRawQuestionObj() {
 		const response = await fetchUtils.getJSON(endpoint);
-		if (!response && !response.response_code && response.response_code !== 0 && !response.results && response.results.length <= 0) {
+		if (!response) {
 			return null;
 		}
 		return response.results[0];
