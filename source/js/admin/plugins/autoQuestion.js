@@ -45,7 +45,7 @@ Answers:${renderConfirmationAnswers(formattedQuestionObj)}`);
 
 	function getRandomCorrectIndex(incorrectAnswers) {
 		const answersCount = incorrectAnswers.length + 1;
-		return Math.round(Math.random() * (answersCount - 1) + 1);
+		return Math.floor(Math.random() * (answersCount + 1));
 	}
 
 	function renderConfirmationAnswers(formattedQuestionObj) {
