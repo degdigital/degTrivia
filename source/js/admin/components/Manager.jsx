@@ -1,5 +1,7 @@
 import React from 'react';
+
 import { Tabs } from './Tabs.jsx';
+import SystemTabContent from './SystemTabContent.jsx';
 
 class Manager extends React.Component {
 
@@ -51,7 +53,7 @@ class Manager extends React.Component {
             {
                 title: 'System',
                 id: 'system',
-                content: 'system'
+                content: <SystemTabContent />
             }
         ];
 
