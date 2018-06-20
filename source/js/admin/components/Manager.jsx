@@ -1,42 +1,67 @@
 import React from 'react';
-import tabs from '../plugins/tabs.js';
+import { Tabs } from './Tabs.jsx';
 
 class Manager extends React.Component {
 
-    componentDidMount() {
-        tabs();
+    constructor(props) {
+        super(props);
+        this.state = {
+            activeSectionId: this.getSectionFromUrl()
+        }
+    }
+
+    getSectionFromUrl() {
+        const hashVal = location.hash;
+		return hashVal.length > 0 ? hashVal.replace('#', '') : null;
+    }
+    
+    tabChanged() {
+        this.setState({
+            activeSectionId: this.getSectionFromUrl()
+        })
     }
 
     render() {
+        const tabConfig = [
+            {
+                title: 'Manage Gameplay',
+                id: 'gameplay',
+                content: 'gameplay'
+            },
+            {
+                title: 'Events',
+                id: 'events',
+                content: 'events'
+            },
+            {
+                title: 'Games',
+                id: 'games',
+                content: 'games'
+            },
+            {
+                title: 'Copy',
+                id: 'copy',
+                content: 'copy'
+            },
+            {
+                title: 'Players',
+                id: 'players',
+                content: 'players'
+            },
+            {
+                title: 'System',
+                id: 'system',
+                content: 'system'
+            }
+        ];
+
         return (
             <div>
                 <h1>Welcome, admin!</h1>
-                <ul class="tab-triggers">
-                    <li><button class="tab-trigger" data-target="gameplay">Manage Gameplay</button></li>
-                    <li><button class="tab-trigger" data-target="events">Events</button></li>
-                    <li><button class="tab-trigger" data-target="games">Games</button></li>
-                    <li><button class="tab-trigger" data-target="copy">Copy</button></li>
-                    <li><button class="tab-trigger" data-target="players">Players</button></li>
-                    <li><button class="tab-trigger" data-target="system">System</button></li>
-                </ul>
-                <div class="tab-section" data-section="gameplay">
-                    <span>GamePlay</span>
-                </div>
-                <div class="tab-section" data-section="events">
-                    <span>events</span>
-                </div>
-                <div class="tab-section" data-section="games">
-                    <span>games</span>
-                </div>
-                <div class="tab-section" data-section="copy">
-                    <span>copy</span>
-                </div>
-                <div class="tab-section" data-section="players">
-                    <span>players</span>
-                </div>
-                <div class="tab-section" data-section="system">
-                    <span>system</span>
-                </div>
+                <Tabs config={tabConfig} 
+                    activeSectionId={this.state.activeSectionId || tabConfig[0].id}
+                    tabChanged={this.tabChanged.bind(this)}
+                />
             </div>
         )
     }
