@@ -1,65 +1,45 @@
 import React from 'react';
 import { Tabs } from './Tabs.jsx';
+import config from '../configs/tabsConfig.js';
 
 class Manager extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            activeSectionId: this.getSectionFromUrl()
+            activeIndex: this.getSectionIndexFromUrl()
         }
     }
 
-    getSectionFromUrl() {
+    getSectionIndexFromUrl() {
         const hashVal = location.hash;
-		return hashVal.length > 0 ? hashVal.replace('#', '') : null;
+        const sectionId = hashVal.length > 0 ? hashVal.replace('#', '') : null;
+        if (sectionId) {
+            return config.map(item => item.id).indexOf(sectionId);
+        }
+        return 0;
+    }
+
+    getActiveSectionData() {
+        if (this.state.activeIndex) {
+            return config[this.state.activeIndex];
+        }
+        return config[0];
     }
     
     tabChanged() {
         this.setState({
-            activeSectionId: this.getSectionFromUrl()
+            activeIndex: this.getSectionIndexFromUrl()
         })
     }
 
     render() {
-        const tabConfig = [
-            {
-                title: 'Manage Gameplay',
-                id: 'gameplay',
-                content: 'gameplay'
-            },
-            {
-                title: 'Events',
-                id: 'events',
-                content: 'events'
-            },
-            {
-                title: 'Games',
-                id: 'games',
-                content: 'games'
-            },
-            {
-                title: 'Copy',
-                id: 'copy',
-                content: 'copy'
-            },
-            {
-                title: 'Players',
-                id: 'players',
-                content: 'players'
-            },
-            {
-                title: 'System',
-                id: 'system',
-                content: 'system'
-            }
-        ];
-
         return (
             <div>
                 <h1>Welcome, admin!</h1>
-                <Tabs config={tabConfig} 
-                    activeSectionId={this.state.activeSectionId || tabConfig[0].id}
+                <Tabs config={config} 
+                    activeSectionIndex={this.state.activeIndex}
+                    activeSectionData={this.getActiveSectionData()}
                     tabChanged={this.tabChanged.bind(this)}
                 />
             </div>
