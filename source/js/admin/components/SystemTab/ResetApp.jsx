@@ -1,22 +1,19 @@
 import React from 'react';
 
-export default class ResetApp extends React.Component {
+export default function ResetApp(props) {
 
-    resetApp() {
+    function resetApp() {
         if(confirm('Are you sure you want to disable the application?')) {
-            this.props.resetApplication();
+            props.resetApplication();
         }
     }
 
-    render() {
-        return (
-            <div>
-                <button id="resetApp"
-                    name="resetApp"
-                    onClick={this.resetApp.bind(this)}
-                >Reset Application</button>
-            </div>
-            
-        )
-    }
+    return (
+        <div>
+            <button id="resetApp"
+                name="resetApp"
+                onClick={resetApp}
+            >Reset Application</button>
+        </div>
+    )
 }

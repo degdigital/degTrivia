@@ -1,4 +1,6 @@
-import SystemTabContent from './SystemTabContent.jsx';
+import React from 'react';
+
+import SystemTabContent from '../components/SystemTabContent.jsx';
 
 export default [
     {
