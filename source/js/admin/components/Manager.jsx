@@ -1,42 +1,47 @@
 import React from 'react';
-import tabs from '../plugins/tabs.js';
+import { Tabs } from './Tabs.jsx';
+import config from '../configs/tabsConfig.js';
 
 class Manager extends React.Component {
 
-    componentDidMount() {
-        tabs();
+    constructor(props) {
+        super(props);
+        this.state = {
+            activeIndex: this.getSectionIndexFromUrl()
+        }
+    }
+
+    getSectionIndexFromUrl() {
+        const hashVal = location.hash;
+        const sectionId = hashVal.length > 0 ? hashVal.replace('#', '') : null;
+        if (sectionId) {
+            return config.map(item => item.id).indexOf(sectionId);
+        }
+        return 0;
+    }
+
+    getActiveSectionData() {
+        if (this.state.activeIndex) {
+            return config[this.state.activeIndex];
+        }
+        return config[0];
+    }
+    
+    tabChanged() {
+        this.setState({
+            activeIndex: this.getSectionIndexFromUrl()
+        })
     }
 
     render() {
         return (
             <div>
                 <h1>Welcome, admin!</h1>
-                <ul class="tab-triggers">
-                    <li><button class="tab-trigger" data-target="gameplay">Manage Gameplay</button></li>
-                    <li><button class="tab-trigger" data-target="events">Events</button></li>
-                    <li><button class="tab-trigger" data-target="games">Games</button></li>
-                    <li><button class="tab-trigger" data-target="copy">Copy</button></li>
-                    <li><button class="tab-trigger" data-target="players">Players</button></li>
-                    <li><button class="tab-trigger" data-target="system">System</button></li>
-                </ul>
-                <div class="tab-section" data-section="gameplay">
-                    <span>GamePlay</span>
-                </div>
-                <div class="tab-section" data-section="events">
-                    <span>events</span>
-                </div>
-                <div class="tab-section" data-section="games">
-                    <span>games</span>
-                </div>
-                <div class="tab-section" data-section="copy">
-                    <span>copy</span>
-                </div>
-                <div class="tab-section" data-section="players">
-                    <span>players</span>
-                </div>
-                <div class="tab-section" data-section="system">
-                    <span>system</span>
-                </div>
+                <Tabs config={config} 
+                    activeSectionIndex={this.state.activeIndex}
+                    activeSectionData={this.getActiveSectionData()}
+                    tabChanged={this.tabChanged.bind(this)}
+                />
             </div>
         )
     }
