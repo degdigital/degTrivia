@@ -1,5 +1,6 @@
 import React from 'react';
 
+import PlayersTabContent from '../components/PlayersTabContent.jsx';
 import SystemTabContent from '../components/SystemTabContent.jsx';
 
 export default [
@@ -26,7 +27,7 @@ export default [
     {
         title: 'Players',
         id: 'players',
-        content: 'players'
+        content: <PlayersTabContent />
     },
     {
         title: 'System',
