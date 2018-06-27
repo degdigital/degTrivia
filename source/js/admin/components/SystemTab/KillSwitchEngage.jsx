@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function KillSwitch(props) {
+export default function KillSwitchEngage(props) {
     function disableApp() {
         if(confirm('Are you sure you want to disable the application?')) {
            props.disableApplication();

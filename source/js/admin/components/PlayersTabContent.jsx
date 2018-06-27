@@ -11,45 +11,40 @@ export default class PlayersTabContent extends React.Component {
             {firstName: 'Anna', lastName: 'Scheuler', email: 'ascheuler@degdigital.com', event: 'beer30', id:'3'}
         ];
         this.state = {
-            people: this.fakePeople,
-            eventId: ''
+            eventId: '',
+            includeDEGers: true
         }
     }
-    
-    
+
+    filterPeople() {
+        let filteredList = this.fakePeople;
+        if (this.state.eventId) {
+            filteredList = this.fakePeople.filter(p => p.event === this.state.eventId);
+            if (!this.state.includeDEGers) {
+                filteredList = filteredList.filter(p => p.email.toLowerCase().indexOf(`@degdigital.com`) === -1);
+            }
+        }
+        return filteredList;
+    }
 
     onEventFilterChange(e) {
-        const event = e.target.value === 'all' ? '' : e.target.value;
-        this.filterByEvent(event);
-    }
-
-    filterByEvent(eventId) {
-        let filteredList = this.fakePeople;
-        if (eventId) {
-            filteredList = this.fakePeople.filter(p => p.event === eventId);
-        }
         this.setState({
-            people: filteredList,
-            eventId
+            eventId: e.target.value
         });
     }
 
-    filterDegEmployees(e) {
-        if (e.target.checked) {
-            this.setState({
-                people: this.state.people.filter(p => p.email.toLowerCase().indexOf(`@degdigital.com`) === -1)
-            })
-        } else {
-            this.filterByEvent(this.state.eventId);
-        }
+    onDegFilterChange(e) {
+       this.setState({
+           includeDEGers: !e.target.checked
+       })
     }
 
     render() {
         return (
             <div>
                 <EventSelectField changeEvent={this.onEventFilterChange.bind(this)} />
-                <NonDegersField changeEvent={this.filterDegEmployees.bind(this)} />
-                <PlayersTable players={this.state.people} />
+                <NonDegersField changeEvent={this.onDegFilterChange.bind(this)} />
+                <PlayersTable players={this.filterPeople()} />
             </div>
         );
     }
@@ -61,7 +56,7 @@ const EventSelectField = function(props) {
         <div>
             <label htmlFor="player-filter" >Filter by Event</label>
             <select className="" name="player-filter" id="player-filter" onChange={props.changeEvent}>
-                <option value="all">All Events</option>
+                <option value="">All Events</option>
                 <option value="beer30">beer30</option>
                 <option value="cnx18">cnx18</option>
             </select>

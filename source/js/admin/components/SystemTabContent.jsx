@@ -1,7 +1,7 @@
 import React from 'react';
 
 import QuestionDuration from './SystemTab/QuestionDuration.jsx';
-import KillSwitch from './SystemTab/KillSwitch.jsx';
+import KillSwitchEngage from './SystemTab/KillSwitchEngage.jsx';
 import ResetApp from './SystemTab/ResetApp.jsx';
 
 class SystemTabContent extends React.Component {
@@ -32,7 +32,7 @@ class SystemTabContent extends React.Component {
                 <h2>This tab holds settings that will affect the entire system.</h2>
                 <QuestionDuration />
                 <hr />
-                <KillSwitch disableApplication={this.disableApp.bind(this)} isAppDisabled={this.state.isAppDisabled} />
+                <KillSwitchEngage disableApplication={this.disableApp.bind(this)} isAppDisabled={this.state.isAppDisabled} />
                 <hr />
                 <ResetApp resetApplication={this.resetApp.bind(this)} />
             </div>
