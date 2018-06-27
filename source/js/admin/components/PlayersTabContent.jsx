@@ -20,9 +20,9 @@ export default class PlayersTabContent extends React.Component {
         let filteredList = this.fakePeople;
         if (this.state.eventId) {
             filteredList = this.fakePeople.filter(p => p.event === this.state.eventId);
-            if (!this.state.includeDEGers) {
-                filteredList = filteredList.filter(p => p.email.toLowerCase().indexOf(`@degdigital.com`) === -1);
-            }
+        }
+        if (!this.state.includeDEGers) {
+            filteredList = filteredList.filter(p => p.email.toLowerCase().indexOf(`@degdigital.com`) === -1);
         }
         return filteredList;
     }
