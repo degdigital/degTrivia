@@ -14,17 +14,31 @@ export default class PlayersTabContent extends React.Component {
             eventId: '',
             includeDEGers: true
         }
+        this.filterByEvent = this.filterByEvent.bind(this);
+        this.filterByCompany = this.filterByCompany.bind(this);
+        this.filterByEventAndCompany = this.filterByEventAndCompany.bind(this);
+    }
+
+    filterByEvent(person) {
+        if (this.state.eventId) {
+            return person.event === this.state.eventId;
+        }
+        return true;
+    }
+
+    filterByCompany(person) {
+        if (!this.state.includeDEGers) {
+            return person.email.toLowerCase().indexOf(`@degdigital.com`) === -1;
+        }
+        return true;
+    }
+
+    filterByEventAndCompany(person) {
+        return this.filterByEvent(person) && this.filterByCompany(person);
     }
 
     filterPeople() {
-        let filteredList = this.fakePeople;
-        if (this.state.eventId) {
-            filteredList = this.fakePeople.filter(p => p.event === this.state.eventId);
-        }
-        if (!this.state.includeDEGers) {
-            filteredList = filteredList.filter(p => p.email.toLowerCase().indexOf(`@degdigital.com`) === -1);
-        }
-        return filteredList;
+        return this.fakePeople.filter(this.filterByEventAndCompany);
     }
 
     onEventFilterChange(e) {
