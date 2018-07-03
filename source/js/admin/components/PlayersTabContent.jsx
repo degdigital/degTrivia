@@ -1,23 +1,41 @@
 import React from 'react';
 
+import listenService from '../services/dbListenService.js';
+
 export default class PlayersTabContent extends React.Component {
 
     constructor(props) {
         super(props);
-        // TODO: replace with data from service, have returned alphabetically by last name
-        this.fakePeople = [
-            {firstName: 'Jon', lastName: 'Snow', email: 'lordCommander@theWall.com', event: 'cnx18', id:'1'},
-            {firstName: 'Danerys', lastName: 'Targaryen', email: 'queen@westeros.org', event: 'beer30', id:'2'},
-            {firstName: 'Anna', lastName: 'Scheuler', email: 'ascheuler@degdigital.com', event: 'beer30', id:'3'}
-        ];
         this.state = {
             eventId: '',
-            includeDEGers: true,
-            filteredPeople: this.fakePeople
+            eventOpts: [],
+            filteredPeople: [],
+            fullPlayersList: [],
+            includeDEGers: true
         }
         this.filterByEvent = this.filterByEvent.bind(this);
         this.filterByCompany = this.filterByCompany.bind(this);
         this.filterByEventAndCompany = this.filterByEventAndCompany.bind(this);
+
+        this.bindListenEvents();
+    }
+
+    bindListenEvents() {
+        listenService.listenToEventsChange(val => {
+            this.setState({
+                eventOpts: val
+            })
+        });
+
+        listenService.listenToPlayersChange(val => {
+            const filteredList = val.filter(person => {
+                return this.filterByEventAndCompany(person, this.state.eventId, this.state.includeDEGers)
+            });
+            this.setState({
+                filteredPeople: filteredList,
+                fullPlayersList: val
+            })
+        });
     }
 
     filterByEvent(person, eventId) {
@@ -39,7 +57,7 @@ export default class PlayersTabContent extends React.Component {
     }
 
     filterPeople(eventId, includeDEG) {
-        return this.fakePeople.filter(person => this.filterByEventAndCompany(person, eventId, includeDEG));
+        return this.state.fullPlayersList.filter(person => this.filterByEventAndCompany(person, eventId, includeDEG));
     }
 
     onEventFilterChange(e) {
@@ -61,7 +79,7 @@ export default class PlayersTabContent extends React.Component {
     render() {
         return (
             <div>
-                <EventSelectField changeEvent={this.onEventFilterChange.bind(this)} />
+                <EventSelectField changeEvent={this.onEventFilterChange.bind(this)} eventOpts={this.state.eventOpts}/>
                 <NonDegersField changeEvent={this.onDegFilterChange.bind(this)} />
                 <PlayersTable players={this.state.filteredPeople} />
             </div>
@@ -70,14 +88,12 @@ export default class PlayersTabContent extends React.Component {
 }
 
 const EventSelectField = function(props) {
-    //TODO: make options dynamic from db
     return (
         <div>
             <label htmlFor="player-filter" >Filter by Event</label>
             <select className="" name="player-filter" id="player-filter" onChange={props.changeEvent}>
                 <option value="">All Events</option>
-                <option value="beer30">beer30</option>
-                <option value="cnx18">cnx18</option>
+                {props.eventOpts.map(opt => <option value={opt.id} key={opt.id}>{opt.name}</option>)}
             </select>
         </div>
     )
