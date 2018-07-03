@@ -12,44 +12,49 @@ export default class PlayersTabContent extends React.Component {
         ];
         this.state = {
             eventId: '',
-            includeDEGers: true
+            includeDEGers: true,
+            filteredPeople: this.fakePeople
         }
         this.filterByEvent = this.filterByEvent.bind(this);
         this.filterByCompany = this.filterByCompany.bind(this);
         this.filterByEventAndCompany = this.filterByEventAndCompany.bind(this);
     }
 
-    filterByEvent(person) {
-        if (this.state.eventId) {
-            return person.event === this.state.eventId;
+    filterByEvent(person, eventId) {
+        if (eventId) {
+            return person.event === eventId;
         }
         return true;
     }
 
-    filterByCompany(person) {
-        if (!this.state.includeDEGers) {
+    filterByCompany(person, includeDEGers) {
+        if (!includeDEGers) {
             return person.email.toLowerCase().indexOf(`@degdigital.com`) === -1;
         }
         return true;
     }
 
-    filterByEventAndCompany(person) {
-        return this.filterByEvent(person) && this.filterByCompany(person);
+    filterByEventAndCompany(person, eventId, includeDEG) {
+        return this.filterByEvent(person, eventId) && this.filterByCompany(person, includeDEG);
     }
 
-    filterPeople() {
-        return this.fakePeople.filter(this.filterByEventAndCompany);
+    filterPeople(eventId, includeDEG) {
+        return this.fakePeople.filter(person => this.filterByEventAndCompany(person, eventId, includeDEG));
     }
 
     onEventFilterChange(e) {
+        const newEventId = e.target.value;
         this.setState({
-            eventId: e.target.value
+            eventId: newEventId,
+            filteredPeople: this.filterPeople(newEventId, this.state.includeDEGers)
         });
     }
 
     onDegFilterChange(e) {
+        const shouldIncludeDEG = !e.target.checked
        this.setState({
-           includeDEGers: !e.target.checked
+           includeDEGers: shouldIncludeDEG,
+           filteredPeople: this.filterPeople(this.state.eventId, shouldIncludeDEG)
        })
     }
 
@@ -58,7 +63,7 @@ export default class PlayersTabContent extends React.Component {
             <div>
                 <EventSelectField changeEvent={this.onEventFilterChange.bind(this)} />
                 <NonDegersField changeEvent={this.onDegFilterChange.bind(this)} />
-                <PlayersTable players={this.filterPeople()} />
+                <PlayersTable players={this.state.filteredPeople} />
             </div>
         );
     }
