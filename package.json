@@ -81,6 +81,9 @@
     "degjs-numericycle": "git+https://git@github.com/degjs/numericycle.git",
     "firebase": "^4.13.1",
     "react": "^16.4.1",
-    "react-dom": "^16.4.1"
+    "react-dom": "^16.4.1",
+    "react-redux": "^5.0.7",
+    "redux": "^4.0.0",
+    "redux-thunk": "^2.3.0"
   }
 }

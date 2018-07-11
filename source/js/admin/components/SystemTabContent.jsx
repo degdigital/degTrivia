@@ -4,8 +4,8 @@ import QuestionDuration from './SystemTab/QuestionDuration.jsx';
 import KillSwitchEngage from './SystemTab/KillSwitchEngage.jsx';
 import ResetApp from './SystemTab/ResetApp.jsx';
 
-import listenService from '../services/dbListenService.js';
-import systemService from '../services/systemService.js';
+import listenService from '../services/dbListenService';
+import systemService from '../services/systemService';
 
 class SystemTabContent extends React.Component {
     constructor(props) {

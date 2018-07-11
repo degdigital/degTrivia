@@ -1,8 +1,10 @@
 import React from 'react';
 
 import listenService from '../services/dbListenService.js';
+import { fetchPlayers } from '../actions';
+import { connect } from 'react-redux';
 
-export default class PlayersTabContent extends React.Component {
+class PlayersTabContent extends React.Component {
 
     constructor(props) {
         super(props);
@@ -13,6 +15,9 @@ export default class PlayersTabContent extends React.Component {
             fullPlayersList: [],
             includeDEGers: true
         }
+
+        this.props.fetchPlayers();
+
         this.filterByEvent = this.filterByEvent.bind(this);
         this.filterByCompany = this.filterByCompany.bind(this);
         this.filterByEventAndCompany = this.filterByEventAndCompany.bind(this);
@@ -20,20 +25,23 @@ export default class PlayersTabContent extends React.Component {
         this.bindListenEvents();
     }
 
+    static getDerivedStateFromProps(props, state) {
+        if (Array.isArray(props.fullPlayersList) && !state.fullPlayersList.length) {
+            const newState = {
+                fullPlayersList: props.fullPlayersList
+            };
+            if (state.eventId === '' && state.includeDEGers) {
+                newState.filteredPeople = props.fullPlayersList;
+            }
+            return newState;
+        }
+        return null;
+    }
+
     bindListenEvents() {
         listenService.listenToEventsChange(val => {
             this.setState({
                 eventOpts: val
-            })
-        });
-
-        listenService.listenToPlayersChange(val => {
-            const filteredList = val.filter(person => {
-                return this.filterByEventAndCompany(person, this.state.eventId, this.state.includeDEGers)
-            });
-            this.setState({
-                filteredPeople: filteredList,
-                fullPlayersList: val
             })
         });
     }
@@ -86,6 +94,14 @@ export default class PlayersTabContent extends React.Component {
         );
     }
 }
+
+const mapStateToProps = ({data}) => {
+    return {
+        fullPlayersList: data
+    }
+}
+
+export default connect(mapStateToProps, { fetchPlayers })(PlayersTabContent);
 
 const EventSelectField = function(props) {
     return (

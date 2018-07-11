@@ -43,8 +43,9 @@ async function buildBundle(bundleInfo) {
 			nodeResolve(), 
 			commonjs({
 				namedExports: {
-					'react': ['React'],
-					'react-dom': ['ReactDOM']
+					'node_modules/react/index.js': ['Component', 'PureComponent', 'Fragment', 'Children', 'createElement'],
+                    'node_modules/react-dom/index.js': ['render'],
+                    'node_modules/redux-logger/dist/redux-logger.js': ['createLogger']
 				}
 			}),
 			globals()

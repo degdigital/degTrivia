@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Tabs } from './Tabs.jsx';
-import config from '../configs/tabsConfig.js';
+import config from '../configs/tabsConfig';
 
 class Manager extends React.Component {
 
