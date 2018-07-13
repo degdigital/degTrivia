@@ -28,15 +28,17 @@ class PlayersTabContent extends React.Component {
     }
 
     static getDerivedStateFromProps(props, state) {
-        if ((!state.fullPlayersList.length && props.fullPlayersList.length) ||
-            props.fullPlayersList.length !== state.fullPlayersList.length    
-        ) {
+        if (PlayersTabContent.hasPropsListUpdated(props.fullPlayersList, state.fullPlayersList)) {
             return {
                 fullPlayersList: props.fullPlayersList,
                 filteredPlayersList: props.fullPlayersList
             }
         }
         return null;
+    }
+
+    static hasPropsListUpdated(propsList, stateList) {
+        return propsList.length !== stateList.length;
     }
 
     filterByEvent(person, eventId) {
