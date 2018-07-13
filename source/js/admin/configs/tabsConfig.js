@@ -1,3 +1,8 @@
+import React from 'react';
+
+import PlayersTabContent from '../components/PlayersTabContent.jsx';
+import SystemTabContent from '../components/SystemTabContent.jsx';
+
 export default [
     {
         title: 'Manage Gameplay',
@@ -22,11 +27,11 @@ export default [
     {
         title: 'Players',
         id: 'players',
-        content: 'players'
+        content: <PlayersTabContent />
     },
     {
         title: 'System',
         id: 'system',
-        content: 'system'
+        content: <SystemTabContent />
     }
 ];
