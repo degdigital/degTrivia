@@ -1,8 +1,9 @@
 import React from 'react';
 
-import listenService from '../../services/dbListenService.js';
+import {fetchQuestionDuration} from '../actions/actions';
+import { connect } from 'react-redux';
 
-export default class QuestionDuration extends React.Component {
+class QuestionDuration extends React.Component {
     
     constructor(props) {
         super(props);
@@ -10,11 +11,16 @@ export default class QuestionDuration extends React.Component {
             questionDuration: 0
         };
 
-        listenService.listenToQDurationChange(val => {
-            this.setState({
-                questionDuration: val / 1000
-            });
-        });
+        this.props.fetchQuestionDuration();
+    }
+
+    static getDerivedStateFromProps(props, state) {
+        if (props.questionDuration !== state.questionDuration) {
+            return {
+                questionDuration: props.questionDuration
+            }
+        }
+        return null;
     }
 
     updateVal(e) {
@@ -45,3 +51,11 @@ export default class QuestionDuration extends React.Component {
         )
     }
 }
+
+const mapStateToProps = ({data}) => {
+    return {
+        questionDuration: data.question.duration,
+    }
+}
+
+export default connect(mapStateToProps, {fetchQuestionDuration})(QuestionDuration);

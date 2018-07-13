@@ -20,3 +20,11 @@ export const fetchEvents = () => async dispatch => {
     })
 }
 
+export const fetchQuestionDuration = () => async dispatch => {
+    listenService.listenToQDurationChange(val => {
+        dispatch({
+            type: FETCH_Q_DURATION,
+            resp: val / 1000
+        });
+    });
+}
