@@ -1,4 +1,4 @@
-import { FETCH_PLAYERS, FETCH_EVENTS } from './types';
+import { FETCH_PLAYERS, FETCH_EVENTS, FETCH_Q_DURATION, ON_Q_DURATION_CHANGE } from './types';
 
 import listenService from '../services/dbListenService.js';
 
@@ -27,4 +27,11 @@ export const fetchQuestionDuration = () => async dispatch => {
             resp: val / 1000
         });
     });
+}
+
+export const onQDurationChange = userInput => dispatch => {
+    dispatch({
+        type: ON_Q_DURATION_CHANGE,
+        resp: userInput
+    })
 }
