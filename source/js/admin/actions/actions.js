@@ -1,4 +1,10 @@
-import { FETCH_PLAYERS, FETCH_EVENTS, FETCH_Q_DURATION, ON_Q_DURATION_CHANGE } from './types';
+import { 
+    FETCH_PLAYERS,
+    FETCH_EVENTS, 
+    FETCH_Q_DURATION, 
+    ON_Q_DURATION_CHANGE, 
+    FETCH_APP_STATUS 
+} from './types';
 
 import listenService from '../services/dbListenService.js';
 
@@ -25,6 +31,15 @@ export const fetchQuestionDuration = () => async dispatch => {
         dispatch({
             type: FETCH_Q_DURATION,
             resp: val / 1000
+        });
+    });
+}
+
+export const fetchAppStatus = () => async dispatch => {
+    listenService.listenToAppDisableChange(val => {
+        dispatch({
+            type: FETCH_APP_STATUS,
+            resp: val
         });
     });
 }

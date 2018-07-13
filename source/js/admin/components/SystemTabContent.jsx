@@ -8,7 +8,7 @@ import ResetApp from './SystemTab/ResetApp.jsx';
 import listenService from '../services/dbListenService';
 import systemService from '../services/systemService';
 
-import {fetchQuestionDuration, onQDurationChange} from '../actions/actions';
+import {fetchQuestionDuration, fetchAppStatus, onQDurationChange} from '../actions/actions';
 
 class SystemTabContent extends React.Component {
     constructor(props) {
@@ -19,25 +19,18 @@ class SystemTabContent extends React.Component {
         };
 
         this.props.fetchQuestionDuration();
-        this.bindListenEvents();
+        this.props.fetchAppStatus();
     }
 
     static getDerivedStateFromProps(props, state) {
+        const retVal = {};
         if (props.questionDuration !== state.questionDuration) {
-            return {
-                questionDuration: props.questionDuration
-            }
+            retVal.questionDuration = props.questionDuration;
         }
-        return null;
-    }
-
-    bindListenEvents() {
-        // TODO: move this up the tree so other parts of the app can respond
-        listenService.listenToAppDisableChange(val => {
-            this.setState({
-                isAppDisabled: val
-            });
-        });
+        if (props.isAppDisabled !== state.isAppDisabled) {
+            retVal.isAppDisabled = props.isAppDisabled;
+        }
+        return retVal;
     }
 
     disableApp() {
@@ -74,12 +67,14 @@ class SystemTabContent extends React.Component {
 const mapStateToProps = ({data}) => {
     return {
         questionDuration: data.question.duration,
+        isAppDisabled: data.isAppDisabled
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
         fetchQuestionDuration: () => dispatch(fetchQuestionDuration()),
+        fetchAppStatus: () => dispatch(fetchAppStatus()),
         onQDurationChange: input => dispatch(onQDurationChange(input))
     }
 }

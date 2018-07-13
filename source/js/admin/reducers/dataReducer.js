@@ -1,4 +1,10 @@
-import { FETCH_PLAYERS, FETCH_EVENTS, FETCH_Q_DURATION, ON_Q_DURATION_CHANGE } from '../actions/types';
+import { 
+    FETCH_PLAYERS, 
+    FETCH_EVENTS, 
+    FETCH_Q_DURATION, 
+    ON_Q_DURATION_CHANGE,
+    FETCH_APP_STATUS
+} from '../actions/types';
 
 const initQuestionState = {
     duration: 0
@@ -39,6 +45,11 @@ export default (state = initialState, action) => {
                     ...state.question,
                     duration: action.resp
                 }
+            }
+        case FETCH_APP_STATUS:
+            return {
+                ...state,
+                isAppDisabled: action.resp
             }
         default:
             return state;
