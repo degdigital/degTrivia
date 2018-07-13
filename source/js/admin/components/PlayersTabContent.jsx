@@ -1,7 +1,10 @@
 import React from 'react';
 
-import listenService from '../services/dbListenService.js';
-import { fetchPlayers } from '../actions';
+import EventSelectField from './PlayersTab/EventSelectField';
+import NonDegersField from './PlayersTab/NonDegersField';
+import PlayersTable from './PlayersTab/PlayersTable';
+
+import { fetchPlayers, fetchEvents } from '../actions/actions';
 import { connect } from 'react-redux';
 
 class PlayersTabContent extends React.Component {
@@ -10,40 +13,30 @@ class PlayersTabContent extends React.Component {
         super(props);
         this.state = {
             eventId: '',
-            eventOpts: [],
-            filteredPeople: [],
-            fullPlayersList: [],
-            includeDEGers: true
+            includeDEGers: true,
+            filteredPlayersList: props.fullPlayersList,
+            fullPlayersList: props.fullPlayersList
         }
 
         this.props.fetchPlayers();
+        this.props.fetchEvents();
 
+        this.filterPeople = this.filterPeople.bind(this);
         this.filterByEvent = this.filterByEvent.bind(this);
         this.filterByCompany = this.filterByCompany.bind(this);
         this.filterByEventAndCompany = this.filterByEventAndCompany.bind(this);
-
-        this.bindListenEvents();
     }
 
     static getDerivedStateFromProps(props, state) {
-        if (Array.isArray(props.fullPlayersList) && !state.fullPlayersList.length) {
-            const newState = {
-                fullPlayersList: props.fullPlayersList
-            };
-            if (state.eventId === '' && state.includeDEGers) {
-                newState.filteredPeople = props.fullPlayersList;
+        if ((!state.fullPlayersList.length && props.fullPlayersList.length) ||
+            props.fullPlayersList.length !== state.fullPlayersList.length    
+        ) {
+            return {
+                fullPlayersList: props.fullPlayersList,
+                filteredPlayersList: props.fullPlayersList
             }
-            return newState;
         }
         return null;
-    }
-
-    bindListenEvents() {
-        listenService.listenToEventsChange(val => {
-            this.setState({
-                eventOpts: val
-            })
-        });
     }
 
     filterByEvent(person, eventId) {
@@ -72,7 +65,7 @@ class PlayersTabContent extends React.Component {
         const newEventId = e.target.value;
         this.setState({
             eventId: newEventId,
-            filteredPeople: this.filterPeople(newEventId, this.state.includeDEGers)
+            filteredPlayersList: this.filterPeople(newEventId, this.state.includeDEGers)
         });
     }
 
@@ -80,16 +73,16 @@ class PlayersTabContent extends React.Component {
         const shouldIncludeDEG = !e.target.checked
        this.setState({
            includeDEGers: shouldIncludeDEG,
-           filteredPeople: this.filterPeople(this.state.eventId, shouldIncludeDEG)
+           filteredPlayersList: this.filterPeople(this.state.eventId, shouldIncludeDEG)
        })
     }
 
     render() {
         return (
             <div>
-                <EventSelectField changeEvent={this.onEventFilterChange.bind(this)} eventOpts={this.state.eventOpts}/>
+                <EventSelectField changeEvent={this.onEventFilterChange.bind(this)} eventOpts={this.props.eventOpts}/>
                 <NonDegersField changeEvent={this.onDegFilterChange.bind(this)} />
-                <PlayersTable players={this.state.filteredPeople} />
+                <PlayersTable players={this.state.filteredPlayersList} />
             </div>
         );
     }
@@ -97,73 +90,9 @@ class PlayersTabContent extends React.Component {
 
 const mapStateToProps = ({data}) => {
     return {
-        fullPlayersList: data
+        eventOpts: data.events,
+        fullPlayersList: data.players
     }
 }
 
-export default connect(mapStateToProps, { fetchPlayers })(PlayersTabContent);
-
-const EventSelectField = function(props) {
-    return (
-        <div>
-            <label htmlFor="player-filter" >Filter by Event</label>
-            <select className="" name="player-filter" id="player-filter" onChange={props.changeEvent}>
-                <option value="">All Events</option>
-                {props.eventOpts.map(opt => <option value={opt.id} key={opt.id}>{opt.name}</option>)}
-            </select>
-        </div>
-    )
-}
-
-const NonDegersField = function(props) {
-    return (
-        <div>
-            <label htmlFor="non-deg-filter">View non-DEG-ers only</label>
-            <input name="non-deg-filter" 
-                id="non-deg-filter" 
-                onChange={props.changeEvent}
-                type="checkbox">
-            </input>
-        </div>
-    );
-}
-
-const PlayersTable = function(props) {
-    function renderNumPlayers() {
-        return <span>({props.players.length})</span>
-    }
-
-    function renderBody() {
-        return (
-            <tbody>
-                {props.players.map(player => {
-                    return (
-                        <tr key={player.id}>
-                            <td>{player.id}</td>
-                            <td>{player.firstName}</td>
-                            <td>{player.lastName}</td>
-                            <td>{player.email}</td>
-                            <td>{player.event}</td>
-                        </tr>
-                    )
-                })}
-            </tbody>
-        )
-    }
-
-    return (
-        <table>
-            <caption>Players {renderNumPlayers()}</caption>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Email</th>
-                    <th>Event</th>
-                </tr>
-            </thead>
-            {renderBody()}
-        </table>
-    )
-}
+export default connect(mapStateToProps, { fetchPlayers, fetchEvents })(PlayersTabContent);

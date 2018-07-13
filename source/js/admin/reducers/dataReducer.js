@@ -1,9 +1,23 @@
-import { FETCH_PLAYERS } from '../actions/types';
+import { FETCH_PLAYERS, FETCH_EVENTS } from '../actions/types';
 
-export default (state = {}, action) => {
+const initialState = {
+    events: [],
+    players: []
+}
+
+
+export default (state = initialState, action) => {
     switch (action.type) {
         case FETCH_PLAYERS:
-            return action.resp;
+            return {
+                ...state,
+                players: action.resp
+            }
+        case FETCH_EVENTS:
+            return {
+                ...state,
+                events: action.resp
+            }
         default:
             return state;
     }

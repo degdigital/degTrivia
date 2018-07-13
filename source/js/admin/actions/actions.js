@@ -1,4 +1,4 @@
-import { FETCH_PLAYERS } from './types';
+import { FETCH_PLAYERS, FETCH_EVENTS } from './types';
 
 import listenService from '../services/dbListenService.js';
 
@@ -10,3 +10,13 @@ export const fetchPlayers = () => async dispatch => {
         })
     })
 }
+
+export const fetchEvents = () => async dispatch => {
+    listenService.listenToEventsChange(resp => {
+        dispatch({
+            type: FETCH_EVENTS,
+            resp: resp
+        })
+    })
+}
+
