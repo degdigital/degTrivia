@@ -14,7 +14,6 @@ class SystemTabContent extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            isAppDisabled: false,
             questionDuration: null
         };
 
@@ -26,9 +25,6 @@ class SystemTabContent extends React.Component {
         const retVal = {};
         if (props.questionDuration !== state.questionDuration) {
             retVal.questionDuration = props.questionDuration;
-        }
-        if (props.isAppDisabled !== state.isAppDisabled) {
-            retVal.isAppDisabled = props.isAppDisabled;
         }
         return retVal;
     }
@@ -56,7 +52,7 @@ class SystemTabContent extends React.Component {
                     null
                 }
                 <hr />
-                <KillSwitchEngage disableApplication={this.disableApp.bind(this)} isAppDisabled={this.state.isAppDisabled} />
+                <KillSwitchEngage disableApplication={this.disableApp.bind(this)} isAppDisabled={this.props.isAppDisabled} />
                 <hr />
                 <ResetApp resetApplication={this.resetApp.bind(this)} />
             </div>
