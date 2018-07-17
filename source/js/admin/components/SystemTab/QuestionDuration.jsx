@@ -1,47 +1,30 @@
 import React from 'react';
 
-import listenService from '../../services/dbListenService.js';
-
-export default class QuestionDuration extends React.Component {
+const QuestionDuration = props => {
     
-    constructor(props) {
-        super(props);
-        this.state = {
-            questionDuration: 0
-        };
-
-        listenService.listenToQDurationChange(val => {
-            this.setState({
-                questionDuration: val / 1000
-            });
-        });
+    function updateVal(e) {
+        props.onQDurationChange(e.target.value);
     }
 
-    updateVal(e) {
-        this.setState({
-            questionDuration: e.target.value
-        });
-    }
-
-    updateQuestionDuration(e) {
+    function updateQuestionDuration(e) {
         e.preventDefault();
-        this.props.updateDuration(this.state.questionDuration * 1000);
+        props.updateDuration(props.questionDuration * 1000);
     }
 
-    render() {
-        return (
-            <form className="questionDuration-form" onSubmit={this.updateQuestionDuration.bind(this)}>
-                <label htmlFor="questionDuration">Question Duration (seconds)</label>
-                <input className="questionduration-input" 
-                    id="questionDuration" 
-                    name="questionDuration" 
-                    type="number" 
-                    onChange={this.updateVal.bind(this)} 
-                    required
-                    value={this.state.questionDuration}
-                />
-                <button type="submit">Update</button>
-            </form>
-        )
-    }
+    return (
+        <form className="questionDuration-form" onSubmit={updateQuestionDuration.bind(this)}>
+            <label htmlFor="questionDuration">Question Duration (seconds)</label>
+            <input className="questionduration-input" 
+                id="questionDuration" 
+                name="questionDuration" 
+                type="number" 
+                onChange={updateVal.bind(this)} 
+                required
+                value={props.questionDuration}
+            />
+            <button type="submit">Update</button>
+        </form>
+    )
 }
+
+export default QuestionDuration;
