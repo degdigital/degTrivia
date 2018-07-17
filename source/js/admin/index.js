@@ -12,6 +12,10 @@ import Manager from './components/Manager.jsx';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {Provider, connect} from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import reduxThunk from 'redux-thunk';
+import reducers from './reducers/index.js';
 
 class AdminApp extends React.Component {
 	constructor(props) {
@@ -48,16 +52,23 @@ class AdminApp extends React.Component {
 		const childEl = this.state.isAdmin ?
 						<Manager /> :
 						<LoginForm /> ;
-		return <div>
-			{ this.state.isLoading ?
-				<h1>Loading...</h1> :
-				childEl
-			}
-		</div>
+
+		return (
+			<div>
+				{ this.state.isLoading ?
+					<h1>Loading...</h1> :
+					childEl
+				}
+			</div>
+		)
 	}
 }
 
+const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
+
 ReactDOM.render(
-	<AdminApp />,
+	<Provider store={store}>
+		<AdminApp />
+	</Provider>,
 	document.getElementById('app')
 )

@@ -4,33 +4,45 @@ import QuestionDuration from './SystemTab/QuestionDuration.jsx';
 import KillSwitchEngage from './SystemTab/KillSwitchEngage.jsx';
 import ResetApp from './SystemTab/ResetApp.jsx';
 
+import listenService from '../services/dbListenService';
+import systemService from '../services/systemService';
+
 class SystemTabContent extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            isAppDisabled: false //TODO: get from DB
+            isAppDisabled: false
         };
+
+        this.bindListenEvents();
+    }
+
+    bindListenEvents() {
+        // TODO: move this up the tree so other parts of the app can respond
+        listenService.listenToAppDisableChange(val => {
+            this.setState({
+                isAppDisabled: val
+            });
+        });
     }
 
     disableApp() {
-        //TODO: call to firebase, on return
-        this.setState({
-            isAppDisabled: true
-        })
+        systemService.disableApplication();
     }
 
     resetApp() {
-        //TODO: call to firebase, on return
-        this.setState({
-            isAppDisabled: false
-        })
+        systemService.resetApplication();
+    }
+
+    updateQuestionDuration(newTime) {
+        systemService.updateQuestionDuration(newTime);
     }
 
     render() {
         return (
             <div>
                 <h2>This tab holds settings that will affect the entire system.</h2>
-                <QuestionDuration />
+                <QuestionDuration updateDuration={this.updateQuestionDuration.bind(this)} />
                 <hr />
                 <KillSwitchEngage disableApplication={this.disableApp.bind(this)} isAppDisabled={this.state.isAppDisabled} />
                 <hr />

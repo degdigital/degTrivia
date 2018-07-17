@@ -1,12 +1,20 @@
 import React from 'react';
 
+import listenService from '../../services/dbListenService.js';
+
 export default class QuestionDuration extends React.Component {
     
     constructor(props) {
         super(props);
         this.state = {
-            questionDuration: 15 // TODO: get question duration from firebase and convert to seconds
+            questionDuration: 0
         };
+
+        listenService.listenToQDurationChange(val => {
+            this.setState({
+                questionDuration: val / 1000
+            });
+        });
     }
 
     updateVal(e) {
@@ -17,10 +25,9 @@ export default class QuestionDuration extends React.Component {
 
     updateQuestionDuration(e) {
         e.preventDefault();
-        console.log(this.state.questionDuration * 1000);
+        this.props.updateDuration(this.state.questionDuration * 1000);
     }
 
-    
     render() {
         return (
             <form className="questionDuration-form" onSubmit={this.updateQuestionDuration.bind(this)}>
