@@ -5,7 +5,6 @@ import QuestionDuration from './SystemTab/QuestionDuration.jsx';
 import KillSwitchEngage from './SystemTab/KillSwitchEngage.jsx';
 import ResetApp from './SystemTab/ResetApp.jsx';
 
-import listenService from '../services/dbListenService';
 import systemService from '../services/systemService';
 
 import {fetchQuestionDuration, fetchAppStatus, onQDurationChange} from '../actions/actions';

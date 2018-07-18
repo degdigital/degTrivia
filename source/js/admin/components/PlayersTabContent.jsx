@@ -1,6 +1,6 @@
 import React from 'react';
 
-import EventSelectField from './PlayersTab/EventSelectField';
+import EventSelectField from './Shared/EventSelectField';
 import NonDegersField from './PlayersTab/NonDegersField';
 import PlayersTable from './PlayersTab/PlayersTable';
 
@@ -34,6 +34,7 @@ class PlayersTabContent extends React.Component {
                 filteredPlayersList: props.fullPlayersList
             }
         }
+        // TODO: set active event id as default id
         return null;
     }
 
@@ -82,7 +83,11 @@ class PlayersTabContent extends React.Component {
     render() {
         return (
             <div>
-                <EventSelectField changeEvent={this.onEventFilterChange.bind(this)} eventOpts={this.props.eventOpts}/>
+                <EventSelectField changeEvent={this.onEventFilterChange.bind(this)} 
+                    eventOpts={this.props.eventOpts}
+                    label='Filter by Event'
+                    defaultOptText='All Events'
+                />
                 <NonDegersField changeEvent={this.onDegFilterChange.bind(this)} />
                 <PlayersTable players={this.state.filteredPlayersList} />
             </div>

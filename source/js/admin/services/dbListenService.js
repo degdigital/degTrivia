@@ -38,9 +38,14 @@ function listenToQDurationChange(callback) {
     listenToFB('questionDuration', callback);
 }
 
+function listenToActiveEventChange(callback) {
+    listenToFB('activeEventId', callback);
+}
+
 export default {
     listenToEventsChange,
     listenToPlayersChange,
     listenToAppDisableChange,
-    listenToQDurationChange
+    listenToQDurationChange,
+    listenToActiveEventChange
 };

@@ -3,7 +3,8 @@ import {
     FETCH_EVENTS, 
     FETCH_Q_DURATION, 
     ON_Q_DURATION_CHANGE, 
-    FETCH_APP_STATUS 
+    FETCH_APP_STATUS,
+    FETCH_ACTIVE_EVENT
 } from './types';
 
 import listenService from '../services/dbListenService.js';
@@ -44,6 +45,16 @@ export const fetchAppStatus = () => async dispatch => {
     });
 }
 
+export const fetchActiveEventId = () => dispatch => {
+    listenService.listenToActiveEventChange(val => {
+        dispatch({
+            type: FETCH_ACTIVE_EVENT,
+            resp: val
+        })
+    })
+} 
+
+// like onChange event when user is typing in input
 export const onQDurationChange = userInput => dispatch => {
     dispatch({
         type: ON_Q_DURATION_CHANGE,
