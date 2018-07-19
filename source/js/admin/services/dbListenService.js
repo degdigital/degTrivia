@@ -1,15 +1,5 @@
 import dbService from '../../services/dbService.js';
-
-
-function objToArray(data = {}) {
-    const keys = Object.keys(data);
-
-    return keys.reduce((accum, key) => {
-        const newItem = data[key];
-        newItem.id = key;
-        return accum.concat([newItem]);
-    }, []);
-}
+import {objToArray} from './utils/dbUtils';
 
 function listenToFB(ref, callback, convertToArray = false) {
     dbService.getDb().ref(ref).on('value', snapshot => {
@@ -39,6 +29,10 @@ function listenToQDurationChange(callback) {
 }
 
 function listenToActiveEventChange(callback) {
+    listenToFB('activeEventId', callback);
+}
+
+function listenToActiveGameChange(callback) {
     listenToFB('activeEventId', callback);
 }
 

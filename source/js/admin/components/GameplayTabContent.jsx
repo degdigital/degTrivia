@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import EventSelectField from './Shared/EventSelectField';
+import SelectField from './Shared/SelectField';
 
-import gameEventService from '../services/gameEventService';
+import manageGameplayService from '../services/manageGameplayService';
 import { fetchEvents } from '../actions/actions';
 
 class GameplayTabContent extends React.Component {
@@ -13,26 +13,34 @@ class GameplayTabContent extends React.Component {
     }
 
     onEventFieldChange(e) {
-        gameEventService.setActiveEvent(e.target.value);
+        manageGameplayService.setActiveEvent(e.target.value);
+    }
+
+    onGameFieldChange(e) {
+        manageGameplayService.setActiveGame(this.props.activeEventId, e.target.value);
     }
 
     render() {
         return (
             <div>
-                <EventSelectField changeEvent={this.onEventFieldChange.bind(this)}
-                    eventOpts={this.props.eventOpts}
+                <SelectField changeEvent={this.onEventFieldChange.bind(this)}
+                    opts={this.props.eventOpts}
                     label='Active Event'
                     defaultOptText='No active event'
                     selectedOpt={this.props.activeEventId}
+                    selectId='event-select'
                 />
-                <div className="field">
-                    <label className="label" htmlFor="activeGame">Active Game</label>
-                    <select className="input input--select" name="activeGame" id="activeGame">
-                        <option value="1">Game 1</option>
-                        <option value="2">Game 2</option>
-                        <option value="3">Game 3</option>
-                    </select>
-                </div>
+
+                {this.props.activeEventId ?
+                    <SelectField changeEvent={this.onGameFieldChange.bind(this)}
+                        opts={this.props.gameOpts}
+                        label='Active Game'
+                        defaultOptText='No active game'
+                        selectedOpt={this.props.activeGameId}
+                        selectId='game-select'
+                    /> :
+                    null
+                }
                 <div className="field">
                     <label className="label" htmlFor="activeQuestion">Active Question</label>
                     <select className="input input--select" name="activeQuestion" id="activeQuestion">
@@ -50,7 +58,9 @@ class GameplayTabContent extends React.Component {
 const mapStateToProps = ({data}) => {
     return {
         eventOpts: data.events,
-        activeEventId: data.activeEventId
+        gameOpts: data.games,
+        activeEventId: data.activeEventId,
+        activeGameId: data.activeGameId
     };
 }
 

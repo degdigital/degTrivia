@@ -1,22 +1,14 @@
-import { 
-    FETCH_PLAYERS,
-    FETCH_EVENTS, 
-    FETCH_Q_DURATION, 
-    ON_Q_DURATION_CHANGE, 
-    FETCH_APP_STATUS,
-    FETCH_ACTIVE_EVENT
+import {
+    FETCH_EVENTS,
+    FETCH_APP_STATUS
 } from './types';
 
 import listenService from '../services/dbListenService.js';
 
-export const fetchPlayers = () => async dispatch => {
-    listenService.listenToPlayersChange(resp => {
-        dispatch({
-            type: FETCH_PLAYERS,
-            resp: resp
-        })
-    })
-}
+import {fetchActiveEventId, getActiveGameId, getGamesForEvent} from './manageGameplayActions';
+import {fetchPlayers} from './playerTabActions';
+import {fetchQuestionDuration, onQDurationChange} from './systemActions';
+
 
 export const fetchEvents = () => async dispatch => {
     listenService.listenToEventsChange(resp => {
@@ -25,15 +17,6 @@ export const fetchEvents = () => async dispatch => {
             resp: resp
         })
     })
-}
-
-export const fetchQuestionDuration = () => async dispatch => {
-    listenService.listenToQDurationChange(val => {
-        dispatch({
-            type: FETCH_Q_DURATION,
-            resp: val / 1000
-        });
-    });
 }
 
 export const fetchAppStatus = () => async dispatch => {
@@ -45,19 +28,11 @@ export const fetchAppStatus = () => async dispatch => {
     });
 }
 
-export const fetchActiveEventId = () => dispatch => {
-    listenService.listenToActiveEventChange(val => {
-        dispatch({
-            type: FETCH_ACTIVE_EVENT,
-            resp: val
-        })
-    })
-} 
-
-// like onChange event when user is typing in input
-export const onQDurationChange = userInput => dispatch => {
-    dispatch({
-        type: ON_Q_DURATION_CHANGE,
-        resp: userInput
-    })
+export {
+    fetchActiveEventId,
+    getActiveGameId,
+    getGamesForEvent,
+    fetchPlayers,
+    fetchQuestionDuration,
+    onQDurationChange
 }
