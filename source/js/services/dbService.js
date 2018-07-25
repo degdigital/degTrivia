@@ -52,8 +52,10 @@ const dbService = function() {
 		const gameTimes = Object.keys(games).map(gameId => games[gameId].startTime)
 			.filter(gameTime => gameTime >= now);
 
-		if (gameTimes) {
+		if (gameTimes && gameTimes.length > 0) {
 			nextGameTime = new Date(gameTimes.sort()[0]);
+		} else {
+			nextGameTime = null;
 		}
 		return Promise.resolve(nextGameTime);
 	}
