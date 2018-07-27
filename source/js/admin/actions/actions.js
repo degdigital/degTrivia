@@ -5,7 +5,16 @@ import {
 
 import listenService from '../services/dbListenService.js';
 
-import {fetchActiveEventId, getActiveGameId, getGamesForEvent} from './manageGameplayActions';
+import {
+    fetchActiveEventId, 
+    getActiveGameId, 
+    getActiveQuestionId, 
+    getGamesForEvent, 
+    getQuestionsForGame,
+    updateActiveEventId,
+    updateActiveGameId,
+    updateActiveQuestionId
+} from './manageGameplayActions';
 import {fetchPlayers} from './playerTabActions';
 import {fetchQuestionDuration, onQDurationChange} from './systemActions';
 
@@ -31,7 +40,12 @@ export const fetchAppStatus = () => async dispatch => {
 export {
     fetchActiveEventId,
     getActiveGameId,
+    getActiveQuestionId,
     getGamesForEvent,
+    getQuestionsForGame,
+    updateActiveEventId,
+    updateActiveGameId,
+    updateActiveQuestionId,
     fetchPlayers,
     fetchQuestionDuration,
     onQDurationChange

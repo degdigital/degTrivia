@@ -1,4 +1,8 @@
 export function objToArray(data = {}) {
+    if (!data) {
+        return [];
+    }
+    
     const keys = Object.keys(data);
 
     return keys.reduce((accum, key) => {

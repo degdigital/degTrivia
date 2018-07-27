@@ -7,7 +7,8 @@ import {
     FETCH_APP_STATUS,
     FETCH_ACTIVE_EVENT,
     FETCH_ACTIVE_GAME_ID,
-    FETCH_ACTIVE_QUESTION
+    FETCH_ACTIVE_QUESTION,
+    FETCH_QS_FOR_GAME
 } from '../actions/types';
 
 const initQuestionState = {
@@ -18,6 +19,7 @@ const initialState = {
     events: [],
     players: [],
     games: [],
+    questions: [],
     question: initQuestionState,
     isAppDisabled: false,
     activeEventId: ''
@@ -40,6 +42,11 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 games: action.resp
+            }
+        case FETCH_QS_FOR_GAME:
+            return {
+                ...state,
+                questions: action.resp
             }
         case FETCH_Q_DURATION:
             return {

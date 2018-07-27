@@ -32,10 +32,6 @@ function listenToActiveEventChange(callback) {
     listenToFB('activeEventId', callback);
 }
 
-function listenToActiveGameChange(callback) {
-    listenToFB('activeEventId', callback);
-}
-
 export default {
     listenToEventsChange,
     listenToPlayersChange,

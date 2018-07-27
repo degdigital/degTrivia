@@ -4,7 +4,16 @@ import { connect } from 'react-redux';
 import SelectField from './Shared/SelectField';
 
 import manageGameplayService from '../services/manageGameplayService';
-import { fetchEvents } from '../actions/actions';
+import {
+    fetchEvents,
+    getActiveGameId,
+    getGamesForEvent,
+    getActiveQuestionId,
+    getQuestionsForGame,
+    updateActiveEventId,
+    updateActiveGameId,
+    updateActiveQuestionId
+} from '../actions/actions';
 
 class GameplayTabContent extends React.Component {
 
@@ -13,11 +22,27 @@ class GameplayTabContent extends React.Component {
     }
 
     onEventFieldChange(e) {
-        manageGameplayService.setActiveEvent(e.target.value);
+        const eventId = e.target.value;
+        // TODO: dispatch an event to do this?
+        manageGameplayService.setActiveEvent(eventId).then(() => {
+            this.props.getActiveGameId(eventId);
+            this.props.getGamesForEvent(eventId);
+        });
     }
 
     onGameFieldChange(e) {
-        manageGameplayService.setActiveGame(this.props.activeEventId, e.target.value);
+        const gameId = e.target.value;
+        // TODO: dispatch an event to do this?
+        manageGameplayService.setActiveGame(this.props.activeEventId, gameId).then(() => {
+            this.props.updateActiveGameId(gameId);
+        })
+    }
+
+    onQuestionFieldChange(e) {
+        const qId = e.target.value;
+        manageGameplayService.setActiveQuestion(this.props.activeGameId, qId).then(() => {
+            this.props.updateActiveQuestionId(qId)
+        });
     }
 
     render() {
@@ -41,14 +66,17 @@ class GameplayTabContent extends React.Component {
                     /> :
                     null
                 }
-                <div className="field">
-                    <label className="label" htmlFor="activeQuestion">Active Question</label>
-                    <select className="input input--select" name="activeQuestion" id="activeQuestion">
-                        <option value="1">Q 1</option>
-                        <option value="2">Q 2</option>
-                        <option value="3">Q 3</option>
-                    </select>
-                </div>
+
+                {this.props.activeEventId && this.props.activeGameId ?
+                    <SelectField changeEvent={this.onQuestionFieldChange.bind(this)}
+                        opts={this.props.questionOpts}
+                        label='Active Question'
+                        defaultOptText='No active question'
+                        selectedOpt={this.props.activeQuestionId}
+                        selectId='question-select'
+                    /> :
+                    null
+                }
                 <button className="button">End Game</button>
             </div>
         )
@@ -59,9 +87,24 @@ const mapStateToProps = ({data}) => {
     return {
         eventOpts: data.events,
         gameOpts: data.games,
+        questionOpts: data.questions,
         activeEventId: data.activeEventId,
-        activeGameId: data.activeGameId
+        activeGameId: data.activeGameId,
+        activeQuestionId: data.activeQuestionId
     };
 }
 
-export default connect(mapStateToProps, {fetchEvents})(GameplayTabContent);
+const mapDispatchToProps = dispatch => {
+    return {
+        fetchEvents: () => dispatch(fetchEvents()),
+        getActiveGameId: input => dispatch(getActiveGameId(input)),
+        getGamesForEvent: input => dispatch(getGamesForEvent(input)),
+        getActiveQuestionId: input => dispatch(getActiveQuestionId(input)),
+        getQuestionsForGame: input => dispatch(getQuestionsForGame(input)),
+        updateActiveEventId: input => dispatch(updateActiveEventId(input)),
+        updateActiveGameId: input => dispatch(updateActiveGameId(input)),
+        updateActiveQuestionId: input => dispatch(updateActiveQuestionId(input))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(GameplayTabContent);
