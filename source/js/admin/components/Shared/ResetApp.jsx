@@ -1,10 +1,11 @@
 import React from 'react';
+import systemService from '../../services/systemService';
 
 export default function ResetApp(props) {
 
     function resetApp() {
         if(confirm('Are you sure you want to disable the application?')) {
-            props.resetApplication();
+            systemService.resetApplication();
         }
     }
 

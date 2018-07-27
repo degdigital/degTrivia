@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import SelectField from './Shared/SelectField';
+import AppDisabledOverlay from './Shared/AppDisabledOverlay.jsx';
 
 import manageGameplayService from '../services/manageGameplayService';
 import {
@@ -47,37 +48,46 @@ class GameplayTabContent extends React.Component {
 
     render() {
         return (
-            <div>
-                <SelectField changeEvent={this.onEventFieldChange.bind(this)}
-                    opts={this.props.eventOpts}
-                    label='Active Event'
-                    defaultOptText='No active event'
-                    selectedOpt={this.props.activeEventId}
-                    selectId='event-select'
-                />
+            <div className="columns columns--two">
+                <div className="column">
+                    <SelectField changeEvent={this.onEventFieldChange.bind(this)}
+                        opts={this.props.eventOpts}
+                        label='Active Event'
+                        defaultOptText='No active event'
+                        selectedOpt={this.props.activeEventId}
+                        selectId='event-select'
+                        isDisabled={this.props.isAppDisabled}
+                    />
 
-                {this.props.activeEventId ?
-                    <SelectField changeEvent={this.onGameFieldChange.bind(this)}
-                        opts={this.props.gameOpts}
-                        label='Active Game'
-                        defaultOptText='No active game'
-                        selectedOpt={this.props.activeGameId}
-                        selectId='game-select'
-                    /> :
+                    {this.props.activeEventId ?
+                        <SelectField changeEvent={this.onGameFieldChange.bind(this)}
+                            opts={this.props.gameOpts}
+                            label='Active Game'
+                            defaultOptText='No active game'
+                            selectedOpt={this.props.activeGameId}
+                            selectId='game-select'
+                            isDisabled={this.props.isAppDisabled}
+                        /> :
+                        null
+                    }
+
+                    {this.props.activeEventId && this.props.activeGameId ?
+                        <SelectField changeEvent={this.onQuestionFieldChange.bind(this)}
+                            opts={this.props.questionOpts}
+                            label='Active Question'
+                            defaultOptText='No active question'
+                            selectedOpt={this.props.activeQuestionId}
+                            selectId='question-select'
+                            isDisabled={this.props.isAppDisabled}
+                        /> :
+                        null
+                    }
+                    <button className="button" disabled={this.props.isAppDisabled}>End Game</button>
+                </div>
+                { this.props.isAppDisabled ?
+                    <div className="column"><AppDisabledOverlay content="App is currently disabled. Please reset to manage gameplay."/></div> :
                     null
                 }
-
-                {this.props.activeEventId && this.props.activeGameId ?
-                    <SelectField changeEvent={this.onQuestionFieldChange.bind(this)}
-                        opts={this.props.questionOpts}
-                        label='Active Question'
-                        defaultOptText='No active question'
-                        selectedOpt={this.props.activeQuestionId}
-                        selectId='question-select'
-                    /> :
-                    null
-                }
-                <button className="button">End Game</button>
             </div>
         )
     }
@@ -90,7 +100,8 @@ const mapStateToProps = ({data}) => {
         questionOpts: data.questions,
         activeEventId: data.activeEventId,
         activeGameId: data.activeGameId,
-        activeQuestionId: data.activeQuestionId
+        activeQuestionId: data.activeQuestionId,
+        isAppDisabled: data.isAppDisabled
     };
 }
 

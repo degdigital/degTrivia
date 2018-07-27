@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 
 import QuestionDuration from './SystemTab/QuestionDuration.jsx';
 import KillSwitchEngage from './SystemTab/KillSwitchEngage.jsx';
-import ResetApp from './SystemTab/ResetApp.jsx';
+import ResetApp from './Shared/ResetApp.jsx';
 
 import systemService from '../services/systemService';
 
-import {fetchQuestionDuration, fetchAppStatus, onQDurationChange} from '../actions/actions';
+import {fetchQuestionDuration, onQDurationChange} from '../actions/actions';
 
 class SystemTabContent extends React.Component {
     constructor(props) {
@@ -17,7 +17,7 @@ class SystemTabContent extends React.Component {
         };
 
         this.props.fetchQuestionDuration();
-        this.props.fetchAppStatus();
+
     }
 
     static getDerivedStateFromProps(props, state) {
@@ -28,13 +28,6 @@ class SystemTabContent extends React.Component {
         return retVal;
     }
 
-    disableApp() {
-        systemService.disableApplication();
-    }
-
-    resetApp() {
-        systemService.resetApplication();
-    }
 
     updateQuestionDuration(newTime) {
         systemService.updateQuestionDuration(newTime);
@@ -51,9 +44,9 @@ class SystemTabContent extends React.Component {
                     null
                 }
                 <hr />
-                <KillSwitchEngage disableApplication={this.disableApp.bind(this)} isAppDisabled={this.props.isAppDisabled} />
+                <KillSwitchEngage isAppDisabled={this.props.isAppDisabled} />
                 <hr />
-                <ResetApp resetApplication={this.resetApp.bind(this)} />
+                <ResetApp />
             </div>
         )
     }
@@ -69,7 +62,6 @@ const mapStateToProps = ({data}) => {
 const mapDispatchToProps = dispatch => {
     return {
         fetchQuestionDuration: () => dispatch(fetchQuestionDuration()),
-        fetchAppStatus: () => dispatch(fetchAppStatus()),
         onQDurationChange: input => dispatch(onQDurationChange(input))
     }
 }

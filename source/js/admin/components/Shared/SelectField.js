@@ -7,7 +7,7 @@ const SelectField = function(props) {
     return (
         <div>
             <label htmlFor={selectId} >{props.label}</label>
-            <select className="" name={selectId} id={selectId} onChange={props.changeEvent} value={props.selectedOpt || ''}>
+            <select className="" name={selectId} id={selectId} onChange={props.changeEvent} value={props.selectedOpt || ''} disabled={props.isDisabled ? true : false}>
                 <option value="">{props.defaultOptText}</option>
                 {props.opts.map(opt => (
                     <option value={opt.id} key={opt.id}>{opt.name}</option>
