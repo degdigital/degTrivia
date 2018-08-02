@@ -7,7 +7,9 @@ import AppDisabledOverlay from './Shared/AppDisabledOverlay.jsx';
 import {
     setActiveEventId,
     setActiveGameId,
-    setActiveQuestionId
+    setActiveQuestionId,
+    activateHostIsTalking,
+    endGame
 } from '../actions/actions';
 
 const GameplayTabContent = function(props) {
@@ -22,6 +24,14 @@ const GameplayTabContent = function(props) {
 
     function onQuestionFieldChange(e) {
         props.setActiveQuestionId(props.activeGameId, e.target.value);
+    }
+
+    function activateHostIsTalking() {
+        props.activateHostIsTalking(props.activeGameId);
+    }
+
+    function endGame() {
+        props.endGame(props.activeGameId);
     }
 
     return (
@@ -60,7 +70,16 @@ const GameplayTabContent = function(props) {
                     null
                 }
                 {props.activeEventId && props.activeGameId ?
-                    <button className="button" disabled={props.isAppDisabled}>End Game</button> :
+                    <button className="button" disabled={props.isAppDisabled} onClick={activateHostIsTalking.bind(this)}>
+                        Host is talking
+                    </button> :
+                    null
+                }
+
+                {props.activeEventId && props.activeGameId ?
+                    <button className="button" disabled={props.isAppDisabled} onClick={endGame.bind(this)}>
+                        End Game
+                    </button> :
                     null
                 }
             </div>
@@ -88,7 +107,9 @@ const mapDispatchToProps = dispatch => {
     return {
         setActiveEventId: input => dispatch(setActiveEventId(input)),
         setActiveGameId: (eventId, gameId) => dispatch(setActiveGameId(eventId, gameId)),
-        setActiveQuestionId: (gameId, qId) => dispatch(setActiveQuestionId(gameId, qId))
+        setActiveQuestionId: (gameId, qId) => dispatch(setActiveQuestionId(gameId, qId)),
+        activateHostIsTalking: gameId => dispatch(activateHostIsTalking(gameId)),
+        endGame: gameId => dispatch(endGame(gameId))
     }
 }
 

@@ -41,10 +41,26 @@ function getQuestionsForGame(gameId) {
         });
 }
 
+function setHostIsTalking(gameId) {
+    return dbService.getDb().ref(`games/${gameId}`).update({
+		showQuestionResults: false,
+		showBetweenQuestions: true
+	})
+}
+
+function endGame(gameId) {
+    return dbService.getDb().ref(`games/${gameId}`).update({
+        showGameOver: true,
+        showQuestionResults: false
+    });
+}
+
 export default {
     setActiveEvent,
     setActiveGame,
     setActiveQuestion,
     getGamesForEvent,
-    getQuestionsForGame
+    getQuestionsForGame,
+    setHostIsTalking,
+    endGame
 }

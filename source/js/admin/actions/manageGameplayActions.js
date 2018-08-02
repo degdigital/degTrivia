@@ -23,6 +23,13 @@ export const setActiveQuestionId = (gameId, qId) => dispatch => {
     manageGameplayService.setActiveQuestion(gameId, qId);
 }
 
+export const activateHostIsTalking = gameId => dispatch => {
+    manageGameplayService.setHostIsTalking(gameId);
+}
+
+export const endGame = gameId => dispatch => {
+    manageGameplayService.endGame(gameId);
+}
 
 // listen to db nodes
 export const listenToActiveEventId = () => (dispatch, getState) => {
