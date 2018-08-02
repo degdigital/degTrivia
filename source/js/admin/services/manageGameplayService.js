@@ -1,5 +1,5 @@
 import dbService from '../../services/dbService.js';
-import {objToArray} from './utils/dbUtils';
+import {objToArray, getValue} from './utils/dbUtils';
 
 function setActiveEvent(eventId) {
     return dbService.getDb().ref().update({
@@ -20,18 +20,15 @@ function setActiveQuestion(activeGameId, qId) {
 }
 
 function getActiveEvent() {
-    return dbService.getDb().ref('activeEventId').once('value')
-        .then(snap => snap.val());
+    return getValue('activeEventId');
 }
 
 function getActiveGame(eventId) {
-    return dbService.getDb().ref(`events/${eventId}/activeGameId`).once('value')
-        .then(snap => snap.val());
+    return getValue(`events/${eventId}/activeGameId`);
 }
 
 function getActiveQuestion(gameId) {
-    return dbService.getDb().ref(`games/${gameId}/activeQuestionId`).once('value')
-        .then(snap => snap.val());
+    return getValue(`games/${gameId}/activeQuestionId`);
 }
 
 function getGamesForEvent(eventId) {
@@ -40,9 +37,8 @@ function getGamesForEvent(eventId) {
 }
 
 function getQuestionsForGame(gameId) {
-    return dbService.getDb().ref(`games/${gameId}/questions`).once('value')
-        .then(snap => {
-            const questions = snap.val();
+    return getValue(`games/${gameId}/questions`)
+        .then(questions => {
             if (!questions) {
                 return [];
             }
