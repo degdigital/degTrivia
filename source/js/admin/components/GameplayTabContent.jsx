@@ -1,12 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import SelectField from './Shared/SelectField';
+import SelectField from './Shared/SelectField.jsx';
 import AppDisabledOverlay from './Shared/AppDisabledOverlay.jsx';
 
 import manageGameplayService from '../services/manageGameplayService';
 import {
-    fetchEvents,
     getActiveGameId,
     getGamesForEvent,
     getActiveQuestionId,
@@ -16,81 +15,78 @@ import {
     updateActiveQuestionId
 } from '../actions/actions';
 
-class GameplayTabContent extends React.Component {
+const GameplayTabContent = function(props) {
 
-    componentDidMount() {
-        this.props.fetchEvents();
-    }
-
-    onEventFieldChange(e) {
+    function onEventFieldChange(e) {
         const eventId = e.target.value;
-        // TODO: dispatch an event to do this?
+        // TODO: dispatch an action to do this?
         manageGameplayService.setActiveEvent(eventId).then(() => {
-            this.props.getActiveGameId(eventId);
-            this.props.getGamesForEvent(eventId);
+            props.getActiveGameId(eventId);
+            props.getGamesForEvent(eventId);
         });
     }
 
-    onGameFieldChange(e) {
+    function onGameFieldChange(e) {
         const gameId = e.target.value;
         // TODO: dispatch an event to do this?
-        manageGameplayService.setActiveGame(this.props.activeEventId, gameId).then(() => {
-            this.props.updateActiveGameId(gameId);
+        manageGameplayService.setActiveGame(props.activeEventId, gameId).then(() => {
+            props.updateActiveGameId(gameId);
         })
     }
 
-    onQuestionFieldChange(e) {
+    function onQuestionFieldChange(e) {
         const qId = e.target.value;
-        manageGameplayService.setActiveQuestion(this.props.activeGameId, qId).then(() => {
-            this.props.updateActiveQuestionId(qId)
+        manageGameplayService.setActiveQuestion(props.activeGameId, qId).then(() => {
+            props.updateActiveQuestionId(qId)
         });
     }
 
-    render() {
-        return (
-            <div className="columns columns--two">
-                <div className="column">
-                    <SelectField changeEvent={this.onEventFieldChange.bind(this)}
-                        opts={this.props.eventOpts}
-                        label='Active Event'
-                        defaultOptText='No active event'
-                        selectedOpt={this.props.activeEventId}
-                        selectId='event-select'
-                        isDisabled={this.props.isAppDisabled}
-                    />
+    return (
+        <div className="columns columns--two">
+            <div className="column">
+                <SelectField changeEvent={onEventFieldChange.bind(this)}
+                    opts={props.eventOpts}
+                    label='Active Event'
+                    defaultOptText='No active event'
+                    value={props.activeEventId}
+                    selectId='event-select'
+                    isDisabled={props.isAppDisabled}
+                />
 
-                    {this.props.activeEventId ?
-                        <SelectField changeEvent={this.onGameFieldChange.bind(this)}
-                            opts={this.props.gameOpts}
-                            label='Active Game'
-                            defaultOptText='No active game'
-                            selectedOpt={this.props.activeGameId}
-                            selectId='game-select'
-                            isDisabled={this.props.isAppDisabled}
-                        /> :
-                        null
-                    }
+                {props.activeEventId ?
+                    <SelectField changeEvent={onGameFieldChange.bind(this)}
+                        opts={props.gameOpts}
+                        label='Active Game'
+                        defaultOptText='No active game'
+                        value={props.activeGameId}
+                        selectId='game-select'
+                        isDisabled={props.isAppDisabled}
+                    /> :
+                    null
+                }
 
-                    {this.props.activeEventId && this.props.activeGameId ?
-                        <SelectField changeEvent={this.onQuestionFieldChange.bind(this)}
-                            opts={this.props.questionOpts}
-                            label='Active Question'
-                            defaultOptText='No active question'
-                            selectedOpt={this.props.activeQuestionId}
-                            selectId='question-select'
-                            isDisabled={this.props.isAppDisabled}
-                        /> :
-                        null
-                    }
-                    <button className="button" disabled={this.props.isAppDisabled}>End Game</button>
-                </div>
-                { this.props.isAppDisabled ?
-                    <div className="column"><AppDisabledOverlay content="App is currently disabled. Please reset to manage gameplay."/></div> :
+                {props.activeEventId && props.activeGameId ?
+                    <SelectField changeEvent={onQuestionFieldChange.bind(this)}
+                        opts={props.questionOpts}
+                        label='Active Question'
+                        defaultOptText='No active question'
+                        value={props.activeQuestionId}
+                        selectId='question-select'
+                        isDisabled={props.isAppDisabled}
+                    /> :
+                    null
+                }
+                {props.activeEventId && props.activeGameId ?
+                    <button className="button" disabled={props.isAppDisabled}>End Game</button> :
                     null
                 }
             </div>
-        )
-    }
+            { props.isAppDisabled ?
+                <div className="column"><AppDisabledOverlay content="App is currently disabled. Please reset to manage gameplay."/></div> :
+                null
+            }
+        </div>
+    )
 }
 
 const mapStateToProps = ({data}) => {
@@ -107,7 +103,6 @@ const mapStateToProps = ({data}) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        fetchEvents: () => dispatch(fetchEvents()),
         getActiveGameId: input => dispatch(getActiveGameId(input)),
         getGamesForEvent: input => dispatch(getGamesForEvent(input)),
         getActiveQuestionId: input => dispatch(getActiveQuestionId(input)),

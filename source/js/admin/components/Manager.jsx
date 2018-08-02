@@ -3,7 +3,11 @@ import React from 'react';
 import { Tabs } from './Tabs.jsx';
 import config from '../configs/tabsConfig';
 
-import {fetchActiveEventId, fetchAppStatus} from '../actions/actions';
+import {
+    fetchActiveEventId,
+    fetchAppStatus,
+    fetchEvents
+} from '../actions/actions';
 import { connect } from 'react-redux';
 
 class Manager extends React.Component {
@@ -18,6 +22,7 @@ class Manager extends React.Component {
     componentDidMount() {
         this.props.fetchActiveEventId();
         this.props.fetchAppStatus();
+        this.props.fetchEvents();
     }
 
     getSectionIndexFromUrl() {
@@ -56,4 +61,4 @@ class Manager extends React.Component {
     }
 }
 
-export default connect(null, {fetchActiveEventId, fetchAppStatus})(Manager);
+export default connect(null, {fetchActiveEventId, fetchAppStatus, fetchEvents})(Manager);

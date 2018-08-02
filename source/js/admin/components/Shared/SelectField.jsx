@@ -1,13 +1,10 @@
 import React from 'react';
 
 const SelectField = function(props) {
-
-    const selectId = props.selectId || 'item-select';
-
     return (
         <div>
-            <label htmlFor={selectId} >{props.label}</label>
-            <select className="" name={selectId} id={selectId} onChange={props.changeEvent} value={props.selectedOpt || ''} disabled={props.isDisabled ? true : false}>
+            <label htmlFor={props.selectId} >{props.label}</label>
+            <select className="" name={props.selectId} id={props.selectId} onChange={props.changeEvent} value={props.value} disabled={props.isDisabled ? true : false}>
                 <option value="">{props.defaultOptText}</option>
                 {props.opts.map(opt => (
                     <option value={opt.id} key={opt.id}>{opt.name}</option>
@@ -15,6 +12,11 @@ const SelectField = function(props) {
             </select>
         </div>
     )
+}
+
+SelectField.defaultProps = {
+    selectId: 'item-select',
+    value: ''
 }
 
 export default SelectField;

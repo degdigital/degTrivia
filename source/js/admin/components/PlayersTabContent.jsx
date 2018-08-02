@@ -1,8 +1,8 @@
 import React from 'react';
 
-import SelectField from './Shared/SelectField';
-import NonDegersField from './PlayersTab/NonDegersField';
-import PlayersTable from './PlayersTab/PlayersTable';
+import SelectField from './Shared/SelectField.jsx';
+import NonDegersField from './PlayersTab/NonDegersField.jsx';
+import PlayersTable from './PlayersTab/PlayersTable.jsx';
 
 import { fetchPlayers, fetchEvents } from '../actions/actions';
 import { connect } from 'react-redux';
@@ -17,9 +17,6 @@ class PlayersTabContent extends React.Component {
             filteredPlayersList: props.fullPlayersList,
             fullPlayersList: props.fullPlayersList
         }
-
-        this.props.fetchPlayers();
-        this.props.fetchEvents();
 
         this.filterPeople = this.filterPeople.bind(this);
         this.filterByEvent = this.filterByEvent.bind(this);
@@ -40,6 +37,11 @@ class PlayersTabContent extends React.Component {
 
     static hasPropsListUpdated(propsList, stateList) {
         return propsList.length !== stateList.length;
+    }
+
+    componentDidMount() {
+        this.props.fetchPlayers();
+        this.props.fetchEvents();
     }
 
     filterByEvent(person, eventId) {
@@ -88,6 +90,7 @@ class PlayersTabContent extends React.Component {
                     label='Filter by Event'
                     defaultOptText='All Events'
                     selectId='event-select'
+                    value={this.state.eventId}
                 />
                 <NonDegersField changeEvent={this.onDegFilterChange.bind(this)} />
                 <PlayersTable players={this.state.filteredPlayersList} />
@@ -99,7 +102,8 @@ class PlayersTabContent extends React.Component {
 const mapStateToProps = ({data}) => {
     return {
         eventOpts: data.events,
-        fullPlayersList: data.players
+        fullPlayersList: data.players,
+        activeEventId: data.activeEventId
     }
 }
 
