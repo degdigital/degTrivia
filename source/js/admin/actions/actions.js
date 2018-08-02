@@ -1,19 +1,19 @@
 import {
-    FETCH_EVENTS,
-    FETCH_APP_STATUS
+    EVENTS_RECEIVED,
+    APP_STATUS_RECEIVED
 } from './types';
 
 import listenService from '../services/dbListenService.js';
 
 import {
-    fetchActiveEventId, 
-    getActiveGameId, 
-    getActiveQuestionId, 
-    getGamesForEvent, 
-    getQuestionsForGame,
-    updateActiveEventId,
-    updateActiveGameId,
-    updateActiveQuestionId
+    setActiveEventId,
+    setActiveGameId,
+    setActiveQuestionId,
+    listenToActiveEventId,
+    listenToActiveGameId,
+    listenToActiveQuestionId,
+    getGamesForEvent,
+    getQuestionsForGame
 } from './manageGameplayActions';
 import {fetchPlayers} from './playerTabActions';
 import {fetchQuestionDuration, onQDurationChange} from './systemActions';
@@ -22,7 +22,7 @@ import {fetchQuestionDuration, onQDurationChange} from './systemActions';
 export const fetchEvents = () => async dispatch => {
     listenService.listenToEventsChange(resp => {
         dispatch({
-            type: FETCH_EVENTS,
+            type: EVENTS_RECEIVED,
             resp: resp
         })
     })
@@ -31,21 +31,21 @@ export const fetchEvents = () => async dispatch => {
 export const fetchAppStatus = () => async dispatch => {
     listenService.listenToAppDisableChange(val => {
         dispatch({
-            type: FETCH_APP_STATUS,
+            type: APP_STATUS_RECEIVED,
             resp: val
         });
     });
 }
 
 export {
-    fetchActiveEventId,
-    getActiveGameId,
-    getActiveQuestionId,
+    setActiveEventId,
+    setActiveGameId,
+    setActiveQuestionId,
+    listenToActiveEventId,
+    listenToActiveGameId,
+    listenToActiveQuestionId,
     getGamesForEvent,
     getQuestionsForGame,
-    updateActiveEventId,
-    updateActiveGameId,
-    updateActiveQuestionId,
     fetchPlayers,
     fetchQuestionDuration,
     onQDurationChange

@@ -12,6 +12,10 @@ function listenToFB(ref, callback, convertToArray = false) {
     });
 }
 
+function removeListener(ref) {
+    dbService.getDb().ref(ref).off('value');
+}
+
 function listenToEventsChange(callback) {
     listenToFB('events', callback, true);
 }
@@ -32,10 +36,21 @@ function listenToActiveEventChange(callback) {
     listenToFB('activeEventId', callback);
 }
 
+function listenToActiveGameChange(eventId, callback) {
+    listenToFB(`events/${eventId}/activeGameId`, callback);
+}
+
+function listenToActiveQuestionChange(gameId, callback) {
+    listenToFB(`games/${gameId}/activeQuestionId`, callback);
+}
+
 export default {
+    removeListener,
     listenToEventsChange,
     listenToPlayersChange,
     listenToAppDisableChange,
     listenToQDurationChange,
-    listenToActiveEventChange
+    listenToActiveEventChange,
+    listenToActiveGameChange,
+    listenToActiveQuestionChange
 };

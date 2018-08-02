@@ -4,7 +4,7 @@ import { Tabs } from './Tabs.jsx';
 import config from '../configs/tabsConfig';
 
 import {
-    fetchActiveEventId,
+    listenToActiveEventId,
     fetchAppStatus,
     fetchEvents
 } from '../actions/actions';
@@ -20,7 +20,7 @@ class Manager extends React.Component {
     }
 
     componentDidMount() {
-        this.props.fetchActiveEventId();
+        this.props.listenToActiveEventId();
         this.props.fetchAppStatus();
         this.props.fetchEvents();
     }
@@ -61,4 +61,4 @@ class Manager extends React.Component {
     }
 }
 
-export default connect(null, {fetchActiveEventId, fetchAppStatus, fetchEvents})(Manager);
+export default connect(null, {listenToActiveEventId, fetchAppStatus, fetchEvents})(Manager);

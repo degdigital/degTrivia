@@ -19,18 +19,6 @@ function setActiveQuestion(activeGameId, qId) {
     });
 }
 
-function getActiveEvent() {
-    return getValue('activeEventId');
-}
-
-function getActiveGame(eventId) {
-    return getValue(`events/${eventId}/activeGameId`);
-}
-
-function getActiveQuestion(gameId) {
-    return getValue(`games/${gameId}/activeQuestionId`);
-}
-
 function getGamesForEvent(eventId) {
     return dbService.getDb().ref('games').orderByChild('event').equalTo(eventId).once('value')
         .then(snap => objToArray(snap.val()));
@@ -57,9 +45,6 @@ export default {
     setActiveEvent,
     setActiveGame,
     setActiveQuestion,
-    getActiveEvent,
-    getActiveGame,
-    getActiveQuestion,
     getGamesForEvent,
     getQuestionsForGame
 }

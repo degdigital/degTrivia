@@ -1,5 +1,5 @@
 import {
-    FETCH_PLAYERS
+    PLAYERS_CHANGED
 } from './types';
 
 import listenService from '../services/dbListenService';
@@ -7,7 +7,7 @@ import listenService from '../services/dbListenService';
 export const fetchPlayers = () => async dispatch => {
     listenService.listenToPlayersChange(resp => {
         dispatch({
-            type: FETCH_PLAYERS,
+            type: PLAYERS_CHANGED,
             resp: resp
         })
     })

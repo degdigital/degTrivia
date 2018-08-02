@@ -4,41 +4,24 @@ import { connect } from 'react-redux';
 import SelectField from './Shared/SelectField.jsx';
 import AppDisabledOverlay from './Shared/AppDisabledOverlay.jsx';
 
-import manageGameplayService from '../services/manageGameplayService';
 import {
-    getActiveGameId,
-    getGamesForEvent,
-    getActiveQuestionId,
-    getQuestionsForGame,
-    updateActiveEventId,
-    updateActiveGameId,
-    updateActiveQuestionId
+    setActiveEventId,
+    setActiveGameId,
+    setActiveQuestionId
 } from '../actions/actions';
 
 const GameplayTabContent = function(props) {
 
     function onEventFieldChange(e) {
-        const eventId = e.target.value;
-        // TODO: dispatch an action to do this?
-        manageGameplayService.setActiveEvent(eventId).then(() => {
-            props.getActiveGameId(eventId);
-            props.getGamesForEvent(eventId);
-        });
+        props.setActiveEventId(e.target.value);
     }
 
     function onGameFieldChange(e) {
-        const gameId = e.target.value;
-        // TODO: dispatch an event to do this?
-        manageGameplayService.setActiveGame(props.activeEventId, gameId).then(() => {
-            props.updateActiveGameId(gameId);
-        })
+        props.setActiveGameId(props.activeEventId, e.target.value);
     }
 
     function onQuestionFieldChange(e) {
-        const qId = e.target.value;
-        manageGameplayService.setActiveQuestion(props.activeGameId, qId).then(() => {
-            props.updateActiveQuestionId(qId)
-        });
+        props.setActiveQuestionId(props.activeGameId, e.target.value);
     }
 
     return (
@@ -103,13 +86,9 @@ const mapStateToProps = ({data}) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        getActiveGameId: input => dispatch(getActiveGameId(input)),
-        getGamesForEvent: input => dispatch(getGamesForEvent(input)),
-        getActiveQuestionId: input => dispatch(getActiveQuestionId(input)),
-        getQuestionsForGame: input => dispatch(getQuestionsForGame(input)),
-        updateActiveEventId: input => dispatch(updateActiveEventId(input)),
-        updateActiveGameId: input => dispatch(updateActiveGameId(input)),
-        updateActiveQuestionId: input => dispatch(updateActiveQuestionId(input))
+        setActiveEventId: input => dispatch(setActiveEventId(input)),
+        setActiveGameId: (eventId, gameId) => dispatch(setActiveGameId(eventId, gameId)),
+        setActiveQuestionId: (gameId, qId) => dispatch(setActiveQuestionId(gameId, qId))
     }
 }
 

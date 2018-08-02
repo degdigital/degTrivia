@@ -1,68 +1,85 @@
 import {
-    FETCH_ACTIVE_EVENT, 
-    FETCH_ACTIVE_GAME_ID,
-    FETCH_ACTIVE_QUESTION,
-    FETCH_GAMES_FOR_EVENT,
-    FETCH_QS_FOR_GAME
+    ACTIVE_EVENT_CHANGED, 
+    ACTIVE_GAME_CHANGED,
+    ACTIVE_QUESTION_CHANGED,
+    GAMES_FOR_EVENT_RECEIVED,
+    QS_FOR_GAME_RECEIVED
 } from './types';
 
 import listenService from '../services/dbListenService';
 import manageGameplayService from '../services/manageGameplayService';
 
-export const fetchActiveEventId = () => dispatch => {
+
+// set values in db
+export const setActiveEventId = eventId => dispatch => {
+    manageGameplayService.setActiveEvent(eventId); // could use thunk to know loading
+}
+
+export const setActiveGameId = (eventId, gameId) => dispatch => {
+    manageGameplayService.setActiveGame(eventId, gameId)
+}
+
+export const setActiveQuestionId = (gameId, qId) => dispatch => {
+    manageGameplayService.setActiveQuestion(gameId, qId);
+}
+
+
+// listen to db nodes
+export const listenToActiveEventId = () => (dispatch, getState) => {
     listenService.listenToActiveEventChange(val => {
-        const eventId = val || '';
-        dispatch(updateActiveEventId(eventId));
+        const newEventId = val || '';   
+        const previousEventId = getState().data.activeEventId;
+
+        if (previousEventId) {
+            listenService.removeListener(`events/${previousEventId}/activeGameId`);
+        }
+
+        if (newEventId) {
+            dispatch(listenToActiveGameId(newEventId));
+            dispatch(getGamesForEvent(newEventId));
+        }
+        dispatch({
+            type: ACTIVE_EVENT_CHANGED,
+            resp: newEventId
+        });
     });
 }
 
-export const updateActiveEventId = eventId => dispatch => {
-    dispatch({
-        type: FETCH_ACTIVE_EVENT,
-        resp: eventId
+export const listenToActiveGameId = eventId => (dispatch, getState) => {
+    listenService.listenToActiveGameChange(eventId, val => {
+        const newGameId = val || '';
+        const previousGameId = getState().data.activeGameId;
+
+        if (previousGameId) {
+            listenService.removeListener(`games/${previousGameId}/activeQuestionId`);
+        }
+
+        if (newGameId) {
+            dispatch(listenToActiveQuestionId(newGameId));
+            dispatch(getQuestionsForGame(newGameId));
+        }
+
+        dispatch({
+            type: ACTIVE_GAME_CHANGED,
+            resp: newGameId
+        })
     });
-
-    if (eventId) {
-        dispatch(getActiveGameId(eventId));
-        dispatch(getGamesForEvent(eventId));
-    }
 }
 
-export const getActiveGameId = eventId => dispatch => {
-    manageGameplayService.getActiveGame(eventId).then(val => {
-        const gameId = val || '';
-        dispatch(updateActiveGameId(gameId));
-    });
-}
-
-export const updateActiveGameId = gameId => dispatch => {
-    dispatch({
-        type: FETCH_ACTIVE_GAME_ID,
-        resp: gameId
-    })
-    if (gameId) {
-        dispatch(getActiveQuestionId(gameId));
-        dispatch(getQuestionsForGame(gameId));
-    }
-}
-
-export const getActiveQuestionId = gameId => dispatch => {
-    manageGameplayService.getActiveQuestion(gameId).then(val => {
-        dispatch(updateActiveQuestionId(val))
+export const listenToActiveQuestionId = gameId => dispatch => {
+    listenService.listenToActiveQuestionChange(gameId, qId => {
+        dispatch({
+            type: ACTIVE_QUESTION_CHANGED,
+            resp: qId
+        })
     })
 }
 
-export const updateActiveQuestionId = qId => dispatch => {
-    dispatch({
-        type: FETCH_ACTIVE_QUESTION,
-        resp: qId
-    })
-}
-
+// get options from db
 export const getGamesForEvent = eventId => dispatch => {
     manageGameplayService.getGamesForEvent(eventId).then(val => {
         dispatch({
-            type: FETCH_GAMES_FOR_EVENT,
+            type: GAMES_FOR_EVENT_RECEIVED,
             resp: val
         })
     });
@@ -71,7 +88,7 @@ export const getGamesForEvent = eventId => dispatch => {
 export const getQuestionsForGame = gameId => dispatch => {
     manageGameplayService.getQuestionsForGame(gameId).then(val => {
         dispatch({
-            type: FETCH_QS_FOR_GAME,
+            type: QS_FOR_GAME_RECEIVED,
             resp: val
         })
     });

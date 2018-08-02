@@ -1,6 +1,6 @@
 import {
-    FETCH_Q_DURATION, 
-    ON_Q_DURATION_CHANGE
+    DB_Q_DURATION_CHANGED, 
+    FORM_Q_DURATION_CHANGED
 } from './types';
 
 import listenService from '../services/dbListenService.js';
@@ -8,7 +8,7 @@ import listenService from '../services/dbListenService.js';
 export const fetchQuestionDuration = () => async dispatch => {
     listenService.listenToQDurationChange(val => {
         dispatch({
-            type: FETCH_Q_DURATION,
+            type: DB_Q_DURATION_CHANGED,
             resp: val / 1000
         });
     });
@@ -17,7 +17,7 @@ export const fetchQuestionDuration = () => async dispatch => {
 // like onChange event when user is typing in input
 export const onQDurationChange = userInput => dispatch => {
     dispatch({
-        type: ON_Q_DURATION_CHANGE,
+        type: FORM_Q_DURATION_CHANGED,
         resp: userInput
     })
 }
