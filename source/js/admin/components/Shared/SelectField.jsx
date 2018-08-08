@@ -4,7 +4,7 @@ const SelectField = function(props) {
     return (
         <div>
             <label htmlFor={props.selectId} >{props.label}</label>
-            <select className="" name={props.selectId} id={props.selectId} onChange={props.changeEvent} value={props.value} disabled={props.isDisabled ? true : false}>
+            <select className="" name={props.selectId} id={props.selectId} onChange={props.changeEvent} value={props.value} disabled={props.isDisabled}>
                 {
                     props.defaultOptsText ? 
                     <option value="">{props.defaultOptText}</option> :

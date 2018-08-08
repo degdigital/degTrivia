@@ -17,7 +17,7 @@ class RotatingCopyTabContent extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            event: this.props.activeEventId || (this.props.eventOpts[0] && this.props.eventOpts[0].id)
+            eventId: this.props.activeEventId || (this.props.eventOpts[0] && this.props.eventOpts[0].id)
         }
         this.getRotatingCopyForEvent = memoize(
             (list, eventId) => {
@@ -50,20 +50,20 @@ class RotatingCopyTabContent extends React.Component {
     }
 
     onDelete(itemId) {
-        this.props.deleteRotatingCopy(itemId, this.state.event);
+        this.props.deleteRotatingCopy(itemId, this.state.eventId);
     }
 
     onEditSave(itemId, newText) {
-        this.props.editRotatingCopy(itemId, newText, this.state.event);
+        this.props.editRotatingCopy(itemId, newText, this.state.eventId);
     }
 
     addRotatingCopy(textVal) {
-        this.props.addRotatingCopy(textVal, this.state.event);
+        this.props.addRotatingCopy(textVal, this.state.eventId);
     }
 
     render() {
         //TODO: figure out how to set state when props.activeEventId === something
-        const rotatingCopy = this.state.event ? this.getRotatingCopyForEvent(this.props.eventOpts, this.state.event) : [];
+        const rotatingCopy = this.state.eventId ? this.getRotatingCopyForEvent(this.props.eventOpts, this.state.eventId) : [];
 
         return (
             <div>
@@ -71,7 +71,7 @@ class RotatingCopyTabContent extends React.Component {
                 <SelectField changeEvent={this.onEventFieldChange.bind(this)}
                     opts={this.props.eventOpts}
                     label='Event'
-                    value={this.state.event}
+                    value={this.state.eventId}
                     selectId='event-select'
                 />
 
