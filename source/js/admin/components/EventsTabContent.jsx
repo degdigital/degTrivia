@@ -20,7 +20,6 @@ class EventsTabContent extends React.Component {
     }
 
     onFormSubmit(formVals) {
-        console.log(buildEventObject(formVals));
         this.props.saveEvent(buildEventObject(formVals), formVals.id);
         this.setState({
             isAddEditView: false,
