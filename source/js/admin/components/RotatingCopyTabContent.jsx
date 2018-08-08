@@ -1,8 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import memoize from 'memoize-one';
+//https://reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html#what-about-memoization
 
 import InputWithButtonField from './Shared/InputWithButtonField.jsx';
 import SelectField from './Shared/SelectField.jsx';
+import EditDeleteTable from './Shared/EditDeleteTable.jsx';
 import {addRotatingCopy} from '../actions/rotatingCopyActions';
 
 class RotatingCopyTabContent extends React.Component {
@@ -12,22 +15,15 @@ class RotatingCopyTabContent extends React.Component {
         this.state = {
             event: this.props.activeEventId || (this.props.eventOpts[0] && this.props.eventOpts[0].id)
         }
-    }
-
-    componentDidMount() {
-        if (this.props.events && this.state.event) {
-            this.setState({
-                rotatingCopy: this.getRotatingCopyForEvent(this.state.event)
-            });
-        }
-    }
-
-    getRotatingCopyForEvent(eventId) {
-        const evt = this.props.eventOpts.find(event => event.id === eventId);
-        if (evt) {
-            return this.convertToArray(evt.pregameRotatingCopy);
-        }
-        return [];
+        this.getRotatingCopyForEvent = memoize(
+            (list, eventId) => {
+                const evt = list.find(event => event.id === eventId);
+                if (evt) {
+                    return this.convertToArray(evt.pregameRotatingCopy);
+                }
+                return [];
+            }
+        )
     }
 
     convertToArray(rotatingCopyObj) {
@@ -43,13 +39,20 @@ class RotatingCopyTabContent extends React.Component {
         })
     }
 
-    // on rotating copy update rotating copy for that event
-
     onEventFieldChange(e) {
         this.setState({
-            event: e.target.value,
-            rotatingCopy: this.getRotatingCopyForEvent(e.target.value)
+            event: e.target.value
         });
+    }
+
+    onDelete(itemId) {
+        console.log('DELETING');
+        // TODO: dispatch action to delete item
+    }
+
+    onEditSave(itemId, newText) {
+        console.log('UPDATING');
+        // TODO: dispatch action to update item
     }
 
     addRotatingCopy(textVal) {
@@ -57,6 +60,9 @@ class RotatingCopyTabContent extends React.Component {
     }
 
     render() {
+        //TODO: figure out how to set state when props.activeEventId === something
+        const rotatingCopy = this.state.event ? this.getRotatingCopyForEvent(this.props.eventOpts, this.state.event) : [];
+
         return (
             <div>
                 <h2>Add Rotating Copy</h2>
@@ -74,8 +80,8 @@ class RotatingCopyTabContent extends React.Component {
                 />
 
                 {
-                    this.state.rotatingCopy ?
-                    this.state.rotatingCopy.map(item => <div key={item.id}>{item.text}</div>) :
+                    rotatingCopy ?
+                    <EditDeleteTable items={rotatingCopy} onDelete={this.onDelete.bind(this)} onEditSave={this.onEditSave.bind(this)} /> :
                     null
                 }
             </div>

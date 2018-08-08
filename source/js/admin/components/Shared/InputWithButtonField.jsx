@@ -16,7 +16,7 @@ class InputWithButtonField extends React.Component {
     }
 
     onButtonClick() {
-        this.props.onButtonClick(inputText);
+        this.props.onButtonClick(this.state.inputText);
     }
 
     render() {

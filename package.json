@@ -80,6 +80,7 @@
     "classnames": "^2.2.5",
     "degjs-numericycle": "git+https://git@github.com/degjs/numericycle.git",
     "firebase": "^4.13.1",
+    "memoize-one": "^4.0.0",
     "object-path-immutable": "^3.0.0",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
