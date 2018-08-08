@@ -32,7 +32,7 @@ export const endGame = gameId => dispatch => {
 }
 
 // listen to db nodes
-export const listenToActiveEventId = () => (dispatch, getState) => {
+export const fetchActiveEventId = () => (dispatch, getState) => {
     listenService.listenToActiveEventChange(val => {
         const newEventId = val || '';   
         const previousEventId = getState().data.activeEventId;
