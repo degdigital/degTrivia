@@ -24,7 +24,7 @@ const AllEventsTable = function(props) {
                                 <td>{event.alias || ''}</td>
                                 <td>{event.hashtag || ''}</td>
                                 <td>{event.id || ''}</td>
-                                <td>{Object.keys(event.games).length || 0}</td>
+                                <td>{event.games && Object.keys(event.games).length || 0}</td>
                                 <td>{event.activeGameId}</td>
                                 <td>
                                     <button className="button" onClick={() => props.editEvent(event)}>Edit</button>

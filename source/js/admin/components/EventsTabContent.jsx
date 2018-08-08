@@ -6,7 +6,8 @@ import memoize from 'memoize-one';
 import AllEventsTable from './EventsTab/AllEventsTable.jsx';
 import AddEditEventsForm from './EventsTab/AddEditEventsForm.jsx';
 
-import {flattenEvent} from '../services/eventsService';
+import {flattenEvent, buildEventObject} from '../services/eventsService';
+import {saveEventChanges} from '../actions/eventTabActions';
 
 class EventsTabContent extends React.Component {
 
@@ -19,8 +20,12 @@ class EventsTabContent extends React.Component {
     }
 
     onFormSubmit(formVals) {
-        console.log(formVals);
-        // TODO: dispatch action to submit form
+        console.log(buildEventObject(formVals));
+        this.props.saveEvent(buildEventObject(formVals), formVals.id);
+        this.setState({
+            isAddEditView: false,
+            eventToEdit: {}
+        })
     }
 
     editEvent(eventToEdit) {
@@ -35,7 +40,7 @@ class EventsTabContent extends React.Component {
         return (
             this.state.isAddEditView ? 
                 <AddEditEventsForm 
-                    onFormCancel={() => this.setState({isAddEditView: false})}
+                    onFormCancel={() => this.setState({isAddEditView: false, eventToEdit: {}})}
                     onFormSubmit={this.onFormSubmit.bind(this)}
                     {...this.state.eventToEdit}
                 /> : 
@@ -58,7 +63,8 @@ const mapStateToProps = ({data}) => {
 
 const mapDispatchToProps = dispatch => {
     return {
+        saveEvent: (eventObject, eventId) => dispatch(saveEventChanges(eventObject, eventId))
     }
 }
 
-export default connect(mapStateToProps)(EventsTabContent);
+export default connect(mapStateToProps, mapDispatchToProps)(EventsTabContent);

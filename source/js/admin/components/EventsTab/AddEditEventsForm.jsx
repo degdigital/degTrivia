@@ -8,14 +8,17 @@ export default class AddEditEventsForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {...props};
-
-        this.onInputChange.bind(this);
     }
 
     onInputChange(e) {
         this.setState({
             [e.target.name]: e.target.value
         })
+    }
+
+    onFormSubmit(e){
+        e.preventDefault();
+        this.props.onFormSubmit(this.state);
     }
 
     renderInputFields() {
@@ -26,14 +29,14 @@ export default class AddEditEventsForm extends React.Component {
                 label={inputItem.label}
                 value={this.state[inputItem.id]}
                 type='text'
-                onChange={this.onInputChange}
+                onChange={this.onInputChange.bind(this)}
             />
         ))
     }
 
     render() {
         return (
-            <form onSubmit={this.props.onFormSubmit}>
+            <form onSubmit={this.onFormSubmit.bind(this)}>
                 <fieldset>
                     <legend>Add an Event</legend>
                     {this.renderInputFields()}
@@ -49,6 +52,7 @@ AddEditEventsForm.defaultProps = {
     name: '',
     alias: '',
     hashtag: '',
+    url: 'degtrivia.com',
     gameWaitBeforeQuestionsCopyTitle: `Let's Play!`,
     gameWaitBeforeQuestionsCopyDescription: `Answer the questions (no stopping for wrong answers) as fast as you can. 10 seconds per question. Speed and accuracy wins. Here comes the first question.`,
     gameBetweenQuestionsCopyTitle: 'Get Ready',

@@ -12,6 +12,10 @@ export default [
         label: 'Hashtag'
     },
     {
+        id: 'url',
+        label: 'Trivia URL'
+    },
+    {
         id: 'gameWaitBeforeQuestionsCopyTitle',
         label: 'Waiting Screen Before Questions (title)'
     },
