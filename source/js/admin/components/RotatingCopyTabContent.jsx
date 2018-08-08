@@ -6,7 +6,11 @@ import memoize from 'memoize-one';
 import InputWithButtonField from './Shared/InputWithButtonField.jsx';
 import SelectField from './Shared/SelectField.jsx';
 import EditDeleteTable from './Shared/EditDeleteTable.jsx';
-import {addRotatingCopy} from '../actions/rotatingCopyActions';
+import {
+    addRotatingCopy,
+    editRotatingCopy,
+    deleteRotatingCopy
+} from '../actions/rotatingCopyActions';
 
 class RotatingCopyTabContent extends React.Component {
 
@@ -46,13 +50,11 @@ class RotatingCopyTabContent extends React.Component {
     }
 
     onDelete(itemId) {
-        console.log('DELETING');
-        // TODO: dispatch action to delete item
+        this.props.deleteRotatingCopy(itemId, this.state.event);
     }
 
     onEditSave(itemId, newText) {
-        console.log('UPDATING');
-        // TODO: dispatch action to update item
+        this.props.editRotatingCopy(itemId, newText, this.state.event);
     }
 
     addRotatingCopy(textVal) {
@@ -98,7 +100,9 @@ const mapStateToProps = ({data}) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        addRotatingCopy: (textVal, eventId) => dispatch(addRotatingCopy(textVal, eventId))
+        addRotatingCopy: (textVal, eventId) => dispatch(addRotatingCopy(textVal, eventId)),
+        editRotatingCopy: (itemId, newTextVal, eventId) => dispatch(editRotatingCopy(itemId, newTextVal, eventId)),
+        deleteRotatingCopy: (itemId, eventId) => dispatch(deleteRotatingCopy(itemId, eventId))
     }
 }
 

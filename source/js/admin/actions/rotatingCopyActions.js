@@ -1,15 +1,13 @@
 import rotatingCopyService from '../services/rotatingCopyService';
 
-import {
-    ROTATING_COPY_UPDATED
-} from './types';
-
 export const addRotatingCopy = (textVal, eventId) => dispatch => {
-    rotatingCopyService.add(textVal, eventId).then(newItem => {
-        dispatch({
-            type: ROTATING_COPY_UPDATED,
-            newItem: newItem,
-            eventId
-        })
-    });
+    rotatingCopyService.addRotatingCopy(textVal, eventId);
+}
+
+export const editRotatingCopy = (itemId, newTextVal, eventId) => dispatch => {
+    rotatingCopyService.editRotatingCopy(itemId, newTextVal, eventId);
+}
+
+export const deleteRotatingCopy = (itemId, eventId) => dispatch => {
+    rotatingCopyService.deleteRotatingCopy(itemId, eventId)
 }

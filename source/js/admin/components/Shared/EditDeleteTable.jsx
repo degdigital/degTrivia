@@ -20,15 +20,15 @@ class EditableRow extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            isEditing: false
+            isEditing: false,
+            newText: this.props.item.text
         }
     }
 
     onSave() {
         this.props.onEditSave(this.props.item.id, this.state.newText);
         this.setState({
-            isEditing: false,
-            newText: ''
+            isEditing: false
         })
     }
 
@@ -48,11 +48,11 @@ class EditableRow extends React.Component {
         return (
             <tr>
                 <td>
-                    <input type="text" value={this.props.item.text} onChange={e => this.setState({newText:e.target.value})} />
+                    <input type="text" value={this.state.newText} onChange={e => this.setState({newText:e.target.value})} />
                 </td>
                 <td>
-                    <button className="button" onClick={this.props.onSave}>Save</button>
-                    <button className="button" onClick={() => this.setState({isEditing: false, newText: ''})}>Cancel</button>
+                    <button className="button" onClick={this.onSave.bind(this)}>Save</button>
+                    <button className="button" onClick={() => this.setState({isEditing: false, newText: this.props.item.text})}>Cancel</button>
                 </td>
             </tr>
         )
