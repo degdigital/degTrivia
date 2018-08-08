@@ -2,6 +2,7 @@ import React from 'react';
 
 import GameplayTabContent from '../components/GameplayTabContent.jsx';
 import PlayersTabContent from '../components/PlayersTabContent.jsx';
+import RotatingCopyTabContent from '../components/RotatingCopyTabContent.jsx';
 import SystemTabContent from '../components/SystemTabContent.jsx';
 
 export default [
@@ -23,7 +24,7 @@ export default [
     {
         title: 'Copy',
         id: 'copy',
-        content: 'copy'
+        content: <RotatingCopyTabContent />
     },
     {
         title: 'Players',

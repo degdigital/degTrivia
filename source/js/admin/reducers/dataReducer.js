@@ -1,3 +1,5 @@
+import immutable from 'object-path-immutable';
+
 import { 
     PLAYERS_CHANGED, 
     EVENTS_RECEIVED,
@@ -8,7 +10,8 @@ import {
     ACTIVE_EVENT_CHANGED,
     ACTIVE_GAME_CHANGED,
     ACTIVE_QUESTION_CHANGED,
-    QS_FOR_GAME_RECEIVED
+    QS_FOR_GAME_RECEIVED,
+    ROTATING_COPY_UPDATED
 } from '../actions/types';
 
 const initQuestionState = {
@@ -83,6 +86,12 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 activeQuestionId: action.resp
+            }
+        case ROTATING_COPY_UPDATED:
+            const newRotatingCopyObj = immutable.merge(state, `events/${action.eventId}/pregameRotatingCopy`, action.newItem)
+            return {
+                ...state,
+                ...newRotatingCopyObj
             }
         default:
             return state;
