@@ -1,8 +1,8 @@
 import React from 'react';
 
-import EventSelectField from './PlayersTab/EventSelectField';
-import NonDegersField from './PlayersTab/NonDegersField';
-import PlayersTable from './PlayersTab/PlayersTable';
+import SelectField from './Shared/SelectField.jsx';
+import NonDegersField from './PlayersTab/NonDegersField.jsx';
+import PlayersTable from './PlayersTab/PlayersTable.jsx';
 
 import { fetchPlayers, fetchEvents } from '../actions/actions';
 import { connect } from 'react-redux';
@@ -18,9 +18,6 @@ class PlayersTabContent extends React.Component {
             fullPlayersList: props.fullPlayersList
         }
 
-        this.props.fetchPlayers();
-        this.props.fetchEvents();
-
         this.filterPeople = this.filterPeople.bind(this);
         this.filterByEvent = this.filterByEvent.bind(this);
         this.filterByCompany = this.filterByCompany.bind(this);
@@ -34,11 +31,17 @@ class PlayersTabContent extends React.Component {
                 filteredPlayersList: props.fullPlayersList
             }
         }
+        // TODO: set active event id as default id
         return null;
     }
 
     static hasPropsListUpdated(propsList, stateList) {
         return propsList.length !== stateList.length;
+    }
+
+    componentDidMount() {
+        this.props.fetchPlayers();
+        this.props.fetchEvents();
     }
 
     filterByEvent(person, eventId) {
@@ -82,7 +85,13 @@ class PlayersTabContent extends React.Component {
     render() {
         return (
             <div>
-                <EventSelectField changeEvent={this.onEventFilterChange.bind(this)} eventOpts={this.props.eventOpts}/>
+                <SelectField changeEvent={this.onEventFilterChange.bind(this)} 
+                    opts={this.props.eventOpts}
+                    label='Filter by Event'
+                    defaultOptText='All Events'
+                    selectId='event-select'
+                    value={this.state.eventId}
+                />
                 <NonDegersField changeEvent={this.onDegFilterChange.bind(this)} />
                 <PlayersTable players={this.state.filteredPlayersList} />
             </div>
@@ -93,7 +102,8 @@ class PlayersTabContent extends React.Component {
 const mapStateToProps = ({data}) => {
     return {
         eventOpts: data.events,
-        fullPlayersList: data.players
+        fullPlayersList: data.players,
+        activeEventId: data.activeEventId
     }
 }
 

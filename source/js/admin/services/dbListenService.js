@@ -1,15 +1,5 @@
 import dbService from '../../services/dbService.js';
-
-
-function objToArray(data = {}) {
-    const keys = Object.keys(data);
-
-    return keys.reduce((accum, key) => {
-        const newItem = data[key];
-        newItem.id = key;
-        return accum.concat([newItem]);
-    }, []);
-}
+import {objToArray} from './utils/dbUtils';
 
 function listenToFB(ref, callback, convertToArray = false) {
     dbService.getDb().ref(ref).on('value', snapshot => {
@@ -20,6 +10,10 @@ function listenToFB(ref, callback, convertToArray = false) {
         
         callback(retVal);
     });
+}
+
+function removeListener(ref) {
+    dbService.getDb().ref(ref).off('value');
 }
 
 function listenToEventsChange(callback) {
@@ -38,9 +32,25 @@ function listenToQDurationChange(callback) {
     listenToFB('questionDuration', callback);
 }
 
+function listenToActiveEventChange(callback) {
+    listenToFB('activeEventId', callback);
+}
+
+function listenToActiveGameChange(eventId, callback) {
+    listenToFB(`events/${eventId}/activeGameId`, callback);
+}
+
+function listenToActiveQuestionChange(gameId, callback) {
+    listenToFB(`games/${gameId}/activeQuestionId`, callback);
+}
+
 export default {
+    removeListener,
     listenToEventsChange,
     listenToPlayersChange,
     listenToAppDisableChange,
-    listenToQDurationChange
+    listenToQDurationChange,
+    listenToActiveEventChange,
+    listenToActiveGameChange,
+    listenToActiveQuestionChange
 };

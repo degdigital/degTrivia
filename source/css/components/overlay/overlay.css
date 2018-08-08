@@ -1,0 +1,21 @@
+.overlay {
+    display: block;
+}
+
+.overlay__backdrop {
+    background-color: color(var(--color-gray-dark-20) a(50%));
+    height: 100%;
+    position: fixed;
+    width: 97%;
+    z-index: 90;
+}
+
+.overlay__content {
+    background-color: var(--color-white);
+    left: 50%;
+    padding: 2em;
+    position: fixed;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 95;
+}

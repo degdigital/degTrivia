@@ -1,5 +1,6 @@
 import React from 'react';
 
+import GameplayTabContent from '../components/GameplayTabContent.jsx';
 import PlayersTabContent from '../components/PlayersTabContent.jsx';
 import SystemTabContent from '../components/SystemTabContent.jsx';
 
@@ -7,7 +8,7 @@ export default [
     {
         title: 'Manage Gameplay',
         id: 'gameplay',
-        content: 'gameplay'
+        content: <GameplayTabContent />
     },
     {
         title: 'Events',

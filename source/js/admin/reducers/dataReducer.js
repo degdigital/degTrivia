@@ -1,9 +1,14 @@
 import { 
-    FETCH_PLAYERS, 
-    FETCH_EVENTS, 
-    FETCH_Q_DURATION, 
-    ON_Q_DURATION_CHANGE,
-    FETCH_APP_STATUS
+    PLAYERS_CHANGED, 
+    EVENTS_RECEIVED,
+    GAMES_FOR_EVENT_RECEIVED,
+    DB_Q_DURATION_CHANGED, 
+    FORM_Q_DURATION_CHANGED,
+    APP_STATUS_RECEIVED,
+    ACTIVE_EVENT_CHANGED,
+    ACTIVE_GAME_CHANGED,
+    ACTIVE_QUESTION_CHANGED,
+    QS_FOR_GAME_RECEIVED
 } from '../actions/types';
 
 const initQuestionState = {
@@ -13,24 +18,37 @@ const initQuestionState = {
 const initialState = {
     events: [],
     players: [],
+    games: [],
+    questions: [],
     question: initQuestionState,
-    isAppDisabled: false
+    isAppDisabled: false,
+    activeEventId: ''
 }
 
 
 export default (state = initialState, action) => {
     switch (action.type) {
-        case FETCH_PLAYERS:
+        case PLAYERS_CHANGED:
             return {
                 ...state,
                 players: action.resp
             }
-        case FETCH_EVENTS:
+        case EVENTS_RECEIVED:
             return {
                 ...state,
                 events: action.resp
             }
-        case FETCH_Q_DURATION:
+        case GAMES_FOR_EVENT_RECEIVED: 
+            return {
+                ...state,
+                games: action.resp
+            }
+        case QS_FOR_GAME_RECEIVED:
+            return {
+                ...state,
+                questions: action.resp
+            }
+        case DB_Q_DURATION_CHANGED:
             return {
                 ...state,
                 question: {
@@ -38,7 +56,7 @@ export default (state = initialState, action) => {
                     duration: action.resp
                 }
             }
-        case ON_Q_DURATION_CHANGE:
+        case FORM_Q_DURATION_CHANGED:
             return {
                 ...state,
                 question: {
@@ -46,10 +64,25 @@ export default (state = initialState, action) => {
                     duration: action.resp
                 }
             }
-        case FETCH_APP_STATUS:
+        case APP_STATUS_RECEIVED:
             return {
                 ...state,
                 isAppDisabled: action.resp
+            }
+        case ACTIVE_EVENT_CHANGED:
+            return {
+                ...state,
+                activeEventId: action.resp
+            }
+        case ACTIVE_GAME_CHANGED:
+            return {
+                ...state,
+                activeGameId: action.resp
+            }
+        case ACTIVE_QUESTION_CHANGED:
+            return {
+                ...state,
+                activeQuestionId: action.resp
             }
         default:
             return state;
