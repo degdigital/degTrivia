@@ -1,3 +1,5 @@
+import immutable from 'object-path-immutable';
+
 import { 
     PLAYERS_CHANGED, 
     EVENTS_RECEIVED,
