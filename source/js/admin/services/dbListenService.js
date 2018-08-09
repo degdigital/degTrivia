@@ -20,6 +20,10 @@ function listenToEventsChange(callback) {
     listenToFB('events', callback, true);
 }
 
+function listenToGamesChange(callback) {
+    listenToFB('games', callback, true)
+}
+
 function listenToPlayersChange(callback) {
     listenToFB('players', callback, true);
 }
@@ -52,5 +56,6 @@ export default {
     listenToQDurationChange,
     listenToActiveEventChange,
     listenToActiveGameChange,
-    listenToActiveQuestionChange
+    listenToActiveQuestionChange,
+    listenToGamesChange
 };

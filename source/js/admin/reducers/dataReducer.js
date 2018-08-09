@@ -10,7 +10,8 @@ import {
     ACTIVE_EVENT_CHANGED,
     ACTIVE_GAME_CHANGED,
     ACTIVE_QUESTION_CHANGED,
-    QS_FOR_GAME_RECEIVED
+    QS_FOR_GAME_RECEIVED,
+    GAMES_RECEIVED
 } from '../actions/types';
 
 const initQuestionState = {
@@ -85,6 +86,11 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 activeQuestionId: action.resp
+            }
+        case GAMES_RECEIVED:
+            return {
+                ...state,
+                games: action.resp
             }
         default:
             return state;

@@ -1,6 +1,7 @@
 import {
     EVENTS_RECEIVED,
-    APP_STATUS_RECEIVED
+    APP_STATUS_RECEIVED,
+    GAMES_RECEIVED
 } from './types';
 
 import listenService from '../services/dbListenService.js';
@@ -25,6 +26,15 @@ export const fetchEvents = () => async dispatch => {
     listenService.listenToEventsChange(resp => {
         dispatch({
             type: EVENTS_RECEIVED,
+            resp: resp
+        })
+    })
+}
+
+export const fetchGames = () => async dispatch => {
+    listenService.listenToGamesChange(resp => {
+        dispatch({
+            type: GAMES_RECEIVED,
             resp: resp
         })
     })
