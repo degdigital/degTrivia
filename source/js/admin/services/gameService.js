@@ -1,35 +1,68 @@
 import dbService from '../../services/dbService.js';
+import {objToArray} from './utils/dbUtils';
 
-async function endGame(gameId) {
-	const db = dbService.getDb();
-
-	const gameData = await db.ref('games').child(gameId).once('value').then(snapshot => snapshot.val());
+// takes FB structure and flattens it for component use
+export function formatObj(gameObj) {
+    const retVal = {};
 	
-	if(gameData) {
-		const { event: eventId} = gameData;
+	Object.keys(gameObj).map(key => {
+		if (typeof gameObj[key] === 'object') {
+			retVal[key] = objToArray(gameObj[key]);
+		} else {
+			retVal[key] = gameObj[key];
+		}	
+	})
 
-		return db.ref(`games/${gameId}`).update({
-			showGameOver: true,
-			showQuestionResults: false
-		});
-	}
-	
-	return Promise.reject(`Error: no game found for ID ${gameId}`);
+    return retVal;
 }
 
-function showBetweenQuestionScreen(gameId) {
-	return dbService.getDb().ref(`games/${gameId}`).update({
-		showQuestionResults: false,
-		showBetweenQuestions: true
+// // takes form vals and returns an object with fb structure
+// export function buildEventObject(formVals) {
+//     const retVal = {};
+
+//     retVal.activeGameId = formVals.activeGameId || false;
+//     retVal.alias = formVals.alias;
+//     retVal.betweenQuestionsCopy = {
+//         title: formVals.gameBetweenQuestionsCopyTitle,
+//         description: formVals.gameBetweenQuestionsCopyDescription
+//     };
+//     retVal.gameWaitBeforeQuestionsCopy = {
+//         title: formVals.gameWaitBeforeQuestionsCopyTitle,
+//         description: formVals.gameWaitBeforeQuestionsCopyDescription
+//     };
+//     retVal.games = formVals.games || false;
+//     retVal.hashtag = formVals.hashtag;
+//     retVal.leaderboardCopy = {
+//         description: formVals.leaderboardCopyDescription
+//     };
+//     retVal.name = formVals.name;
+//     retVal.postgameResultsCopy = {
+//         description: formVals.postgameResultsCopyDescription
+//     };
+//     retVal.registrationCopy = {
+//         title: formVals.registrationCopyTitle,
+//         disclosure: formVals.registrationCopyDisclosure
+//     };
+//     retVal.url = formVals.url;
+
+//     return retVal;
+// }
+
+// export function saveEvent(eventObj, eventId) {
+//     const ref = dbService.getDb().ref('events');
+//     const key = eventId || ref.push().key;
+
+//     ref.update({
+//         [key]: eventObj
+//     });
+// }
+
+export function resetGameById(gameId) {
+	dbService.getDb().ref(`games/${gameId}`).update({
+		activeQuestionId: false,
+		showBetweenQuestions: false,
+		showGameOver: false,
+		showGameResults: false,
+		showQuestionResults: false
 	})
 }
-
-
-function gameService() {
-	return {
-		endGame,
-		showBetweenQuestionScreen
-	};
-}
-
-export default gameService;

@@ -22,6 +22,7 @@ const initialState = {
     events: [],
     players: [],
     games: [],
+    gamesForEvent: [],
     questions: [],
     question: initQuestionState,
     isAppDisabled: false,
@@ -44,7 +45,7 @@ export default (state = initialState, action) => {
         case GAMES_FOR_EVENT_RECEIVED: 
             return {
                 ...state,
-                games: action.resp
+                gamesForEvent: action.resp
             }
         case QS_FOR_GAME_RECEIVED:
             return {

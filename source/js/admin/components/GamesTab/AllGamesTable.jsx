@@ -27,8 +27,8 @@ const AllEventsTable = function(props) {
                                 <td>{formatDate(game.startTime, 'MMM D, YYYY h:mm a')}</td>
                                 <td>{game.questions && Object.keys(game.questions).length || 0}</td>
                                 <td>
-                                    <button className="button" onClick={() => props.editEvent(event)}>Edit</button>
-                                    <button className="button">Reset</button>
+                                    <button className="button" onClick={() => props.editGame(game)}>Edit</button>
+                                    <button className="button" onClick={() => props.resetGame(game.id)}>Reset</button>
                                 </td>
                             </tr>
                         )

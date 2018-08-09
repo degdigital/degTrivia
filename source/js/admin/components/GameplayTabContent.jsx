@@ -94,7 +94,7 @@ const GameplayTabContent = function(props) {
 const mapStateToProps = ({data}) => {
     return {
         eventOpts: data.events,
-        gameOpts: data.games,
+        gameOpts: data.gamesForEvent,
         questionOpts: data.questions,
         activeEventId: data.activeEventId,
         activeGameId: data.activeGameId,

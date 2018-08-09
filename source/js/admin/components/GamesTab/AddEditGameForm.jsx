@@ -1,7 +1,9 @@
 import React from 'react';
+import { format as formatDate} from 'date-fns';
 
 import InputField from '../Shared/InputField.jsx';
 import SelectField from '../Shared/SelectField.jsx';
+import AddEditQuestionContent from './AddEditQuestionContent.jsx';
 
 export default class AddEditGameForm extends React.Component {
 
@@ -45,13 +47,13 @@ export default class AddEditGameForm extends React.Component {
                             <InputField
                                 id='startTime'
                                 label='Start Time'
-                                value={this.state.startTime}
+                                value={this.state.startTime && formatDate(this.state.startTime, 'YYYY-MM-DDTHH:mm')}
                                 type='datetime-local'
                                 onChange={this.onInputChange.bind(this)}
                             />
                         </div>
                         <div className="column">
-                            Question stuff
+                            <AddEditQuestionContent questions={this.props.questions || []} />
                         </div>
                     </div>
                     <button className="button" type="submit">Submit</button>

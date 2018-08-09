@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import AllGamesTable from './GamesTab/AllGamesTable.jsx';
 import AddEditGamesForm from './GamesTab/AddEditGameForm.jsx';
 
+import {formatObj} from '../services/gameService';
+import {resetGame} from '../actions/gameActions';
 class GamesTabContent extends React.Component {
 
     constructor(props) {
@@ -22,11 +24,15 @@ class GamesTabContent extends React.Component {
         })
     }
 
-    editEvent(eventToEdit) {
-        // this.setState({
-        //     isAddEditView: true,
-        //     gameToEdit: flattenEvent(eventToEdit)
-        // })
+    editGame(gameToEdit) {
+        this.setState({
+            isAddEditView: true,
+            gameToEdit: formatObj(gameToEdit)
+        })
+    }
+
+    resetGame(gameId) {
+        this.props.resetGame(gameId);
     }
 
     render() {
@@ -40,10 +46,11 @@ class GamesTabContent extends React.Component {
                 eventOpts={this.props.events}
             /> :
             <div>
-                <button className="button" onClick={() => this.setState({isAddEditView:true})}>Add Game</button>
+                <button className="button" onClick={() => this.setState({isAddEditView:true, gameToEdit: {}})}>Add Game</button>
                 <AllGamesTable 
                     games={this.props.games}
-                    editEvent={this.editEvent.bind(this)}
+                    editGame={this.editGame.bind(this)}
+                    resetGame={this.resetGame.bind(this)}
                 />
             </div>
         );
@@ -59,7 +66,7 @@ const mapStateToProps = ({data}) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-
+        resetGame: gameId => dispatch(resetGame(gameId))
     }
 }
 
