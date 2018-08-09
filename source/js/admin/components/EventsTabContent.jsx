@@ -1,7 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import memoize from 'memoize-one';
-//https://reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html#what-about-memoization
 
 import AllEventsTable from './EventsTab/AllEventsTable.jsx';
 import AddEditEventsForm from './EventsTab/AddEditEventsForm.jsx';
