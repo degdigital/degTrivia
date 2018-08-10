@@ -7,6 +7,7 @@ const QuestionsTable = function(props) {
             <caption>All Questions For Game</caption>
             <thead>
                 <tr>
+                    <th>Order</th>
                     <th>Text</th>
                     <th></th>
                 </tr>
@@ -16,6 +17,7 @@ const QuestionsTable = function(props) {
                     props.questions.map(question => {
                         return (
                             <tr key={question.id}>
+                                <td>{question.order}</td>
                                 <td>{question.question || ''}</td>
                                 <td>
                                     <button className="button" type="button" onClick={() => props.editQuestion(question)}>Edit</button>

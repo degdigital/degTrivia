@@ -18,9 +18,19 @@ export default class AddEditGameForm extends React.Component {
         })
     }
 
+    onDateTimeChange(e) {
+        this.setState({
+            [e.target.name]: new Date(e.target.value).valueOf
+        })
+    }
+
     onFormSubmit(e){
         e.preventDefault();
-        this.props.onFormSubmit(this.state);
+        this.props.onFormSubmit({
+            event: this.state.event,
+            name: this.state.name,
+            startTime: this.state.startTime
+        });
     }
 
     render() {

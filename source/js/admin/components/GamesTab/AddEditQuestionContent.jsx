@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import QuestionsTable from './QuestionsTable.jsx';
 import AddEditQuestionForm from './AddEditQuestionForm.jsx';
 
-import {formatObj, buildObj} from '../../services/gameService';
+import {flattenObj, buildObj} from '../../services/gameService';
 import {
     setQuestionToEdit,
     removeQuestion,
@@ -35,7 +35,7 @@ class AddEditQuestionContent extends React.Component {
     }
 
     editQuestion(questionToEdit) {
-        this.updateStateAndStore(true, formatObj(questionToEdit));
+        this.updateStateAndStore(true, flattenObj(questionToEdit));
     }
 
     render() {

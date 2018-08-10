@@ -1,7 +1,7 @@
 import React from 'react';
 
 import InputField from '../Shared/InputField.jsx';
-
+import {generateKey} from '../../services/gameService';
 export default class AddEditGameForm extends React.Component {
 
     constructor(props) {
@@ -12,8 +12,9 @@ export default class AddEditGameForm extends React.Component {
     }
 
     onInputChange(e) {
+        const newVal = e.target.type === 'number' ? Number(e.target.value) : e.target.value;
         this.setState({
-            [e.target.name]: e.target.value
+            [e.target.name]: newVal
         })
     }
 
@@ -47,7 +48,7 @@ export default class AddEditGameForm extends React.Component {
     }
 
     onChoiceAdd(e) {
-        const newVal = {text: '', isNew: true, id: Date.now().toString()};
+        const newVal = {text: '', id: generateKey(), chosenCount: 0};
         let newChoices;
 
         if (this.state.choices) {
@@ -70,11 +71,10 @@ export default class AddEditGameForm extends React.Component {
         return items.map(item => (
             <div data-id={item.id} key={item.id}>
                 <span>
-                    <input key={item.id} className="input" type="text" value={item.text} onChange={(e) => this.onChoiceInputChange(item.id, e.target.value)} />
+                    <input className="input" type="text" value={item.text} onChange={e => this.onChoiceInputChange(item.id, e.target.value)} />
                 </span>
                 <span>
                     <input 
-                        key={item.id} 
                         className="input input--radio" 
                         type="radio" 
                         name="correctChoice" 
@@ -84,7 +84,7 @@ export default class AddEditGameForm extends React.Component {
                     />
                 </span>
                 <span>
-                    <button key={item.id} className="button" type="button" onClick={() => this.onChoiceRemove(item.id)}>Remove</button>
+                    <button className="button" type="button" onClick={() => this.onChoiceRemove(item.id)}>Remove</button>
                 </span>
             </div>
         ))
@@ -99,6 +99,13 @@ export default class AddEditGameForm extends React.Component {
                     label='Question Text'
                     value={this.state.question}
                     type='text'
+                    onChange={this.onInputChange.bind(this)}
+                />
+                <InputField
+                    id='order'
+                    label='Question Order'
+                    value={this.state.order}
+                    type='number'
                     onChange={this.onInputChange.bind(this)}
                 />
                 <button className="button" type="button" onClick={this.onChoiceAdd.bind(this)}>Add Choice</button>

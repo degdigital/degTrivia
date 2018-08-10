@@ -4,10 +4,11 @@ import { connect } from 'react-redux';
 import AllGamesTable from './GamesTab/AllGamesTable.jsx';
 import AddEditGamesForm from './GamesTab/AddEditGameForm.jsx';
 
-import {formatObj} from '../services/gameService';
+import {flattenObj} from '../services/gameService';
 import {
     resetGame,
-    setGameToEdit
+    setGameToEdit,
+    saveGame
 } from '../actions/gameActions';
 class GamesTabContent extends React.Component {
 
@@ -27,12 +28,12 @@ class GamesTabContent extends React.Component {
     }
 
     onFormSubmit(formVals) {
-        // dispatch action to save game
+        this.props.saveGame(formVals);
         this.updateStateAndStore(false, {})
     }
 
     editGame(gameToEdit) {
-        this.updateStateAndStore(true, formatObj(gameToEdit));
+        this.updateStateAndStore(true, flattenObj(gameToEdit));
     }
 
     resetGame(gameId) {
@@ -72,7 +73,8 @@ const mapStateToProps = ({data}) => {
 const mapDispatchToProps = dispatch => {
     return {
         resetGame: gameId => dispatch(resetGame(gameId)),
-        setGameToEdit: gameToEdit => dispatch(setGameToEdit(gameToEdit))
+        setGameToEdit: gameToEdit => dispatch(setGameToEdit(gameToEdit)),
+        saveGame: newGameVals => dispatch(saveGame(newGameVals))
     }
 }
 

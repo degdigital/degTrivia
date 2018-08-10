@@ -1,4 +1,4 @@
-import {resetGameById} from '../services/gameService';
+import {resetGameById, saveGameInDb} from '../services/gameService';
 import {
     GAME_TO_EDIT_UPDATED,
     QUESTION_TO_EDIT_UPDATED,
@@ -33,7 +33,7 @@ export const removeQuestion = qId => (dispatch, getState) => {
 
 export const updateGameQuestion = updatedQuestion => (dispatch, getState) => {
     let newQList = [];
-    const currentQList = getState().data.gameToEdit.questions;
+    const currentQList = getState().data.gameToEdit.questions || [];
 
     if (updatedQuestion.id) {
         newQList = currentQList.map(q => {
@@ -57,4 +57,14 @@ export const updateGameQuestion = updatedQuestion => (dispatch, getState) => {
         type: GAME_QUESTIONS_UPDATED,
         resp: newQList
     })
+}
+
+export const saveGame = newGameVals => (dispatch, getState) => {
+    const newGameObj = {
+        ...getState().data.gameToEdit,
+        ...newGameVals
+    };
+
+    saveGameInDb(newGameObj);
+    // call service to save
 }

@@ -1,8 +1,8 @@
 import dbService from '../../services/dbService.js';
-import {objToArray, arrayToObj} from './utils/dbUtils';
+import {objToArray, arrayToObj, replaceNewIds} from './utils/dbUtils';
 
 // takes FB structure and flattens it for component use
-export function formatObj(gameObj) {
+export function flattenObj(gameObj) {
     const retVal = {};
 	
 	Object.keys(gameObj).map(key => {
@@ -18,10 +18,12 @@ export function formatObj(gameObj) {
 
 export function buildObj(formVals) {
 	const retVal = {};
+	const ref = dbService.getDb().ref('games');
 	
 	Object.keys(formVals).map(key => {
 		if (typeof formVals[key] === 'object' && formVals[key].length) {
-			retVal[key] = arrayToObj(formVals[key]);
+			const valList = formVals[key].map(item => replaceNewIds(ref, item));
+			retVal[key] = arrayToObj(valList);
 		} else if (typeof formVals[key] !== 'function') {
 			retVal[key] = formVals[key];
 		}	
@@ -30,46 +32,23 @@ export function buildObj(formVals) {
     return retVal;
 }
 
-// // takes form vals and returns an object with fb structure
-// export function buildEventObject(formVals) {
-//     const retVal = {};
+export function saveGameInDb(gameObj) {
+	const ref = dbService.getDb().ref('games');
+	const formattedGameObj = replaceNewIds(ref, gameObj)
 
-//     retVal.activeGameId = formVals.activeGameId || false;
-//     retVal.alias = formVals.alias;
-//     retVal.betweenQuestionsCopy = {
-//         title: formVals.gameBetweenQuestionsCopyTitle,
-//         description: formVals.gameBetweenQuestionsCopyDescription
-//     };
-//     retVal.gameWaitBeforeQuestionsCopy = {
-//         title: formVals.gameWaitBeforeQuestionsCopyTitle,
-//         description: formVals.gameWaitBeforeQuestionsCopyDescription
-//     };
-//     retVal.games = formVals.games || false;
-//     retVal.hashtag = formVals.hashtag;
-//     retVal.leaderboardCopy = {
-//         description: formVals.leaderboardCopyDescription
-//     };
-//     retVal.name = formVals.name;
-//     retVal.postgameResultsCopy = {
-//         description: formVals.postgameResultsCopyDescription
-//     };
-//     retVal.registrationCopy = {
-//         title: formVals.registrationCopyTitle,
-//         disclosure: formVals.registrationCopyDisclosure
-//     };
-//     retVal.url = formVals.url;
+	let key = ref.push().key; 
+	if (formattedGameObj.id) {
+		key = formattedGameObj.id;
+		delete formattedGameObj.id;
+	}
 
-//     return retVal;
-// }
+	console.log(key);
+	console.log(buildObj(formattedGameObj))
 
-// export function saveEvent(eventObj, eventId) {
-//     const ref = dbService.getDb().ref('events');
-//     const key = eventId || ref.push().key;
-
-//     ref.update({
-//         [key]: eventObj
-//     });
-// }
+    ref.update({
+        [key]: buildObj(formattedGameObj)
+    });
+}
 
 export function resetGameById(gameId) {
 	dbService.getDb().ref(`games/${gameId}`).update({
@@ -79,4 +58,8 @@ export function resetGameById(gameId) {
 		showGameResults: false,
 		showQuestionResults: false
 	})
+}
+
+export function generateKey() {
+	return dbService.getDb().ref('games').push().key;
 }
