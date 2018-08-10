@@ -17,24 +17,47 @@ export default class AddEditGameForm extends React.Component {
         })
     }
 
+    onChoiceInputChange(id, val) {
+        const newChoicesList = this.state.choices.map(item => {
+            if (item.id === id) {
+                return {
+                    ...item,
+                    ...{
+                        text: val
+                    }
+                }
+            }
+            return item;
+        });
+
+        this.setState({
+            choices: newChoicesList
+        })
+    }
+
+    onCorrectChoiceChange(e) {
+        this.setState({
+            correctChoice: e.target.value
+        })
+    }
+
     onSectionSubmit(e){
         e.preventDefault();
         this.props.onFormSubmit(this.state);
     }
 
-
     onChoiceAdd(e) {
         const newVal = {text: '', isNew: true, id: Date.now().toString()};
+        let newChoices;
+
         if (this.state.choices) {
-            this.setState({
-                choices: [...this.state.choices, ...[newVal]]
-            })
+            newChoices = [...this.state.choices, ...[newVal]];
         } else {
-            this.setState({
-                choices: [newVal]
-            })
+            newChoices = [newVal]
         }
-        
+        this.setState({
+            choices: newChoices
+        });        
     }
 
     onChoiceRemove(id) {
@@ -47,10 +70,18 @@ export default class AddEditGameForm extends React.Component {
         return items.map(item => (
             <div data-id={item.id} key={item.id}>
                 <span>
-                    <input key={item.id} className="input" type="text" value={item.text} />
+                    <input key={item.id} className="input" type="text" value={item.text} onChange={(e) => this.onChoiceInputChange(item.id, e.target.value)} />
                 </span>
                 <span>
-                    <input key={item.id} className="input input--radio" type="radio" value={item.text} checked={item.id === this.state.correctChoice} />
+                    <input 
+                        key={item.id} 
+                        className="input input--radio" 
+                        type="radio" 
+                        name="correctChoice" 
+                        value={item.id} 
+                        checked={item.id === this.state.correctChoice}
+                        onChange={this.onCorrectChoiceChange.bind(this)}
+                    />
                 </span>
                 <span>
                     <button key={item.id} className="button" type="button" onClick={() => this.onChoiceRemove(item.id)}>Remove</button>

@@ -13,6 +13,7 @@ const InputField = function(props) {
                 name={props.id} 
                 id={props.id} 
                 onChange={props.onChange} 
+                required={props.isRequired}
             />
         </div>
     )
@@ -21,7 +22,8 @@ const InputField = function(props) {
 InputField.defaultProps = {
     isDisabled: false,
     id: 'item-input',
-    value: ''
+    value: '',
+    isRequired: false
 }
 
 export default InputField;

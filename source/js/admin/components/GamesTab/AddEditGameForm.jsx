@@ -36,6 +36,7 @@ export default class AddEditGameForm extends React.Component {
                                 value={this.state.name}
                                 type='text'
                                 onChange={this.onInputChange.bind(this)}
+                                isRequired={true}
                             />
                             <SelectField
                                 changeEvent={this.onInputChange.bind(this)}
@@ -43,6 +44,7 @@ export default class AddEditGameForm extends React.Component {
                                 label='Event'
                                 value={this.state.event}
                                 selectId='event'
+                                isRequired={true}
                             />
                             <InputField
                                 id='startTime'
@@ -50,10 +52,13 @@ export default class AddEditGameForm extends React.Component {
                                 value={this.state.startTime && formatDate(this.state.startTime, 'YYYY-MM-DDTHH:mm')}
                                 type='datetime-local'
                                 onChange={this.onInputChange.bind(this)}
+                                isRequired={true}
                             />
                         </div>
                         <div className="column">
-                            <AddEditQuestionContent questions={this.props.questions || []} />
+                            <AddEditQuestionContent 
+                                questions={this.props.questions || []}
+                            />
                         </div>
                     </div>
                     <button className="button" type="submit">Submit</button>

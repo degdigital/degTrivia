@@ -5,30 +5,34 @@ import AllGamesTable from './GamesTab/AllGamesTable.jsx';
 import AddEditGamesForm from './GamesTab/AddEditGameForm.jsx';
 
 import {formatObj} from '../services/gameService';
-import {resetGame} from '../actions/gameActions';
+import {
+    resetGame,
+    setGameToEdit
+} from '../actions/gameActions';
 class GamesTabContent extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            isAddEditView: false,
-            gameToEdit: {}
+            isAddEditView: false
         }
+        this.updateStateAndStore.bind(this);
+    }
+
+    updateStateAndStore(isEditView, gameToEdit) {
+        this.setState({
+            isAddEditView: isEditView
+        });
+        this.props.setGameToEdit(gameToEdit);
     }
 
     onFormSubmit(formVals) {
-        // this.props.saveEvent(buildEventObject(formVals), formVals.id);
-        this.setState({
-            isAddEditView: false,
-            gameToEdit: {}
-        })
+        // dispatch action to save game
+        this.updateStateAndStore(false, {})
     }
 
     editGame(gameToEdit) {
-        this.setState({
-            isAddEditView: true,
-            gameToEdit: formatObj(gameToEdit)
-        })
+        this.updateStateAndStore(true, formatObj(gameToEdit));
     }
 
     resetGame(gameId) {
@@ -40,13 +44,13 @@ class GamesTabContent extends React.Component {
         return (
             this.state.isAddEditView ? 
             <AddEditGamesForm 
-                onFormCancel={() => this.setState({isAddEditView: false, gameToEdit: {}})}
+                onFormCancel={() => this.updateStateAndStore(false, {})}
                 onFormSubmit={this.onFormSubmit.bind(this)}
-                {...this.state.gameToEdit}
+                {...this.props.gameToEdit}
                 eventOpts={this.props.events}
             /> :
             <div>
-                <button className="button" onClick={() => this.setState({isAddEditView:true, gameToEdit: {}})}>Add Game</button>
+                <button className="button" onClick={() => this.updateStateAndStore(true, {})}>Add Game</button>
                 <AllGamesTable 
                     games={this.props.games}
                     editGame={this.editGame.bind(this)}
@@ -60,13 +64,15 @@ class GamesTabContent extends React.Component {
 const mapStateToProps = ({data}) => {
     return {
         games: data.games,
-        events: data.events
+        events: data.events,
+        gameToEdit: data.gameToEdit
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        resetGame: gameId => dispatch(resetGame(gameId))
+        resetGame: gameId => dispatch(resetGame(gameId)),
+        setGameToEdit: gameToEdit => dispatch(setGameToEdit(gameToEdit))
     }
 }
 

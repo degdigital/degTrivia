@@ -14,6 +14,17 @@ export function objToArray(data = {}) {
     }, []);
 }
 
+export function arrayToObj(data = []) {
+    const retVal = {};
+
+    data.map(item => {
+        retVal[item.id] = {...item};
+        delete retVal[item.id].id;
+    })
+
+    return retVal;
+}
+
 export function getValue(ref){
     return dbService.getDb().ref(ref).once('value')
         .then(snap => snap.val());

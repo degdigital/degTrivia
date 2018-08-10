@@ -1,5 +1,5 @@
 import dbService from '../../services/dbService.js';
-import {objToArray} from './utils/dbUtils';
+import {objToArray, arrayToObj} from './utils/dbUtils';
 
 // takes FB structure and flattens it for component use
 export function formatObj(gameObj) {
@@ -10,6 +10,20 @@ export function formatObj(gameObj) {
 			retVal[key] = objToArray(gameObj[key]);
 		} else {
 			retVal[key] = gameObj[key];
+		}	
+	})
+
+    return retVal;
+}
+
+export function buildObj(formVals) {
+	const retVal = {};
+	
+	Object.keys(formVals).map(key => {
+		if (typeof formVals[key] === 'object' && formVals[key].length) {
+			retVal[key] = arrayToObj(formVals[key]);
+		} else if (typeof formVals[key] !== 'function') {
+			retVal[key] = formVals[key];
 		}	
 	})
 

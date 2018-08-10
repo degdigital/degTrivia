@@ -4,7 +4,7 @@ const SelectField = function(props) {
     return (
         <div>
             <label htmlFor={props.selectId} >{props.label}</label>
-            <select className="" name={props.selectId} id={props.selectId} onChange={props.changeEvent} value={props.value} disabled={props.isDisabled}>
+            <select className="" name={props.selectId} id={props.selectId} onChange={props.changeEvent} value={props.value} disabled={props.isDisabled} required={props.required}>
                 {
                     props.defaultOptsText ? 
                     <option value="">{props.defaultOptText}</option> :
@@ -22,7 +22,8 @@ const SelectField = function(props) {
 SelectField.defaultProps = {
     isDisabled: false,
     selectId: 'item-select',
-    value: ''
+    value: '',
+    isRequired: true
 }
 
 export default SelectField;

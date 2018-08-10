@@ -11,7 +11,11 @@ import {
     ACTIVE_GAME_CHANGED,
     ACTIVE_QUESTION_CHANGED,
     QS_FOR_GAME_RECEIVED,
-    GAMES_RECEIVED
+    GAMES_RECEIVED,
+    GAME_TO_EDIT_UPDATED,
+    QUESTION_TO_EDIT_UPDATED,
+    QUESTION_REMOVED,
+    GAME_QUESTIONS_UPDATED
 } from '../actions/types';
 
 const initQuestionState = {
@@ -26,7 +30,8 @@ const initialState = {
     questions: [],
     question: initQuestionState,
     isAppDisabled: false,
-    activeEventId: ''
+    activeEventId: '',
+    gameToEdit: {}
 }
 
 
@@ -92,6 +97,27 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 games: action.resp
+            }
+        case GAME_TO_EDIT_UPDATED:
+            return {
+                ...state,
+                gameToEdit: action.resp
+            }
+        case QUESTION_TO_EDIT_UPDATED:
+            return {
+                ...state,
+                questionToEdit: action.resp
+            }
+        case QUESTION_REMOVED:
+        case GAME_QUESTIONS_UPDATED:
+            return {
+                ...state,
+                gameToEdit: {
+                    ...state.gameToEdit,
+                    ...{
+                        questions: action.resp
+                    }
+                }
             }
         default:
             return state;

@@ -15,6 +15,7 @@ import ReactDOM from 'react-dom';
 import {Provider, connect} from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import reduxThunk from 'redux-thunk';
+import logger from 'redux-logger';
 import reducers from './reducers/index.js';
 
 class AdminApp extends React.Component {
@@ -64,7 +65,7 @@ class AdminApp extends React.Component {
 	}
 }
 
-const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
+const store = createStore(reducers, {}, applyMiddleware(reduxThunk, logger));
 
 ReactDOM.render(
 	<Provider store={store}>

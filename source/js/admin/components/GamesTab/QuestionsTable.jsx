@@ -18,8 +18,8 @@ const QuestionsTable = function(props) {
                             <tr key={question.id}>
                                 <td>{question.question || ''}</td>
                                 <td>
-                                    <button className="button" onClick={() => props.editQuestion(question)}>Edit</button>
-                                    <button className="button">Delete</button>
+                                    <button className="button" type="button" onClick={() => props.editQuestion(question)}>Edit</button>
+                                    <button className="button" type="button" onClick={() => props.deleteQuestion(question.id)}>Delete</button>
                                 </td>
                             </tr>
                         )

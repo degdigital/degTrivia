@@ -1,52 +1,75 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import QuestionsTable from './QuestionsTable.jsx';
 import AddEditQuestionForm from './AddEditQuestionForm.jsx';
 
-import {formatObj} from '../../services/gameService';
+import {formatObj, buildObj} from '../../services/gameService';
+import {
+    setQuestionToEdit,
+    removeQuestion,
+    updateGameQuestion
+} from '../../actions/gameActions';
 
 class AddEditQuestionContent extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            isAddEditView: false,
-            questionToEdit: {}
+            isAddEditView: false
         }
+        this.updateStateAndStore.bind(this);
+    }
+
+    updateStateAndStore(isEditView, questionToEdit) {
+        this.setState({
+            isAddEditView: isEditView
+        });
+        this.props.setQuestionToEdit(questionToEdit);
     }
 
     onFormSubmit(formVals) {
-        // this.props.saveEvent(buildEventObject(formVals), formVals.id);
-        this.setState({
-            isAddEditView: false,
-            questionToEdit: {}
-        })
+        // console.log(buildObj(formVals));
+        this.props.updateGameQuestion(buildObj(formVals));
+        this.updateStateAndStore(false, {});
     }
 
     editQuestion(questionToEdit) {
-        this.setState({
-            isAddEditView: true,
-            questionToEdit: formatObj(questionToEdit)
-        })
+        this.updateStateAndStore(true, formatObj(questionToEdit));
     }
 
     render() {
         return (
             this.state.isAddEditView ? 
             <AddEditQuestionForm 
-                onFormCancel={() => this.setState({isAddEditView: false, questionToEdit: {}})}
+                onFormCancel={() => this.updateStateAndStore(false, {})}
                 onFormSubmit={this.onFormSubmit.bind(this)}
-                {...this.state.questionToEdit}
+                {...this.props.questionToEdit}
             /> :
             <div>
-                <button className="button" onClick={() => this.setState({isAddEditView:true, questionToEdit: {}})}>Add Question</button>
+                <button className="button" type="button" onClick={() => this.updateStateAndStore(true, {})}>Add Question</button>
                 <QuestionsTable 
                     questions={this.props.questions}
                     editQuestion={this.editQuestion.bind(this)}
+                    deleteQuestion={this.props.removeQuestion}
                 />
             </div>
         );
     }
 }
 
-export default AddEditQuestionContent;
+const mapStateToProps = ({data}) => {
+    return {
+        questionToEdit: data.questionToEdit
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        setQuestionToEdit: qToEdit => dispatch(setQuestionToEdit(qToEdit)),
+        removeQuestion: qId => dispatch(removeQuestion(qId)),
+        updateGameQuestion: updatedQuestion => dispatch(updateGameQuestion(updatedQuestion))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddEditQuestionContent);
