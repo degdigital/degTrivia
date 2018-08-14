@@ -8,7 +8,8 @@ import {flattenObj, buildObj} from '../../services/gameService';
 import {
     setQuestionToEdit,
     removeQuestion,
-    updateGameQuestion
+    updateGameQuestion,
+    generateQuestion
 } from '../../actions/gameActions';
 
 class AddEditQuestionContent extends React.Component {
@@ -40,7 +41,7 @@ class AddEditQuestionContent extends React.Component {
 
     render() {
         return (
-            this.state.isAddEditView ? 
+            this.state.isAddEditView || this.props.questionToEdit && Object.keys(this.props.questionToEdit).length ? 
             <AddEditQuestionForm 
                 onFormCancel={() => this.updateStateAndStore(false, {})}
                 onFormSubmit={this.onFormSubmit.bind(this)}
@@ -48,6 +49,7 @@ class AddEditQuestionContent extends React.Component {
             /> :
             <div>
                 <button className="button" type="button" onClick={() => this.updateStateAndStore(true, {})}>Add Question</button>
+                <button className="button" type="button" onClick={this.props.generateQuestion}>Generate Question</button>
                 <QuestionsTable 
                     questions={this.props.questions}
                     editQuestion={this.editQuestion.bind(this)}
@@ -68,7 +70,8 @@ const mapDispatchToProps = dispatch => {
     return {
         setQuestionToEdit: qToEdit => dispatch(setQuestionToEdit(qToEdit)),
         removeQuestion: qId => dispatch(removeQuestion(qId)),
-        updateGameQuestion: updatedQuestion => dispatch(updateGameQuestion(updatedQuestion))
+        updateGameQuestion: updatedQuestion => dispatch(updateGameQuestion(updatedQuestion)),
+        generateQuestion: () => dispatch(generateQuestion())
     }
 }
 

@@ -1,4 +1,5 @@
 import {resetGameById, saveGameInDb} from '../services/gameService';
+import {getGeneratedQuestion} from '../services/generatedQuestionService';
 import {
     GAME_TO_EDIT_UPDATED,
     QUESTION_TO_EDIT_UPDATED,
@@ -66,5 +67,10 @@ export const saveGame = newGameVals => (dispatch, getState) => {
     };
 
     saveGameInDb(newGameObj);
-    // call service to save
+}
+
+export const generateQuestion = () => dispatch => {
+    getGeneratedQuestion().then(resp => {
+        dispatch(setQuestionToEdit(resp));
+    })
 }

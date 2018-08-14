@@ -31,7 +31,8 @@ const initialState = {
     question: initQuestionState,
     isAppDisabled: false,
     activeEventId: '',
-    gameToEdit: {}
+    gameToEdit: {},
+    questionToEdit: {}
 }
 
 
