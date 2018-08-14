@@ -20,7 +20,7 @@ export default class AddEditGameForm extends React.Component {
 
     onDateTimeChange(e) {
         this.setState({
-            [e.target.name]: new Date(e.target.value).valueOf
+            [e.target.name]: new Date(e.target.value).valueOf()
         })
     }
 
@@ -53,6 +53,7 @@ export default class AddEditGameForm extends React.Component {
                                 opts={this.props.eventOpts}
                                 label='Event'
                                 value={this.state.event}
+                                defaultOptText='Select an event'
                                 selectId='event'
                                 isRequired={true}
                             />
@@ -61,7 +62,7 @@ export default class AddEditGameForm extends React.Component {
                                 label='Start Time'
                                 value={this.state.startTime && formatDate(this.state.startTime, 'YYYY-MM-DDTHH:mm')}
                                 type='datetime-local'
-                                onChange={this.onInputChange.bind(this)}
+                                onChange={this.onDateTimeChange.bind(this)}
                                 isRequired={true}
                             />
                         </div>

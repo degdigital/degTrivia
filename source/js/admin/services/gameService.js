@@ -42,9 +42,6 @@ export function saveGameInDb(gameObj) {
 		delete formattedGameObj.id;
 	}
 
-	console.log(key);
-	console.log(buildObj(formattedGameObj))
-
     ref.update({
         [key]: buildObj(formattedGameObj)
     });
