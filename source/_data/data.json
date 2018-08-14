@@ -240,5 +240,31 @@
         "heading": "Oh no!",
         "subheading": "We’re experiencing some technical difficulties. Stay with us. The page will refresh when ready."
     },
-    "appStyleModifier": "page-width"
+    "appStyleModifier": "page-width",
+    "adminLoginForm": {
+        "username": {
+            "field": {
+                "id": "email",
+                "label": {
+                    "content": "Email"
+                },
+                "input": {
+                    "isRequired": true,
+                    "type": "email",
+                }
+            }
+        },
+        "password": {
+            "field": {
+                "id": "password",
+                "label": {
+                    "content": "Password"
+                },
+                "input": {
+                    "isRequired": true,
+                    "type": "password"
+                }
+            }
+        }
+    }
 }
