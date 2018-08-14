@@ -7,7 +7,9 @@ import gameService from '../services/gameService.js';
 const buttonClass = 'between-questions-button';
 
 function bindEvents(wrapperEl, boundClickHandler) {
-	wrapperEl.addEventListener('click', boundClickHandler);
+	if (wrapperEl) {
+		wrapperEl.addEventListener('click', boundClickHandler);
+	}
 }
 
 function onWrapperClick(e, gameId) {
@@ -23,9 +25,11 @@ function showInbetweenScreen(gameId) {
 }
 
 function render(wrapperEl) {
-	replaceContent(wrapperEl, `
-		<button class="${buttonClass}" id="betweenQuestions" name="betweenQuestions">Host is talking</button>
-	`);
+	if (wrapperEl) {
+		replaceContent(wrapperEl, `
+			<button class="${buttonClass}" id="betweenQuestions" name="betweenQuestions">Host is talking</button>
+		`);
+	}
 }
 
 function teardown(boundClickHandler, wrapperEl) {
