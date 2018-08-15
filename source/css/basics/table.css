@@ -3,6 +3,10 @@
     width: 100%;
 }
 
+.table--wide {
+    max-width: 100%;
+}
+
 .table__caption {
     font-size: 1.25em;
     letter-spacing: var(--letter-spacing-wide);
@@ -26,6 +30,10 @@
 
 .table__col--md {
     width: 65%;
+}
+
+.table__heading--left {
+    text-align: left;
 }
 
 .table__data-cell {

@@ -1,0 +1,16 @@
+{{> components-admin-header }}
+<main class="main">
+    <div>
+        {{> components-admin-tabs}}
+        <div class="tab-content">
+            {{^ isEditing}}
+                <button class="button button--orange-inverse button--small button--right">Add Event</button>
+                {{> basics-table}}
+            {{/ isEditing}}
+
+            {{# isEditing}}
+                {{> components-add-event-form}}
+            {{/ isEditing}}
+        </div>
+    </div>
+</main>
