@@ -18,6 +18,7 @@
 	--color-teal-light-20: color(var(--color-teal) tint(20%));
 
 	--color-orange: #f98e2b;
+	--color-orange-dark-10: color(var(--color-orange) shade(10%));
 
 	--color-green: #c3d600;
 	--color-green-dark-10: color(var(--color-green) shade(10%));

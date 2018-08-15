@@ -266,5 +266,62 @@
                 }
             }
         }
+    },
+    "adminTabs": {
+        "tabs": [
+            {"name": "gameplay", "displayName": "Manage Gameplay", "isActive":true},
+            {"name": "events", "displayName": "Events"},
+            {"name": "games", "displayName": "Games"},
+            {"name": "copy", "displayName": "Copy"},
+            {"name": "players", "displayName": "Players"},
+            {"name": "system", "displayName": "System"}
+        ]
+    },
+    "manageGameplayContent": {
+        "eventInput": {
+            "field": {
+                "id": "event-select",
+                "label": {
+                    "content": "Active Event"
+                },
+                "input": {
+                    "options": [
+                        {"label": "No active event", "value": ""},
+                        {"label": "Event 1", "value": "1"},
+                        {"label": "Event 2", "value": "2"}
+                    ]
+                }
+            }
+        },
+        "gameInput": {
+            "field": {
+                "id": "game-select",
+                "label": {
+                    "content": "Active Game"
+                },
+                "input": {
+                    "options": [
+                        {"label": "No active game", "value": ""},
+                        {"label": "Game 1", "value": "1"},
+                        {"label": "Game 2", "value": "2"}
+                    ]
+                }
+            }
+        },
+        "questionInput": {
+            "field": {
+                "id": "question-select",
+                "label": {
+                    "content": "Active Question"
+                },
+                "input": {
+                    "options": [
+                        {"label": "No active question", "value": ""},
+                        {"label": "Question 1", "value": "1"},
+                        {"label": "Question 2", "value": "2"}
+                    ]
+                }
+            }
+        }
     }
 }

@@ -36,3 +36,19 @@
 .button--large {
 	padding: .75em 2.5em;
 }
+
+.button--alt {
+	background-color: color(var(--color-white) a(90%));
+	color: var(--color-orange);
+	border: .25em solid var(--color-orange);
+
+	&:hover, &:focus {
+		background-color: var(--color-orange);
+		color: var(--color-white);
+	}
+
+	&:active {
+		background-color: var(--color-green-light-40);
+	}
+
+}

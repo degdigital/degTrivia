@@ -9,6 +9,10 @@
 	&.is-hidden {
 		display: none;
 	}
+
+	.page-title {
+		margin-bottom: 0;
+	}
 }
 
 .logo {
