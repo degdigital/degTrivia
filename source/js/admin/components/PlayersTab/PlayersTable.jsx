@@ -28,11 +28,11 @@ const PlayersTable = function(props) {
             <caption className="table__caption">Players {renderNumPlayers()}</caption>
             <thead className="table__header-row">
                 <tr className="table__row table__row--header">
-                    <th className="table__heading table__heading--left">ID</th>
-                    <th className="table__heading table__heading--left">First Name</th>
-                    <th className="table__heading table__heading--left">Last Name</th>
-                    <th className="table__heading table__heading--left">Email</th>
-                    <th className="table__heading table__heading--left">Event</th>
+                    <th className="table__heading table__heading--left table__heading--bold">ID</th>
+                    <th className="table__heading table__heading--left table__heading--bold">First Name</th>
+                    <th className="table__heading table__heading--left table__heading--bold">Last Name</th>
+                    <th className="table__heading table__heading--left table__heading--bold">Email</th>
+                    <th className="table__heading table__heading--left table__heading--bold">Event</th>
                 </tr>
             </thead>
             {renderBody()}

@@ -8,11 +8,11 @@ const AllEventsTable = function(props) {
             <caption className="table__caption">All Events</caption>
             <thead className="table__header-row">
                 <tr className="table__row table__row--header">
-                    <th className="table__heading table__heading--left">Name</th>
-                    <th className="table__heading table__heading--left">ID</th>
-                    <th className="table__heading table__heading--left">Event</th>
-                    <th className="table__heading table__heading--left">Start Time (in local time)</th>
-                    <th className="table__heading table__heading--left">Number Questions</th>
+                    <th className="table__heading table__heading--left table__heading--bold">Name</th>
+                    <th className="table__heading table__heading--left table__heading--bold">ID</th>
+                    <th className="table__heading table__heading--left table__heading--bold">Event</th>
+                    <th className="table__heading table__heading--left table__heading--bold">Start Time (in local time)</th>
+                    <th className="table__heading table__heading--left table__heading--bold">Number Questions</th>
                     <th></th>
                 </tr>
             </thead>

@@ -96,3 +96,7 @@
 .button--right {
 	float: right;
 }
+
+.button--vertical-spacing {
+	margin: 1em 0;
+}

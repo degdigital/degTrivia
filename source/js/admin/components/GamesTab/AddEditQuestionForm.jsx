@@ -75,7 +75,7 @@ export default class AddEditGameForm extends React.Component {
                 </td>
                 <td className="table__data-cell">
                     <input 
-                        className="input input--radio" 
+                        className="input input--radio input--centered" 
                         type="radio" 
                         name="correctChoice" 
                         value={item.id} 
@@ -111,8 +111,8 @@ export default class AddEditGameForm extends React.Component {
                 <table className="table">
                     <thead className="table__header-row">
                         <tr className="table__row table__row--header">
-                            <th className="table__heading">Choice Text</th>
-                            <th className="table__heading">Is correct answer?</th>
+                            <th className="table__heading table__heading--bold">Choice Text</th>
+                            <th className="table__heading table__heading--bold">Is correct answer?</th>
                             <th className="table__heading"></th>
                         </tr>
                     </thead>
@@ -120,9 +120,9 @@ export default class AddEditGameForm extends React.Component {
                         {this.state.choices ? this.renderChoices(this.state.choices) : null}
                     </tbody>
                 </table>
-                <button className="button button--small" type="button" onClick={this.onChoiceAdd.bind(this)}>Add Choice</button>
+                <button className="button button--small button--vertical-spacing " type="button" onClick={this.onChoiceAdd.bind(this)}>Add Choice</button>
                 <div className="button-group">
-                    <button className="button button--small" type="button" onClick={this.onSectionSubmit.bind(this)}>Add</button>
+                    <button className="button button--small" type="button" onClick={this.onSectionSubmit.bind(this)}>Save Question</button>
                     <button className="button button--small button--alt" type="button" onClick={this.props.onFormCancel}>Cancel</button>
                 </div>
             </fieldset>

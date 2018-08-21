@@ -7,8 +7,8 @@ const QuestionsTable = function(props) {
             <caption className="table__caption">All Questions For Game</caption>
             <thead className="table__header-row">
                 <tr className="table__row table__row--header">
-                    <th className="table__heading table__heading--left">Order</th>
-                    <th className="table__heading table__heading--left">Text</th>
+                    <th className="table__heading table__heading--left table__heading--bold">Order</th>
+                    <th className="table__heading table__heading--left table__heading--bold">Text</th>
                     <th></th>
                 </tr>
             </thead>
