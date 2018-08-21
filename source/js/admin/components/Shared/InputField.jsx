@@ -4,7 +4,6 @@ const InputField = function(props) {
     return (
         <div className="field">
             <label htmlFor={props.id} className="label">{props.label}</label>
-            <br />
             <input 
                 type={props.type} 
                 className="input" 

@@ -13,16 +13,19 @@ const QuestionDuration = props => {
 
     return (
         <form className="questionDuration-form" onSubmit={updateQuestionDuration.bind(this)}>
-            <label htmlFor="questionDuration">Question Duration (seconds)</label>
-            <input className="questionduration-input" 
-                id="questionDuration" 
-                name="questionDuration" 
-                type="number" 
-                onChange={updateVal.bind(this)} 
-                required
-                value={props.questionDuration}
-            />
-            <button type="submit">Update</button>
+            <div className="field">
+                <label htmlFor="questionDuration" className="label">Question Duration (seconds)</label>
+                <input className="input" 
+                    id="questionDuration" 
+                    name="questionDuration" 
+                    type="number" 
+                    onChange={updateVal.bind(this)} 
+                    required
+                    value={props.questionDuration}
+                />
+                <button type="submit" className="button button--small button--alt">Update</button>
+            </div>
+            
         </form>
     )
 }

@@ -51,7 +51,7 @@ class GamesTabContent extends React.Component {
                 eventOpts={this.props.events}
             /> :
             <div>
-                <button className="button" onClick={() => this.updateStateAndStore(true, {})}>Add Game</button>
+                <button className="button button--small button--right" onClick={() => this.updateStateAndStore(true, {})}>Add Game</button>
                 <AllGamesTable 
                     games={this.props.games}
                     editGame={this.editGame.bind(this)}

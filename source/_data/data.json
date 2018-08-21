@@ -481,5 +481,41 @@
                 }
             }
         }
+    },
+    "addEditQuestionForm": {
+        "table": {
+            "tableCaption": "Add a Question",
+            "tableColumns": [
+                {"cssClass": "", "heading": "Choice Text"},
+                {"cssClass": "", "heading": "Is correct answer?"},
+                {"cssClass": ""}
+            ],
+            "tableData": [
+                { "row" : [
+                        { "heading": "Choice Text", "content": "<input class=\"input\" type=\"text\" value=\"Fletcher Christian\">" },
+                        { "heading": "Is correct answer?", "content": "<input class=\"input input--radio\" type=\"radio\" name=\"correctChoice\" value=\"0\">" },
+                        { "heading": "", "content": "<button class=\"button button--small button--orange\">Remove</button> " }
+                    ]
+                },
+                { "row" : [
+                        { "heading": "Choice Text", "content": "<input class=\"input\" type=\"text\" value=\"Jay Gatsby\">" },
+                        { "heading": "Is correct answer?", "content": "<input class=\"input input--radio\" type=\"radio\" name=\"correctChoice\" value=\"1\">" },
+                        { "heading": "", "content": "<button class=\"button button--small button--orange\">Remove</button> " }
+                    ]
+                },
+                { "row" : [
+                        { "heading": "Choice Text", "content": "<input class=\"input\" type=\"text\" value=\"Randall Flagg\">" },
+                        { "heading": "Is correct answer?", "content": "<input class=\"input input--radio\" type=\"radio\" name=\"correctChoice\" value=\"2\">" },
+                        { "heading": "", "content": "<button class=\"button button--small button--orange\">Remove</button> " }
+                    ]
+                },
+                { "row" : [
+                        { "heading": "Choice Text", "content": "<input class=\"input\" type=\"text\" value=\"Holden Caulfield\">" },
+                        { "heading": "Is correct answer?", "content": "<input class=\"input input--radio\" type=\"radio\" name=\"correctChoice\" value=\"3\" checked>" },
+                        { "heading": "", "content": "<button class=\"button button--small button--orange\">Remove</button> " }
+                    ]
+                }
+            ]
+        }
     }
 }

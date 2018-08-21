@@ -56,6 +56,28 @@
 	}
 }
 
+.button--alt {
+	background-color: var(--color-teal);
+
+	&:hover, &:focus {
+		background-color: var(--color-teal-light-20);
+	}
+
+	&:active {
+		background-color: var(--color-blue);
+	}
+}
+
+.button--orange {
+	background-color: var(--color-orange);
+	/* color: var(--color-white); */
+
+	&:hover, &:focus {
+		background-color: var(--color-orange-dark-10);
+		/* color: var(--color-white); */
+	}
+}
+
 .button--orange-inverse {
 	background-color: color(var(--color-white) a(90%));
 	color: var(--color-orange);
@@ -69,7 +91,6 @@
 	/* &:active {
 		background-color: var(--color-green-light-40);
 	} */
-
 }
 
 .button--right {

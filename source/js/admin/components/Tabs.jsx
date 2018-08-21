@@ -10,12 +10,12 @@ export class Tabs extends React.Component {
 
     renderTabButtons() {
         return this.props.config.map((section, index) => {
-            const classes = classnames('tab-trigger', {
+            const classes = classnames('tab__button', {
                 'is-active': index === this.props.activeSectionIndex
             });
 
             return (
-                <li key={index}>
+                <li key={index} className="tab">
                     <button className={classes}
                         onClick={this.showSection.bind(this)} 
                         name={section.id.toLowerCase()}
@@ -35,7 +35,7 @@ export class Tabs extends React.Component {
     render() {
         return (
             <div>
-                <ul className="tabs tab-triggers">
+                <ul className="tabs">
                     {this.renderTabButtons()}
                 </ul>
                 <TabContent {...this.props.activeSectionData} />
@@ -47,7 +47,7 @@ export class Tabs extends React.Component {
 
 export const TabContent = props => {
     return (
-        <div className="tab-section is-active">
+        <div className="tab-content">
             {props.content}
         </div>
     )

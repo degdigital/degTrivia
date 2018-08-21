@@ -56,6 +56,10 @@ class AdminApp extends React.Component {
 
 		return (
 			<div>
+				<header role="banner" className="site-header">
+					<img src="../../images/deg-logo.svg" alt="DEG logo" className="logo" />
+					<h1 className="page-title">Trivia Admin</h1>
+				</header>
 				{ this.state.isLoading ?
 					<h1>Loading...</h1> :
 					childEl

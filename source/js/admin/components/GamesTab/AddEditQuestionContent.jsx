@@ -48,8 +48,10 @@ class AddEditQuestionContent extends React.Component {
                 {...this.props.questionToEdit}
             /> :
             <div>
-                <button className="button" type="button" onClick={() => this.updateStateAndStore(true, {})}>Add Question</button>
-                <button className="button" type="button" onClick={this.props.generateQuestion}>Generate Question</button>
+                <div className="button-group">
+                    <button className="button button--alt button--small" type="button" onClick={() => this.updateStateAndStore(true, {})}>Add Question</button>
+                    <button className="button button--alt button--small" type="button" onClick={this.props.generateQuestion}>Generate Question</button>
+                </div>
                 <QuestionsTable 
                     questions={this.props.questions}
                     editQuestion={this.editQuestion.bind(this)}

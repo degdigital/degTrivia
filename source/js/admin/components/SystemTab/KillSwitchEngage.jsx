@@ -13,8 +13,9 @@ export default function KillSwitchEngage(props) {
     return (
         <div>
             <div className="field">
-                <label htmlFor="disableAll">Disable Application</label>
+                <label className="label" htmlFor="disableAll">Disable Application</label>
                 <button id="disableAll"
+                    className="button button--alt"
                     name="disableAll"
                     onClick={disableApp}
                     disabled={props.isAppDisabled}

@@ -69,11 +69,11 @@ export default class AddEditGameForm extends React.Component {
 
     renderChoices(items) {
         return items.map(item => (
-            <div data-id={item.id} key={item.id}>
-                <span>
+            <tr className="table__row table__data-row" data-id={item.id} key={item.id}>
+                <td className="table__data-cell">
                     <input className="input" type="text" value={item.text} onChange={e => this.onChoiceInputChange(item.id, e.target.value)} />
-                </span>
-                <span>
+                </td>
+                <td className="table__data-cell">
                     <input 
                         className="input input--radio" 
                         type="radio" 
@@ -82,11 +82,11 @@ export default class AddEditGameForm extends React.Component {
                         checked={item.id === this.state.correctChoice}
                         onChange={this.onCorrectChoiceChange.bind(this)}
                     />
-                </span>
-                <span>
-                    <button className="button" type="button" onClick={() => this.onChoiceRemove(item.id)}>Remove</button>
-                </span>
-            </div>
+                </td>
+                <td className="table__data-cell">
+                    <button className="button button--small button--orange" type="button" onClick={() => this.onChoiceRemove(item.id)}>Remove</button>
+                </td>
+            </tr>
         ))
     }
 
@@ -108,16 +108,23 @@ export default class AddEditGameForm extends React.Component {
                     type='number'
                     onChange={this.onInputChange.bind(this)}
                 />
-                <button className="button" type="button" onClick={this.onChoiceAdd.bind(this)}>Add Choice</button>
-                <div className="">
-                    <div>Choices</div>
-                    <div>Is correct answer?</div>
+                <table className="table">
+                    <thead className="table__header-row">
+                        <tr className="table__row table__row--header">
+                            <th className="table__heading">Choice Text</th>
+                            <th className="table__heading">Is correct answer?</th>
+                            <th className="table__heading"></th>
+                        </tr>
+                    </thead>
+                    <tbody className="table__table-body">
+                        {this.state.choices ? this.renderChoices(this.state.choices) : null}
+                    </tbody>
+                </table>
+                <button className="button button--small" type="button" onClick={this.onChoiceAdd.bind(this)}>Add Choice</button>
+                <div className="button-group">
+                    <button className="button button--small" type="button" onClick={this.onSectionSubmit.bind(this)}>Add</button>
+                    <button className="button button--small button--alt" type="button" onClick={this.props.onFormCancel}>Cancel</button>
                 </div>
-                <div>
-                    {this.state.choices ? this.renderChoices(this.state.choices) : null}
-                </div>                
-                <button className="button" type="button" onClick={this.onSectionSubmit.bind(this)}>Add</button>
-                <button className="button" type="button" onClick={this.props.onFormCancel}>Cancel</button>
             </fieldset>
         )
     }

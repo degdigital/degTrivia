@@ -7,15 +7,15 @@ const PlayersTable = function(props) {
 
     function renderBody() {
         return (
-            <tbody>
+            <tbody  className="table__table-body">
                 {props.players.map(player => {
                     return (
-                        <tr key={player.id}>
-                            <td>{player.id}</td>
-                            <td>{player.firstName}</td>
-                            <td>{player.lastName}</td>
-                            <td>{player.email}</td>
-                            <td>{player.event}</td>
+                        <tr key={player.id} className="table__row table__data-row">
+                            <td className="table__data-cell">{player.id}</td>
+                            <td className="table__data-cell">{player.firstName}</td>
+                            <td className="table__data-cell">{player.lastName}</td>
+                            <td className="table__data-cell">{player.email}</td>
+                            <td className="table__data-cell">{player.event}</td>
                         </tr>
                     )
                 })}
@@ -24,15 +24,15 @@ const PlayersTable = function(props) {
     }
 
     return (
-        <table>
-            <caption>Players {renderNumPlayers()}</caption>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Email</th>
-                    <th>Event</th>
+        <table className="table table--wide">
+            <caption className="table__caption">Players {renderNumPlayers()}</caption>
+            <thead className="table__header-row">
+                <tr className="table__row table__row--header">
+                    <th className="table__heading table__heading--left">ID</th>
+                    <th className="table__heading table__heading--left">First Name</th>
+                    <th className="table__heading table__heading--left">Last Name</th>
+                    <th className="table__heading table__heading--left">Email</th>
+                    <th className="table__heading table__heading--left">Event</th>
                 </tr>
             </thead>
             {renderBody()}

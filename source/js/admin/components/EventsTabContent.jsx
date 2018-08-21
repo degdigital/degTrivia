@@ -42,7 +42,7 @@ class EventsTabContent extends React.Component {
                     {...this.state.eventToEdit}
                 /> : 
                 <div>
-                    <button className="button" onClick={() => this.setState({isAddEditView:true})}>Add Event</button>
+                    <button className="button button--small button--right" onClick={() => this.setState({isAddEditView:true})}>Add Event</button>
                     <AllEventsTable 
                         events={this.props.events}
                         editEvent={this.editEvent.bind(this)}

@@ -69,19 +69,22 @@ const GameplayTabContent = function(props) {
                     /> :
                     null
                 }
-                {props.activeEventId && props.activeGameId ?
-                    <button className="button" disabled={props.isAppDisabled} onClick={activateHostIsTalking.bind(this)}>
-                        Host is talking
-                    </button> :
-                    null
-                }
+                    <div className="button-group">
+                    {props.activeEventId && props.activeGameId ?
+                        <button className="button button--alt" disabled={props.isAppDisabled} onClick={activateHostIsTalking.bind(this)}>
+                            Host is talking
+                        </button> :
+                        null
+                    }
 
-                {props.activeEventId && props.activeGameId ?
-                    <button className="button" disabled={props.isAppDisabled} onClick={endGame.bind(this)}>
-                        End Game
-                    </button> :
-                    null
-                }
+                    {props.activeEventId && props.activeGameId ?
+                        <button className="button button--alt" disabled={props.isAppDisabled} onClick={endGame.bind(this)}>
+                            End Game
+                        </button> :
+                        null
+                    }
+                </div>
+                
             </div>
             { props.isAppDisabled ?
                 <div className="column"><AppDisabledOverlay content="App is currently disabled. Please reset to manage gameplay."/></div> :

@@ -32,6 +32,10 @@
     width: 65%;
 }
 
+.table__heading--bold {
+    font-weight: bold;
+}
+
 .table__heading--left {
     text-align: left;
 }

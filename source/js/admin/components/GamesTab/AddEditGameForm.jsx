@@ -72,8 +72,11 @@ export default class AddEditGameForm extends React.Component {
                             />
                         </div>
                     </div>
-                    <button className="button" type="submit">Submit</button>
-                    <button className="button" type="button" onClick={this.props.onFormCancel}>Cancel</button>
+                    <div className="button-group">
+                        <button className="button" type="submit">Submit</button>
+                        <button className="button button--alt" type="button" onClick={this.props.onFormCancel}>Cancel</button>
+                    </div>
+                    
                 </fieldset>
             </form>
         )

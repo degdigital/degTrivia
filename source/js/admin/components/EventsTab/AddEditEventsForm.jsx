@@ -21,8 +21,8 @@ export default class AddEditEventsForm extends React.Component {
         this.props.onFormSubmit(this.state);
     }
 
-    renderInputFields() {
-        return addEditEventsConfig.map(inputItem => (
+    renderInputFields(config) {
+        return config.map(inputItem => (
             <InputField
                 key={inputItem.id}
                 id={inputItem.id}
@@ -38,10 +38,19 @@ export default class AddEditEventsForm extends React.Component {
         return (
             <form onSubmit={this.onFormSubmit.bind(this)}>
                 <fieldset>
-                    <legend>Add an Event</legend>
-                    {this.renderInputFields()}
-                    <button className="button" type="submit">Submit</button>
-                    <button className="button" type="button" onClick={this.props.onFormCancel}>Cancel</button>
+                    <legend>{this.props.name ? 'Edit' : 'Add'} an Event</legend>
+                    <div className="columns columns--two">
+                        <div className="column">
+                            {this.renderInputFields(addEditEventsConfig.col1)}
+                        </div>
+                        <div className="column">
+                            {this.renderInputFields(addEditEventsConfig.col2)}
+                        </div>
+                    </div>
+                    <div className="button-group">
+                        <button className="button" type="submit">Submit</button>
+                        <button className="button button--alt" type="button" onClick={this.props.onFormCancel}>Cancel</button>
+                    </div>
                 </fieldset>
             </form>
         )

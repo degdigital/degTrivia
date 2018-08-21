@@ -51,14 +51,13 @@ class Manager extends React.Component {
 
     render() {
         return (
-            <div>
-                <h1>Welcome, admin!</h1>
+            <main className="main">
                 <Tabs config={config} 
                     activeSectionIndex={this.state.activeIndex}
                     activeSectionData={this.getActiveSectionData()}
                     tabChanged={this.tabChanged.bind(this)}
                 />
-            </div>
+            </main>
         )
     }
 }
