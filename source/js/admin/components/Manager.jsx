@@ -7,7 +7,8 @@ import {
     fetchActiveEventId,
     fetchAppStatus,
     fetchEvents,
-    fetchGames
+    fetchGames,
+    fetchPlayers
 } from '../actions/actions';
 import { connect } from 'react-redux';
 
@@ -25,6 +26,7 @@ class Manager extends React.Component {
         this.props.fetchAppStatus();
         this.props.fetchEvents();
         this.props.fetchGames();
+        this.props.fetchPlayers();
     }
 
     getSectionIndexFromUrl() {
@@ -62,4 +64,4 @@ class Manager extends React.Component {
     }
 }
 
-export default connect(null, {fetchActiveEventId, fetchAppStatus, fetchEvents, fetchGames})(Manager);
+export default connect(null, {fetchActiveEventId, fetchAppStatus, fetchEvents, fetchGames, fetchPlayers})(Manager);

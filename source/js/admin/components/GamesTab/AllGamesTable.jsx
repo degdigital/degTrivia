@@ -18,8 +18,7 @@ const AllEventsTable = function(props) {
             </thead>
             <tbody className="table__table-body">
                 {
-                    props.games.map(game => {
-                        return (
+                    props.games.map(game => (
                             <tr key={game.id} className="table__row table__data-row">
                                 <td className="table__data-cell">{game.name || ''}</td>
                                 <td className="table__data-cell">{game.id || ''}</td>
@@ -32,7 +31,7 @@ const AllEventsTable = function(props) {
                                 </td>
                             </tr>
                         )
-                    })
+                    )
                 }
             </tbody>
         </table>
