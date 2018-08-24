@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import AllEventsTable from './EventsTab/AllEventsTable.jsx';
+import Table from './Shared/Table.jsx';
 import AddEditEventsForm from './EventsTab/AddEditEventsForm.jsx';
 
 import {flattenEvent, buildEventObject} from '../services/eventsService';
@@ -15,6 +15,47 @@ class EventsTabContent extends React.Component {
             isAddEditView: false,
             eventToEdit: {}
         }
+        this.eventsTableConfig;
+        this.editEvent.bind(this);
+    }
+
+    get eventsTableConfig() {
+        return [
+            {
+                displayName: 'Name',
+                propName: 'name'
+            },
+            {
+                displayName: 'Alias',
+                propName: 'alias'
+            },
+            {
+                displayName: 'Hashtag',
+                propName: 'hashtag'
+            },
+            {
+                displayName: 'ID',
+                propName: 'id'
+            },
+            {
+                displayName: 'Number of Games',
+                type: 'custom',
+                renderFn: dataItem => (
+                    dataItem.games && Object.keys(dataItem.games).length || 0
+                )
+            },
+            {
+                displayName: 'Active Game ID',
+                propName: 'activeGameId'
+            },
+            {
+                displayName: '',
+                type: 'custom',
+                renderFn: dataItem => (
+                    <button className="button button--alt button--small" onClick={() => this.editEvent(dataItem)}>Edit</button>
+                )
+            }
+        ]
     }
 
     onFormSubmit(formVals) {
@@ -43,9 +84,10 @@ class EventsTabContent extends React.Component {
                 /> : 
                 <div>
                     <button className="button button--small button--right" onClick={() => this.setState({isAddEditView:true})}>Add Event</button>
-                    <AllEventsTable 
-                        events={this.props.events}
-                        editEvent={this.editEvent.bind(this)}
+                    <Table
+                        data={this.props.events}
+                        columns={this.eventsTableConfig}
+                        caption='All Events'
                     />
                 </div>
         );

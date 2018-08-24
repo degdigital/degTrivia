@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { format as formatDate} from 'date-fns';
 
 import Table from './Shared/Table.jsx';
 import AddEditGamesForm from './GamesTab/AddEditGameForm.jsx';
@@ -18,7 +17,7 @@ class GamesTabContent extends React.Component {
         this.state = {
             isAddEditView: false
         }
-        this.gameTableConfig
+        this.gameTableConfig;
 
         this.updateStateAndStore.bind(this);
         this.editGame.bind(this);
@@ -41,8 +40,9 @@ class GamesTabContent extends React.Component {
             },
             {
                 displayName: 'Start Time (in local time)',
-                type: 'custom',
-                renderFn: dataItem => formatDate(dataItem.startTime, 'MMM D, YYYY h:mm a')
+                type: 'date',
+                propName: 'startTime',
+                dateFormat: 'MMM D, YYYY h:mm a'
             },
             {
                 displayName: 'Number of Questions',

@@ -1,4 +1,5 @@
 import React from 'react';
+import { format as formatDate} from 'date-fns';
 
 const Table = function(props) {
     function renderHeadings() {
@@ -32,6 +33,7 @@ const Table = function(props) {
     function renderCell(dataItem, columnInfo) {
         switch(columnInfo.type) {
             case 'date':
+                return formatDate(dataItem[columnInfo.propName], columnInfo.dateFormat);
             case 'custom':
                 return columnInfo.renderFn(dataItem);
             default: 
