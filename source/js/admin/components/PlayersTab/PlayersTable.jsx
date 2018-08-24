@@ -4,23 +4,23 @@ import Table from '../Shared/Table.jsx';
 const tableHeaderConfig = [
     {
         displayName: 'ID',
-        propsName: 'id'
+        propName: 'id'
     },
     {
         displayName: 'First Name',
-        propsName: 'firstName'
+        propName: 'firstName'
     },
     {
         displayName: 'Last Name',
-        propsName: 'lastName'
+        propName: 'lastName'
     },
     {
         displayName: 'Email',
-        propsName: 'email'
+        propName: 'email'
     },
     {
         displayName: 'Event',
-        propsName: 'event'
+        propName: 'event'
     }
 ]
 

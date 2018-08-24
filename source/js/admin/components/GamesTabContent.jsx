@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { format as formatDate} from 'date-fns';
 
-import AllGamesTable from './GamesTab/AllGamesTable.jsx';
+import Table from './Shared/Table.jsx';
 import AddEditGamesForm from './GamesTab/AddEditGameForm.jsx';
 
 import {flattenObj} from '../services/gameService';
@@ -17,7 +18,48 @@ class GamesTabContent extends React.Component {
         this.state = {
             isAddEditView: false
         }
+        this.gameTableConfig
+
         this.updateStateAndStore.bind(this);
+        this.editGame.bind(this);
+        this.resetGame.bind(this);
+    }
+
+    get gameTableConfig() {
+        return [
+            {
+                displayName: 'Name',
+                propName: 'name'
+            },
+            {
+                displayName: 'ID',
+                propName: 'id'
+            },
+            {
+                displayName: 'Event',
+                propName: 'event'
+            },
+            {
+                displayName: 'Start Time (in local time)',
+                type: 'custom',
+                renderFn: dataItem => formatDate(dataItem.startTime, 'MMM D, YYYY h:mm a')
+            },
+            {
+                displayName: 'Number of Questions',
+                type: 'custom',
+                renderFn: dataItem => dataItem.questions && Object.keys(dataItem.questions).length || 0
+            },
+            {
+                displayName: '',
+                type: 'custom',
+                renderFn: dataItem => (
+                    <div className="button-group">
+                        <button className="button button--small button--alt" onClick={ () => this.editGame(dataItem)}>Edit</button>
+                        <button className="button button--small button--orange" onClick={() => props.resetGame(dataItem.id)}>Reset</button>
+                    </div>
+                )
+            }
+        ]
     }
 
     updateStateAndStore(isEditView, gameToEdit) {
@@ -52,10 +94,10 @@ class GamesTabContent extends React.Component {
             /> :
             <div>
                 <button className="button button--small button--right" onClick={() => this.updateStateAndStore(true, {})}>Add Game</button>
-                <AllGamesTable 
-                    games={this.props.games}
-                    editGame={this.editGame.bind(this)}
-                    resetGame={this.resetGame.bind(this)}
+                <Table 
+                    data={this.props.games}
+                    columns={this.gameTableConfig}
+                    caption='All Games'
                 />
             </div>
         );

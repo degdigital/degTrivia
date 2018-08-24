@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import QuestionsTable from './QuestionsTable.jsx';
+import Table from '../Shared/Table.jsx';
 import AddEditQuestionForm from './AddEditQuestionForm.jsx';
 
 import {flattenObj, buildObj} from '../../services/gameService';
@@ -19,7 +19,29 @@ class AddEditQuestionContent extends React.Component {
         this.state = {
             isAddEditView: false
         }
+        this.questionsTableConfig;
+
         this.updateStateAndStore.bind(this);
+        this.editQuestion.bind(this)
+    }
+
+    get questionsTableConfig() {
+        return [
+            {
+                displayName: 'Text',
+                propName: 'question'
+            },
+            {
+                displayName: '',
+                type: 'custom',
+                renderFn: dataItem => (
+                    <div className="button-group">
+                        <button className="button button--small button--alt" type="button" onClick={() => this.editQuestion(dataItem)}>Edit</button>
+                        <button className="button button--small button--orange" type="button" onClick={() => this.props.removeQuestion(dataItem.id)}>Delete</button>
+                    </div>
+                )
+            },
+        ]
     }
 
     updateStateAndStore(isEditView, questionToEdit) {
@@ -42,22 +64,22 @@ class AddEditQuestionContent extends React.Component {
     render() {
         return (
             this.state.isAddEditView || this.props.questionToEdit && Object.keys(this.props.questionToEdit).length ? 
-            <AddEditQuestionForm 
-                onFormCancel={() => this.updateStateAndStore(false, {})}
-                onFormSubmit={this.onFormSubmit.bind(this)}
-                {...this.props.questionToEdit}
-            /> :
-            <div>
-                <div className="button-group">
-                    <button className="button button--alt button--small" type="button" onClick={() => this.updateStateAndStore(true, {})}>Add Question</button>
-                    <button className="button button--alt button--small" type="button" onClick={this.props.generateQuestion}>Generate Question</button>
+                <AddEditQuestionForm 
+                    onFormCancel={() => this.updateStateAndStore(false, {})}
+                    onFormSubmit={this.onFormSubmit.bind(this)}
+                    {...this.props.questionToEdit}
+                /> :
+                <div>
+                    <div className="button-group">
+                        <button className="button button--alt button--small" type="button" onClick={() => this.updateStateAndStore(true, {})}>Add Question</button>
+                        <button className="button button--alt button--small" type="button" onClick={this.props.generateQuestion}>Generate Question</button>
+                    </div>
+                    <Table
+                        data={this.props.questions}
+                        columns={this.questionsTableConfig}
+                        caption='All Questions for Game'
+                    />
                 </div>
-                <QuestionsTable 
-                    questions={this.props.questions}
-                    editQuestion={this.editQuestion.bind(this)}
-                    deleteQuestion={this.props.removeQuestion}
-                />
-            </div>
         );
     }
 }

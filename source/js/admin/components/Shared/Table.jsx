@@ -35,7 +35,7 @@ const Table = function(props) {
             case 'custom':
                 return columnInfo.renderFn(dataItem);
             default: 
-                return dataItem[columnInfo.propsName]
+                return dataItem[columnInfo.propName]
         }
     }
 
