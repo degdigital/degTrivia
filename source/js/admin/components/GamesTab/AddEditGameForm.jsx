@@ -65,6 +65,12 @@ export default class AddEditGameForm extends React.Component {
                                 onChange={this.onDateTimeChange.bind(this)}
                                 isRequired={true}
                             />
+
+                            <input type="hidden" name="showBetweenQuestions" value={this.state.showBetweenQuestions} />
+                            <input type="hidden" name="showGameOver" value={this.state.showGameOver} />
+                            <input type="hidden" name="showGameResults" value={this.state.showGameResults} />
+                            <input type="hidden" name="showQuestionResults" value={this.state.showQuestionResults} />
+
                         </div>
                         <div className="column">
                             <AddEditQuestionContent 
@@ -86,5 +92,9 @@ export default class AddEditGameForm extends React.Component {
 AddEditGameForm.defaultProps = {
     name: '',
     event: '',
-    startTime: ''
+    startTime: '',
+    showBetweenQuestions: false,
+    showGameOver: false,
+    showGameResults: false,
+    showQuestionResults: false
 }

@@ -70,8 +70,18 @@ class GamesTabContent extends React.Component {
     }
 
     onFormSubmit(formVals) {
-        this.props.saveGame(formVals);
-        this.updateStateAndStore(false, {})
+        const formattedVals = this.convertBooleans(formVals);
+        this.props.saveGame(formattedVals);
+        this.updateStateAndStore(false, {});
+    }
+
+    convertBooleans(formVals) {
+        const retVal = {...formVals};
+        retVal.showBetweenQuestions = formVals.showBetweenQuestions === 'true';
+        retVal.showGameOver = formVals.showGameOver === 'true';
+        retVal.showGameResults = formVals.showGameResults === 'true';
+        retVal.showQuestionResults = formVals.showQuestionResults === 'true';
+        return retVal;
     }
 
     editGame(gameToEdit) {

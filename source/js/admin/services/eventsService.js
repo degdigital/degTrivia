@@ -28,7 +28,7 @@ export function buildEventObject(formVals) {
     const retVal = {};
 
     retVal.activeGameId = formVals.activeGameId || false;
-    retVal.alias = formVals.alias;
+    retVal.alias = formVals.alias.toLowerCase();
     retVal.betweenQuestionsCopy = {
         title: formVals.gameBetweenQuestionsCopyTitle,
         description: formVals.gameBetweenQuestionsCopyDescription
