@@ -94,7 +94,7 @@
 					".validate": "newData.isBoolean() || (newData.isString() && newData.val().length > 0 && newData.val().length === 20)"
 				},
 				"startTime": {
-					".validate": "newData.isNumber() && newData.val() > now && newData.val() <= 9999999999999"
+					".validate": "newData.isNumber() && newData.val() <= 9999999999999"
 				}
 			}
 		},

@@ -1,35 +1,62 @@
 import dbService from '../../services/dbService.js';
+import {objToArray, arrayToObj, replaceNewIds} from './utils/dbUtils';
 
-async function endGame(gameId) {
-	const db = dbService.getDb();
-
-	const gameData = await db.ref('games').child(gameId).once('value').then(snapshot => snapshot.val());
+// takes FB structure and flattens it for component use
+export function flattenObj(gameObj) {
+    const retVal = {};
 	
-	if(gameData) {
-		const { event: eventId} = gameData;
+	Object.keys(gameObj).map(key => {
+		if (typeof gameObj[key] === 'object') {
+			retVal[key] = objToArray(gameObj[key]);
+		} else {
+			retVal[key] = gameObj[key];
+		}	
+	})
 
-		return db.ref(`games/${gameId}`).update({
-			showGameOver: true,
-			showQuestionResults: false
-		});
-	}
-	
-	return Promise.reject(`Error: no game found for ID ${gameId}`);
+    return retVal;
 }
 
-function showBetweenQuestionScreen(gameId) {
-	return dbService.getDb().ref(`games/${gameId}`).update({
-		showQuestionResults: false,
-		showBetweenQuestions: true
+export function buildObj(formVals) {
+	const retVal = {};
+	const ref = dbService.getDb().ref('games');
+	
+	Object.keys(formVals).map(key => {
+		if (typeof formVals[key] === 'object' && formVals[key].length) {
+			const valList = formVals[key].map(item => replaceNewIds(ref, item));
+			retVal[key] = arrayToObj(valList);
+		} else if (typeof formVals[key] !== 'function') {
+			retVal[key] = formVals[key];
+		}	
+	})
+
+    return retVal;
+}
+
+export function saveGameInDb(gameObj) {
+	const ref = dbService.getDb().ref('games');
+	const formattedGameObj = replaceNewIds(ref, gameObj)
+
+	let key = ref.push().key; 
+	if (formattedGameObj.id) {
+		key = formattedGameObj.id;
+		delete formattedGameObj.id;
+	}
+
+    ref.update({
+        [key]: buildObj(formattedGameObj)
+    });
+}
+
+export function resetGameById(gameId) {
+	dbService.getDb().ref(`games/${gameId}`).update({
+		activeQuestionId: false,
+		showBetweenQuestions: false,
+		showGameOver: false,
+		showGameResults: false,
+		showQuestionResults: false
 	})
 }
 
-
-function gameService() {
-	return {
-		endGame,
-		showBetweenQuestionScreen
-	};
+export function generateKey() {
+	return dbService.getDb().ref('games').push().key;
 }
-
-export default gameService;

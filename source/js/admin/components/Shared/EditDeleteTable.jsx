@@ -8,8 +8,8 @@ const EditDeleteTable = function(props) {
     }
 
     return (
-        <table>
-            <tbody>
+        <table className="table table--wide">
+            <tbody className="table__table-body">
                 {renderRows()}
             </tbody>
         </table>
@@ -34,11 +34,11 @@ class EditableRow extends React.Component {
 
     renderDisplayRow() {
        return (
-            <tr>
-                <td>{this.props.item.text}</td>
-                <td>
-                    <button className="button" onClick={() => this.setState({isEditing: true})}>Edit</button>
-                    <button className="button" onClick={() => this.props.onDelete(this.props.item.id)}>Delete</button>
+            <tr className="table__row table__data-row">
+                <td className="table__data-cell">{this.props.item.text}</td>
+                <td className="table__data-cell button-group">
+                    <button className="button button--small button--alt" onClick={() => this.setState({isEditing: true})}>Edit</button>
+                    <button className="button button--small button--orange" onClick={() => this.props.onDelete(this.props.item.id)}>Delete</button>
                 </td>
             </tr>
        )
@@ -46,13 +46,13 @@ class EditableRow extends React.Component {
 
     renderEditRow() {
         return (
-            <tr>
-                <td>
-                    <input type="text" value={this.state.newText} onChange={e => this.setState({newText:e.target.value})} />
+            <tr className="table__row table__data-row">
+                <td className="table__data-cell">
+                    <input type="text" className="input" value={this.state.newText} onChange={e => this.setState({newText:e.target.value})} />
                 </td>
-                <td>
-                    <button className="button" onClick={this.onSave.bind(this)}>Save</button>
-                    <button className="button" onClick={() => this.setState({isEditing: false, newText: this.props.item.text})}>Cancel</button>
+                <td className="table__data-cell button-group">
+                    <button className="button button--small" onClick={this.onSave.bind(this)}>Save</button>
+                    <button className="button button--small button--alt" onClick={() => this.setState({isEditing: false, newText: this.props.item.text})}>Cancel</button>
                 </td>
             </tr>
         )

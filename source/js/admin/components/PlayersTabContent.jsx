@@ -4,7 +4,6 @@ import SelectField from './Shared/SelectField.jsx';
 import NonDegersField from './PlayersTab/NonDegersField.jsx';
 import PlayersTable from './PlayersTab/PlayersTable.jsx';
 
-import { fetchPlayers, fetchEvents } from '../actions/actions';
 import { connect } from 'react-redux';
 
 class PlayersTabContent extends React.Component {
@@ -37,11 +36,6 @@ class PlayersTabContent extends React.Component {
 
     static hasPropsListUpdated(propsList, stateList) {
         return propsList.length !== stateList.length;
-    }
-
-    componentDidMount() {
-        this.props.fetchPlayers();
-        this.props.fetchEvents();
     }
 
     filterByEvent(person, eventId) {
@@ -93,7 +87,7 @@ class PlayersTabContent extends React.Component {
                     value={this.state.eventId}
                 />
                 <NonDegersField changeEvent={this.onDegFilterChange.bind(this)} />
-                <PlayersTable players={this.state.filteredPlayersList} />
+                <PlayersTable players={this.state.filteredPlayersList} eventMap={this.props.eventMap} />
             </div>
         );
     }
@@ -103,8 +97,9 @@ const mapStateToProps = ({data}) => {
     return {
         eventOpts: data.events,
         fullPlayersList: data.players,
-        activeEventId: data.activeEventId
+        activeEventId: data.activeEventId,
+        eventMap: data.eventMap
     }
 }
 
-export default connect(mapStateToProps, { fetchPlayers, fetchEvents })(PlayersTabContent);
+export default connect(mapStateToProps)(PlayersTabContent);

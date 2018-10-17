@@ -34,3 +34,48 @@
 :-moz-placeholder { 
  	color: var(--color-gray-light-30);
 }
+
+.input--radio,
+.input--checkbox {
+	cursor: pointer;
+	position: relative;
+
+	&:before {
+		background: var(--color-white);
+		content: '';
+		display: inline-block;
+		height: 1.25em;
+		width: 1.25em;
+	}
+
+	&:hover {
+		background: var(--color-green);
+	}
+
+	&:checked&:before{
+		background: var(--color-green);
+	}
+
+	&:checked&:after {
+		background: var(--color-black);
+		box-shadow:
+			.125em 0 0 var(--color-black),
+			.25em 0 0 var(--color-black),
+			.25em -.125em 0 var(--color-black),
+			.25em -.25em 0 var(--color-black),
+			.25em -.375em 0 var(--color-black),
+			.25em -.5em 0 var(--color-black);
+		content: '';
+		display: inline-block;
+		height: .25em;
+		left: .25em;
+		position: absolute;
+		transform: rotate(45deg);
+		top: .5em;
+		width: .25em;	
+	}
+
+	&.input--centered {
+		margin-left: 45%;
+	}
+}

@@ -15,6 +15,7 @@ export function flattenEvent(eventObj) {
     retVal.hashtag = eventObj.hashtag;
     retVal.leaderboardCopyDescription = eventObj.leaderboardCopy.description;
     retVal.name = eventObj.name;
+    retVal.pregameRotatingCopy = eventObj.pregameRotatingCopy;
     retVal.postgameResultsCopyDescription = eventObj.postgameResultsCopy.description;
     retVal.registrationCopyTitle = eventObj.registrationCopy.title;
     retVal.registrationCopyDisclosure = eventObj.registrationCopy.disclosure;
@@ -28,7 +29,7 @@ export function buildEventObject(formVals) {
     const retVal = {};
 
     retVal.activeGameId = formVals.activeGameId || false;
-    retVal.alias = formVals.alias;
+    retVal.alias = formVals.alias.toLowerCase();
     retVal.betweenQuestionsCopy = {
         title: formVals.gameBetweenQuestionsCopyTitle,
         description: formVals.gameBetweenQuestionsCopyDescription
@@ -50,6 +51,7 @@ export function buildEventObject(formVals) {
         title: formVals.registrationCopyTitle,
         disclosure: formVals.registrationCopyDisclosure
     };
+    retVal.pregameRotatingCopy = formVals.pregameRotatingCopy;
     retVal.url = formVals.url;
 
     return retVal;

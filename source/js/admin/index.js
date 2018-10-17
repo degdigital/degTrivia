@@ -15,6 +15,7 @@ import ReactDOM from 'react-dom';
 import {Provider, connect} from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import reduxThunk from 'redux-thunk';
+import logger from 'redux-logger';
 import reducers from './reducers/index.js';
 
 class AdminApp extends React.Component {
@@ -55,6 +56,10 @@ class AdminApp extends React.Component {
 
 		return (
 			<div>
+				<header role="banner" className="site-header">
+					<img src="../../images/deg-logo.svg" alt="DEG logo" className="logo" />
+					<h1 className="page-title">Trivia Admin</h1>
+				</header>
 				{ this.state.isLoading ?
 					<h1>Loading...</h1> :
 					childEl
@@ -64,7 +69,7 @@ class AdminApp extends React.Component {
 	}
 }
 
-const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
+const store = createStore(reducers, {}, applyMiddleware(reduxThunk, logger));
 
 ReactDOM.render(
 	<Provider store={store}>

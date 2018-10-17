@@ -6,7 +6,9 @@ import config from '../configs/tabsConfig';
 import {
     fetchActiveEventId,
     fetchAppStatus,
-    fetchEvents
+    fetchEvents,
+    fetchGames,
+    fetchPlayers
 } from '../actions/actions';
 import { connect } from 'react-redux';
 
@@ -23,6 +25,8 @@ class Manager extends React.Component {
         this.props.fetchActiveEventId();
         this.props.fetchAppStatus();
         this.props.fetchEvents();
+        this.props.fetchGames();
+        this.props.fetchPlayers();
     }
 
     getSectionIndexFromUrl() {
@@ -49,16 +53,15 @@ class Manager extends React.Component {
 
     render() {
         return (
-            <div>
-                <h1>Welcome, admin!</h1>
+            <main className="main">
                 <Tabs config={config} 
                     activeSectionIndex={this.state.activeIndex}
                     activeSectionData={this.getActiveSectionData()}
                     tabChanged={this.tabChanged.bind(this)}
                 />
-            </div>
+            </main>
         )
     }
 }
 
-export default connect(null, {fetchActiveEventId, fetchAppStatus, fetchEvents})(Manager);
+export default connect(null, {fetchActiveEventId, fetchAppStatus, fetchEvents, fetchGames, fetchPlayers})(Manager);

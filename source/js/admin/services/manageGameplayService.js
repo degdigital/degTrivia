@@ -14,9 +14,7 @@ function setActiveGame(activeEventId, gameId) {
 }
 
 function setActiveQuestion(activeGameId, qId) {
-    return dbService.getDb().ref(`games/${activeGameId}`).update({
-        activeQuestionId: qId || false
-    });
+    return dbService.setActiveQuestion(activeGameId, qId || false);
 }
 
 function getGamesForEvent(eventId) {

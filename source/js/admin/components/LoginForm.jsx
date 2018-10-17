@@ -47,14 +47,14 @@ class LoginForm extends React.Component {
                 <fieldset>
                     <legend>Login</legend>
                     <div className="field">
-                        <label htmlFor="email">Email address</label><br/>
-                        <input onChange={this.updateFormVal.bind(this)} name="email" id="email" type="email" required />
+                        <label htmlFor="email" className="label">Email address</label><br/>
+                        <input className="input" onChange={this.updateFormVal.bind(this)} name="email" id="email" type="email" required />
                     </div>
                     <div className="field">
-                        <label htmlFor="password">Password</label><br />
-                        <input onChange={this.updateFormVal.bind(this)} name="password" id="password" type="password" required />
+                        <label className="label" htmlFor="password">Password</label><br />
+                        <input className="input" onChange={this.updateFormVal.bind(this)} name="password" id="password" type="password" required />
                     </div>
-                    <button type="submit">Login</button>
+                    <button type="submit" className="button button--large">Login</button>
                 </fieldset>
                 {this.state.hasError ? this.renderError() : null }
             </form>

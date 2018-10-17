@@ -1,0 +1,23 @@
+<form>
+    <legend>Add a Game</legend>
+    <fieldset>
+        <legend>Add a Question</legend>
+        <div class="field">
+            <label for="question" class="label">Question Text</label>
+            <input type="text" class="input" name="question" id="question" value="What is the name of the protagonist of J.D. Salinger's novel Catcher in the Rye?">
+        </div>
+        <div class="field">
+            <label for="order" class="label">Question Order</label>
+            <input type="number" class="input" name="order" id="order" value="">
+        </div>
+        <button class="button button--alt button--small" type="button">Add Choice</button>
+        {{# addEditQuestionForm}}
+            {{> basics-table}}
+        {{/ addEditQuestionForm}}
+        <div class="button-group">
+            <button class="button button--small" type="button">Add</button>
+            <button class="button button--alt button--small" type="button">Cancel</button>
+        </div>
+        
+    </fieldset>
+</form>

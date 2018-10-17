@@ -45,7 +45,7 @@ class RotatingCopyTabContent extends React.Component {
 
     onEventFieldChange(e) {
         this.setState({
-            event: e.target.value
+            eventId: e.target.value
         });
     }
 

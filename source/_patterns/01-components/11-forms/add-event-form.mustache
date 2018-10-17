@@ -1,0 +1,65 @@
+{{# addEventForm }}
+<form class="">
+    <div class="columns columns--two">
+        {{# isFormInvalid }}
+            {{> components-form-error-message }}
+        {{/ isFormInvalid }}
+        <div class="column">
+            {{# nameField }}
+                {{> components-field }}
+            {{/ nameField }}
+        
+            {{# aliasField }}
+                {{> components-field }}
+            {{/ aliasField }}
+
+            {{# hashtagField }}
+                {{> components-field }}
+            {{/ hashtagField }}
+
+            {{# urlField }}
+                {{> components-field }}
+            {{/ urlField }}
+        </div>
+        <div class="column">
+            {{# waitTitleField }}
+                {{> components-field }}
+            {{/ waitTitleField }}
+        
+            {{# waitDescriptionField }}
+                {{> components-field }}
+            {{/ waitDescriptionField }}
+
+            {{# betweenTitleField }}
+                {{> components-field }}
+            {{/ betweenTitleField }}
+
+            {{# betweenDescriptionField }}
+                {{> components-field }}
+            {{/ betweenDescriptionField }}
+
+            {{# leaderboardField }}
+                {{> components-field }}
+            {{/ leaderboardField }}
+        
+            {{# postgameField }}
+                {{> components-field }}
+            {{/ postgameField }}
+
+            {{# registrationTitleField }}
+                {{> components-field }}
+            {{/ registrationTitleField }}
+
+            {{# regDisclosureField }}
+                {{> components-field }}
+            {{/ regDisclosureField }}
+        </div>
+    </div>
+
+	<div class="button-group button-group--centered">
+        <button class="button" type="submit">Add</button>
+        <button class="button button--inverse" type="button">Cancel</button>
+	</div>
+
+</form>
+{{/ addEventForm }}

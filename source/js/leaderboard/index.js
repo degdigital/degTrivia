@@ -7,7 +7,7 @@ import dbService from '../services/dbService.js';
 import playerService from '../services/playerService.js';
 
 // Screens
-import login from '../admin/screens/login.js';
+import login from './screens/login.js';
 import screenRotator from './components/screenRotator.js';
 
 const leaderboardTV = function(el) {

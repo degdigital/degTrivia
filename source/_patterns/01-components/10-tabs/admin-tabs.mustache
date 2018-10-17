@@ -1,0 +1,11 @@
+{{# adminTabs}}
+    <ul class="tabs">
+        {{# tabs}}
+        <li class="tab">
+            <button class="tab__button {{#isActive}}is-active{{/isActive}}" name={{name}}>
+                {{displayName}}
+            </button>
+        </li>
+        {{/ tabs}}
+    </ul>
+{{/ adminTabs}}

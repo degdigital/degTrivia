@@ -1,43 +1,36 @@
 import React from 'react';
+import Table from '../Shared/Table.jsx';
 
 const PlayersTable = function(props) {
-    function renderNumPlayers() {
-        return <span>({props.players.length})</span>
+    const tableHeaderConfig = [
+        {
+            displayName: 'ID',
+            propName: 'id'
+        },
+        {
+            displayName: 'First Name',
+            propName: 'firstName'
+        },
+        {
+            displayName: 'Last Name',
+            propName: 'lastName'
+        },
+        {
+            displayName: 'Email',
+            propName: 'email'
+        },
+        {
+            displayName: 'Event',
+            type: 'custom',
+            renderFn: dataItem => props.eventMap[dataItem.event]
+        }
+    ];
+
+    function renderCaption() {
+        return `Players (${props.players.length})`;
     }
 
-    function renderBody() {
-        return (
-            <tbody>
-                {props.players.map(player => {
-                    return (
-                        <tr key={player.id}>
-                            <td>{player.id}</td>
-                            <td>{player.firstName}</td>
-                            <td>{player.lastName}</td>
-                            <td>{player.email}</td>
-                            <td>{player.event}</td>
-                        </tr>
-                    )
-                })}
-            </tbody>
-        )
-    }
-
-    return (
-        <table>
-            <caption>Players {renderNumPlayers()}</caption>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Email</th>
-                    <th>Event</th>
-                </tr>
-            </thead>
-            {renderBody()}
-        </table>
-    )
+    return <Table columns={tableHeaderConfig} data={props.players} caption={renderCaption()} />
 }
 
 export default PlayersTable;

@@ -36,3 +36,67 @@
 .button--large {
 	padding: .75em 2.5em;
 }
+
+.button--small {
+	padding: .25em .75em;
+}
+
+.button--inverse {
+	background-color: transparent;
+	color: var(--color-green);
+	border: .25em solid var(--color-green);
+
+	&:hover, &:focus {
+		background-color: var(--color-green);
+		color: var(--color-white);
+	}
+
+	&:active {
+		background-color: var(--color-green-light-40);
+	}
+}
+
+.button--alt {
+	background-color: var(--color-teal);
+
+	&:hover, &:focus {
+		background-color: var(--color-teal-light-20);
+	}
+
+	&:active {
+		background-color: var(--color-blue);
+	}
+}
+
+.button--orange {
+	background-color: var(--color-orange);
+	/* color: var(--color-white); */
+
+	&:hover, &:focus {
+		background-color: var(--color-orange-dark-10);
+		/* color: var(--color-white); */
+	}
+}
+
+.button--orange-inverse {
+	background-color: color(var(--color-white) a(90%));
+	color: var(--color-orange);
+	border: .25em solid var(--color-orange);
+
+	&:hover, &:focus {
+		background-color: var(--color-orange);
+		color: var(--color-white);
+	}
+
+	/* &:active {
+		background-color: var(--color-green-light-40);
+	} */
+}
+
+.button--right {
+	float: right;
+}
+
+.button--vertical-spacing {
+	margin: 1em 0;
+}

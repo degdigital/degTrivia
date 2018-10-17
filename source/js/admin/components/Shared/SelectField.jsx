@@ -2,11 +2,11 @@ import React from 'react';
 
 const SelectField = function(props) {
     return (
-        <div>
-            <label htmlFor={props.selectId} >{props.label}</label>
-            <select className="" name={props.selectId} id={props.selectId} onChange={props.changeEvent} value={props.value} disabled={props.isDisabled}>
+        <div className="field">
+            <label htmlFor={props.selectId} className="label">{props.label}</label>
+            <select className="input input--select-menu" name={props.selectId} id={props.selectId} onChange={props.changeEvent} value={props.value} disabled={props.isDisabled} required={props.required}>
                 {
-                    props.defaultOptsText ? 
+                    props.defaultOptText ? 
                     <option value="">{props.defaultOptText}</option> :
                     null 
                 }
@@ -22,7 +22,8 @@ const SelectField = function(props) {
 SelectField.defaultProps = {
     isDisabled: false,
     selectId: 'item-select',
-    value: ''
+    value: '',
+    isRequired: true
 }
 
 export default SelectField;

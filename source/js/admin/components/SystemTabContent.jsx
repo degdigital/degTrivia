@@ -37,16 +37,22 @@ class SystemTabContent extends React.Component {
         return (
             <div>
                 <h2>This tab holds settings that will affect the entire system.</h2>
-                { this.state.questionDuration ? 
-                    <QuestionDuration updateDuration={this.updateQuestionDuration.bind(this)} 
-                        questionDuration={this.state.questionDuration}
-                        onQDurationChange={this.props.onQDurationChange} /> :
-                    null
-                }
-                <hr />
-                <KillSwitchEngage isAppDisabled={this.props.isAppDisabled} />
-                <hr />
-                <ResetApp />
+                <div className="columns columns--two">
+                    <div className="column">
+                        { this.state.questionDuration ? 
+                            <QuestionDuration updateDuration={this.updateQuestionDuration.bind(this)} 
+                                questionDuration={this.state.questionDuration}
+                                onQDurationChange={this.props.onQDurationChange} /> :
+                            null
+                        }
+                    </div>
+                    <div className="column">
+                        <KillSwitchEngage isAppDisabled={this.props.isAppDisabled} />
+                        <hr />
+                        <ResetApp />
+                    </div>
+                </div>
+                
             </div>
         )
     }

@@ -12,6 +12,7 @@ export default function ResetApp(props) {
     return (
         <div>
             <button id="resetApp"
+                className="button button--alt"
                 name="resetApp"
                 onClick={resetApp}
             >Reset Application</button>

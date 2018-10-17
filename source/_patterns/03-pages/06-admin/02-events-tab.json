@@ -1,0 +1,74 @@
+{
+    "appStyleModifier": "page-width page-width--wide",
+    "isEditing": false,
+    "adminTabs": {
+        "tabs": [
+            {"name": "gameplay", "displayName": "Manage Gameplay", "isActive": false},
+            {"name": "events", "displayName": "Events", "isActive":true},
+            {"name": "games", "displayName": "Games"},
+            {"name": "copy", "displayName": "Copy"},
+            {"name": "players", "displayName": "Players"},
+            {"name": "system", "displayName": "System"}
+        ]
+    },
+    "table": {
+        "styleModifier": "table--wide",
+        "tableCaption": "All Events",
+        "tableColumns": [
+            {"heading": "Name", "cssClass": "table__heading--left"},
+            {"heading": "Alias", "cssClass": "table__heading--left"},
+            {"heading": "Hashtag", "cssClass": "table__heading--left"},
+            {"heading": "ID", "cssClass": "table__heading--left"},
+            {"heading": "Number of Games", "cssClass": "table__heading--left"},
+            {"heading": "Active Game ID", "cssClass": "table__heading--left"},
+            {"heading": "", "cssClass": "table__heading--left"}
+        ],
+        "tableData": [
+            {"row": [
+                {"heading": "Name", "content": "Event 1"},
+                {"heading": "Alias", "content": "event"},
+                {"heading": "Hashtag", "content": "#event1"},
+                {"heading": "ID", "content": "12345"},
+                {"heading": "Number of Games", "content": "1"},
+                {"heading": "Active Game ID", "content": ""},
+                {"heading": "", "content": "<button class=\"button button--inverse button--small \">Edit</button>"}
+            ]},
+            {"row": [
+                {"heading": "Name", "content": "Event 2"},
+                {"heading": "Alias", "content": "event2"},
+                {"heading": "Hashtag", "content": "#event2"},
+                {"heading": "ID", "content": "2345"},
+                {"heading": "Number of Games", "content": "2"},
+                {"heading": "Active Game ID", "content": ""},
+                {"heading": "", "content": "<button class=\"button button--inverse button--small \">Edit</button>"}
+            ]},
+            {"row": [
+                {"heading": "Name", "content": "Event 3"},
+                {"heading": "Alias", "content": "event3"},
+                {"heading": "Hashtag", "content": "#event3"},
+                {"heading": "ID", "content": "345"},
+                {"heading": "Number of Games", "content": "3"},
+                {"heading": "Active Game ID", "content": ""},
+                {"heading": "", "content": "<button class=\"button button--inverse button--small \">Edit</button>"}
+            ]},
+            {"row": [
+                {"heading": "Name", "content": "Event 4"},
+                {"heading": "Alias", "content": "event4"},
+                {"heading": "Hashtag", "content": "#event4"},
+                {"heading": "ID", "content": "45"},
+                {"heading": "Number of Games", "content": "4"},
+                {"heading": "Active Game ID", "content": ""},
+                {"heading": "", "content": "<button class=\"button button--inverse button--small \">Edit</button>"}
+            ]},
+            {"row": [
+                {"heading": "Name", "content": "Event 5"},
+                {"heading": "Alias", "content": "event5"},
+                {"heading": "Hashtag", "content": "#event5"},
+                {"heading": "ID", "content": "5"},
+                {"heading": "Number of Games", "content": "5"},
+                {"heading": "Active Game ID", "content": ""},
+                {"heading": "", "content": "<button class=\"button button--inverse button--small \">Edit</button>"}
+            ]}
+        ]
+    }
+}
