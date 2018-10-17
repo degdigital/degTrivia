@@ -1,5 +1,3 @@
-import immutable from 'object-path-immutable';
-
 import { 
     PLAYERS_CHANGED, 
     EVENTS_RECEIVED,
@@ -15,7 +13,8 @@ import {
     GAME_TO_EDIT_UPDATED,
     QUESTION_TO_EDIT_UPDATED,
     QUESTION_REMOVED,
-    GAME_QUESTIONS_UPDATED
+    GAME_QUESTIONS_UPDATED,
+    EVENT_MAP_UPDATED
 } from '../actions/types';
 
 const initQuestionState = {
@@ -47,6 +46,11 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 events: action.resp
+            }
+        case EVENT_MAP_UPDATED:
+            return {
+                ...state,
+                eventMap: action.resp
             }
         case GAMES_FOR_EVENT_RECEIVED: 
             return {

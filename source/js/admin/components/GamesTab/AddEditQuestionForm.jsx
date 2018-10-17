@@ -101,13 +101,6 @@ export default class AddEditGameForm extends React.Component {
                     type='text'
                     onChange={this.onInputChange.bind(this)}
                 />
-                <InputField
-                    id='order'
-                    label='Question Order'
-                    value={this.state.order}
-                    type='number'
-                    onChange={this.onInputChange.bind(this)}
-                />
                 <table className="table">
                     <thead className="table__header-row">
                         <tr className="table__row table__row--header">

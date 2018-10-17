@@ -87,7 +87,7 @@ class PlayersTabContent extends React.Component {
                     value={this.state.eventId}
                 />
                 <NonDegersField changeEvent={this.onDegFilterChange.bind(this)} />
-                <PlayersTable players={this.state.filteredPlayersList} />
+                <PlayersTable players={this.state.filteredPlayersList} eventMap={this.props.eventMap} />
             </div>
         );
     }
@@ -97,7 +97,8 @@ const mapStateToProps = ({data}) => {
     return {
         eventOpts: data.events,
         fullPlayersList: data.players,
-        activeEventId: data.activeEventId
+        activeEventId: data.activeEventId,
+        eventMap: data.eventMap
     }
 }
 

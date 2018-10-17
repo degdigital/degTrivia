@@ -36,7 +36,8 @@ class GamesTabContent extends React.Component {
             },
             {
                 displayName: 'Event',
-                propName: 'event'
+                type: 'custom',
+                renderFn: dataItem => this.props.eventMap[dataItem.event]
             },
             {
                 displayName: 'Start Time (in local time)',
@@ -55,7 +56,7 @@ class GamesTabContent extends React.Component {
                 renderFn: dataItem => (
                     <div className="button-group">
                         <button className="button button--small button--alt" onClick={ () => this.editGame(dataItem)}>Edit</button>
-                        <button className="button button--small button--orange" onClick={() => props.resetGame(dataItem.id)}>Reset</button>
+                        <button className="button button--small button--orange" onClick={() => this.props.resetGame(dataItem.id)}>Reset</button>
                     </div>
                 )
             }
@@ -118,6 +119,7 @@ const mapStateToProps = ({data}) => {
     return {
         games: data.games,
         events: data.events,
+        eventMap: data.eventMap,
         gameToEdit: data.gameToEdit
     }
 }

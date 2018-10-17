@@ -26,9 +26,15 @@ export const setQuestionToEdit = questionToEdit => dispatch => {
 }
 
 export const removeQuestion = qId => (dispatch, getState) => {
+    let qList = getState().data.gameToEdit.questions.filter(q => q.id !== qId);
+    qList = qList.map((q, index) => {
+        q.order = index
+        return q;
+    });
+
     dispatch({
         type: QUESTION_REMOVED,
-        resp: getState().data.gameToEdit.questions.filter(q => q.id !== qId)
+        resp: qList
     })
 }
 
@@ -53,6 +59,12 @@ export const updateGameQuestion = updatedQuestion => (dispatch, getState) => {
         }
         newQList = [...currentQList, ...[newQ]];
     }
+
+    // resetting order on question changes
+    newQList = [...newQList].map((q, index) => {
+        q.order = index;
+        return q;
+    })
     
     dispatch({
         type: GAME_QUESTIONS_UPDATED,

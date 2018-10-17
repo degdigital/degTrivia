@@ -52,7 +52,6 @@ class AddEditQuestionContent extends React.Component {
     }
 
     onFormSubmit(formVals) {
-        // console.log(buildObj(formVals));
         this.props.updateGameQuestion(buildObj(formVals));
         this.updateStateAndStore(false, {});
     }
